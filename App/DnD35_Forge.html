@@ -516,7 +516,7 @@ details>summary::-webkit-details-marker{display:none;}
   <div class="nav-drive-status" id="nav-drive-status">Drive: not configured</div>
   <div style="padding:6px 14px;font-family:'Cinzel',serif;font-size:.58rem;color:#3a2a10;letter-spacing:.08em;cursor:pointer;transition:color .15s"
     onmouseover="this.style.color='#8b6914'" onmouseout="this.style.color='#3a2a10'"
-    onclick="showTool('changelog')">v1.9.2 · ACFs + Servants · Apr 2026</div>
+    onclick="showTool('changelog')">v1.9.3 · Audit Pass · Apr 2026</div>
 </nav>
 
 
@@ -6497,7 +6497,6 @@ function getScalableAbilities(){
 
   // ── Paladin abilities ───────────────────────────────────────────────────
   const palLvl=g('Paladin');
-  const totalHD=c.levels.length;
   if(palLvl>0){
     if(palLvl>=4) abilities.push({name:'Turn Undead (Pal)',value:`${Math.max(1,3+cha)}/day`,detail:`Effective cleric level ${palLvl-3} — as cleric ${palLvl-3}`});
     const loh=Math.max(0,cha)*palLvl;
@@ -6506,20 +6505,22 @@ function getScalableAbilities(){
     abilities.push({name:'Smite Evil',value:`${smites}/day`,detail:`${sign(Math.max(0,cha))} to hit, +${palLvl} dmg (Pal L${palLvl})`});
     if(palLvl>=3) abilities.push({name:"Aura of Courage / Divine Health",value:'Passive',detail:`Immune fear; Immune all disease`});
     if(palLvl>=5){
-      const mStr=totalHD>=15?'+7':totalHD>=11?'+6':totalHD>=8?'+5':'+4';
-      const mInt=totalHD>=15?9:totalHD>=11?8:totalHD>=8?7:6;
-      const mSpc=totalHD>=15?'Spell resistance':totalHD>=11?'Command creatures of kind':totalHD>=8?'Improved speed':'Empathic link, share spells, evasion';
-      const mType=totalHD>=15?'Heavy Warhorse':totalHD>=8?'Light Warhorse':'Light Warhorse or Pony';
+      // PHB Table 3-10: bonuses scale with Paladin class level, not total character level
+      const mStr=palLvl>=15?'+7':palLvl>=11?'+6':palLvl>=8?'+5':'+4';
+      const mInt=palLvl>=15?9:palLvl>=11?8:palLvl>=8?7:6;
+      const mSpc=palLvl>=15?'Spell resistance':palLvl>=11?'Command creatures of kind':palLvl>=8?'Improved speed':'Empathic link, share spells, evasion';
+      const mType=palLvl>=15?'Heavy Warhorse':palLvl>=8?'Light Warhorse':'Light Warhorse or Pony';
       abilities.push({name:'Special Mount',value:mType,detail:`Pal L${palLvl} — Str/Con ${mStr}, +${mStr} nat. armor, Int ${mInt}; ${mSpc}. Call 2 hrs/pal lvl, 1/day`});
     }
   }
   // ── Blackguard Fiendish Servant ────────────────────────────────────────
   const bgLvl=g('Blackguard');
   if(bgLvl>=5){
-    const bStr=totalHD>=15?'+7':totalHD>=11?'+6':totalHD>=8?'+5':'+4';
-    const bInt=totalHD>=15?9:totalHD>=11?8:totalHD>=8?7:6;
-    const bDR=totalHD>=16?10:totalHD>=11?5:bgLvl>=8?5:0;
-    const bDRType=totalHD>=16?'/magic':totalHD>=11?'/silver':'/silver';
+    // DMG: servant bonuses scale with Blackguard class level
+    const bStr=bgLvl>=15?'+7':bgLvl>=11?'+6':bgLvl>=8?'+5':'+4';
+    const bInt=bgLvl>=15?9:bgLvl>=11?8:bgLvl>=8?7:6;
+    const bDR=bgLvl>=16?10:bgLvl>=11?5:bgLvl>=8?5:0;
+    const bDRType=bgLvl>=16?'/magic':'/silver';
     const bType=bgLvl>=8?'Camel, Dire Bat, Horse':bgLvl>=5?'Bat, Cat, Dire Rat, Raven, or Toad':'—';
     abilities.push({name:'Fiendish Servant',value:bType,detail:`BG L${bgLvl} — Str/Con ${bStr}, +${bStr} nat. armor, Int ${bInt}${bDR?`; DR ${bDR}${bDRType}`:''}; Smite Good 1/day, resist cold/fire 5`});
   }
@@ -7769,7 +7770,7 @@ let _featTypeFilter='';
 function setFeatTypeFilter(t){ _featTypeFilter=(t===_featTypeFilter)?'':t; renderChar(); }
 
 function stepFeats(){
-  const allFeats=[...DATA.feats,...DATA.epicFeats];
+  const allFeats=[...DATA.feats,...(DATA.epicFeats||[])];
   const flawCount=(charState.char.flaws||[]).length;
   const slotHtml=charState.char.feats.map((slot,i)=>{
     const sel=allFeats.find(f=>f.name===slot.chosen);
@@ -7805,7 +7806,7 @@ function stepFeats(){
     }
     const filteredFeats = _featTypeFilter ? filterFeatsBySource(DATA.feats).filter(f=>f.type&&f.type.toLowerCase().includes(_featTypeFilter.toLowerCase())) : filterFeatsBySource(DATA.feats);
     const availFeats = sortQualifiedFirst(filteredFeats, f => checkFeatPrereqs(f).length === 0);
-    const availEpicFeats = sortQualifiedFirst(filterFeatsBySource(DATA.epicFeats), f => checkFeatPrereqs(f).length === 0);
+    const availEpicFeats = sortQualifiedFirst(filterFeatsBySource(DATA.epicFeats||[]), f => checkFeatPrereqs(f).length === 0);
     const regOpts=availFeats.map(f=>{
       const fails=checkFeatPrereqs(f);
       if(fails.length&&slot.chosen!==f.name)
@@ -11789,8 +11790,8 @@ function stepSummary(){
       </div>
       <div class="summary-block"><h4>Feats (${c.feats.filter(f=>f.chosen).length})</h4>
         ${c.feats.filter(f=>f.chosen).map(f=>{
-          const fd=[...DATA.feats,...DATA.epicFeats].find(d=>d.name===f.chosen);
-          const ftColors={'Exalted':'#3a7a3a','Vile':'#7a2a2a','Psionic':'#3a4a8a','Metamagic':'#6a3a8a','Fighter':'#8a4a1a','Reserve':'#4a6a4a','Tactical':'#5a5a1a','Item Creation':'#6a4a0a','Spelltouched':'#4a6a6a','Incarnum':'#2a5a7a','Draconic':'#7a5a1a','Exalted':'#3a7a3a'};
+          const fd=[...DATA.feats,...(DATA.epicFeats||[])].find(d=>d.name===f.chosen);
+          const ftColors={'Exalted':'#3a7a3a','Vile':'#7a2a2a','Psionic':'#3a4a8a','Metamagic':'#6a3a8a','Fighter':'#8a4a1a','Reserve':'#4a6a4a','Tactical':'#5a5a1a','Item Creation':'#6a4a0a','Spelltouched':'#4a6a6a','Incarnum':'#2a5a7a','Draconic':'#7a5a1a'};
           const ftBadge=fd&&fd.type&&fd.type!=='General'?`<span style="font-size:.58rem;padding:1px 4px;border-radius:2px;color:#fff;background:${ftColors[fd.type.split(',')[0].trim()]||'#5a5a5a'};vertical-align:middle;margin-left:4px">${fd.type.split(',')[0].trim()}</span>`:'';
           return `<div class="summary-row"><span class="sr-label" style="font-size:.8rem">${f.epic?'⚡ ':f.type==='flaw-bonus'?'⚠ ':''}${f.chosen}${ftBadge}</span></div>`;
         }).join('')||'<span class="text-muted">None</span>'}
@@ -11948,7 +11949,7 @@ function charExportRTF(type){
       const cm=modVal(finalAbility('CON'));
       c.levels.forEach((l,i)=>{ const cls2=getClass(l.className); const hpThis=i===0&&c.charType==='PC'?(cls2?cls2.hitDie:8):(l.hpRolled||0); r+=rP(`Level ${i+1}${i>=20?' ⚡':''}: ${l.className||'—'} | HP: ${hpThis}+${cm}=${hpThis+cm}`); });
       r+=rDiv(); r+=rH('FEATS',22);
-      const allFts=[...DATA.feats,...DATA.epicFeats];
+      const allFts=[...DATA.feats,...(DATA.epicFeats||[])];
       c.feats.filter(f=>f.chosen).forEach(f=>{ const fd=allFts.find(d=>d.name===f.chosen); r+=rP(`${f.epic?'⚡ ':''}${f.chosen}: ${fd?fd.desc:'—'}`); });
       r+=rDiv(); r+=rH('SKILLS',22);
       DATA.skills.forEach(sk=>{ const rk=c.skillRanks[sk.name]||0; if(!rk) return; const am=sk.ability?modVal(finalAbility(sk.ability)):0; r+=rKV(sk.name,`${(rk+am)>=0?'+':''}${rk+am} (${rk} ranks + ${am>=0?'+':''}${am})`); });
@@ -16643,6 +16644,20 @@ async function askHelpAI(){
 const CHANGELOG = [
 
           {
+            version: '1.9.3',
+            date: '2026-04-30',
+            summary: 'Full audit pass — 6 bugs fixed.',
+            changes: [
+              'FORGE_VERSION constant updated from 1.7 to 1.9.2 (was stuck since v1.7 stability pass; changelog panel now shows correct version)',
+              'Paladin Special Mount rules bug fixed: mount type and stat bonuses now correctly scale with Paladin class level (not total character level) per PHB Table 3-10. A Pal 5/Wiz 10 no longer incorrectly shows a Heavy Warhorse.',
+              'Blackguard Fiendish Servant rules bug fixed: stat bonuses now scale with Blackguard class level per DMG (same fix as Special Mount)',
+              'partyRemove() changed from splice() to members[i]=null — splice shifted slot indices causing misaligned party cards on removal',
+              'Spell Forge level selects: all option elements 0–9 now have explicit value attributes (previously relied on implicit text-content matching, fragile)',
+              'DATA.epicFeats null-safety: added ||[] guards on all four spread-operator usages (stepFeats allFeats, availEpicFeats, stepSummary ftColors lookup, RTF export allFts)',
+              'Duplicate Exalted key removed from ftColors object in summary feats block',
+            ]
+          },
+          {
             version: '1.9.2',
             date: '2026-04-30',
             summary: 'Alternate Class Features (ACFs), Special Mount, Fiendish Servant.',
@@ -17553,7 +17568,7 @@ const CHANGELOG = [
 ];
 
 // ── Current version (bumped on each update) ───────────────────────────────
-const FORGE_VERSION = '1.7';
+const FORGE_VERSION = '1.9.3';
 const FORGE_DATE    = 'April 2026';
 
 function renderChangelog(){
@@ -17784,8 +17799,8 @@ function renderSpellForgeTool(){
             <label style="font-size:.68rem;color:#888">${name}</label>
             <select class="field-input" onchange="sfUpdateField('lvl_${k}',this.value)" style="width:100%;padding:3px 6px">
               <option value="">—</option>
-              ${[0,1,2,3,4,5,6,7,8,9].map(n=>`<option ${s.levels[k]===n?'selected':''}>${n}</option>`).join('')}
-              <option ${s.levels[k]>=10?'selected':''} value="10">10+ (Epic)</option>
+              ${[0,1,2,3,4,5,6,7,8,9].map(n=>`<option value="${n}" ${s.levels[k]===n?'selected':''}>${n}</option>`).join('')}
+              <option value="10" ${s.levels[k]>=10?'selected':''}>10+ (Epic)</option>
             </select>
           </div>`).join('')}
         </div>
@@ -17860,7 +17875,7 @@ async function partyLoadFile(e,slot){
   }catch(er){ alert('Invalid character JSON: '+er.message); return; }
   renderPartyTool();
 }
-function partyRemove(i){ partyState.members.splice(i,1); renderPartyTool(); }
+function partyRemove(i){ partyState.members[i]=null; renderPartyTool(); }
 
 async function runPartyAnalysis(){
   const statusEl=document.getElementById('party-ai-status');
