@@ -1,0 +1,20 @@
+# Large source files not needed in repo
+Class Progression Tables/
+archives/
+extraction_output/
+scripts/
+
+# Credentials — never commit tokens
+App/github.txt
+github.txt
+*.env
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo

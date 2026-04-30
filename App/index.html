@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D&D 3.5 Forge</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%231a1410'/%3E%3Cpath d='M16 3 L19 13 L29 13 L21 19 L24 29 L16 23 L8 29 L11 19 L3 13 L13 13 Z' fill='%23c8952a' stroke='%23e8b84b' stroke-width='1'/%3E%3Cpath d='M16 8 L18 14 L24 14 L19 18 L21 24 L16 20 L11 24 L13 18 L8 14 L14 14 Z' fill='%231a1410' opacity='0.5'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;background:#1a1410;font-family:'Crimson Text',Georgia,serif;display:flex;align-items:center;justify-content:center;}
+.container{text-align:center;padding:40px 20px;max-width:700px;width:100%;}
+h1{font-family:'Cinzel',serif;font-size:2.6rem;font-weight:900;color:#e8b84b;margin-bottom:8px;letter-spacing:.04em;}
+.subtitle{color:#8a7050;font-size:1.1rem;margin-bottom:48px;font-style:italic;}
+.cards{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;}
+.card{
+  background:#110e09;border:1px solid #3a2a10;border-radius:8px;
+  padding:32px 28px;width:280px;cursor:pointer;text-decoration:none;
+  transition:border-color .2s,transform .15s,box-shadow .2s;
+  display:block;
+}
+.card:hover{border-color:#c8952a;transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.5);}
+.card-icon{font-size:3rem;margin-bottom:12px;}
+.card-title{font-family:'Cinzel',serif;font-size:1.25rem;font-weight:700;color:#e8b84b;margin-bottom:8px;}
+.card-desc{color:#8a7050;font-size:.92rem;line-height:1.5;}
+.card-tools{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;}
+.tool-tag{
+  background:#1e1608;border:1px solid #3a2a10;border-radius:3px;
+  padding:3px 8px;font-family:'Cinzel',serif;font-size:.62rem;color:#6a5030;
+  letter-spacing:.05em;text-transform:uppercase;
+}
+.footer{margin-top:48px;color:#6a5030;font-size:.78rem;font-family:'Cinzel',serif;letter-spacing:.1em;}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>⚔ D&D 3.5 Forge</h1>
+  <p class="subtitle">Choose your path, adventurer</p>
+  <div class="cards">
+    <a class="card" href="DnD35_Player.html">
+      <div class="card-icon">🧙</div>
+      <div class="card-title">Player Forge</div>
+      <div class="card-desc">Build characters, companions, magic items, and prestige classes.</div>
+      <div class="card-tools">
+        <span class="tool-tag">Character</span>
+        <span class="tool-tag">Companion</span>
+        <span class="tool-tag">Item</span>
+        <span class="tool-tag">Prestige</span>
+      </div>
+    </a>
+    <a class="card" href="DnD35_DM.html">
+      <div class="card-icon">👾</div>
+      <div class="card-title">DM Forge</div>
+      <div class="card-desc">Run monsters, track sessions, generate NPCs, and build encounters.</div>
+      <div class="card-tools">
+        <span class="tool-tag">Monsters</span>
+        <span class="tool-tag">Sessions</span>
+        <span class="tool-tag">NPCs</span>
+        <span class="tool-tag">Builder</span>
+      </div>
+    </a>
+  </div>
+  <div class="footer">v1.7 · Stability Pass · Apr 2026</div>
+</div>
+</body>
+</html>

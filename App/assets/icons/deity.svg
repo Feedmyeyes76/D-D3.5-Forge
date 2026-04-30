@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Deity">
+  <circle cx="32" cy="32" r="24" fill="#c8952a"/>
+  <path fill="#f5eed8" d="M32 11l5 16 16 5-16 5-5 16-5-16-16-5 16-5z"/>
+  <circle cx="32" cy="32" r="5" fill="#8b1a1a"/>
+</svg>
