@@ -450,6 +450,15 @@ details>summary::-webkit-details-marker{display:none;}
     <div class="nav-item" id="nav-prc" onclick="showTool('prc')">
       <span class="nav-icon">📜</span><span class="nav-label">Prestige Forge</span>
     </div>
+    <div class="nav-item" id="nav-spellforge" onclick="showTool('spellforge')">
+      <span class="nav-icon">✨</span><span class="nav-label">Spell Forge</span>
+    </div>
+    <div class="nav-item" id="nav-party" onclick="showTool('party')">
+      <span class="nav-icon">👥</span><span class="nav-label">Party Tool</span>
+    </div>
+    <div class="nav-item" id="nav-ranking" onclick="showTool('ranking')">
+      <span class="nav-icon">🏆</span><span class="nav-label">Ranking Tool</span>
+    </div>
   </div>
 
   <div class="nav-section" id="nav-char-steps" style="display:none">
@@ -507,7 +516,7 @@ details>summary::-webkit-details-marker{display:none;}
   <div class="nav-drive-status" id="nav-drive-status">Drive: not configured</div>
   <div style="padding:6px 14px;font-family:'Cinzel',serif;font-size:.58rem;color:#3a2a10;letter-spacing:.08em;cursor:pointer;transition:color .15s"
     onmouseover="this.style.color='#8b6914'" onmouseout="this.style.color='#3a2a10'"
-    onclick="showTool('changelog')">v1.8.8 · Class Abilities · Apr 2026</div>
+    onclick="showTool('changelog')">v1.9.0 · Spell Forge + Party + Ranking · Apr 2026</div>
 </nav>
 
 
@@ -644,11 +653,14 @@ function showTool(tool) {
     case 'changelog':   renderChangelog();       break;
     case 'settings':    renderSettings();        break;
     case 'sources':     renderSourceFilter();    break;
+    case 'spellforge':  renderSpellForgeTool();  break;
+    case 'party':       renderPartyTool();       break;
+    case 'ranking':     renderRankingTool();     break;
   }
 }
 
 function updateNavActive() {
-  ['home','char','comp','item','prc','mon','session','npc','monbuilder','help','changelog','settings','sources'].forEach(t => {
+  ['home','char','comp','item','prc','spellforge','party','ranking','mon','session','npc','monbuilder','help','changelog','settings','sources'].forEach(t => {
     const el = document.getElementById('nav-'+t);
     if(el) {
       el.className = 'nav-item';
@@ -734,6 +746,24 @@ function renderHome() {
         <div class="tc-name">Monster Builder</div>
         <div class="tc-stat">FULL STAT BLOCK · DRIVE SAVE · SESSION INTEGRATION</div>
         <div class="tc-desc">Build homebrew monsters from scratch with complete stat block control — type, size, HD, all six ability scores, attacks with damage expressions, special abilities, and feat selection. Save to Drive, export RTF, or push straight into the Session Tracker.</div>
+      </div>
+      <div class="tool-card" style="--bar-color:#3a4a8a" onclick="showTool('spellforge')">
+        <span class="tc-icon">✨</span>
+        <div class="tc-name">Spell Forge</div>
+        <div class="tc-stat">HOMEBREW SPELLS · ALL LEVELS 0–9 + EPIC · AI BALANCE CHECK</div>
+        <div class="tc-desc">Design custom spells with full PHB spell parameter support — school, level by class, components, range, area/target, duration, saving throw, SR. Power estimate based on comparable spells. AI balance analysis and RTF export.</div>
+      </div>
+      <div class="tool-card" style="--bar-color:#7a5a1a" onclick="showTool('party')">
+        <span class="tc-icon">👥</span>
+        <div class="tc-name">Party Tool</div>
+        <div class="tc-stat">MULTI-CHARACTER · ROLE COVERAGE · AI PARTY REVIEW</div>
+        <div class="tc-desc">Load multiple character saves to build a party roster. See combined skill coverage, saves, BAB, and role balance at a glance. AI generates a party assessment with gaps, strengths, and tactical recommendations.</div>
+      </div>
+      <div class="tool-card" style="--bar-color:#5a3a7a" onclick="showTool('ranking')">
+        <span class="tc-icon">🏆</span>
+        <div class="tc-name">Ranking Tool</div>
+        <div class="tc-stat">COMPARE PRCS · CLASSES · BUILDS · AI TIER ANALYSIS</div>
+        <div class="tc-desc">Compare prestige classes, base classes, or build paths side-by-side. Built-in community tier ratings for PrCs by role. Drop up to 5 items into the AI ranker for a structured power/utility comparison with reasoning.</div>
       </div>
     </div>
     ${!APPS_SCRIPT_URL || (!OPENAI_API_KEY && !GEMINI_API_KEY) ? `
@@ -5885,6 +5915,7 @@ const BLANK_CHAR = () => ({
   equipment:{weapons:[],armor:'',shield:'',gear:[]},
   magicItems:{},
   hp:0, notes:'', background:'', personality:'',
+  exClasses:{},
   _driveId:null, _driveName:null,
 });
 
@@ -6514,6 +6545,19 @@ function getScalableAbilities(){
   return abilities;
 }
 
+const EX_CLASS_RULES={
+  'Paladin':{align:'Lawful Good',loses:'All paladin class features (spells, smite evil, lay on hands, divine grace, aura of courage, divine health, turn undead, special mount, remove disease)',keeps:'Hit dice, BAB, saves, armor/weapon proficiencies',regain:"Atonement spell cast by a Lawful Good cleric. Must also atone in conduct — DM's discretion."},
+  'Monk':{align:'Lawful',loses:'All monk class features (unarmed damage progression, flurry of blows, AC bonus, ki strike, slow fall, evasion, wholeness of body, etc.)',keeps:'Hit dice, BAB, saves, proficiencies',regain:'Atonement spell. Cannot take further Monk levels until alignment is restored.'},
+  'Druid':{align:'Within 1 step of True Neutral (NG, NE, LN, CN, or TN)',loses:'All druid class features (spells, animal companion, wild shape, nature sense, venom immunity, etc.)',keeps:'Hit dice, BAB, saves, proficiencies',regain:'Atonement spell. Must perform a great deed of nature in service of a Neutral cause.'},
+  'Blackguard':{align:'Evil',loses:'All blackguard class features (dark blessing, smite good, command undead, fiendish servant, aura of despair, etc.)',keeps:'Hit dice, BAB, saves, proficiencies',regain:'None — cannot regain; treat as fighter for future advancement.'},
+  'Assassin':{align:'Any Evil',loses:'Assassin spells, death attack, poison use, uncanny dodge, hide in plain sight',keeps:'Hit dice, BAB, saves, proficiencies',regain:'Atonement spell + recommit to evil cause as judged by DM.'},
+};
+function toggleExClass(cls){
+  const c=charState.char;
+  if(!c.exClasses) c.exClasses={};
+  c.exClasses[cls]=!c.exClasses[cls];
+  renderChar();
+}
 function calcHP(){
   const cm=modVal(finalAbility('CON'));
   return charState.char.levels.reduce((sum,l,i)=>{
@@ -11676,6 +11720,37 @@ function stepSummary(){
         </div>
       </details>`;
     })()}
+    ${(()=>{
+      const cl={};
+      c.levels.forEach(l=>{ if(l.className) cl[l.className]=(cl[l.className]||0)+1; });
+      const exCandidates=Object.keys(EX_CLASS_RULES).filter(k=>cl[k]);
+      if(!exCandidates.length) return '';
+      const rows=exCandidates.map(cls=>{
+        const rule=EX_CLASS_RULES[cls];
+        const isEx=c.exClasses&&c.exClasses[cls];
+        return `<div style="margin-bottom:8px;border:1px solid ${isEx?'rgba(180,40,40,.4)':'rgba(0,0,0,.1)'};border-radius:4px;padding:8px;background:${isEx?'rgba(180,40,40,.05)':'rgba(0,0,0,.02)'}">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-weight:700;font-size:.82rem;color:${isEx?'var(--crimson)':'var(--ink)'}">${isEx?'⚠ Ex-':'✓ '}${cls}</span>
+            <button class="btn btn-xs" style="background:${isEx?'var(--crimson)':'rgba(0,0,0,.1)'};color:${isEx?'#fff':'#555'}" onclick="toggleExClass('${cls}')">${isEx?'Mark Restored':'Mark Ex-'+cls}</button>
+          </div>
+          ${isEx?`<div style="font-size:.72rem;color:#888;margin-top:5px;line-height:1.5">
+            <div><strong>Alignment required:</strong> ${rule.align}</div>
+            <div><strong>Lost:</strong> ${rule.loses}</div>
+            <div><strong>Kept:</strong> ${rule.keeps}</div>
+            <div style="margin-top:3px;color:var(--sage)"><strong>To regain:</strong> ${rule.regain}</div>
+          </div>`:''}
+        </div>`;
+      }).join('');
+      return `<details style="margin-bottom:14px">
+        <summary style="font-family:'Cinzel',serif;font-size:.78rem;font-weight:600;cursor:pointer;padding:9px 12px;background:rgba(180,40,40,.06);border:1px solid rgba(180,40,40,.25);border-radius:4px;list-style:none;color:${Object.keys(c.exClasses||{}).some(k=>c.exClasses[k])?'var(--crimson)':'var(--ink)'}">
+          ${Object.keys(c.exClasses||{}).some(k=>c.exClasses[k])?'⚠ Ex-Class Status (active)':'⚑ Ex-Class & Redemption — click to expand'}
+        </summary>
+        <div style="background:rgba(180,40,40,.03);border:1px solid rgba(180,40,40,.15);border-top:none;border-radius:0 0 4px 4px;padding:10px">
+          <p style="font-size:.72rem;color:#888;margin:0 0 8px">Mark a class as "ex-" if the character has lost their class features through alignment violation, misconduct, or loss of patron.</p>
+          ${rows}
+        </div>
+      </details>`;
+    })()}
     ${c.personality?`<div class="info-box" style="margin-bottom:12px"><strong>Personality:</strong><br>${c.personality}</div>`:''}
     ${c.background?`<div class="info-box" style="margin-bottom:14px"><strong>Background:</strong><br>${c.background}</div>`:''}
     <div class="divider-ornament"><span>🤖 AI Build Analysis</span></div>
@@ -12432,6 +12507,7 @@ function renderItemTool(){
 function forgeHtml(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
+const hE=forgeHtml;
 function forgeAttr(s){
   return forgeHtml(s).replace(/"/g,'&quot;');
 }
@@ -16435,6 +16511,18 @@ async function askHelpAI(){
 const CHANGELOG = [
 
           {
+            version: '1.9.0',
+            date: '2026-04-30',
+            summary: 'Spell Forge, Party Tool, Ranking Tool, Ex-Class & Redemption rules.',
+            changes: [
+              'Spell Forge (new tool) — design homebrew spells with full PHB parameter support: school/subschool/descriptors, level by class (Sor/Wiz/Clr/Drd/Brd/Pal/Rgr/Arc/Div), V/S/M/DF/XP/F components, range/target/duration/save/SR, and spell description. AI balance analysis vs. official spells. RTF export.',
+              'Party Tool (new tool) — load up to 6 character JSON saves, view party roster at a glance, AI party analysis covering role coverage, synergies, vulnerabilities, tactical identity, and per-character next-level advice.',
+              'Ranking Tool (new tool) — AI-powered side-by-side comparison of PrCs, classes, spells, feats, or build paths. Tier placements, power gap assessment, context-dependent winners. Built-in community PrC tier reference (T1–T6).',
+              'Ex-Class & Redemption panel in Summary step — mark Paladin, Monk, Druid, Blackguard, or Assassin as ex-; shows what abilities are lost, what is kept, and the specific atonement path to regain class features.',
+              'Global hE() HTML-escaping helper (alias of forgeHtml) available to all tool render functions.',
+            ]
+          },
+          {
             version: '1.8.8',
             date: '2026-04-30',
             summary: 'Scalable class abilities panel, feat type filter + badges, Item Forge AI analysis.',
@@ -17390,6 +17478,425 @@ function renderChangelog(){
     </div>
   </div>`;
 }
+
+// ── SPELL FORGE ───────────────────────────────────────────────────────────────
+let sfState={
+  name:'',school:'Evocation',subschool:'',descriptors:[],
+  levels:{Sor:null,Wiz:null,Clr:null,Drd:null,Brd:null,Pal:null,Rgr:null,Arc:null,Div:null},
+  comp:{V:false,S:false,M:false,DF:false,XP:false,F:false},
+  materialCost:'',xpCost:'',focusCost:'',
+  range:'Close (25 ft. + 5 ft./2 levels)',
+  targetAreaEffect:'',duration:'Instantaneous',castingTime:'1 standard action',
+  savingThrow:'None',sr:true,description:''
+};
+const SF_SCHOOLS=['Abjuration','Conjuration','Divination','Enchantment','Evocation','Illusion','Necromancy','Transmutation','Universal'];
+const SF_SUBSCHOOLS={Conjuration:['Calling','Creation','Healing','Summoning','Teleportation'],Illusion:['Figment','Glamer','Pattern','Phantasm','Shadow'],Divination:['Scrying'],Enchantment:['Charm','Compulsion'],Necromancy:[]};
+const SF_DESCRIPTORS=['Acid','Air','Chaotic','Cold','Darkness','Death','Earth','Electricity','Evil','Fear','Fire','Force','Good','Language-Dependent','Law','Lawful','Light','Mind-Affecting','Sonic','Teleportation','Water'];
+const SF_RANGES=['Personal','Touch','Close (25 ft. + 5 ft./2 levels)','Medium (100 ft. + 10 ft./level)','Long (400 ft. + 40 ft./level)','See text'];
+const SF_DURATIONS=['Instantaneous','1 round/level','1 min./level','10 min./level','1 hour/level','24 hours','Permanent','See text','Concentration'];
+const SF_SAVE_TYPES=['None','Will negates','Will half','Fortitude negates','Fortitude half','Reflex negates','Reflex half','Reflex partial','Will disbelief','No saving throw'];
+const SF_CAST_TIMES=['1 standard action','1 full round','1 round','1 minute','10 minutes','1 hour'];
+const SF_CLASS_NAMES={Sor:'Sorcerer',Wiz:'Wizard',Clr:'Cleric',Drd:'Druid',Brd:'Bard',Pal:'Paladin',Rgr:'Ranger',Arc:'Arcane (generic)',Div:'Divine (generic)'};
+
+function sfLvlHint(lvl){
+  if(lvl===null||lvl===undefined) return '';
+  const hints={0:'Cantrip/Orison — trivial utility',1:'Simple, limited range or duration',2:'Moderate effect, single target',3:'Solid single-target or area',4:'Strong, uncommon power spike',5:'Significant threat or major utility',6:'Game-changing; restricted casters only',7:'Devastating or highly potent',8:'Epic in scope for standard play',9:'Pinnacle of arcane/divine power'};
+  return hints[Math.min(lvl,9)]||'Epic level spell';
+}
+
+function sfUpdateField(field,val){
+  if(field==='comp'){
+    sfState.comp[val]=!sfState.comp[val];
+  } else if(field==='descriptor'){
+    const idx=sfState.descriptors.indexOf(val);
+    if(idx>=0) sfState.descriptors.splice(idx,1); else sfState.descriptors.push(val);
+  } else if(field.startsWith('lvl_')){
+    const cls=field.slice(4);
+    sfState.levels[cls]=val===''?null:parseInt(val);
+  } else {
+    sfState[field]=val;
+  }
+  renderSpellForgeTool();
+}
+
+function sfClearAll(){ sfState={name:'',school:'Evocation',subschool:'',descriptors:[],levels:{Sor:null,Wiz:null,Clr:null,Drd:null,Brd:null,Pal:null,Rgr:null,Arc:null,Div:null},comp:{V:false,S:false,M:false,DF:false,XP:false,F:false},materialCost:'',xpCost:'',focusCost:'',range:'Close (25 ft. + 5 ft./2 levels)',targetAreaEffect:'',duration:'Instantaneous',castingTime:'1 standard action',savingThrow:'None',sr:true,description:''}; renderSpellForgeTool(); }
+
+async function runSpellAnalysis(){
+  const statusEl=document.getElementById('sf-ai-status');
+  const outputEl=document.getElementById('sf-ai-output');
+  if(!statusEl||!outputEl) return;
+  if(!OPENAI_API_KEY&&!GEMINI_API_KEY){ statusEl.innerHTML='<span style="color:var(--crimson)">No AI key in Settings.</span>'; return; }
+  statusEl.innerHTML='<span class="spinner"></span> Analyzing…';
+  outputEl.style.display='none';
+  const activeLvls=Object.entries(sfState.levels).filter(([,v])=>v!==null).map(([k,v])=>`${SF_CLASS_NAMES[k]||k} ${v}`).join(', ')||'Unspecified level';
+  const comps=Object.entries(sfState.comp).filter(([,v])=>v).map(([k])=>k).join(', ')||'None';
+  const prompt=`You are an expert D&D 3.5 spell designer and balance analyst. Evaluate this homebrew spell:
+
+NAME: ${sfState.name||'Unnamed'}
+SCHOOL: ${sfState.school}${sfState.subschool?` (${sfState.subschool})`:''}${sfState.descriptors.length?' ['+sfState.descriptors.join(', ')+']':''}
+LEVEL(S): ${activeLvls}
+COMPONENTS: ${comps}${sfState.materialCost?' — Material cost: '+sfState.materialCost:''}${sfState.xpCost?' — XP cost: '+sfState.xpCost:''}
+CASTING TIME: ${sfState.castingTime}
+RANGE: ${sfState.range}
+TARGET/AREA/EFFECT: ${sfState.targetAreaEffect||'—'}
+DURATION: ${sfState.duration}
+SAVING THROW: ${sfState.savingThrow}
+SPELL RESISTANCE: ${sfState.sr?'Yes':'No'}
+DESCRIPTION: ${sfState.description||'(none provided)'}
+
+Provide a concise analysis in these sections:
+
+BALANCE VERDICT
+Is the spell level appropriate? Compare to 2-3 official spells at the same level and class.
+
+DESIGN STRENGTHS
+What works well mechanically and thematically?
+
+BALANCE CONCERNS
+Any power spikes, exploitable interactions, or under-powered aspects?
+
+SUGGESTED TWEAKS
+1-2 concrete changes to improve balance or flavor.
+
+COMPARABLE SPELLS
+Name 2-3 the closest official spells and how this compares.
+
+Keep total response under 300 words.`;
+  try{
+    const text=await geminiGenerate(prompt);
+    outputEl.textContent=text;
+    outputEl.style.display='block';
+    statusEl.innerHTML='<span style="color:var(--sage)">✓ Analysis complete</span>';
+  }catch(e){ statusEl.innerHTML=`<span style="color:var(--crimson)">✗ ${e.message}</span>`; }
+}
+
+function sfExportRTF(){
+  const s=sfState;
+  const activeLvls=Object.entries(s.levels).filter(([,v])=>v!==null).map(([k,v])=>`${SF_CLASS_NAMES[k]||k} ${v}`).join(', ')||'—';
+  const comps=Object.entries(s.comp).filter(([,v])=>v).map(([k])=>k).join(', ')||'—';
+  let r=rHead();
+  r+=rH(s.name||'Unnamed Spell',28,1);
+  r+=rP(`${s.school}${s.subschool?` (${s.subschool})`:''}${s.descriptors.length?' ['+s.descriptors.join(', ')+']':''}`);
+  r+=rDiv();
+  r+=rKV('Level',activeLvls);
+  r+=rKV('Components',comps+(s.materialCost?' (M: '+s.materialCost+')':'')+(s.xpCost?' (XP: '+s.xpCost+')':''));
+  r+=rKV('Casting Time',s.castingTime);
+  r+=rKV('Range',s.range);
+  if(s.targetAreaEffect) r+=rKV('Target/Area/Effect',s.targetAreaEffect);
+  r+=rKV('Duration',s.duration);
+  r+=rKV('Saving Throw',s.savingThrow);
+  r+=rKV('Spell Resistance',s.sr?'Yes':'No');
+  if(s.description){ r+=rDiv(); r+=rH('Description',20,2); r+=rP(s.description); }
+  r+='}';
+  const blob=new Blob([r],{type:'text/rtf'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=(s.name||'spell')+'.rtf'; a.click();
+}
+
+function renderSpellForgeTool(){
+  const s=sfState;
+  const activeLvls=Object.entries(s.levels).filter(([,v])=>v!==null);
+  const primaryLvl=activeLvls.length?Math.min(...activeLvls.map(([,v])=>v)):null;
+  const hint=primaryLvl!==null?sfLvlHint(primaryLvl):'';
+  document.getElementById('tool-container').innerHTML=`
+  <div class="forge-card fade-in" style="margin-top:16px">
+    <div class="step-heading" style="color:var(--gold2)">✨ Spell Forge</div>
+    <p class="step-sub">Design a homebrew spell with full PHB parameter support. AI can analyze balance against official spells.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+
+      <div>
+        <label class="field-label">Spell Name</label>
+        <input class="field-input" value="${hE(s.name)}" oninput="sfState.name=this.value" placeholder="e.g. Bolt of Utter Darkness" style="width:100%">
+      </div>
+      <div>
+        <label class="field-label">Casting Time</label>
+        <select class="field-input" onchange="sfUpdateField('castingTime',this.value)" style="width:100%">
+          ${SF_CAST_TIMES.map(ct=>`<option ${s.castingTime===ct?'selected':''}>${ct}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="field-label">School</label>
+        <select class="field-input" onchange="sfUpdateField('school',this.value)" style="width:100%">
+          ${SF_SCHOOLS.map(sc=>`<option ${s.school===sc?'selected':''}>${sc}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="field-label">Subschool</label>
+        <select class="field-input" onchange="sfUpdateField('subschool',this.value)" style="width:100%">
+          <option value="">— None —</option>
+          ${(SF_SUBSCHOOLS[s.school]||[]).map(ss=>`<option ${s.subschool===ss?'selected':''}>${ss}</option>`).join('')}
+        </select>
+      </div>
+
+      <div style="grid-column:1/-1">
+        <label class="field-label">Descriptors</label>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          ${SF_DESCRIPTORS.map(d=>`<button onclick="sfUpdateField('descriptor','${d}')" class="btn btn-xs" style="${s.descriptors.includes(d)?'background:var(--gold);color:#1a1208':'background:rgba(0,0,0,.08);color:#666'}">${d}</button>`).join('')}
+        </div>
+      </div>
+
+      <div style="grid-column:1/-1">
+        <label class="field-label">Spell Level by Class</label>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px">
+          ${Object.entries(SF_CLASS_NAMES).map(([k,name])=>`<div>
+            <label style="font-size:.68rem;color:#888">${name}</label>
+            <select class="field-input" onchange="sfUpdateField('lvl_${k}',this.value)" style="width:100%;padding:3px 6px">
+              <option value="">—</option>
+              ${[0,1,2,3,4,5,6,7,8,9].map(n=>`<option ${s.levels[k]===n?'selected':''}>${n}</option>`).join('')}
+              <option ${s.levels[k]>=10?'selected':''} value="10">10+ (Epic)</option>
+            </select>
+          </div>`).join('')}
+        </div>
+        ${hint?`<div style="margin-top:6px;font-size:.74rem;color:var(--sage);font-style:italic">Level ${primaryLvl}: ${hint}</div>`:''}
+      </div>
+
+      <div style="grid-column:1/-1">
+        <label class="field-label">Components</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          ${Object.keys(s.comp).map(k=>`<label style="display:flex;align-items:center;gap:4px;font-size:.82rem;cursor:pointer">
+            <input type="checkbox" ${s.comp[k]?'checked':''} onchange="sfUpdateField('comp','${k}')"> ${k}
+          </label>`).join('')}
+        </div>
+        ${s.comp.M?`<input class="field-input" placeholder="Material component cost/description" value="${hE(s.materialCost)}" oninput="sfState.materialCost=this.value" style="margin-top:5px;width:100%">`:''}
+        ${s.comp.XP?`<input class="field-input" placeholder="XP cost (e.g. 500 XP)" value="${hE(s.xpCost)}" oninput="sfState.xpCost=this.value" style="margin-top:5px;width:100%">`:''}
+        ${s.comp.F?`<input class="field-input" placeholder="Focus description/cost" value="${hE(s.focusCost)}" oninput="sfState.focusCost=this.value" style="margin-top:5px;width:100%">`:''}
+      </div>
+
+      <div>
+        <label class="field-label">Range</label>
+        <select class="field-input" onchange="sfUpdateField('range',this.value)" style="width:100%">
+          ${SF_RANGES.map(r=>`<option ${s.range===r?'selected':''}>${r}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="field-label">Duration</label>
+        <select class="field-input" onchange="sfUpdateField('duration',this.value)" style="width:100%">
+          ${SF_DURATIONS.map(d=>`<option ${s.duration===d?'selected':''}>${d}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <label class="field-label">Saving Throw</label>
+        <select class="field-input" onchange="sfUpdateField('savingThrow',this.value)" style="width:100%">
+          ${SF_SAVE_TYPES.map(sv=>`<option ${s.savingThrow===sv?'selected':''}>${sv}</option>`).join('')}
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding-top:18px">
+        <label style="display:flex;align-items:center;gap:6px;font-size:.82rem;cursor:pointer">
+          <input type="checkbox" ${s.sr?'checked':''} onchange="sfState.sr=this.checked;renderSpellForgeTool()"> Spell Resistance applies
+        </label>
+      </div>
+      <div style="grid-column:1/-1">
+        <label class="field-label">Target / Area / Effect</label>
+        <input class="field-input" value="${hE(s.targetAreaEffect)}" oninput="sfState.targetAreaEffect=this.value" placeholder="e.g. One creature, or Area: 20-ft.-radius burst" style="width:100%">
+      </div>
+      <div style="grid-column:1/-1">
+        <label class="field-label">Description</label>
+        <textarea class="field-input" rows="5" oninput="sfState.description=this.value" placeholder="Full spell text — describe the effect, any special mechanics, damage dice, etc." style="width:100%;resize:vertical">${hE(s.description)}</textarea>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;align-items:center">
+      ${(OPENAI_API_KEY||GEMINI_API_KEY)?`<button class="btn btn-gold" onclick="runSpellAnalysis()" ${!s.description&&activeLvls.length===0?'disabled':''}>🤖 AI Balance Analysis</button>`:''}
+      <button class="btn btn-secondary" onclick="sfExportRTF()" ${!s.name?'disabled':''}>📄 Export RTF</button>
+      <button class="btn btn-sm btn-danger" onclick="sfClearAll()">↺ Clear</button>
+    </div>
+    <div id="sf-ai-status" style="margin-top:8px;font-size:.82rem;min-height:1em"></div>
+    <pre id="sf-ai-output" style="display:none;margin-top:8px;background:rgba(74,103,65,.06);border:1px solid rgba(74,103,65,.3);border-radius:4px;padding:12px;font-size:.78rem;line-height:1.65;white-space:pre-wrap;word-wrap:break-word;font-family:inherit;color:var(--ink);max-height:420px;overflow-y:auto"></pre>
+  </div>`;
+}
+
+// ── PARTY TOOL ────────────────────────────────────────────────────────────────
+let partyState={members:[],aiStatus:'',aiOutput:''};
+
+async function partyLoadFile(e,slot){
+  const file=e.target.files[0]; if(!file) return;
+  try{
+    const text=await file.text();
+    const data=JSON.parse(text);
+    const ch=data.character||data;
+    partyState.members[slot]={name:ch.name||file.name,char:ch,fileName:file.name};
+  }catch(er){ alert('Invalid character JSON: '+er.message); return; }
+  renderPartyTool();
+}
+function partyRemove(i){ partyState.members.splice(i,1); renderPartyTool(); }
+
+async function runPartyAnalysis(){
+  const statusEl=document.getElementById('party-ai-status');
+  const outputEl=document.getElementById('party-ai-output');
+  if(!statusEl||!outputEl) return;
+  if(!OPENAI_API_KEY&&!GEMINI_API_KEY){ statusEl.innerHTML='<span style="color:var(--crimson)">No AI key in Settings.</span>'; return; }
+  statusEl.innerHTML='<span class="spinner"></span> Analyzing party…'; outputEl.style.display='none';
+  const members=partyState.members.filter(m=>m);
+  const roster=members.map(m=>{
+    const c=m.char;
+    const cls=(c.levels||[]).reduce((acc,l)=>{ if(l.className) acc[l.className]=(acc[l.className]||0)+1; return acc; },{});
+    const clsSummary=Object.entries(cls).map(([k,v])=>`${k} ${v}`).join('/');
+    return `  • ${c.name||'?'} — ${c.race||'?'} ${clsSummary}, ${(c.levels||[]).length} HD, ${c.alignment||'?'}, Deity: ${c.deity||'none'}`;
+  }).join('\n');
+  const prompt=`You are an expert D&D 3.5 DM and optimization consultant. Analyze this adventuring party:
+
+${roster}
+
+Provide a structured party assessment:
+
+PARTY ROLE COVERAGE
+Rate coverage (Strong/Weak/Missing) for: Melee, Arcane, Divine, Stealth, Scouting, Social/Face, Healing, Crowd Control, Battlefield Control
+
+SYNERGIES
+What class combos or ability interactions work especially well together?
+
+VULNERABILITIES
+What threats will this party struggle with? (e.g. "no AoE", "weak against undead", "no Dispel Magic")
+
+MISSING ROLES
+The most critical gap and a concrete suggestion to fill it (class + key feat/PrC).
+
+TACTICAL IDENTITY
+2-sentence summary of how this party should approach combat and exploration.
+
+NEXT 3 LEVELS
+One high-impact suggestion per character (just name and key next choice).
+
+Keep total under 350 words.`;
+  try{
+    const text=await geminiGenerate(prompt);
+    outputEl.textContent=text; outputEl.style.display='block';
+    statusEl.innerHTML='<span style="color:var(--sage)">✓ Analysis complete</span>';
+  }catch(e){ statusEl.innerHTML=`<span style="color:var(--crimson)">✗ ${e.message}</span>`; }
+}
+
+function renderPartyTool(){
+  const members=partyState.members;
+  const slots=6;
+  const memberCards=Array.from({length:slots},(_,i)=>{
+    const m=members[i];
+    if(m){
+      const c=m.char;
+      const cls=(c.levels||[]).reduce((acc,l)=>{ if(l.className) acc[l.className]=(acc[l.className]||0)+1; return acc; },{});
+      const clsSummary=Object.entries(cls).map(([k,v])=>`${k} ${v}`).join(' / ')||'No class';
+      const totalHD=(c.levels||[]).length;
+      return `<div style="border:1px solid rgba(74,103,65,.3);border-radius:6px;padding:12px;background:rgba(74,103,65,.04)">
+        <div style="display:flex;justify-content:space-between;align-items:start">
+          <div>
+            <div style="font-weight:700;font-size:.9rem">${hE(c.name||'Unknown')}</div>
+            <div style="font-size:.72rem;color:#888;margin-top:2px">${hE(c.race||'?')} · ${hE(clsSummary)}</div>
+            <div style="font-size:.72rem;color:#888">${totalHD} HD · ${hE(c.alignment||'?')}${c.deity?' · '+hE(c.deity):''}</div>
+          </div>
+          <button class="btn btn-xs btn-danger" onclick="partyRemove(${i})">✕</button>
+        </div>
+      </div>`;
+    }
+    return `<div style="border:2px dashed rgba(0,0,0,.12);border-radius:6px;padding:12px;text-align:center">
+      <label style="cursor:pointer;color:#888;font-size:.78rem">
+        <div style="font-size:1.4rem;margin-bottom:4px">➕</div>
+        Add Character ${i+1}
+        <input type="file" accept=".json" onchange="partyLoadFile(event,${i})" style="display:none">
+      </label>
+    </div>`;
+  }).join('');
+  const hasMembers=members.some(m=>m);
+  document.getElementById('tool-container').innerHTML=`
+  <div class="forge-card fade-in" style="margin-top:16px">
+    <div class="step-heading" style="color:var(--gold2)">👥 Party Tool</div>
+    <p class="step-sub">Load up to 6 character JSON saves to build a party roster. Export JSON files from the Character Forge Summary step.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:16px">
+      ${memberCards}
+    </div>
+    ${hasMembers?`
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+      ${(OPENAI_API_KEY||GEMINI_API_KEY)?`<button class="btn btn-gold" onclick="runPartyAnalysis()">🤖 AI Party Analysis</button>`:'<span style="font-size:.8rem;color:#888">Add an AI key in Settings to enable party analysis.</span>'}
+    </div>
+    <div id="party-ai-status" style="font-size:.82rem;min-height:1em;margin-bottom:6px"></div>
+    <pre id="party-ai-output" style="display:none;background:rgba(74,103,65,.06);border:1px solid rgba(74,103,65,.3);border-radius:4px;padding:12px;font-size:.78rem;line-height:1.65;white-space:pre-wrap;word-wrap:break-word;font-family:inherit;color:var(--ink);max-height:500px;overflow-y:auto"></pre>`
+    :'<p style="color:#888;font-size:.82rem">Load at least one character JSON to begin.</p>'}
+  </div>`;
+}
+
+// ── RANKING TOOL ──────────────────────────────────────────────────────────────
+let rankState={inputs:['','','','',''],aiStatus:'',mode:'prc'};
+
+async function runRankingAnalysis(){
+  const statusEl=document.getElementById('rank-ai-status');
+  const outputEl=document.getElementById('rank-ai-output');
+  if(!statusEl||!outputEl) return;
+  if(!OPENAI_API_KEY&&!GEMINI_API_KEY){ statusEl.innerHTML='<span style="color:var(--crimson)">No AI key.</span>'; return; }
+  const items=rankState.inputs.filter(x=>x.trim());
+  if(items.length<2){ statusEl.innerHTML='<span style="color:var(--crimson)">Enter at least 2 items to compare.</span>'; return; }
+  statusEl.innerHTML='<span class="spinner"></span> Ranking…'; outputEl.style.display='none';
+  const typeLabel={'prc':'D&D 3.5 prestige classes','class':'D&D 3.5 base classes','spell':'D&D 3.5 spells','feat':'D&D 3.5 feats','build':'D&D 3.5 character build paths'}[rankState.mode]||'items';
+  const prompt=`You are an expert D&D 3.5 theorycrafterwith deep knowledge of optimization and tier lists. Compare and rank these ${typeLabel}:
+
+${items.map((x,i)=>`${i+1}. ${x}`).join('\n')}
+
+Provide:
+
+RANKINGS
+Rank them from strongest/most useful to weakest for general play, with a 1-sentence justification per entry.
+
+POWER GAP
+How wide is the gap between #1 and #${items.length}? (Minimal / Moderate / Large / Extreme)
+
+CONTEXT MATTERS
+What specific party composition, campaign type, or build path makes a lower-ranked option jump to the top?
+
+TIER PLACEMENT
+Place each in the classic D&D 3.5 optimizer tier (T1=broken, T2=very strong, T3=solid, T4=functional, T5=weak, T6=trap).
+
+VERDICT
+2-sentence conclusion on which to prioritize.
+
+Keep total under 300 words.`;
+  try{
+    const text=await geminiGenerate(prompt);
+    outputEl.textContent=text; outputEl.style.display='block';
+    statusEl.innerHTML='<span style="color:var(--sage)">✓ Done</span>';
+  }catch(e){ statusEl.innerHTML=`<span style="color:var(--crimson)">✗ ${e.message}</span>`; }
+}
+
+function renderRankingTool(){
+  const r=rankState;
+  const modeLabels={'prc':'Prestige Classes','class':'Base Classes','spell':'Spells','feat':'Feats','build':'Build Paths'};
+  document.getElementById('tool-container').innerHTML=`
+  <div class="forge-card fade-in" style="margin-top:16px">
+    <div class="step-heading" style="color:var(--gold2)">🏆 Ranking Tool</div>
+    <p class="step-sub">Enter up to 5 items to compare. The AI will rank, tier, and explain trade-offs with D&D 3.5 optimizer depth.</p>
+
+    <div style="margin-bottom:12px">
+      <label class="field-label">Comparing</label>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${Object.entries(modeLabels).map(([k,v])=>`<button onclick="rankState.mode='${k}';renderRankingTool()" class="btn btn-sm" style="${r.mode===k?'background:var(--gold);color:#1a1208':'background:rgba(0,0,0,.1);color:#888'}">${v}</button>`).join('')}
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+      ${r.inputs.map((v,i)=>`<div style="display:flex;gap:6px;align-items:center">
+        <span style="font-size:.7rem;color:#888;width:18px;text-align:right">${i+1}.</span>
+        <input class="field-input" style="flex:1" value="${hE(v)}" oninput="rankState.inputs[${i}]=this.value" placeholder="${i<2?'Required — enter a '+modeLabels[r.mode].slice(0,-1):'Optional'}">
+        ${v?`<button onclick="rankState.inputs[${i}]='';renderRankingTool()" class="btn btn-xs" style="background:rgba(180,40,40,.1);color:var(--crimson)">✕</button>`:''}
+      </div>`).join('')}
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+      ${(OPENAI_API_KEY||GEMINI_API_KEY)?`<button class="btn btn-gold" onclick="runRankingAnalysis()">🤖 Rank & Compare</button>`:'<span style="font-size:.8rem;color:#888">Add an AI key in Settings to enable ranking.</span>'}
+      <button class="btn btn-sm btn-danger" onclick="rankState.inputs=['','','','',''];renderRankingTool()">↺ Clear</button>
+    </div>
+    <div id="rank-ai-status" style="font-size:.82rem;min-height:1em;margin-bottom:6px"></div>
+    <pre id="rank-ai-output" style="display:none;background:rgba(74,103,65,.06);border:1px solid rgba(74,103,65,.3);border-radius:4px;padding:12px;font-size:.78rem;line-height:1.65;white-space:pre-wrap;word-wrap:break-word;font-family:inherit;color:var(--ink);max-height:500px;overflow-y:auto"></pre>
+
+    <div class="divider-ornament" style="margin-top:20px"><span>📊 Quick PrC Tier Reference</span></div>
+    <p style="font-size:.76rem;color:#888;margin-bottom:10px">Community optimization tier ratings for common prestige classes (T1=broken → T6=trap). Click to load into the ranker.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      ${[
+        ['T1','Incantatrix','#7a2a7a'],['T1','Incantatar','#7a2a7a'],['T1','Initiate of the Sevenfold Veil','#7a2a7a'],
+        ['T2','Mystic Theurge','#4a4a9a'],['T2','Ur-Priest','#4a4a9a'],['T2','Arcane Hierophant','#4a4a9a'],['T2','Cerebremancer','#4a4a9a'],
+        ['T3','Arcane Archer','#3a6a3a'],['T3','Duelist','#3a6a3a'],['T3','Shadowdancer','#3a6a3a'],['T3','Arcane Trickster','#3a6a3a'],['T3','Assassin','#3a6a3a'],
+        ['T4','Blackguard','#7a6a1a'],['T4','Dragon Disciple','#7a6a1a'],['T4','Loremaster','#7a6a1a'],['T4','Horizon Walker','#7a6a1a'],
+        ['T5','Eldritch Knight','#8a4a1a'],['T5','Weapon Master','#8a4a1a'],
+        ['T6','Exotic Weapon Master','#8a2a2a'],
+      ].map(([tier,name,color])=>`<button onclick="const empty=rankState.inputs.findIndex(x=>!x.trim());if(empty>=0){rankState.inputs[empty]='${name}';renderRankingTool();}" class="btn btn-xs" style="background:${color}20;border:1px solid ${color}60;color:${color};font-size:.65rem"><span style="font-weight:700">${tier}</span> ${name}</button>`).join('')}
+    </div>
+  </div>`;
+}
+
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', ()=>{
