@@ -516,7 +516,7 @@ details>summary::-webkit-details-marker{display:none;}
   <div class="nav-drive-status" id="nav-drive-status">Drive: not configured</div>
   <div style="padding:6px 14px;font-family:'Cinzel',serif;font-size:.58rem;color:#3a2a10;letter-spacing:.08em;cursor:pointer;transition:color .15s"
     onmouseover="this.style.color='#8b6914'" onmouseout="this.style.color='#3a2a10'"
-    onclick="showTool('changelog')">v1.9.0 · Spell Forge + Party + Ranking · Apr 2026</div>
+    onclick="showTool('changelog')">v1.9.2 · ACFs + Servants · Apr 2026</div>
 </nav>
 
 
@@ -5915,7 +5915,7 @@ const BLANK_CHAR = () => ({
   equipment:{weapons:[],armor:'',shield:'',gear:[]},
   magicItems:{},
   hp:0, notes:'', background:'', personality:'',
-  exClasses:{},
+  exClasses:{}, acfs:{},
   _driveId:null, _driveName:null,
 });
 
@@ -6497,6 +6497,7 @@ function getScalableAbilities(){
 
   // ── Paladin abilities ───────────────────────────────────────────────────
   const palLvl=g('Paladin');
+  const totalHD=c.levels.length;
   if(palLvl>0){
     if(palLvl>=4) abilities.push({name:'Turn Undead (Pal)',value:`${Math.max(1,3+cha)}/day`,detail:`Effective cleric level ${palLvl-3} — as cleric ${palLvl-3}`});
     const loh=Math.max(0,cha)*palLvl;
@@ -6504,6 +6505,23 @@ function getScalableAbilities(){
     const smites=1+Math.floor(palLvl/5);
     abilities.push({name:'Smite Evil',value:`${smites}/day`,detail:`${sign(Math.max(0,cha))} to hit, +${palLvl} dmg (Pal L${palLvl})`});
     if(palLvl>=3) abilities.push({name:"Aura of Courage / Divine Health",value:'Passive',detail:`Immune fear; Immune all disease`});
+    if(palLvl>=5){
+      const mStr=totalHD>=15?'+7':totalHD>=11?'+6':totalHD>=8?'+5':'+4';
+      const mInt=totalHD>=15?9:totalHD>=11?8:totalHD>=8?7:6;
+      const mSpc=totalHD>=15?'Spell resistance':totalHD>=11?'Command creatures of kind':totalHD>=8?'Improved speed':'Empathic link, share spells, evasion';
+      const mType=totalHD>=15?'Heavy Warhorse':totalHD>=8?'Light Warhorse':'Light Warhorse or Pony';
+      abilities.push({name:'Special Mount',value:mType,detail:`Pal L${palLvl} — Str/Con ${mStr}, +${mStr} nat. armor, Int ${mInt}; ${mSpc}. Call 2 hrs/pal lvl, 1/day`});
+    }
+  }
+  // ── Blackguard Fiendish Servant ────────────────────────────────────────
+  const bgLvl=g('Blackguard');
+  if(bgLvl>=5){
+    const bStr=totalHD>=15?'+7':totalHD>=11?'+6':totalHD>=8?'+5':'+4';
+    const bInt=totalHD>=15?9:totalHD>=11?8:totalHD>=8?7:6;
+    const bDR=totalHD>=16?10:totalHD>=11?5:bgLvl>=8?5:0;
+    const bDRType=totalHD>=16?'/magic':totalHD>=11?'/silver':'/silver';
+    const bType=bgLvl>=8?'Camel, Dire Bat, Horse':bgLvl>=5?'Bat, Cat, Dire Rat, Raven, or Toad':'—';
+    abilities.push({name:'Fiendish Servant',value:bType,detail:`BG L${bgLvl} — Str/Con ${bStr}, +${bStr} nat. armor, Int ${bInt}${bDR?`; DR ${bDR}${bDRType}`:''}; Smite Good 1/day, resist cold/fire 5`});
   }
 
   // ── Monk ────────────────────────────────────────────────────────────────
@@ -7586,6 +7604,7 @@ function stepLevels(){
     </div>
     <button class="btn btn-secondary btn-sm" onclick="addLvl()" style="margin-top:6px">+ Add Level ${lvl+1}${lvl>=20?' ⚡':''}</button>
     ${incrHTML}
+    ${renderACFPanel()}
     <div class="nav-row">
       <button class="btn btn-secondary" onclick="prevStep()">&larr; Back</button>
       <button class="btn btn-primary" onclick="nextStep4()">Continue →</button>
@@ -7631,6 +7650,119 @@ function setAbilityIncrease(lvl,ab){
   renderChar();
 }
 function nextStep4(){ charState.char.hp=calcHP(); charState.char.totalLevel=charState.char.levels.length; initFeatSlots(); charState.step=5; renderChar(); }
+
+// ── ACF Data + Logic ────────────────────────────────────────────────────────
+const ACF_DATA={
+  'Barbarian':[
+    {name:'Ferocity',level:1,gives:'Replace Rage with Ferocity: +4 Str, –2 AC, no fatigue afterwards',replaces:'Rage',source:'Unearthed Arcana'},
+    {name:'Fast Movement (Variant)',level:1,gives:'Replace Fast Movement with +10 ft speed always (no penalty in armor)',replaces:'Fast movement',source:'Unearthed Arcana'},
+    {name:'Trap Sense (Variant)',level:3,gives:'Replace Trap Sense with Wild Empathy (as Druid)',replaces:'Trap sense',source:'Unearthed Arcana'},
+    {name:'Spirit Totem',level:1,gives:'Choose a spirit totem (Bear/Eagle/Lion/Wolf/Serpent) — gain totem-based bonus instead of standard fast movement',replaces:'Fast movement',source:"PHB2 / Player's Handbook II"},
+  ],
+  'Bard':[
+    {name:'Druidic Music',level:1,gives:'Replace Bardic Knowledge with Bardic Music using nature-themed performances (Commune with Nature 1/day)',replaces:'Bardic Knowledge',source:'Unearthed Arcana'},
+    {name:'Seeker (Lore)',level:1,gives:'Replace Bardic Music with +2 to all Knowledge checks and add Appraise to class skills',replaces:'Bardic Music',source:'Unearthed Arcana'},
+    {name:'Extra Performance',level:1,gives:'Replace one performance type with the ability to use two performances simultaneously once per day',replaces:'Inspire Competence',source:"PHB2"},
+  ],
+  'Cleric':[
+    {name:'Spontaneous Domain Spellcasting',level:1,gives:'Lose ability to spontaneously cast Cure/Inflict spells; gain ability to spontaneously cast spells from one of your domains',replaces:'Spontaneous casting (cure/inflict)',source:'Unearthed Arcana'},
+    {name:'Divine Magician',level:1,gives:'Replace one domain with any two spells from Wizard/Sorcerer list added to your class spell list',replaces:'One domain choice',source:"Player's Handbook II"},
+    {name:'Shugenja (Domain Variant)',level:1,gives:'Focus on one element (Air/Earth/Fire/Water); gain extra spell slots for element-aligned domain spells',replaces:'Spontaneous casting',source:'Unearthed Arcana'},
+  ],
+  'Druid':[
+    {name:'Aspects of Nature',level:1,gives:'Replace Wild Shape with limited nature aspect: +4 Str or +4 Con or +10 fly speed (Su) usable 1+WIS mod/day',replaces:'Wild shape',source:'Unearthed Arcana'},
+    {name:'Shapeshift',level:5,gives:'Replace Wild Shape with Shapeshift (Ex): at will, shift between bipedal and animal form. Weaker than wild shape but not limited uses.',replaces:'Wild shape',source:'PHB2'},
+    {name:'Nature Sense (Variant)',level:1,gives:'Replace Nature Sense with Wild Empathy that also works with magical beasts (as if ranger)',replaces:'Nature sense',source:'Unearthed Arcana'},
+    {name:'Spontaneous Rejuvenation',level:1,gives:'Replace Spontaneous Summon Nature\'s Ally with Spontaneous Healing (can convert spells to Cure spells like Good Clerics)',replaces:"Spontaneous summoning (Nature's Ally)",source:'Unearthed Arcana'},
+  ],
+  'Fighter':[
+    {name:'Resolute',level:1,gives:'Lose a bonus feat to gain +2 bonus on Will saves against fear',replaces:'Bonus feat (choice)',source:"Player's Handbook II"},
+    {name:'Motivate',level:1,gives:'Lose a bonus feat; whenever you take the attack action you grant adjacent allies +1 morale bonus to attack rolls',replaces:'Bonus feat (choice)',source:"Player's Handbook II"},
+    {name:'Dungeon Crasher',level:2,gives:'Replace Bravery/bonus feat with +4 bonus on bull rush checks; if you drive a foe into a wall deal 2d6+1.5×Str damage',replaces:'Bonus feat (level 2)',source:'Dungeonscape'},
+    {name:'Zhentarim Soldier (Variant)',level:1,gives:'Replace all bonus feats with +2 to Intimidate and bonus equal to character level on checks to demoralize foes in combat',replaces:'Fighter bonus feats',source:'Player\'s Guide to Faerûn'},
+  ],
+  'Monk':[
+    {name:'Passive Way',level:1,gives:'Replace Flurry of Blows with Deflect Arrows as bonus feat and +1 to AC as a dodge bonus when not attacking',replaces:'Flurry of blows',source:'Unearthed Arcana'},
+    {name:'Cobra Strike',level:1,gives:'Replace Flurry of Blows; when fighting defensively you may make a single attack at full BAB',replaces:'Flurry of blows',source:"Player's Handbook II"},
+    {name:'Invisible Fist',level:1,gives:'Replace Stunning Fist; once per encounter, you can attempt to grapple a stunned/flat-footed target as a free action',replaces:'Stunning Fist',source:"Player's Handbook II"},
+    {name:'Harmonious Fist',level:1,gives:'Replace Stunning Fist; successful hits add 1 point of Wisdom bonus to damage (Su)',replaces:'Stunning Fist',source:'Complete Champion'},
+  ],
+  'Paladin':[
+    {name:'Divine Spirit',level:1,gives:'Replace Special Mount with access to one cleric domain (and its domain spell)  of your patron deity. Add domain spell at each level to your paladin list.',replaces:'Special Mount',source:'Unearthed Arcana'},
+    {name:'Holy Warrior',level:1,gives:'Replace Lay on Hands with ability to deal +1d6 divine damage on any successful melee attack 1+Cha mod/day',replaces:'Lay on Hands',source:'Unearthed Arcana'},
+    {name:'Exorcist of the Silver Flame',level:1,gives:'Replace Turn Undead with ability to use Turn Evil (affects evil outsiders) or rebuke/command evil outsiders',replaces:'Turn Undead',source:'Eberron Campaign Setting'},
+  ],
+  'Ranger':[
+    {name:'Distracting Attack',level:1,gives:'Replace Favored Enemy with: successful hit grants your next ally to attack the same target a +4 flanking-like bonus on their attack',replaces:'Favored enemy',source:"Player's Handbook II"},
+    {name:'Urban Ranger',level:1,gives:'Replace Wild Empathy and some nature-based skills with Gather Information, Bluff as class skills and +2 to Gather Information in cities',replaces:'Wild empathy',source:'Unearthed Arcana'},
+    {name:'Solitary Hunting',level:1,gives:'Replace Animal Companion with +2 bonus to all saves when more than 10 ft from any ally',replaces:'Animal companion',source:'Unearthed Arcana'},
+    {name:'Wild Empathy (Magical Beasts)',level:1,gives:'Replace Animal Companion with the ability to use Wild Empathy with magical beasts at –3 penalty',replaces:'Animal companion',source:'PHB2'},
+  ],
+  'Rogue':[
+    {name:'Martial Rogue',level:1,gives:'Replace Trapfinding with proficiency in all martial weapons',replaces:'Trapfinding',source:'Unearthed Arcana'},
+    {name:'Penetrating Strike',level:1,gives:'Replace Trapfinding; your sneak attacks deal half damage to targets normally immune to precision damage',replaces:'Trapfinding',source:'Dungeonscape'},
+    {name:'Wilderness Rogue',level:1,gives:'Replace Trapfinding with Wild Empathy (as druid/ranger) and Survival as a class skill',replaces:'Trapfinding',source:'Unearthed Arcana'},
+    {name:'Brutal Strike',level:1,gives:"Replace Evasion with: once per encounter, deal 1 extra die of sneak attack damage (adds to existing SA dice or grants a free d6 if flanking but not SA-eligible)",replaces:'Evasion',source:"Player's Handbook II"},
+  ],
+  'Sorcerer':[
+    {name:'Spontaneous Domain Caster',level:1,gives:'Replace familiar with access to one cleric domain (gain domain spells at each sorcerer level accessible as bonus known spells)',replaces:'Familiar',source:'Unearthed Arcana'},
+    {name:'Innate Armored Caster',level:1,gives:"Replace Familiar with proficiency in light armor and no ASF for light armor",replaces:'Familiar',source:"Complete Mage"},
+  ],
+  'Wizard':[
+    {name:'Domain Wizard (Specialist)',level:1,gives:'Replace one school opposition with access to a cleric domain; gain the domain\'s granted power as a bonus feat',replaces:'School opposition (one)',source:'Unearthed Arcana'},
+    {name:'Focused Specialist',level:1,gives:'Replace standard specialist benefits; gain one extra spell slot per level, but must oppose two additional schools',replaces:'Standard specialization (–1 opposition school)',source:'Complete Mage'},
+    {name:'Immediate Magic',level:1,gives:'Lose a bonus wizard feat to gain the ability to cast cantrips as an immediate action 1/round',replaces:'Bonus feat (level 5)',source:"Player's Handbook II"},
+  ],
+};
+
+function toggleACF(cls,acfName){
+  const c=charState.char;
+  if(!c.acfs) c.acfs={};
+  if(!c.acfs[cls]) c.acfs[cls]=[];
+  const idx=c.acfs[cls].indexOf(acfName);
+  if(idx>=0) c.acfs[cls].splice(idx,1); else c.acfs[cls].push(acfName);
+  renderChar();
+}
+
+function renderACFPanel(){
+  const c=charState.char;
+  const cl={};
+  c.levels.forEach(l=>{ if(l.className) cl[l.className]=(cl[l.className]||0)+1; });
+  const relevantClasses=Object.keys(cl).filter(cn=>ACF_DATA[cn]);
+  if(!relevantClasses.length) return '';
+  if(!c.acfs) c.acfs={};
+  const sections=relevantClasses.map(cls=>{
+    const acfs=ACF_DATA[cls];
+    const rows=acfs.map(acf=>{
+      const active=c.acfs[cls]&&c.acfs[cls].includes(acf.name);
+      return `<div style="padding:6px 8px;border:1px solid ${active?'rgba(74,103,65,.4)':'rgba(0,0,0,.08)'};border-radius:3px;background:${active?'rgba(74,103,65,.08)':'rgba(0,0,0,.02)'};margin-bottom:4px">
+        <div style="display:flex;justify-content:space-between;align-items:start;gap:8px">
+          <div>
+            <span style="font-weight:600;font-size:.8rem">${acf.name}</span>
+            <span style="font-size:.6rem;color:#888;margin-left:6px">${acf.source}</span>
+          </div>
+          <button class="btn btn-xs" onclick="toggleACF('${cls.replace(/'/g,"\\'")}','${acf.name.replace(/'/g,"\\'")}');event.stopPropagation()" style="white-space:nowrap;background:${active?'var(--sage)':'rgba(0,0,0,.1)'};color:${active?'#fff':'#666'}">${active?'✓ Active':'Take'}</button>
+        </div>
+        <div style="font-size:.69rem;color:var(--crimson);margin-top:2px"><strong>Replaces:</strong> ${acf.replaces}</div>
+        <div style="font-size:.69rem;color:#555;margin-top:1px">${acf.gives}</div>
+      </div>`;
+    }).join('');
+    const activeCount=(c.acfs[cls]||[]).length;
+    return `<div style="margin-bottom:10px">
+      <div style="font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;color:var(--gold);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em">${cls}${activeCount?` <span style="color:var(--sage)">(${activeCount} active)</span>`:''}</div>
+      ${rows}
+    </div>`;
+  }).join('');
+  return `<details style="margin-bottom:14px">
+    <summary style="font-family:'Cinzel',serif;font-size:.78rem;font-weight:600;color:var(--sage);cursor:pointer;padding:9px 12px;background:rgba(74,103,65,.07);border:1px solid rgba(74,103,65,.25);border-radius:4px;list-style:none">
+      🔄 Alternate Class Features — click to select variants
+    </summary>
+    <div style="background:rgba(74,103,65,.03);border:1px solid rgba(74,103,65,.15);border-top:none;border-radius:0 0 4px 4px;padding:12px">
+      <p style="font-size:.72rem;color:#888;margin:0 0 10px">ACFs replace specific default class features. Check with your DM before using. Sources: UA, PHB2, Complete series.</p>
+      ${sections}
+    </div>
+  </details>`;
+}
 
 // ── STEP 5: Feats ─────────────────────────────────────────────────────────
 let _featTypeFilter='';
@@ -16510,6 +16642,17 @@ async function askHelpAI(){
 <script>
 const CHANGELOG = [
 
+          {
+            version: '1.9.2',
+            date: '2026-04-30',
+            summary: 'Alternate Class Features (ACFs), Special Mount, Fiendish Servant.',
+            changes: [
+              'ACF_DATA: 40+ alternate class features across Barbarian, Bard, Cleric, Druid, Fighter, Monk, Paladin, Ranger, Rogue, Sorcerer, Wizard from UA, PHB2, Complete series, Dungeonscape, and campaign settings',
+              'renderACFPanel() in Step 4 (Levels): collapsible panel per class showing available ACFs, what each replaces, what it grants, and source book. Toggle each ACF active/inactive; active state saved in char.acfs.',
+              'Special Mount added to getScalableAbilities(): Paladin 5+ shows mount type (pony→warhorse→heavy warhorse), Str/Con bonus, natural armor, Int, and special qualities based on total character level',
+              'Fiendish Servant added to getScalableAbilities(): Blackguard 5+ shows servant type by BG level, same stat progression, DR and elemental resistance from fiendish template',
+            ]
+          },
           {
             version: '1.9.0',
             date: '2026-04-30',
