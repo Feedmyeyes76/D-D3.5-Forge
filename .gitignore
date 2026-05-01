@@ -3,6 +3,19 @@ Class Progression Tables/
 archives/
 extraction_output/
 scripts/
+D&D Books OCR-txt files/
+D&D Books docx/
+Monsters/
+source/
+VS Code Workspace/
+Asset Uploads/
+Codex Prompts and work chat.txt
+DnD3.5Index-Classes-Prestige.pdf
+DnD3.5Index-Classes-Prestige.xlsx
+
+# Backup files and old build scripts
+App/*.bak*
+App/*.py
 
 # Credentials — never commit tokens
 App/github.txt
