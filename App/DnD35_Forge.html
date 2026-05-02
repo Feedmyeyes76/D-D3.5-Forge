@@ -1085,7 +1085,7 @@ function openSpellPrint(){
   char.levels.forEach(l=>{
     if(seen.has(l.className)||!l.className) return; seen.add(l.className);
     const cls = DATA.classes.find(c=>c.name===l.className)||DATA.prestigeClasses.find(c=>c.name===l.className);
-    if(!cls||!cls.spellcasting||cls.spellcasting.type==='invocations') return;
+    if(!cls||!cls.spellcasting||isInvocationCaster(l.className)) return;
     spellClasses.push({name:l.className, lvl:cc[l.className]||1, cls});
   });
   if(!spellClasses.length){ alert('No spellcasting classes found.'); return; }
@@ -1094,13 +1094,14 @@ function openSpellPrint(){
 
   let sections = '';
   spellClasses.forEach(({name, lvl, cls})=>{
-    const spellKey = SPELL_CLASS_MAP[name];
-    const tbl = DATA.spellSlots[name]; if(!tbl) return;
+    const progression = getCasterProgression(name);
+    const spellKey = progression.spellKey;
+    const tbl = progression.spellSlots; if(!tbl) return;
     const slots = tbl[Math.min(lvl,tbl.length)-1]||[];
     const spAbil = cls.spellcasting.ability.toUpperCase();
     const spMod = Math.floor(((char.abilityFinal[spAbil]||10)-10)/2);
-    const noCantrips = ['Paladin','Ranger','Hexblade'].includes(name);
-    const isWiz = name==='Wizard';
+    const noCantrips = !progression.hasCantrips;
+    const isWiz = progression.usesSpellbook;
     const isClr = name==='Cleric';
     const known = char.spellsKnown[name]||{};
     const sb = char.spellbook||[];
@@ -3987,6 +3988,38 @@ const DOMAIN_DATA = {
   Water:      ['Obscuring Mist','Fog Cloud','Water Breathing','Control Water','Ice Storm','Cone of Cold','Acid Fog','Horrid Wilting','Elemental Swarm'],
 };
 
+
+function getCasterType(className){
+  const cls=getClass(className);
+  return cls&&cls.spellcasting?cls.spellcasting.type:null;
+}
+function getSpellPreparationType(className){
+  const cls=getClass(className);
+  if(!cls||!cls.spellcasting) return null;
+  if(cls.spellcasting.type==='invocations') return 'invocation';
+  return cls.spellcasting.prep||'prepared';
+}
+function getCasterProgression(className){
+  const cls=getClass(className);
+  if(!cls||!cls.spellcasting) return null;
+  const table=(DATA.progressionTables&&DATA.progressionTables[className])||{};
+  return {
+    className,
+    type:getCasterType(className),
+    preparation:getSpellPreparationType(className),
+    ability:cls.spellcasting.ability||null,
+    startsAt:cls.spellcasting.startsAt||1,
+    spellSlots:table.spellSlots||DATA.spellSlots[className]||null,
+    spellKey:SPELL_CLASS_MAP[className]||className,
+    hasDomains:!!cls.hasDomains,
+    hasCantrips:!['Paladin','Ranger','Hexblade'].includes(className),
+    usesSpellbook:className==='Wizard'
+  };
+}
+function isInvocationCaster(className){ return getSpellPreparationType(className)==='invocation'; }
+function isSpontaneousCaster(className){ return getSpellPreparationType(className)==='spontaneous'; }
+function isPreparedCaster(className){ return getSpellPreparationType(className)==='prepared'; }
+
 // Spell picker state (not saved to char — just UI state)
 const spellState = {
   activeClass: null,
@@ -4092,7 +4125,7 @@ function stepSpells(){
 
   const spellCls = charState.char.levels.filter(l=>{
     const cls=getClass(l.className);
-    return cls && cls.spellcasting && cls.spellcasting.type!=='invocations';
+    return cls && cls.spellcasting && !isInvocationCaster(l.className);
   });
   if(!spellCls.length && !warlockLvl && !dfaLvl) return `
     <div class="step-heading">🔮 Spells</div>
@@ -4107,17 +4140,17 @@ function stepSpells(){
     if(seen.has(l.className)) return; seen.add(l.className);
     const cls = getClass(l.className);
     const clsLvl = cc[l.className]||1;
-    const tbl = DATA.spellSlots[l.className]; if(!tbl) return;
+    const progression = getCasterProgression(l.className);
+    const tbl = progression.spellSlots; if(!tbl) return;
     const slots = tbl[Math.min(clsLvl,tbl.length)-1]||[];
     const spAbil = cls.spellcasting.ability;
     const spMod = modVal(finalAbility(spAbil.toUpperCase()));
-    const spellKey = SPELL_CLASS_MAP[l.className];
-    const isSpontaneous = ['Sorcerer','Bard','Favored Soul','Hexblade','Duskblade'].includes(l.className);
+    const spellKey = progression.spellKey;
+    const isSpontaneous = progression.preparation==='spontaneous';
 
     // Slots per day boxes
     // Paladin, Ranger, Hexblade have no orisons; their slot array index 0 = 1st-level spells
-    const noCantrips = new Set(['Paladin','Ranger','Hexblade']);
-    const spellLvlOffset = noCantrips.has(l.className) ? 1 : 0;
+    const spellLvlOffset = progression.hasCantrips ? 0 : 1;
     const boxes = slots.map((cnt,idx)=>{
       if(cnt===null) return '';
       const actualLvl = idx + spellLvlOffset;
@@ -4133,7 +4166,7 @@ function stepSpells(){
       const knownRow = isSpontaneous && SPELLS_KNOWN_TABLES[l.className]
         ? (SPELLS_KNOWN_TABLES[l.className][Math.min(clsLvl,20)-1] || null) : null;
       const maxSelectable = knownRow
-        ? (knownRow[noCantrips.has(l.className) ? actualLvl-1 : actualLvl] ?? 0)
+        ? (knownRow[progression.hasCantrips ? actualLvl : actualLvl-1] ?? 0)
         : total;
       return `<div class="spell-level-box" style="cursor:pointer;border:2px solid ${spellState.activeClass===l.className&&spellState.activeLevel===actualLvl?'var(--crimson)':'#c4aa7a'}"
         onclick="openSpellPicker('${l.className}',${actualLvl})">
@@ -4461,13 +4494,13 @@ function toggleSpell(className, level, spellName){
     arr.splice(i,1);
   } else {
     // Enforce PHB spells-known cap for spontaneous casters
-    const isSpon = ['Sorcerer','Bard','Favored Soul','Hexblade','Duskblade'].includes(className);
+    const isSpon = isSpontaneousCaster(className);
     if(isSpon && SPELLS_KNOWN_TABLES[className]){
       let cv=0; charState.char.levels.forEach(l=>{ if(l.className===className) cv++; });
       const row = SPELLS_KNOWN_TABLES[className][Math.min(cv,20)-1];
       if(row){
-        const noC=['Paladin','Ranger','Hexblade'].includes(className);
-        const cap = row[noC ? level-1 : level] ?? 0;
+        const progression=getCasterProgression(className);
+        const cap = row[progression&&progression.hasCantrips ? level : level-1] ?? 0;
         if(cap > 0 && arr.length >= cap){
           const nt2=document.getElementById('spell-notes'); if(nt2) charState.char.preparedSpells.__notes=nt2.value;
           renderChar(); return;
