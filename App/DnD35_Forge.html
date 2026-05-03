@@ -1044,33 +1044,27 @@ function renderSettings() {
 
 
 // ── PRINT SHEET ──────────────────────────────────────────────────────────
+function renderPrintSheet(themeName, pageNumber){
+  const s=generateCharacterSheetData();
+  const theme=themeName||'radial';
+  const cls=`print-page sheet-${theme}`;
+  const sign=n=>n>=0?`+${n}`:String(n);
+  const abilityTags=DATA.abilities.map(ab=>`<div class="ps-stat"><b>${ab}</b><span>${s.abilities[ab].score}</span><small>${sign(s.abilities[ab].mod)}</small></div>`).join('');
+  const portrait=s.portrait?`<img class="ps-portrait" src="${s.portrait}" alt="Portrait">`:`<div class="ps-portrait ps-silhouette">Portrait</div>`;
+  if(pageNumber===1) return `<section class="${cls}"><h1>${escHtml(s.name||'Unnamed Character')}</h1><h2>${escHtml(s.race||'—')} · Level ${s.level}</h2>${portrait}<div class="ps-grid">${abilityTags}</div><div class="ps-block"><h3>Combat</h3><p><b>HP</b> ${s.hp} · <b>AC</b> ${s.ac.total} touch ${s.ac.touch} flat ${s.ac.flatFooted} · <b>Init</b> ${sign(s.initiative)} · <b>BAB</b> ${escHtml(s.bab)}</p><p><b>Attack</b> Melee ${sign(s.attack.melee)} · Ranged ${sign(s.attack.ranged)}</p><p><b>Saves</b> Fort ${sign(s.saves.fort.total)} · Ref ${sign(s.saves.ref.total)} · Will ${sign(s.saves.will.total)}</p><p><b>Speed</b> ${s.speed} ft.</p></div><div class="ps-block"><h3>AC Breakdown</h3><p>10 + armor ${s.ac.armor} + shield ${s.ac.shield} + Dex ${s.ac.dexterity} + size ${s.ac.size} + natural ${s.ac.natural} + deflection ${s.ac.deflection} + dodge ${s.ac.dodge} + misc ${s.ac.misc}</p></div></section>`;
+  if(pageNumber===2) return `<section class="${cls}"><h1>Skills, Feats & Features</h1><div class="ps-cols"><div><h3>Skills</h3>${s.skills.map(sk=>`<div class="ps-row"><span>${escHtml(sk.name)}</span><b>${sign(sk.total)}</b></div>`).join('')||'<p>No trained skills.</p>'}</div><div><h3>Feats</h3>${s.feats.map(f=>`<div class="ps-row"><span>${f.epic?'⚡ ':''}${escHtml(f.name)}</span><small>${escHtml(f.type)}</small></div>`).join('')||'<p>No feats selected.</p>'}<h3>Class Features</h3>${s.features.slice(0,40).map(f=>`<div class="ps-row"><span>${escHtml(f.className)}</span><small>${escHtml(f.feature)}</small></div>`).join('')||'<p>No features listed.</p>'}</div></div></section>`;
+  return `<section class="${cls}"><h1>Equipment, Attacks & Spellcasting</h1><div class="ps-cols"><div><h3>Equipment</h3>${s.equipment.summary.map(e=>`<div class="ps-row"><span>${escHtml(e.slot)}</span><b>${e.enhancement?`+${e.enhancement} `:''}${escHtml(e.name)}</b></div>`).join('')||'<p>No equipment selected.</p>'}<h3>Legality</h3><p>Armor proficient: ${s.equipment.armorProficient?'Yes':'No'} · Shield proficient: ${s.equipment.shieldProficient?'Yes':'No'}${s.equipment.arcaneSpellFailure.risk?` · ASF ${s.equipment.arcaneSpellFailure.total}%`:''}</p><h3>Combat Profiles</h3>${s.combatProfiles.slice(0,10).map(p=>`<div class="ps-row"><span>${escHtml(p.name)}</span><b>${escHtml(p.attackRoutine||'—')}</b></div>`).join('')||'<p>No combat profiles.</p>'}</div><div><h3>Spellcasting</h3>${s.spellcasting.map(sc=>`<div class="ps-block"><b>${escHtml(sc.className)}</b> CL ${sc.casterLevel} · ${escHtml(sc.ability||'—')} · ${escHtml(sc.mode)}<br>${sc.slots.map(sl=>`Lv ${sl.spellLevel}: ${sl.selected.length}/${sl.base}${sl.domain.slots?` · Domain ${sl.domain.used}/${sl.domain.slots}`:''}`).join(' · ')}</div>`).join('')||'<p>No spellcasting.</p>'}<h3>Class Timeline</h3><p>${s.progressionTimeline.map(l=>`L${l.level} ${escHtml(l.className||'—')}`).join(' · ')}</p></div></div></section>`;
+}
 function openPrintSheet(){
-  // Sheet HTML is stored in the hidden template element — avoids parser conflicts
-  const tpl = document.getElementById('print-sheet-template');
-  if(!tpl){ console.error('Print sheet template not found'); return; }
-  const sheetHTML = tpl.innerHTML;
+  const theme=charState.printTheme||'radial';
+  const pages=[1,2,3].map(n=>renderPrintSheet(theme,n)).join('');
+  const sheetHTML=`<!doctype html><html><head><meta charset="utf-8"><title>${escHtml(charState.char.name||'Character Sheet')}</title><style>
+    body{margin:0;background:#222;font-family:Georgia,serif;color:#23180d}.toolbar{position:sticky;top:0;background:#111;color:#eee;padding:8px;text-align:center;z-index:5}.toolbar button{margin-left:8px}.print-page{width:8.5in;min-height:11in;margin:18px auto;padding:.45in;background:#f7efd8;box-sizing:border-box;page-break-after:always;border:1px solid #b99a5b}.print-page h1{font-family:Georgia,serif;text-align:center;margin:.05in 0;color:#5a1010}.print-page h2{text-align:center;font-size:13px;font-weight:400;margin:0 0 .15in}.ps-portrait{width:1.65in;height:1.65in;object-fit:cover;border:3px double #8b6914;border-radius:50%;display:block;margin:0 auto .15in}.ps-silhouette{display:flex;align-items:center;justify-content:center;color:#8a7050;background:#eadbb8}.ps-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}.ps-stat,.ps-block,.ps-row{border:1px solid #c4aa7a;background:rgba(255,255,255,.35);padding:6px;margin:4px 0}.ps-stat{text-align:center}.ps-stat b,.ps-stat span,.ps-stat small{display:block}.ps-stat span{font-size:22px}.ps-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ps-row{display:flex;justify-content:space-between;gap:8px;font-size:12px}.sheet-classic{background:#fff;color:#111}.sheet-classic .ps-portrait{border-radius:4px}.sheet-equipment .ps-block,.sheet-equipment .ps-row{border-color:#8b6914}.sheet-compact{font-size:11px;padding:.3in}.sheet-compact .ps-portrait{width:1.1in;height:1.1in}@media print{body{background:#fff}.toolbar{display:none}.print-page{margin:0;border:0;box-shadow:none}}</style></head><body><div class="toolbar">Theme: ${escHtml(theme)} <button onclick="window.print()">Print</button></div>${pages}</body></html>`;
   const win = window.open('', '_blank');
   if(!win){ alert('Please allow popups to open the character sheet.'); return; }
   win.document.open();
   win.document.write(sheetHTML);
   win.document.close();
-  // Give the new window time to parse and register its message listener
-  setTimeout(() => {
-    win.postMessage({
-      type: 'FORGE_CHAR',
-      char: JSON.parse(JSON.stringify(charState.char)),
-      DATA: {
-        races: DATA.races,
-        classes: DATA.classes,
-        prestigeClasses: DATA.prestigeClasses,
-        skills: DATA.skills,
-        feats: DATA.feats,
-        epicFeats: DATA.epicFeats,
-        saves: SAVE_TABLES,
-        bab: BAB_TABLES,
-      }
-    }, '*');
-  }, 400);
 }
 
 
@@ -1748,10 +1742,11 @@ const BLANK_CHAR = () => ({
   abilityIncreases:{},
   feats:[],
   skillRanks:{},
-  spellsKnown:{}, preparedSpells:{}, spellbook:[], domains:[], spellSwapLog:[],
+  combatProfiles:[],
+  spellsKnown:{}, preparedSpells:{}, spellbook:[], domains:[], spellSwapLog:[], spellMetamagic:{},
   equipment:{weapons:[],armor:'',shield:'',gear:[]},
   magicItems:{},
-  hp:0, notes:'', background:'', personality:'',
+  hp:0, notes:'', background:'', personality:'', portrait:'', portraitPrompt:'', portraitStyle:'Realistic fantasy',
   exClasses:{}, acfs:{},
   _driveId:null, _driveName:null,
 });
@@ -1966,6 +1961,100 @@ function getEqWeapon(idx){
   const w=eq.weapons&&eq.weapons[idx];
   if(!w||!w.name) return null;
   return EQUIPMENT_DATA.weapons.find(x=>x.name===w.name)||null;
+}
+function normalizeProficiencyToken(v){
+  return String(v||'').toLowerCase().replace(/^all\s+/,'').replace(/\s+weapons?$/,'').replace(/\s+armor$/,'').trim();
+}
+function getActiveACFTextForClass(className){
+  return getActiveACFsForClass(className).map(a=>[a.name,a.replaces,a.grants,a.description].flat().join(' ')).join(' ').toLowerCase();
+}
+function getWeaponProficiencies(){
+  const profs=new Set();
+  const defaults={
+    Barbarian:['simple','martial'],Bard:['simple','longsword','rapier','sap','short sword','shortbow','whip'],Cleric:['simple'],Druid:['club','dagger','dart','quarterstaff','scimitar','sickle','shortspear','sling','spear'],Fighter:['simple','martial'],Monk:['club','crossbow, light','crossbow, heavy','dagger','handaxe','javelin','kama','nunchaku','quarterstaff','sai','shuriken','siangham','sling'],Paladin:['simple','martial'],Ranger:['simple','martial'],Rogue:['simple','hand crossbow','rapier','sap','shortbow','short sword'],Sorcerer:['simple'],Wizard:['club','dagger','crossbow, heavy','crossbow, light','quarterstaff'],Warlock:['simple'],Hexblade:['simple','martial'],'Dragonfire Adept':['simple']
+  };
+  charState.char.levels.forEach(l=>{
+    const cls=getClass(l.className); if(!cls) return;
+    (defaults[l.className]||[]).forEach(p=>profs.add(normalizeProficiencyToken(p)));
+    (cls.weaponProficiencies||[]).forEach(p=>profs.add(normalizeProficiencyToken(p)));
+    getFilteredClassFeatures(cls,99).forEach(f=>{
+      const s=String(f).toLowerCase();
+      if(s.includes('simple weapon')) profs.add('simple');
+      if(s.includes('martial weapon')) profs.add('martial');
+      if(s.includes('exotic weapon')) profs.add('exotic');
+    });
+  });
+  return profs;
+}
+function getArmorProficiencies(){
+  const profs=new Set();
+  const defaults={Barbarian:['light','medium'],Bard:['light'],Cleric:['light','medium','heavy'],Druid:['light','medium'],Fighter:['light','medium','heavy'],Paladin:['light','medium','heavy'],Ranger:['light'],Hexblade:['light','medium'],Warlock:['light'],Scout:['light']};
+  charState.char.levels.forEach(l=>{
+    const cls=getClass(l.className); if(!cls) return;
+    (defaults[l.className]||[]).forEach(p=>profs.add(normalizeProficiencyToken(p)));
+    (cls.armorProficiencies||[]).forEach(p=>profs.add(normalizeProficiencyToken(p)));
+    getFilteredClassFeatures(cls,99).forEach(f=>{
+      const s=String(f).toLowerCase();
+      if(s.includes('light armor')) profs.add('light');
+      if(s.includes('medium armor')) profs.add('medium');
+      if(s.includes('heavy armor')) profs.add('heavy');
+    });
+    const acfText=getActiveACFTextForClass(l.className);
+    if(l.className==='Cleric'&&acfText.includes('cloistered cleric')){ profs.delete('medium'); profs.delete('heavy'); }
+    if(acfText.includes('lose proficiency with medium armor')) profs.delete('medium');
+    if(acfText.includes('lose proficiency with heavy armor')||acfText.includes('replaces heavy armor')) profs.delete('heavy');
+    if(acfText.includes('do not gain proficiency with any kind of armor')){ profs.delete('light'); profs.delete('medium'); profs.delete('heavy'); }
+  });
+  return profs;
+}
+function getShieldProficiencies(){
+  const profs=new Set();
+  const defaults={Barbarian:['shield'],Cleric:['shield'],Druid:['shield'],Fighter:['shield','tower'],Paladin:['shield'],Ranger:['shield'],Hexblade:['shield']};
+  charState.char.levels.forEach(l=>{
+    const cls=getClass(l.className); if(!cls) return;
+    (defaults[l.className]||[]).forEach(p=>profs.add(normalizeProficiencyToken(p)));
+    (cls.shieldProficiencies||[]).forEach(p=>profs.add(normalizeProficiencyToken(p)));
+    getFilteredClassFeatures(cls,99).forEach(f=>{
+      const s=String(f).toLowerCase();
+      if(s.includes('shield proficiency')||s.includes('with shields')) profs.add('shield');
+      if(s.includes('tower shield')) profs.add('tower');
+    });
+  });
+  return profs;
+}
+function isWeaponProficient(wData){
+  if(!wData) return true;
+  const profs=getWeaponProficiencies();
+  const req=normalizeProficiencyToken(wData.proficiency);
+  return !req||profs.has(req)||profs.has(normalizeProficiencyToken(wData.name));
+}
+function isArmorProficient(aData){
+  if(!aData) return true;
+  return getArmorProficiencies().has(normalizeProficiencyToken(aData.type));
+}
+function isShieldProficient(sData){
+  if(!sData) return true;
+  const n=String(sData.name||'').toLowerCase();
+  const profs=getShieldProficiencies();
+  if(n.includes('tower')) return profs.has('tower');
+  return profs.has('shield');
+}
+function getArcaneSpellFailureRisk(){
+  const armor=getEqArmor(), shield=getEqShield();
+  const armorFailure=armor?(armor.arcaneFailure||0):0;
+  const shieldFailure=shield?(shield.arcaneFailure||0):0;
+  const total=armorFailure+shieldFailure;
+  const arcaneClasses=[];
+  charState.char.levels.forEach(l=>{
+    if(arcaneClasses.includes(l.className)) return;
+    const prog=getCasterProgression(l.className);
+    if(prog&&prog.type==='arcane'&&prog.preparation!=='invocation') arcaneClasses.push(l.className);
+  });
+  if(!total||!arcaneClasses.length) return {risk:false,total,classes:arcaneClasses,exceptions:[]};
+  const armorType=armor?normalizeProficiencyToken(armor.type):null;
+  const exceptions=arcaneClasses.filter(c=>(['Bard','Duskblade','Hexblade'].includes(c)&&armorType==='light'&&!shield)||(['Duskblade'].includes(c)&&armorType==='medium'&&!shield));
+  const affected=arcaneClasses.filter(c=>!exceptions.includes(c));
+  return {risk:affected.length>0,total,classes:affected,exceptions};
 }
 function getWeaponEnhancement(idx){
   const eq=charState.char.equipment;
@@ -2942,7 +3031,7 @@ function renderChar(){
   const cardClass='forge-card card-char'+(charState.char.charType==='NPC'?' card-npc':isEpic()?' card-epic':'');
 
   // Top bar
-  const pct=Math.round((charState.step/10)*100);
+  const pct=Math.round((charState.step/11)*100);
   const fillClass=charState.char.charType==='NPC'?'fill-npc':isEpic()?'fill-epic':'';
   const topBar=`
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:8px;flex-wrap:wrap">
@@ -2964,8 +3053,8 @@ function renderChar(){
   const progress=`
     <div class="progress-wrap">
       <div class="progress-label">
-        <span>${['Identity','Race','Ability Method','Assign Scores','Levels','Feats','Skills','Spells','Equipment','Finishing','Summary'][charState.step]}${charState.char.name?' — '+charState.char.name:''}</span>
-        <span>Step ${charState.step+1}/11</span>
+        <span>${['Identity','Race','Ability Method','Assign Scores','Levels','Feats','Skills','Spells','Equipment','Finishing','Portrait','Summary'][charState.step]}${charState.char.name?' — '+charState.char.name:''}</span>
+        <span>Step ${charState.step+1}/12</span>
       </div>
       <div class="progress-track"><div class="progress-fill ${fillClass}" style="width:${pct}%"></div></div>
     </div>`;
@@ -2982,7 +3071,8 @@ function renderChar(){
     case 7: stepHTML=stepSpells(); break;
     case 8: stepHTML=stepEquipment(); break;
     case 9: stepHTML=stepFinishing(); break;
-    case 10: stepHTML=stepSummary(); break;
+    case 10: stepHTML=stepPortrait(); break;
+    case 11: stepHTML=stepSummary(); break;
   }
 
   c.innerHTML=`<div class="${cardClass} fade-in" style="margin-top:16px">${topBar}${drivePanel}${progress}${stepHTML}</div>`;
@@ -4019,6 +4109,88 @@ function getCasterProgression(className){
 function isInvocationCaster(className){ return getSpellPreparationType(className)==='invocation'; }
 function isSpontaneousCaster(className){ return getSpellPreparationType(className)==='spontaneous'; }
 function isPreparedCaster(className){ return getSpellPreparationType(className)==='prepared'; }
+function getClassLevel(className){
+  return charState.char.levels.filter(l=>l.className===className).length;
+}
+function getSpellKnownCap(className, level){
+  const progression=getCasterProgression(className);
+  if(!progression||!isSpontaneousCaster(className)||!SPELLS_KNOWN_TABLES[className]) return null;
+  const row=SPELLS_KNOWN_TABLES[className][Math.min(getClassLevel(className),20)-1];
+  if(!row) return 0;
+  return row[progression.hasCantrips ? level : level-1] ?? 0;
+}
+function getPreparedSpellAccess(className, level){
+  const progression=getCasterProgression(className);
+  const selected=charState.char.spellsKnown[className]?.[level]||[];
+  const prepared=charState.char.preparedSpells[className]?.[level]||selected;
+  const book=progression&&progression.usesSpellbook ? (charState.char.spellbook||[]) : null;
+  return {className,level,mode:'prepared',spellKey:progression?progression.spellKey:className,usesSpellbook:!!(progression&&progression.usesSpellbook),selected,prepared,book};
+}
+function getKnownSpellAccess(className, level){
+  const progression=getCasterProgression(className);
+  const selected=charState.char.spellsKnown[className]?.[level]||[];
+  const cap=getSpellKnownCap(className, level);
+  return {className,level,mode:'known',spellKey:progression?progression.spellKey:className,selected,known:selected,cap,atCap:cap!=null&&cap>0&&selected.length>=cap};
+}
+function getInvocationAccess(className){
+  const lvl=getClassLevel(className);
+  const tierBreaks=className==='Dragonfire Adept'
+    ? [['Least',1],['Lesser',6],['Greater',11]]
+    : [['Least',1],['Lesser',6],['Greater',11],['Dark',16]];
+  const tiers=tierBreaks.filter(([,min])=>lvl>=min).map(([tier])=>tier);
+  const selectedByTier=charState.char.spellsKnown[className]||{};
+  return {className,level:lvl,mode:'invocation',tiers,selectedByTier,selected:Object.values(selectedByTier).flat()};
+}
+function getSpellDC(className, spellLevel){
+  const progression=getCasterProgression(className);
+  if(!progression) return null;
+  const ability=progression.ability ? progression.ability.toUpperCase() : null;
+  if(!ability) return null;
+  const level=Math.max(0, parseInt(spellLevel)||0);
+  const abilityMod=modVal(finalAbility(ability));
+  const casterLevel=getClassLevel(className);
+  const base=10+level+abilityMod;
+  if(progression.preparation==='invocation'){
+    return {dc:10+Math.floor(casterLevel/2)+abilityMod, ability, abilityMod, spellLevel:level, casterLevel, mode:'invocation'};
+  }
+  return {dc:base, ability, abilityMod, spellLevel:level, casterLevel, mode:progression.preparation, metamagicAdjustment:0};
+}
+function getDomainSpellSlots(className, level){
+  const progression=getCasterProgression(className);
+  const spellLevel=Math.max(0, parseInt(level)||0);
+  if(!progression||!progression.hasDomains||spellLevel<=0) return {slots:0,used:0,remaining:0,domainSpells:[],selected:[],isDomainSpell:()=>false};
+  const domains=(charState.char.domains||[]).filter(Boolean);
+  const domainSpells=domains.map(d=>DOMAIN_DATA[d]&&DOMAIN_DATA[d][spellLevel-1]).filter(Boolean);
+  const selected=charState.char.spellsKnown[className]?.[spellLevel]||[];
+  const used=selected.filter(n=>domainSpells.includes(n)).length;
+  return {className,level:spellLevel,slots:1,used,remaining:Math.max(0,1-used),domains,domainSpells,selected:selected.filter(n=>domainSpells.includes(n)),isDomainSpell:(name)=>domainSpells.includes(name)};
+}
+function getMetamagicSlotAdjustment(spellName, appliedMetamagic){
+  const baseSpell=SPELL_DATA.find(s=>s.n===spellName);
+  const baseLevel=baseSpell&&baseSpell.l&&typeof baseSpell.l==='object'?Math.min(...Object.values(baseSpell.l).filter(v=>typeof v==='number')):0;
+  const featList=Array.isArray(DATA.feats)?DATA.feats:(DATA.feats&&DATA.feats.feats)||[];
+  const ownedFeatNames=(charState.char.feats||[]).map(f=>typeof f==='string'?f:f.name).filter(Boolean);
+  const knownMetamagic=featList.filter(f=>ownedFeatNames.includes(f.name)&&String(f.type||'').toLowerCase().includes('metamagic')).map(f=>f.name);
+  const costs={
+    'Empower Spell':2,'Enlarge Spell':1,'Extend Spell':1,'Maximize Spell':3,'Quicken Spell':4,
+    'Silent Spell':1,'Still Spell':1,'Widen Spell':3,'Heighten Spell':0,'Energy Substitution':0,
+    'Sculpt Spell':1,'Chain Spell':3,'Twin Spell':4,'Repeat Spell':3,'Persistent Spell':6,
+    'Fell Drain':2,'Fell Frighten':2,'Fell Weaken':1,'Fell Animate':3,'Flash Frost Spell':1,
+    'Fiery Spell':1,'Blistering Spell':1,'Coercive Spell':1,'Deafening Spell':1,'Born of the Three Thunders':0
+  };
+  const items=Array.isArray(appliedMetamagic)?appliedMetamagic:(appliedMetamagic?[appliedMetamagic]:[]);
+  const details=items.map(m=>{
+    const name=typeof m==='string'?m:(m.name||m.feat||'');
+    const heighten=typeof m==='object' ? (parseInt(m.heightenTo)||parseInt(m.targetLevel)||null) : null;
+    const reducer=typeof m==='object' ? (parseInt(m.reducer)||0) : 0;
+    const divine=typeof m==='object' && !!m.divineMetamagic;
+    const raw=name==='Heighten Spell'&&heighten!=null ? Math.max(0,heighten-baseLevel) : (costs[name]??0);
+    const adjustment=divine ? 0 : Math.max(0,raw-reducer);
+    return {name,rawAdjustment:raw,reducer,divineMetamagic:divine,adjustment};
+  });
+  const totalAdjustment=details.reduce((sum,d)=>sum+d.adjustment,0);
+  return {spellName,baseLevel,knownMetamagic,appliedMetamagic:details,totalAdjustment,adjustedSlotLevel:Math.min(9,baseLevel+totalAdjustment),uncappedAdjustedSlotLevel:baseLevel+totalAdjustment};
+}
 
 // Spell picker state (not saved to char — just UI state)
 const spellState = {
@@ -4039,20 +4211,17 @@ function stepSpells(){
   const warlockLvl = cc['Warlock']||0;
   let invocationSection = '';
   if(warlockLvl > 0){
-    const availTiers = [];
-    if(warlockLvl >= 1)  availTiers.push('Least');
-    if(warlockLvl >= 6)  availTiers.push('Lesser');
-    if(warlockLvl >= 11) availTiers.push('Greater');
-    if(warlockLvl >= 16) availTiers.push('Dark');
-
-    const selectedInvs = charState.char.spellsKnown['Warlock']||{};
-    const allSelected = Object.values(selectedInvs).flat();
+    const invocationAccess = getInvocationAccess('Warlock');
+    const availTiers = invocationAccess.tiers;
+    const allSelected = invocationAccess.selected;
 
     const tierColors = {Least:'#2a4a6b',Lesser:'#4a2a6b',Greater:'#6b2a2a',Dark:'#1a1a1a'};
 
     const invCards = WARLOCK_INVOCATIONS.filter(inv => availTiers.includes(inv.tier)).map(inv=>{
       const isSel = allSelected.includes(inv.name);
       const typeLabel = inv.type==='eldritch_essence'?'⚡ Essence':inv.type==='blast_shape'?'🔶 Shape':'🔮 Invocation';
+      const dcInfo = getSpellDC('Warlock', 0);
+      const dcText = dcInfo&&/\b(save|will|fort|ref|negates|dc)\b/i.test(inv.desc) ? ` · DC ${dcInfo.dc}` : '';
       return `
       <div onclick="toggleInvocation('${inv.name.replace(/'/g,"\\'")}','${inv.tier}')"
         style="background:${isSel?'rgba(74,103,65,.12)':'#faf6ea'};border:2px solid ${isSel?'var(--sage)':tierColors[inv.tier]+'33'};
@@ -4060,7 +4229,7 @@ function stepSpells(){
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <span style="font-family:'Cinzel',serif;font-weight:700;font-size:.82rem;flex:1;color:${isSel?'var(--sage)':'var(--ink)'}">${inv.name}</span>
           <span style="font-size:.6rem;padding:1px 6px;border-radius:2px;background:${tierColors[inv.tier]}22;border:1px solid ${tierColors[inv.tier]}55;color:${tierColors[inv.tier]}">${inv.tier}</span>
-          <span style="font-size:.6rem;color:#8a7050">${typeLabel}</span>
+          <span style="font-size:.6rem;color:#8a7050">${typeLabel}${dcText}</span>
           ${isSel?'<span style="color:var(--sage);font-size:.85rem">✓</span>':''}
         </div>
         <div style="font-size:.78rem;color:#5a4020;margin-top:3px;line-height:1.5">${inv.desc}</div>
@@ -4089,22 +4258,21 @@ function stepSpells(){
   let dfaSection = '';
   if(dfaLvl > 0){
     const dfaBreathDmg = Math.max(1, Math.floor(dfaLvl/2));
-    const availTiersDfa = [];
-    if(dfaLvl >= 1)  availTiersDfa.push('Least');
-    if(dfaLvl >= 6)  availTiersDfa.push('Lesser');
-    if(dfaLvl >= 11) availTiersDfa.push('Greater');
-    const selectedDfa = charState.char.spellsKnown['Dragonfire Adept']||{};
-    const allSelDfa = Object.values(selectedDfa).flat();
+    const dfaAccess = getInvocationAccess('Dragonfire Adept');
+    const availTiersDfa = dfaAccess.tiers;
+    const allSelDfa = dfaAccess.selected;
     const tierColorsDfa = {Least:'#5a2a00',Lesser:'#2a5a2a',Greater:'#4a2a6b'};
     const dfaTypeLabel = t => t==='breath_effect'?'🔥 Breath':t==='invocation'?'🐉 Invocation':'';
     const dfaCards = DFA_INVOCATIONS.filter(inv=>availTiersDfa.includes(inv.tier)).map(inv=>{
       const isSel = allSelDfa.includes(inv.name);
+      const dcInfo = getSpellDC('Dragonfire Adept', 0);
+      const dcText = dcInfo&&/\b(save|will|fort|ref|negates|dc)\b/i.test(inv.desc) ? ` · DC ${dcInfo.dc}` : '';
       return `<div onclick="toggleDfaInvocation('${inv.name.replace(/'/g,"\\'")}','${inv.tier}')"
         style="background:${isSel?'rgba(74,103,65,.12)':'#faf6ea'};border:2px solid ${isSel?'var(--sage)':tierColorsDfa[inv.tier]+'33'};border-radius:4px;padding:9px 12px;cursor:pointer;margin-bottom:5px">
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <span style="font-family:'Cinzel',serif;font-weight:700;font-size:.82rem;flex:1;color:${isSel?'var(--sage)':'var(--ink)'}">${inv.name}</span>
           <span style="font-size:.6rem;padding:1px 6px;border-radius:2px;background:${tierColorsDfa[inv.tier]}22;border:1px solid ${tierColorsDfa[inv.tier]}55;color:${tierColorsDfa[inv.tier]}">${inv.tier}</span>
-          <span style="font-size:.6rem;color:#8a7050">${dfaTypeLabel(inv.type)}</span>
+          <span style="font-size:.6rem;color:#8a7050">${dfaTypeLabel(inv.type)}${dcText}</span>
           ${isSel?'<span style="color:var(--sage);font-size:.85rem">✓</span>':''}
         </div>
         <div style="font-size:.78rem;color:#5a4020;margin-top:3px;line-height:1.5">${inv.desc}</div>
@@ -4159,20 +4327,18 @@ function stepSpells(){
         ? Math.floor((spMod - actualLvl) / 4) + 1 : 0;
       // Domain slot: Cleric (hasDomains) gets +1 prepared slot per non-orison level (PHB p31)
       const domainSlot = (cls.hasDomains && actualLvl > 0) ? 1 : 0;
+      const domainAccess = getDomainSpellSlots(l.className, actualLvl);
       const total = (cnt||0) + bonusSlots + domainSlot;
       if(total === 0) return '';
       const lvlLabel = actualLvl===0?'Orisons':actualLvl===1?'1st':actualLvl===2?'2nd':actualLvl===3?'3rd':`${actualLvl}th`;
       const selectedCount = getSelectedSpellCount(l.className, actualLvl);
-      const knownRow = isSpontaneous && SPELLS_KNOWN_TABLES[l.className]
-        ? (SPELLS_KNOWN_TABLES[l.className][Math.min(clsLvl,20)-1] || null) : null;
-      const maxSelectable = knownRow
-        ? (knownRow[progression.hasCantrips ? actualLvl : actualLvl-1] ?? 0)
-        : total;
+      const knownAccess = isSpontaneous ? getKnownSpellAccess(l.className, actualLvl) : null;
+      const maxSelectable = knownAccess&&knownAccess.cap!=null ? knownAccess.cap : total;
       return `<div class="spell-level-box" style="cursor:pointer;border:2px solid ${spellState.activeClass===l.className&&spellState.activeLevel===actualLvl?'var(--crimson)':'#c4aa7a'}"
         onclick="openSpellPicker('${l.className}',${actualLvl})">
         <span class="slb-level">${lvlLabel}</span>
         <span class="slb-count">${total}</span>
-        <div style="font-size:.58rem;color:#8a7050">/day${domainSlot?'<span style="color:#7a5c2e"> +D</span>':''}</div>
+        <div style="font-size:.58rem;color:#8a7050">/day${domainSlot?`<span style="color:#7a5c2e"> +D ${domainAccess.used}/${domainAccess.slots}</span>`:''}</div>
         ${isSpontaneous && maxSelectable > 0
           ? `<div style="font-size:.6rem;color:${selectedCount>=maxSelectable?'var(--crimson)':'var(--sage)'};font-weight:600;margin-top:2px">${selectedCount}/${maxSelectable}</div>`
           : selectedCount>0?`<div style="font-size:.6rem;color:var(--sage);font-weight:600;margin-top:2px">${selectedCount} picked</div>`:'<div style="font-size:.58rem;color:#aaa;margin-top:2px">click to pick</div>'
@@ -4253,8 +4419,8 @@ function toggleDfaInvocationRemove(invName){
 }
 
 function getSelectedSpellCount(className, level){
-  const sk = charState.char.spellsKnown;
-  return (sk[className]?.[level]||[]).length;
+  const access=isSpontaneousCaster(className)?getKnownSpellAccess(className,level):getPreparedSpellAccess(className,level);
+  return (access.selected||[]).length;
 }
 
 // ── Spell step helper functions ──────────────────────────────────────────────
@@ -4326,7 +4492,7 @@ function renderWizardSpellbookPicker(){
   const tabs = labelNames.slice(0, accessible).map((nm,i)=>
     `<button class="btn btn-xs ${i===lvl?'btn-primary':'btn-secondary'}" onclick="spellState.wizSpellbookLevel=${i};spellState.search='';renderChar()">${nm}</button>`
   ).join('');
-  const sb = charState.char.spellbook;
+  const sb = getPreparedSpellAccess('Wizard', lvl).book;
   const search = (spellState.search||'').toLowerCase();
   const spKey = SPELL_CLASS_MAP['Wizard'];
   const atLevel = SPELL_DATA.filter(s=>s.l&&typeof s.l==='object'&&spKey in s.l&&s.l[spKey]===lvl);
@@ -4351,7 +4517,7 @@ function renderWizardSpellbookPicker(){
 }
 
 function toggleSpellbook(spellName){
-  const sb = charState.char.spellbook;
+  const sb = getPreparedSpellAccess('Wizard', lvl).book;
   const i = sb.indexOf(spellName);
   if(i>-1) sb.splice(i,1); else sb.push(spellName);
   renderChar();
@@ -4396,17 +4562,11 @@ function renderSpellPicker(className, level, spellKey, spMod, isSpontaneous){
     if(className==='Ranger'  && 'Ranger'  in lvl && lvl['Ranger']===level) return true;
     return false;
   });
-  const classSpells = className==='Wizard'
-    ? allClassSpells.filter(s=>charState.char.spellbook.includes(s.n))
+  const access = isSpontaneous ? getKnownSpellAccess(className, level) : getPreparedSpellAccess(className, level);
+  const classSpells = access.usesSpellbook
+    ? allClassSpells.filter(s=>(access.book||[]).includes(s.n))
     : allClassSpells;
-
-  // PHB cap for spontaneous casters
-  let maxCount = 0;
-  if(isSpontaneous && SPELLS_KNOWN_TABLES[className]){
-    let cv=0; charState.char.levels.forEach(l=>{ if(l.className===className) cv++; });
-    const capRow = SPELLS_KNOWN_TABLES[className][Math.min(cv,20)-1];
-    if(capRow){ const noC2=['Paladin','Ranger','Hexblade'].includes(className); maxCount=capRow[noC2?level-1:level]??0; }
-  }
+  const maxCount = access.cap || 0;
 
   // Apply search filter
   const search = spellState.search.toLowerCase();
@@ -4414,9 +4574,10 @@ function renderSpellPicker(className, level, spellKey, spMod, isSpontaneous){
     ? classSpells.filter(s=>s.n.toLowerCase().includes(search) || (s.desc||'').toLowerCase().includes(search) || (s.sc||'').toLowerCase().includes(search))
     : classSpells;
 
-  const selected = charState.char.spellsKnown[className]?.[level]||[];
-  const atCap = isSpontaneous && maxCount > 0 && selected.length >= maxCount;
+  const selected = access.selected||[];
+  const atCap = !!access.atCap;
   const lvlLabel = level===0?'Orisons':level===1?'1st-Level':level===2?'2nd-Level':level===3?'3rd-Level':`${level}th-Level`;
+  const domainAccess = getDomainSpellSlots(className, level);
 
   const schoolColors = {
     Abjuration:'#2a4a6b', Conjuration:'#4a2a6b', Divination:'#2a6b4a',
@@ -4430,6 +4591,9 @@ function renderSpellPicker(className, level, spellKey, spMod, isSpontaneous){
     const sc = s.sc||'';
     const color = schoolColors[sc]||'#3a3a3a';
     const esc = n=>n.replace(/'/g,"\'");
+    const dcInfo = getSpellDC(className, level);
+    const dcText = dcInfo ? `DC ${dcInfo.dc}` : 'DC —';
+    const isDomainSpell = domainAccess.isDomainSpell(s.n);
     return `
     <div style="background:${isSel?'rgba(74,103,65,.15)':'#faf6ea'};border:2px solid ${isSel?'var(--sage)':'#d4c090'};border-radius:4px;padding:10px 12px;cursor:pointer;transition:all .15s;margin-bottom:6px${!isSel&&atCap?';opacity:.55':''}"
       onclick='openSpellPreview(${JSON.stringify(s.n)},${JSON.stringify(className)},${level})'
@@ -4437,7 +4601,9 @@ function renderSpellPicker(className, level, spellKey, spMod, isSpontaneous){
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
         <span style="font-family:'Cinzel',serif;font-weight:700;font-size:.85rem;color:${isSel?'var(--sage)':' var(--ink)'};flex:1">${s.n}</span>
         <span style="font-size:.62rem;padding:1px 6px;border-radius:2px;background:${color}22;border:1px solid ${color}44;color:${color === '#2a2a2a'?'#888':color}">${sc}</span>
+        ${isDomainSpell?'<span style="font-size:.58rem;padding:1px 6px;border-radius:2px;background:rgba(200,149,42,.13);border:1px solid rgba(200,149,42,.45);color:#7a5c2e">DOMAIN</span>':''}
         <span style="font-size:.68rem;color:#8a7050">${s.c}</span>
+        <span style="font-size:.62rem;padding:1px 6px;border-radius:2px;background:rgba(139,26,26,.08);border:1px solid rgba(139,26,26,.25);color:var(--crimson)">${dcText}</span>
         ${isSel?'<span style="color:var(--sage);font-size:.9rem">✓</span>':(!isSel&&atCap?'<span style="font-size:.6rem;color:var(--crimson)">cap</span>':'')}
         <button type="button" class="preview-link-btn" onclick="event.stopPropagation();toggleSpell('${className}',${level},'${esc(s.n)}')">${isSel?'Remove':'Add'}</button>
         <button type="button" class="preview-link-btn" onclick='event.stopPropagation();openSpellPreview(${JSON.stringify(s.n)},${JSON.stringify(className)},${level})'>Details</button>
@@ -4451,7 +4617,7 @@ function renderSpellPicker(className, level, spellKey, spMod, isSpontaneous){
       <div style="margin-top:8px;padding-top:8px;border-top:1px solid #d4c090;font-size:.82rem;color:#3a2a10;line-height:1.6">
         <div style="margin-bottom:4px">${s.desc}</div>
         <div style="font-size:.75rem;color:#8b6914">
-          Save: ${s.sv||'—'} · SR: ${s.sr||'—'} · Components: ${s.c||'—'}
+          Save: ${s.sv||'—'} · ${dcText} · SR: ${s.sr||'—'} · Components: ${s.c||'—'}
         </div>
       </div>`:''}
     </div>`;
@@ -4462,7 +4628,7 @@ function renderSpellPicker(className, level, spellKey, spMod, isSpontaneous){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
       <div style="font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;color:var(--crimson)">
         📚 ${lvlLabel} ${className} Spells
-        <span style="font-weight:400;color:#8b6914;margin-left:6px">${filtered.length} spells · ${isSpontaneous&&maxCount?`${selected.length}/${maxCount} known`:`${selected.length} selected`}${className==='Wizard'?` · spellbook: ${charState.char.spellbook.length}`:''}</span>
+        <span style="font-weight:400;color:#8b6914;margin-left:6px">${filtered.length} spells · ${isSpontaneous&&maxCount?`${selected.length}/${maxCount} known`:`${selected.length} selected`}${access.usesSpellbook?` · spellbook: ${(access.book||[]).length}`:''}</span>
       </div>
       <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
         <input type="text" placeholder="Search Search spells…" value="${spellState.search}"
@@ -4472,6 +4638,7 @@ function renderSpellPicker(className, level, spellKey, spMod, isSpontaneous){
         <button class="btn btn-xs btn-secondary" onclick="openSpellPicker('${className}',${level})">✕ Close</button>
       </div>
     </div>
+    ${domainAccess.slots?`<div class="info-box" style="font-size:.76rem;margin-bottom:8px"><strong>Domain slot:</strong> ${domainAccess.used}/${domainAccess.slots} used${domainAccess.domainSpells.length?` · eligible: ${domainAccess.domainSpells.join(' or ')}`:''}</div>`:''}
     ${atCap?`<div style="font-size:.78rem;color:var(--crimson);margin-bottom:8px">Cap reached (${maxCount}). Use 🔄 swap to replace a spell.</div>`:''}
     ${filtered.length===0?`<div style="font-size:.82rem;color:#8a7050;font-style:italic;padding:10px 0">No spells match${className==='Wizard'?' your spellbook':' your search'}.</div>`:
       `<div style="max-height:340px;overflow-y:auto;padding-right:4px">${spellCards}</div>`}
@@ -4488,26 +4655,22 @@ function renderSpellPicker(className, level, spellKey, spMod, isSpontaneous){
 function toggleSpell(className, level, spellName){
   if(!charState.char.spellsKnown[className]) charState.char.spellsKnown[className]={};
   if(!charState.char.spellsKnown[className][level]) charState.char.spellsKnown[className][level]=[];
+  if(!charState.char.spellMetamagic) charState.char.spellMetamagic={};
+  if(!charState.char.spellMetamagic[className]) charState.char.spellMetamagic[className]={};
+  if(!charState.char.spellMetamagic[className][level]) charState.char.spellMetamagic[className][level]={};
   const arr = charState.char.spellsKnown[className][level];
   const i = arr.indexOf(spellName);
   if(i>-1){
     arr.splice(i,1);
+    delete charState.char.spellMetamagic[className][level][spellName];
   } else {
-    // Enforce PHB spells-known cap for spontaneous casters
-    const isSpon = isSpontaneousCaster(className);
-    if(isSpon && SPELLS_KNOWN_TABLES[className]){
-      let cv=0; charState.char.levels.forEach(l=>{ if(l.className===className) cv++; });
-      const row = SPELLS_KNOWN_TABLES[className][Math.min(cv,20)-1];
-      if(row){
-        const progression=getCasterProgression(className);
-        const cap = row[progression&&progression.hasCantrips ? level : level-1] ?? 0;
-        if(cap > 0 && arr.length >= cap){
-          const nt2=document.getElementById('spell-notes'); if(nt2) charState.char.preparedSpells.__notes=nt2.value;
-          renderChar(); return;
-        }
-      }
+    const knownAccess=getKnownSpellAccess(className, level);
+    if(knownAccess.atCap){
+      const nt2=document.getElementById('spell-notes'); if(nt2) charState.char.preparedSpells.__notes=nt2.value;
+      renderChar(); return;
     }
     arr.push(spellName);
+    charState.char.spellMetamagic[className][level][spellName]=getMetamagicSlotAdjustment(spellName, []);
   }
   const nt = document.getElementById('spell-notes');
   if(nt) charState.char.preparedSpells.__notes = nt.value;
@@ -4516,6 +4679,7 @@ function toggleSpell(className, level, spellName){
 
 function clearSpellLevel(className, level){
   if(charState.char.spellsKnown[className]) charState.char.spellsKnown[className][level]=[];
+  if(charState.char.spellMetamagic&&charState.char.spellMetamagic[className]) charState.char.spellMetamagic[className][level]={};
   renderChar();
 }
 
@@ -4550,6 +4714,7 @@ function stepEquipment(){
   const weaponRows=eq.weapons.map((w,i)=>{
     const wData=EQUIPMENT_DATA.weapons.find(x=>x.name===w.name);
     const isRanged=wData?wData.ranged:false;
+    const wProfOk=isWeaponProficient(wData);
     const wOpts=[...EQUIPMENT_DATA.weapons].sort((a,b)=>a.name.localeCompare(b.name)).map(x=>`<option value="${x.name}" ${w.name===x.name?'selected':''}>${x.name} (${x.proficiency}, ${x.damage})</option>`).join('');
     const weSpecials=MAGIC_ITEMS_DATA.weaponEnhancements.specialAbilities;
     const saOpts=weSpecials.map(sa=>`<option value="${sa.name}" ${(w.specialAbilities||[]).includes(sa.name)?'selected':''}>${sa.name} [+${sa.bonusVal}]</option>`).join('');
@@ -4571,18 +4736,28 @@ function stepEquipment(){
       ${(w.specialAbilities||[]).length?`<div style="font-size:.7rem;color:var(--gold)">${w.specialAbilities.map((sa,si)=>`<span class="tag" style="cursor:pointer" onclick="charState.char.equipment.weapons[${i}].specialAbilities.splice(${si},1);renderChar()">${sa} ✕</span>`).join(' ')}</div>`:''}
       ${ammoRow}
       ${wData?`<div style="font-size:.68rem;color:#a08060;margin-top:3px">${wData.damage} · ${wData.crit} · ${wData.type}${wData.range?' · '+wData.range+'ft range':''}</div>`:''}
+      ${wData&&!wProfOk?`<div class="notice notice-warn" style="font-size:.72rem;margin-top:5px;padding:5px 7px">⚠ Not proficient with ${wData.proficiency} weapon: ${wData.name}</div>`:''}
     </div>`;
   }).join('');
 
   // ── Armor section ──────────────────────────────────────────────────────
-  const arOpts=[...EQUIPMENT_DATA.armor].sort((a,b)=>a.name.localeCompare(b.name)).map(a=>`<option value="${a.name}" ${eq.armor.name===a.name?'selected':''}>${a.name} (AC+${a.acBonus})</option>`).join('');
+  const arOpts=[...EQUIPMENT_DATA.armor].sort((a,b)=>a.name.localeCompare(b.name)).map(a=>`<option value="${a.name}" ${eq.armor.name===a.name?'selected':''} ${!isArmorProficient(a)&&eq.armor.name!==a.name?'disabled':''}>${a.name} (AC+${a.acBonus}${!isArmorProficient(a)?' · not proficient':''})</option>`).join('');
   const arSpecials=MAGIC_ITEMS_DATA.armorEnhancements.specialAbilities;
   const arSaOpts=arSpecials.map(sa=>`<option value="${sa.name}">${sa.name} [+${sa.bonusVal}]</option>`).join('');
   const arMat=EQUIPMENT_DATA.specialMaterials.map(m=>`<option value="${m.name}" ${eq.armor.material===m.name?'selected':''}>${m.name}</option>`).join('');
   const arData=getEqArmor();
 
-  const shOpts=[...EQUIPMENT_DATA.shields].sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<option value="${s.name}" ${eq.shield.name===s.name?'selected':''}>${s.name} (AC+${s.shieldBonus})</option>`).join('');
+  const shOpts=[...EQUIPMENT_DATA.shields].sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<option value="${s.name}" ${eq.shield.name===s.name?'selected':''} ${!isShieldProficient(s)&&eq.shield.name!==s.name?'disabled':''}>${s.name} (AC+${s.shieldBonus}${!isShieldProficient(s)?' · not proficient':''})</option>`).join('');
   const shData=getEqShield();
+  const armorProfOk=isArmorProficient(arData);
+  const shieldProfOk=isShieldProficient(shData);
+  const asfRisk=getArcaneSpellFailureRisk();
+  const equipWarnings=[
+    arData&&!armorProfOk?`Not proficient with ${arData.type} armor: ${arData.name}`:'',
+    shData&&!shieldProfOk?`Not proficient with shield: ${shData.name}`:'',
+    asfRisk.risk?`Arcane spell failure ${asfRisk.total}% affects ${asfRisk.classes.join(', ')}`:'',
+    asfRisk.exceptions.length?`ASF exception active for ${asfRisk.exceptions.join(', ')}`:''
+  ].filter(Boolean);
 
   // ── Magic items by slot ────────────────────────────────────────────────
   const allWondrous=MAGIC_ITEMS_DATA.wondrousItems;
@@ -4692,6 +4867,8 @@ function stepEquipment(){
     <button class="btn btn-secondary btn-sm" style="margin-top:4px" onclick="charState.char.equipment.weapons.push({name:'',enhancement:0,specialAbilities:[],material:'',ammo:null});renderChar()">+ Add Weapon</button>
     </details>
 
+    ${equipWarnings.length?`<div class="notice notice-warn" style="font-size:.78rem;margin-bottom:10px"><strong>Equipment validation:</strong><br>${equipWarnings.map(w=>'• '+w).join('<br>')}</div>`:''}
+
     <details><summary class="section-heading" style="cursor:pointer">🛡 Armor & Shield</summary>
     <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
       <div>
@@ -4704,6 +4881,7 @@ function stepEquipment(){
           <select style="flex:1" onchange="charState.char.equipment.armor.material=this.value"><option value="">Standard</option>${arMat}</select>
         </div>
         ${arData?`<div style="font-size:.68rem;color:#a08060;margin-top:3px">AC+${arData.acBonus+eq.armor.enhancement} · Max DEX ${arData.maxDex!=null?arData.maxDex:'—'} · ACP −${Math.max(0,(arData.acp||0)-Math.floor(eq.armor.enhancement||0))} · ASF ${arData.arcaneFailure}%</div>`:''}
+        ${arData&&!armorProfOk?`<div class="notice notice-warn" style="font-size:.72rem;margin-top:5px;padding:5px 7px">⚠ Not proficient with ${arData.type} armor</div>`:''}
       </div>
       <div>
         <label style="font-size:.72rem;font-weight:600">Shield</label>
@@ -4712,7 +4890,8 @@ function stepEquipment(){
           <label style="font-size:.7rem">Enhancement</label>
           <select style="width:60px" onchange="charState.char.equipment.shield.enhancement=parseInt(this.value)">${enhOpts(eq.shield.enhancement||0)}</select>
         </div>
-        ${shData?`<div style="font-size:.68rem;color:#a08060;margin-top:3px">AC+${shData.shieldBonus+eq.shield.enhancement} · ACP −${Math.max(0,(shData.acp||0)-Math.floor(eq.shield.enhancement||0))}</div>`:''}
+        ${shData?`<div style="font-size:.68rem;color:#a08060;margin-top:3px">AC+${shData.shieldBonus+eq.shield.enhancement} · ACP −${Math.max(0,(shData.acp||0)-Math.floor(eq.shield.enhancement||0))} · ASF ${shData.arcaneFailure||0}%</div>`:''}
+        ${shData&&!shieldProfOk?`<div class="notice notice-warn" style="font-size:.72rem;margin-top:5px;padding:5px 7px">⚠ Not proficient with this shield</div>`:''}
       </div>
     </div>
     <div class="flex-row" style="gap:12px;margin-top:8px">
@@ -4982,7 +5161,193 @@ function nextStep9(){
   charState.step=10; renderChar();
 }
 
-// ── STEP 10: Summary ──────────────────────────────────────────────────────
+// ── STEP 10: Portrait ─────────────────────────────────────────────────────
+function generatePortraitPrompt(style){
+  const c=charState.char;
+  const classSummary=buildClassSum().replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+  const armor=getEqArmor();
+  const shield=getEqShield();
+  const weapons=(c.equipment.weapons||[]).filter(w=>w&&w.name).map(w=>w.name).slice(0,2);
+  const tmpl=getTmpl(c.appliedTemplate);
+  const parts=[
+    c.gender,
+    tmpl?tmpl.name:'',
+    c.race,
+    classSummary,
+    c.alignment?`${c.alignment} alignment`:'',
+    armor?`wearing ${armor.name}`:'',
+    shield?`carrying ${shield.name}`:'',
+    weapons.length?`armed with ${weapons.join(' and ')}`:'',
+    c.deity&&c.deity!=='None / Unaffiliated'?`devotee of ${c.deity}`:'',
+    c.homeland?`from ${c.homeland}${c.city?', '+c.city:''}`:'',
+    c.personality,
+    c.background
+  ].filter(Boolean).join(', ');
+  return `${parts || 'Dungeons and Dragons 3.5 fantasy adventurer'}, ${style||c.portraitStyle||'Realistic fantasy'} character portrait, centered bust composition, detailed equipment, clean background, no text, no watermark`;
+}
+function storePortrait(dataUrl){
+  charState.char.portrait=dataUrl||'';
+  renderChar();
+}
+function uploadPortrait(evt){
+  const file=evt.target.files&&evt.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>storePortrait(reader.result);
+  reader.readAsDataURL(file);
+}
+async function generatePortraitImage(){
+  const status=document.getElementById('portrait-status');
+  const promptEl=document.getElementById('portrait-prompt');
+  if(promptEl) charState.char.portraitPrompt=promptEl.value;
+  if(!OPENAI_API_KEY&&!GEMINI_API_KEY){ if(status) status.innerHTML='<span style="color:var(--crimson)">⚠ Add an AI image key/provider in Settings, or upload a custom portrait.</span>'; return; }
+  if(status) status.innerHTML='<span style="color:var(--gold)">AI image generation endpoint is not configured yet. Prompt is saved for regeneration/export.</span>';
+}
+function stepPortrait(){
+  const c=charState.char;
+  if(!c.portraitPrompt) c.portraitPrompt=generatePortraitPrompt(c.portraitStyle);
+  const styles=['Realistic fantasy','Painterly fantasy','Ink illustration','Classic D&D manual style','Portrait sketch','Heroic splash art','Token portrait'];
+  return `<div class="step-heading">🎨 Portrait Generator</div>
+    <p class="step-sub">Create or upload a character portrait before generating the final sheet.</p>
+    <div class="summary-grid">
+      <div class="summary-block"><h4>Portrait Preview</h4>
+        <div style="height:320px;border:2px solid #c4aa7a;border-radius:6px;background:rgba(0,0,0,.05);display:flex;align-items:center;justify-content:center;overflow:hidden">
+          ${c.portrait?`<img src="${c.portrait}" alt="Character portrait" style="width:100%;height:100%;object-fit:cover">`:`<div style="text-align:center;color:#8a7050;font-family:'Cinzel',serif">No portrait yet<br><span style="font-size:.72rem;font-family:inherit">Generate or upload one</span></div>`}
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn btn-gold btn-sm" onclick="generatePortraitImage()">Generate Portrait (AI)</button>
+          <label class="btn btn-secondary btn-sm" style="cursor:pointer">Upload Custom Portrait<input type="file" accept="image/*" onchange="uploadPortrait(event)" style="display:none"></label>
+          ${c.portrait?`<button class="btn btn-secondary btn-sm" onclick="storePortrait('')">Remove Portrait</button>`:''}
+        </div>
+        <div id="portrait-status" style="font-size:.78rem;margin-top:8px;min-height:1.2em"></div>
+      </div>
+      <div class="summary-block"><h4>Advanced Prompt Options</h4>
+        <label>Art Style</label>
+        <select onchange="charState.char.portraitStyle=this.value;charState.char.portraitPrompt=generatePortraitPrompt(this.value);renderChar()">${styles.map(s=>`<option value="${s}" ${c.portraitStyle===s?'selected':''}>${s}</option>`).join('')}</select>
+        <label style="margin-top:10px">Generated Prompt</label>
+        <textarea id="portrait-prompt" rows="12" oninput="charState.char.portraitPrompt=this.value">${c.portraitPrompt}</textarea>
+        <button class="btn btn-secondary btn-sm" style="margin-top:8px" onclick="charState.char.portraitPrompt=generatePortraitPrompt(charState.char.portraitStyle);renderChar()">Regenerate Prompt</button>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-secondary" onclick="prevStep()">&larr; Back</button>
+      <button class="btn btn-gold" onclick="nextStep10()">Continue to Summary &rarr;</button>
+    </div>`;
+}
+function nextStep10(){
+  const prompt=document.getElementById('portrait-prompt');
+  if(prompt) charState.char.portraitPrompt=prompt.value;
+  charState.step=11; renderChar();
+}
+
+// ── STEP 11: Summary ──────────────────────────────────────────────────────
+function generateCombatProfiles(){
+  const c=charState.char;
+  const feats=(c.feats||[]).map(f=>String(f&&f.chosen||'').toLowerCase()).filter(Boolean);
+  const hasFeat=n=>feats.includes(String(n).toLowerCase());
+  const attackBase=totalBAB();
+  const str=modVal(finalAbility('STR'));
+  const dex=modVal(finalAbility('DEX'));
+  const weapons=(c.equipment.weapons||[]).filter(w=>w&&w.name);
+  const primary=weapons[0]||{name:'Primary weapon',enhancement:0};
+  const damageSources=[];
+  (typeof getScalableAbilities==='function'?getScalableAbilities():[]).forEach(a=>{
+    const n=String(a.name||'');
+    if(/sneak attack|skirmish|sudden strike/i.test(n)) damageSources.push({source:n,dice:String(a.value||''),flat:0,critMultiplies:false,condition:a.detail||'Conditional precision damage'});
+    if(/inspire courage/i.test(n)) damageSources.push({source:n,dice:'',flat:parseInt(String(a.detail||'').match(/[+-]\d+/)?.[0]||0)||0,critMultiplies:true,condition:'Bardic music active'});
+  });
+  if(hasFeat('Point Blank Shot')) damageSources.push({source:'Point Blank Shot',dice:'',flat:1,critMultiplies:true,condition:'Target within 30 ft.'});
+  if(hasFeat('Knowledge Devotion')) damageSources.push({source:'Knowledge Devotion',dice:'',flat:'variable',critMultiplies:true,condition:'Knowledge check result'});
+  if(hasFeat('Craven')) damageSources.push({source:'Craven',dice:'',flat:c.levels.length,critMultiplies:false,condition:'Sneak attack applies'});
+  const weaponEnh=Number(primary.enhancement||0);
+  if(weaponEnh) damageSources.push({source:'Weapon Enhancement',dice:'',flat:weaponEnh,critMultiplies:true,condition:primary.name});
+  const iteratives=(base)=>{ const out=[]; for(let b=base;b>=base-20&&b>0;b-=5) out.push(b); return out; };
+  const formatAttacks=arr=>arr.map(n=>n>=0?`+${n}`:String(n)).join('/');
+  const profiles=[];
+  profiles.push({name:'Base Attack Routine',attacks:iteratives(attackBase).map(b=>b+str+weaponEnh),attackRoutine:formatAttacks(iteratives(attackBase).map(b=>b+str+weaponEnh)),damageSources:damageSources.filter(d=>['Weapon Enhancement'].includes(d.source)),critRules:[{source:primary.name,critMultiplies:true}],conditions:['Normal melee/full attack']});
+  if(weapons.length>1||hasFeat('Two-Weapon Fighting')) profiles.push({name:'Two-Weapon Routine',attacks:[...iteratives(attackBase).map(b=>b+str+weaponEnh-2),attackBase+str+weaponEnh-2],attackRoutine:`${formatAttacks(iteratives(attackBase).map(b=>b+str+weaponEnh-2))} / off-hand ${attackBase+str+weaponEnh-2>=0?'+':''}${attackBase+str+weaponEnh-2}`,damageSources,critRules:[{source:'Precision dice',critMultiplies:false},{source:'Flat weapon bonuses',critMultiplies:true}],conditions:['Two-weapon/full attack penalties estimated']});
+  if(hasFeat('Rapid Shot')) profiles.push({name:'Rapid Shot Routine',attacks:[attackBase+dex+weaponEnh-2,...iteratives(attackBase).map(b=>b+dex+weaponEnh-2)],attackRoutine:`${attackBase+dex+weaponEnh-2>=0?'+':''}${attackBase+dex+weaponEnh-2}/${formatAttacks(iteratives(attackBase).map(b=>b+dex+weaponEnh-2))}`,damageSources,critRules:[{source:'Precision dice',critMultiplies:false},{source:'Flat ranged bonuses',critMultiplies:true}],conditions:['Rapid Shot active']});
+  if(hasFeat('Manyshot')) profiles.push({name:'Manyshot Routine',attacks:[attackBase+dex+weaponEnh-4],attackRoutine:`${attackBase+dex+weaponEnh-4>=0?'+':''}${attackBase+dex+weaponEnh-4}`,damageSources,critRules:[{source:'Precision dice',critMultiplies:false}],conditions:['Standard action manyshot; extra arrows not expanded']});
+  damageSources.filter(d=>d.source!=='Weapon Enhancement').forEach(d=>profiles.push({name:d.source,attacks:iteratives(attackBase).map(b=>b+str+weaponEnh),attackRoutine:formatAttacks(iteratives(attackBase).map(b=>b+str+weaponEnh)),damageSources:[d],critRules:[{source:d.source,critMultiplies:d.critMultiplies}],conditions:[d.condition]}));
+  return [...profiles,...(c.combatProfiles||[])];
+}
+function generateCharacterSheetData(){
+  const c=charState.char;
+  const classCounts={};
+  c.levels.forEach(l=>{ if(l.className) classCounts[l.className]=(classCounts[l.className]||0)+1; });
+  const preEpic=c.levels.slice(0,20);
+  const preEpicCounts={};
+  preEpic.forEach(l=>{ if(l.className) preEpicCounts[l.className]=(preEpicCounts[l.className]||0)+1; });
+  const baseSave=(type)=>Object.entries(preEpicCounts).reduce((sum,[name,levels])=>{
+    const cls=getClass(name); return sum+(cls?(SAVE_TABLES[cls.saves[type]]?.[levels-1]||0):0);
+  },0)+epicSaveBonus();
+  const abilities=Object.fromEntries(DATA.abilities.map(ab=>[ab,{score:finalAbility(ab),mod:modVal(finalAbility(ab))}]));
+  const allCS=new Set(c.levels.flatMap(l=>{ const cls=getClass(l.className); return cls?cls.classSkills||[]:[]; }));
+  const skills=Object.entries(c.skillRanks||{}).filter(([,v])=>v>0).map(([name,ranks])=>{
+    const sk=DATA.skills.find(s=>s.name===name)||{};
+    const ability=sk.ability||'INT';
+    return {name,ranks,ability,classSkill:allCS.has(name),total:ranks+modVal(finalAbility(ability))};
+  }).sort((a,b)=>b.total-a.total);
+  const spellcasting=Object.keys(classCounts).map(className=>{
+    const progression=getCasterProgression(className);
+    if(!progression) return null;
+    const clsLvl=classCounts[className];
+    const slots=(progression.spellSlots&&progression.spellSlots[Math.min(clsLvl,progression.spellSlots.length)-1])||[];
+    const offset=progression.hasCantrips?0:1;
+    return {className,level:clsLvl,mode:progression.preparation,casterLevel:clsLvl,ability:progression.ability,dc0:getSpellDC(className,0),slots:slots.map((cnt,idx)=>{
+      if(cnt==null) return null;
+      const spellLevel=idx+offset;
+      const access=isSpontaneousCaster(className)?getKnownSpellAccess(className,spellLevel):getPreparedSpellAccess(className,spellLevel);
+      return {spellLevel,base:cnt,selected:(access.selected||[]),domain:getDomainSpellSlots(className,spellLevel),metamagic:(c.spellMetamagic&&c.spellMetamagic[className]&&c.spellMetamagic[className][spellLevel])||{}};
+    }).filter(Boolean)};
+  }).filter(Boolean);
+  const armor=getEqArmor(), shield=getEqShield(), asf=getArcaneSpellFailureRisk();
+  const ac=calcAC();
+  const race=DATA.races.find(r=>r.name===c.race)||{};
+  const attack={base:totalBAB(),strength:modVal(finalAbility('STR')),dexterity:modVal(finalAbility('DEX')),misc:getUAStatMod('attack'),melee:totalBAB()+modVal(finalAbility('STR'))+getUAStatMod('melee'),ranged:totalBAB()+modVal(finalAbility('DEX'))+getUAStatMod('ranged')};
+  const initiative={total:modVal(finalAbility('DEX'))+getUAStatMod('initiative'),dexterity:modVal(finalAbility('DEX')),misc:getUAStatMod('initiative')};
+  const acBreakdown={total:ac.total,touch:ac.touch,flatFooted:ac.flatFooted,base:10,armor:ac.armorBonus||0,shield:ac.shieldBonus||0,dexterity:ac.dexMod||0,size:ac.sizeMod||0,natural:ac.naturalArmor||0,deflection:ac.deflection||0,dodge:ac.dodge||0,misc:getUAStatMod('ac')};
+  const saves={fort:{total:totalSave('fort'),base:baseSave('fort'),ability:modVal(finalAbility('CON')),magic:getItemBonus('resistance'),misc:(race.saveBonusAll||0)+getUAStatMod('fort')},ref:{total:totalSave('ref'),base:baseSave('ref'),ability:modVal(finalAbility('DEX')),magic:getItemBonus('resistance'),misc:(race.saveBonusAll||0)+getUAStatMod('ref')},will:{total:totalSave('will'),base:baseSave('will'),ability:modVal(finalAbility('WIS')),magic:getItemBonus('resistance'),misc:(race.saveBonusAll||0)+getUAStatMod('will')}};
+  const equipmentSummary=[...(c.equipment.weapons||[]).filter(w=>w&&w.name).map(w=>({slot:'Weapon',name:w.name,enhancement:w.enhancement||0,material:w.material||''})),armor?{slot:'Armor',name:armor.name,enhancement:(c.equipment.armor&&c.equipment.armor.enhancement)||0,material:(c.equipment.armor&&c.equipment.armor.material)||''}:null,shield?{slot:'Shield',name:shield.name,enhancement:(c.equipment.shield&&c.equipment.shield.enhancement)||0,material:(c.equipment.shield&&c.equipment.shield.material)||''}:null].filter(Boolean);
+  const featSummary=(c.feats||[]).filter(f=>f&&f.chosen).map(f=>{ const fd=[...DATA.feats,...(DATA.epicFeats||[])].find(d=>d.name===f.chosen)||{}; return {name:f.chosen,type:fd.type||'General',slot:f.type||'',epic:!!f.epic}; });
+  const progressionTimeline=c.levels.map((l,i)=>({level:i+1,className:l.className,hp:l.hp||0,bab:totalBAB(),fort:totalSave('fort'),ref:totalSave('ref'),will:totalSave('will')}));
+  const companions=['animal companion','familiar','special mount','fiendish servant'].map(t=>({type:t,...getEffectiveCompanionLevel(t)})).filter(x=>x.level>0);
+  const features=Object.entries(classCounts).flatMap(([className,lvl])=>{
+    const cls=getClass(className);
+    return getFilteredClassFeatures(cls,lvl).map(feature=>({className,feature}));
+  });
+  const combatProfiles=generateCombatProfiles();
+  return {name:c.name,race:c.race,classes:classCounts,level:c.levels.length,portrait:c.portrait||'',portraitPrompt:c.portraitPrompt||'',hp:calcHP(),bab:babString(),attack,ac:acBreakdown,saves,initiative:initiative.total,initiativeBreakdown:initiative,speed:race.speed||30,abilities,skills,spellcasting,equipment:{armor:armor?armor.name:null,shield:shield?shield.name:null,armorProficient:isArmorProficient(armor),shieldProficient:isShieldProficient(shield),arcaneSpellFailure:asf,summary:equipmentSummary},feats:featSummary,progressionTimeline,combatProfiles,companions,features};
+}
+function renderCharacterSheetPreview(){
+  const s=generateCharacterSheetData();
+  const abilityRow=DATA.abilities.map(ab=>`<span class="tag">${ab} ${s.abilities[ab].score} (${s.abilities[ab].mod>=0?'+':''}${s.abilities[ab].mod})</span>`).join('');
+  const skillTags=s.skills.slice(0,18).map(sk=>`<span class="tag">${sk.name} ${sk.total>=0?'+':''}${sk.total}</span>`).join('')||'<span class="text-muted">No trained skills</span>';
+  const spellRows=s.spellcasting.map(sc=>`<div style="font-size:.76rem;margin:3px 0"><strong>${sc.className}</strong> ${sc.mode} · CL ${sc.casterLevel} · ${sc.ability||'—'} · DC0 ${sc.dc0?sc.dc0.dc:'—'} · ${sc.slots.map(sl=>`${sl.spellLevel}:${sl.selected.length}${sl.domain.slots?` D${sl.domain.used}/${sl.domain.slots}`:''}`).join(' ')}</div>`).join('')||'<span class="text-muted">No spellcasting</span>';
+  const equipWarn=[s.equipment.armor&&!s.equipment.armorProficient?`Armor not proficient: ${s.equipment.armor}`:'',s.equipment.shield&&!s.equipment.shieldProficient?`Shield not proficient: ${s.equipment.shield}`:'',s.equipment.arcaneSpellFailure.risk?`ASF ${s.equipment.arcaneSpellFailure.total}%: ${s.equipment.arcaneSpellFailure.classes.join(', ')}`:''].filter(Boolean).join(' · ');
+  const eqRows=s.equipment.summary.map(e=>`<div class="summary-row"><span class="sr-label">${e.slot}</span><span class="sr-value">${e.enhancement?`+${e.enhancement} `:''}${e.name}${e.material?` · ${e.material}`:''}</span></div>`).join('')||'<span class="text-muted">No equipment selected</span>';
+  const featRows=s.feats.map(f=>`<span class="tag">${f.epic?'⚡ ':''}${f.name} · ${f.type}</span>`).join('')||'<span class="text-muted">No feats selected</span>';
+  const timeline=s.progressionTimeline.map(l=>`<span class="tag">L${l.level} ${l.className||'—'}</span>`).join('');
+  const profileRows=s.combatProfiles.slice(0,8).map(p=>`<div class="summary-row"><span class="sr-label">${p.name}</span><span class="sr-value">${p.attackRoutine||'—'}${p.damageSources&&p.damageSources.length?` · ${p.damageSources.map(d=>`${d.source} ${d.dice||d.flat||''}`).join(', ')}`:''}</span></div>`).join('');
+  return `<div class="summary-block" style="margin-bottom:14px"><h4>Character Sheet Preview — Phase 2</h4>
+    <div class="summary-grid" style="margin-bottom:8px">
+      <div><div class="summary-row"><span class="sr-label">HP / AC / Init</span><span class="sr-value">${s.hp} / ${s.ac.total} / ${s.initiative>=0?'+':''}${s.initiative}</span></div><div class="summary-row"><span class="sr-label">BAB</span><span class="sr-value">${s.bab}</span></div><div class="summary-row"><span class="sr-label">Saves</span><span class="sr-value">F ${s.saves.fort.total>=0?'+':''}${s.saves.fort.total} R ${s.saves.ref.total>=0?'+':''}${s.saves.ref.total} W ${s.saves.will.total>=0?'+':''}${s.saves.will.total}</span></div></div>
+      <div>${s.portrait?`<img src="${s.portrait}" alt="Character portrait" style="width:120px;height:120px;object-fit:cover;border:2px solid #c4aa7a;border-radius:6px;float:right;margin-left:10px">`:''}<div style="display:flex;flex-wrap:wrap;gap:4px">${abilityRow}</div></div>
+    </div>
+    <div class="summary-grid" style="margin-bottom:8px">
+      <div><h4 style="margin-top:0">Breakdowns</h4><div style="font-size:.76rem;line-height:1.6"><strong>Attack:</strong> melee ${s.attack.melee>=0?'+':''}${s.attack.melee}, ranged ${s.attack.ranged>=0?'+':''}${s.attack.ranged} (BAB ${s.attack.base}, STR ${s.attack.strength}, DEX ${s.attack.dexterity})<br><strong>Init:</strong> ${s.initiative>=0?'+':''}${s.initiative} = DEX ${s.initiativeBreakdown.dexterity} + misc ${s.initiativeBreakdown.misc}<br><strong>AC:</strong> ${s.ac.total} = 10 + armor ${s.ac.armor} + shield ${s.ac.shield} + DEX ${s.ac.dexterity} + size ${s.ac.size} + natural ${s.ac.natural} + deflection ${s.ac.deflection} + dodge ${s.ac.dodge} + misc ${s.ac.misc}</div></div>
+      <div><h4 style="margin-top:0">Save Components</h4><div style="font-size:.76rem;line-height:1.6">${['fort','ref','will'].map(k=>`${k.toUpperCase()} ${s.saves[k].total>=0?'+':''}${s.saves[k].total} = base ${s.saves[k].base} + ability ${s.saves[k].ability} + magic ${s.saves[k].magic} + misc ${s.saves[k].misc}`).join('<br>')}</div></div>
+    </div>
+    <div style="font-size:.72rem;color:#8a7050;margin-bottom:5px">Top skills</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">${skillTags}</div>
+    <div style="font-size:.72rem;color:#8a7050;margin-bottom:5px">Spellcasting</div>${spellRows}
+    <div class="summary-grid" style="margin-top:8px;margin-bottom:8px"><div><h4 style="margin-top:0">Equipment</h4>${eqRows}</div><div><h4 style="margin-top:0">Feats</h4><div style="display:flex;flex-wrap:wrap;gap:4px">${featRows}</div></div></div>
+    <div class="summary-block" style="margin-top:8px"><h4>Combat Profiles</h4>${profileRows||'<span class="text-muted">No combat profiles generated</span>'}</div>
+    <div style="font-size:.72rem;color:#8a7050;margin-bottom:5px">Class Progression</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">${timeline}</div>
+    ${equipWarn?`<div class="notice notice-warn" style="margin-top:8px;font-size:.76rem">${equipWarn}</div>`:''}
+    ${s.companions.length?`<div style="font-size:.76rem;margin-top:8px"><strong>Companions:</strong> ${s.companions.map(c=>`${c.type} EL ${c.level}`).join(', ')}</div>`:''}
+    <div style="font-size:.76rem;margin-top:8px"><strong>Filtered class features:</strong> ${s.features.length}</div>
+  </div>`;
+}
 function stepSummary(){
   const c=charState.char,hp=calcHP(),cls=buildClassSum(),race=DATA.races.find(r=>r.name===c.race)||{};
   return `
@@ -5124,6 +5489,7 @@ function stepSummary(){
     })()}
     ${c.personality?`<div class="info-box" style="margin-bottom:12px"><strong>Personality:</strong><br>${c.personality}</div>`:''}
     ${c.background?`<div class="info-box" style="margin-bottom:14px"><strong>Background:</strong><br>${c.background}</div>`:''}
+    ${renderCharacterSheetPreview()}
     <div class="divider-ornament"><span>🤖 AI Build Analysis</span></div>
     <div style="margin-bottom:18px;text-align:center">
       <p class="step-sub" style="margin-bottom:8px">Get an expert D&D 3.5 assessment of your build's archetype, synergies, weaknesses, and next steps.</p>
