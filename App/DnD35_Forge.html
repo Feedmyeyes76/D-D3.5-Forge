@@ -202,7 +202,7 @@ body{background:var(--ink);font-family:'Crimson Text',Georgia,serif;color:var(--
 /* ── Inputs ──────────────────────────────────────────────────────────────── */
 .field-group{margin-bottom:16px;}
 .field-group label{display:block;font-family:'Cinzel',serif;font-size:.7rem;font-weight:600;letter-spacing:.12em;color:#6b4c1a;text-transform:uppercase;margin-bottom:5px;}
-input[type=text],input[type=number],input[type=password],textarea,select{width:100%;padding:9px 12px;background:#faf6ea;border:1px solid #c4aa7a;border-radius:var(--radius);font-family:'Crimson Text',serif;font-size:1rem;color:var(--ink);transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;}
+input[type=text],input[type=number],input[type=password],textarea,select{width:100%;padding:9px 12px;background:#faf6ea;border:1px solid #c4aa7a;border-radius:var(--radius);font-family:'Crimson Text',serif;font-size:1rem;color:var(--ink);transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;-moz-appearance:none;appearance:none;}
 .field-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
 .field-row input{flex:1;min-width:0;}
 .field-row button{flex:0 0 auto;}
@@ -1051,9 +1051,21 @@ function renderPrintSheet(themeName, pageNumber){
   const sign=n=>n>=0?`+${n}`:String(n);
   const abilityTags=DATA.abilities.map(ab=>`<div class="ps-stat"><b>${ab}</b><span>${s.abilities[ab].score}</span><small>${sign(s.abilities[ab].mod)}</small></div>`).join('');
   const portrait=s.portrait?`<img class="ps-portrait" src="${s.portrait}" alt="Portrait">`:`<div class="ps-portrait ps-silhouette">Portrait</div>`;
-  if(pageNumber===1) return `<section class="${cls}"><h1>${escHtml(s.name||'Unnamed Character')}</h1><h2>${escHtml(s.race||'—')} · Level ${s.level}</h2>${portrait}<div class="ps-grid">${abilityTags}</div><div class="ps-block"><h3>Combat</h3><p><b>HP</b> ${s.hp} · <b>AC</b> ${s.ac.total} touch ${s.ac.touch} flat ${s.ac.flatFooted} · <b>Init</b> ${sign(s.initiative)} · <b>BAB</b> ${escHtml(s.bab)}</p><p><b>Attack</b> Melee ${sign(s.attack.melee)} · Ranged ${sign(s.attack.ranged)}</p><p><b>Saves</b> Fort ${sign(s.saves.fort.total)} · Ref ${sign(s.saves.ref.total)} · Will ${sign(s.saves.will.total)}</p><p><b>Speed</b> ${s.speed} ft.</p></div><div class="ps-block"><h3>AC Breakdown</h3><p>10 + armor ${s.ac.armor} + shield ${s.ac.shield} + Dex ${s.ac.dexterity} + size ${s.ac.size} + natural ${s.ac.natural} + deflection ${s.ac.deflection} + dodge ${s.ac.dodge} + misc ${s.ac.misc}</p></div></section>`;
-  if(pageNumber===2) return `<section class="${cls}"><h1>Skills, Feats & Features</h1><div class="ps-cols"><div><h3>Skills</h3>${s.skills.map(sk=>`<div class="ps-row"><span>${escHtml(sk.name)}</span><b>${sign(sk.total)}</b></div>`).join('')||'<p>No trained skills.</p>'}</div><div><h3>Feats</h3>${s.feats.map(f=>`<div class="ps-row"><span>${f.epic?'⚡ ':''}${escHtml(f.name)}</span><small>${escHtml(f.type)}</small></div>`).join('')||'<p>No feats selected.</p>'}<h3>Class Features</h3>${s.features.slice(0,40).map(f=>`<div class="ps-row"><span>${escHtml(f.className)}</span><small>${escHtml(f.feature)}</small></div>`).join('')||'<p>No features listed.</p>'}</div></div></section>`;
-  return `<section class="${cls}"><h1>Equipment, Attacks & Spellcasting</h1><div class="ps-cols"><div><h3>Equipment</h3>${s.equipment.summary.map(e=>`<div class="ps-row"><span>${escHtml(e.slot)}</span><b>${e.enhancement?`+${e.enhancement} `:''}${escHtml(e.name)}</b></div>`).join('')||'<p>No equipment selected.</p>'}<h3>Legality</h3><p>Armor proficient: ${s.equipment.armorProficient?'Yes':'No'} · Shield proficient: ${s.equipment.shieldProficient?'Yes':'No'}${s.equipment.arcaneSpellFailure.risk?` · ASF ${s.equipment.arcaneSpellFailure.total}%`:''}</p><h3>Combat Profiles</h3>${s.combatProfiles.slice(0,10).map(p=>`<div class="ps-row"><span>${escHtml(p.name)}</span><b>${escHtml(p.attackRoutine||'—')}</b></div>`).join('')||'<p>No combat profiles.</p>'}</div><div><h3>Spellcasting</h3>${s.spellcasting.map(sc=>`<div class="ps-block"><b>${escHtml(sc.className)}</b> CL ${sc.casterLevel} · ${escHtml(sc.ability||'—')} · ${escHtml(sc.mode)}<br>${sc.slots.map(sl=>`Lv ${sl.spellLevel}: ${sl.selected.length}/${sl.base}${sl.domain.slots?` · Domain ${sl.domain.used}/${sl.domain.slots}`:''}`).join(' · ')}</div>`).join('')||'<p>No spellcasting.</p>'}<h3>Class Timeline</h3><p>${s.progressionTimeline.map(l=>`L${l.level} ${escHtml(l.className||'—')}`).join(' · ')}</p></div></div></section>`;
+  const detailLine=[s.details.hairColor&&`Hair ${s.details.hairColor}`,s.details.eyeColor&&`Eyes ${s.details.eyeColor}`,s.details.heightFeet&&`${s.details.heightFeet}'${s.details.heightInches||0}"`,s.details.weightLbs&&`${s.details.weightLbs} lbs`,s.details.age&&`Age ${s.details.age}`,s.details.homelandRegion&&`From ${s.details.homelandRegion}`,s.details.residenceCity&&`Resides ${s.details.residenceCity}`,s.details.experience&&`${s.details.experience} XP`].filter(Boolean).join(' · ');
+  if(pageNumber===1) return `<section class="${cls}"><h1>${escHtml(s.name||'Unnamed Character')}</h1><h2>${escHtml(s.race||'—')} · Level ${s.level}</h2>${portrait}<div class="ps-grid">${abilityTags}</div><div class="ps-block"><h3>Details & Languages</h3><p>${escHtml(detailLine||'—')}</p><p><b>Languages</b> ${s.languages.known.map(escHtml).join(', ')||'—'}</p></div><div class="ps-block"><h3>Combat</h3><p><b>HP</b> ${s.hp} · <b>AC</b> ${s.ac.total} touch ${s.ac.touch} flat ${s.ac.flatFooted} · <b>Init</b> ${sign(s.initiative)} · <b>BAB</b> ${escHtml(s.bab)}</p><p><b>Attack</b> Melee ${sign(s.attack.melee)} · Ranged ${sign(s.attack.ranged)}</p><p><b>Saves</b> Fort ${sign(s.saves.fort.total)} · Ref ${sign(s.saves.ref.total)} · Will ${sign(s.saves.will.total)}</p><p><b>Speed</b> ${s.speed} ft.</p></div><div class="ps-block"><h3>AC Breakdown</h3><p>10 + armor ${s.ac.armor} + shield ${s.ac.shield} + Dex ${s.ac.dexterity} + size ${s.ac.size} + natural ${s.ac.natural} + deflection ${s.ac.deflection} + dodge ${s.ac.dodge} + misc ${s.ac.misc}</p></div></section>`;
+  if(pageNumber===2){
+    const skillRows=s.skills.map(sk=>`<div class="ps-row"><span>${escHtml(sk.name)}${sk.classSkill?' [CS]':''}${sk.trainedOnly?' [T]':''}${sk.armorPenaltyApplies?' [ACP]':''}</span><small>${sign(sk.total)} = ${sk.ranks} + ${sign(sk.abilityModifier)} ${escHtml(sk.ability)} + ${sk.synergyBonus} syn + ${sk.miscBonus} misc${sk.armorPenaltyApplies?` ${sk.armorCheckPenaltyApplied}`:''}</small></div>`).join('')||'<p>No trained skills.</p>';
+    const featGroups=[['Level Feats',s.groupedFeats.level],['Class Bonus Feats',s.groupedFeats.classBonus],['Racial Bonus Feats',s.groupedFeats.racial],['Epic Feats',s.groupedFeats.epic],['Flaw Feats',s.groupedFeats.flaw],['Other Feats',s.groupedFeats.other]].filter(([,arr])=>arr.length).map(([label,arr])=>`<h3>${label}</h3>${arr.map(f=>`<div class="ps-row"><span>${f.epic?'⚡ ':''}${escHtml(f.name)}</span><small>${escHtml(f.source||f.type)}</small></div>`).join('')}`).join('')||'<p>No feats selected.</p>';
+    const featureGroups=Object.entries(s.groupedFeatures).map(([className,rows])=>`<h3>${escHtml(className)}</h3>${rows.slice(0,24).map(f=>`<div class="ps-row"><span>${escHtml(className)} ${f.classLevel||'—'}</span><small>${escHtml(f.feature)}</small></div>`).join('')}`).join('')||'<p>No features listed.</p>';
+    return `<section class="${cls}"><h1>Skills, Feats & Features</h1><div class="ps-cols"><div><h3>Skills</h3><p><small>Total = ranks + ability + synergy + misc − ACP. CS = class skill, T = trained only, ACP = armor check penalty applies.</small></p>${skillRows}</div><div>${featGroups}<h3>Class Features by Class Level</h3>${featureGroups}</div></div></section>`;
+  }
+  const weaponRows=s.weaponAttackTables.map(w=>`<div class="ps-block"><b>${escHtml(w.name)}</b> ${escHtml(w.type)} ${escHtml(w.attackRoutine)} · ${escHtml(w.damage)} · ${escHtml(w.critical)}${w.range?` · ${w.range} ft.`:''}<br><small>Attack = BAB ${w.attackComponents.bab} + ability ${sign(w.attackComponents.ability)} + enhancement ${w.attackComponents.enhancement} + size ${sign(w.attackComponents.size)} + misc ${sign(w.attackComponents.misc)}. Damage = ${escHtml(w.damageComponents.baseDice)} + ability ${sign(w.damageComponents.ability)} + enhancement ${w.damageComponents.enhancement}.${w.material?` Material: ${escHtml(w.material)}.`:''}${w.specialAbilities.length?` Special: ${w.specialAbilities.map(escHtml).join(', ')}.`:''}</small></div>`).join('')||'<p>No weapons selected.</p>';
+  const damageRows=s.damageSourcesExpanded.map(d=>`<div class="ps-row"><span>${escHtml(d.source)}</span><small>${escHtml(d.dice||String(d.flat||''))} · ${d.critMultiplies?'multiplies':'no crit'} · ${escHtml(d.condition||'')}</small></div>`).join('')||'<p>No conditional damage sources.</p>';
+  const ac=s.acBreakdownExpanded, init=s.initiativeBreakdownExpanded;
+  const acRows=`<div class="ps-row"><span>AC ${ac.total}</span><small>10 + armor ${ac.armor} + shield ${ac.shield} + Dex ${ac.dexterity} + size ${ac.size} + natural ${ac.natural} + deflection ${ac.deflection} + dodge ${ac.dodge} + misc ${ac.misc}</small></div><div class="ps-row"><span>Touch ${ac.touch}</span><small>Flat-footed ${ac.flatFooted}</small></div>`;
+  const saveRows=['fort','ref','will'].map(k=>{const sv=s.saveBreakdownsExpanded[k];return `<div class="ps-row"><span>${k.toUpperCase()} ${sign(sv.total)}</span><small>base ${sv.base} + ability ${sign(sv.ability)} + resistance ${sv.magic} + misc ${sign(sv.misc)}</small></div>`;}).join('');
+  const consumableRows=Object.entries(s.consumables).map(([k,arr])=>`<div class="ps-row"><span>${escHtml(k)}</span><small>${arr.length?arr.map(x=>escHtml(x.name||x.spellName||x)).join(', '):'—'}</small></div>`).join('');
+  return `<section class="${cls}"><h1>Equipment, Attacks & Spellcasting</h1><div class="ps-cols"><div><h3>Weapons</h3>${weaponRows}<h3>Combat Damage Abilities</h3>${damageRows}<h3>Combat Profiles</h3>${s.combatProfiles.slice(0,8).map(p=>`<div class="ps-row"><span>${escHtml(p.name)}</span><b>${escHtml(p.attackRoutine||'—')}</b></div>`).join('')||'<p>No combat profiles.</p>'}</div><div><h3>Defenses</h3>${acRows}<div class="ps-row"><span>Initiative ${sign(init.total)}</span><small>Dex ${sign(init.dexterity)} + Improved Init ${init.improvedInitiative} + trait ${sign(init.trait)} + misc ${sign(init.misc)}</small></div>${saveRows}<h3>Equipment</h3>${s.equipment.summary.map(e=>`<div class="ps-row"><span>${escHtml(e.slot)}</span><b>${e.enhancement?`+${e.enhancement} `:''}${escHtml(e.name)}</b></div>`).join('')||'<p>No equipment selected.</p>'}<h3>Wealth & Consumables</h3><div class="ps-row"><span>Total Wealth</span><b>${s.wealthBreakdown.totalGP.toFixed(2)} gp</b></div><div class="ps-row"><span>Suggested WBL</span><small>${s.wealthBreakdown.suggestedGP} gp</small></div>${consumableRows}<h3>Legality</h3><p>Armor proficient: ${s.equipment.armorProficient?'Yes':'No'} · Shield proficient: ${s.equipment.shieldProficient?'Yes':'No'}${s.equipment.arcaneSpellFailure.risk?` · ASF ${s.equipment.arcaneSpellFailure.total}%`:''}</p></div></div></section>`;
 }
 function openPrintSheet(){
   const theme=charState.printTheme||'radial';
@@ -1746,7 +1758,7 @@ const BLANK_CHAR = () => ({
   spellsKnown:{}, preparedSpells:{}, spellbook:[], domains:[], spellSwapLog:[], spellMetamagic:{},
   equipment:{weapons:[],armor:'',shield:'',gear:[]},
   magicItems:{},
-  hp:0, notes:'', background:'', personality:'', portrait:'', portraitPrompt:'', portraitStyle:'Realistic fantasy',
+  hp:0, notes:'', background:'', personality:'', hairColor:'', eyeColor:'', complexion:'', heightFeet:'', heightInches:'', weightLbs:'', age:'', homelandRegion:'', residenceCity:'', experience:0, languagesKnown:[], portrait:'', portraitPrompt:'', portraitStyle:'Realistic fantasy',
   exClasses:{}, acfs:{},
   _driveId:null, _driveName:null,
 });
@@ -3031,7 +3043,7 @@ function renderChar(){
   const cardClass='forge-card card-char'+(charState.char.charType==='NPC'?' card-npc':isEpic()?' card-epic':'');
 
   // Top bar
-  const pct=Math.round((charState.step/11)*100);
+  const pct=Math.round((charState.step/12)*100);
   const fillClass=charState.char.charType==='NPC'?'fill-npc':isEpic()?'fill-epic':'';
   const topBar=`
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:8px;flex-wrap:wrap">
@@ -3053,8 +3065,8 @@ function renderChar(){
   const progress=`
     <div class="progress-wrap">
       <div class="progress-label">
-        <span>${['Identity','Race','Ability Method','Assign Scores','Levels','Feats','Skills','Spells','Equipment','Finishing','Portrait','Summary'][charState.step]}${charState.char.name?' — '+charState.char.name:''}</span>
-        <span>Step ${charState.step+1}/12</span>
+        <span>${['Identity','Race','Ability Method','Assign Scores','Details & Languages','Levels','Feats','Skills','Spells','Equipment','Finishing','Portrait','Summary'][charState.step]}${charState.char.name?' — '+charState.char.name:''}</span>
+        <span>Step ${charState.step+1}/13</span>
       </div>
       <div class="progress-track"><div class="progress-fill ${fillClass}" style="width:${pct}%"></div></div>
     </div>`;
@@ -3065,21 +3077,22 @@ function renderChar(){
     case 1: stepHTML=stepRace(); break;
     case 2: stepHTML=stepAbilityMethod(); break;
     case 3: stepHTML=stepAssignScores(); break;
-    case 4: stepHTML=stepLevels(); break;
-    case 5: stepHTML=stepFeats(); break;
-    case 6: stepHTML=stepSkills(); break;
-    case 7: stepHTML=stepSpells(); break;
-    case 8: stepHTML=stepEquipment(); break;
-    case 9: stepHTML=stepFinishing(); break;
-    case 10: stepHTML=stepPortrait(); break;
-    case 11: stepHTML=stepSummary(); break;
+    case 4: stepHTML=stepDetailsLanguages(); break;
+    case 5: stepHTML=stepLevels(); break;
+    case 6: stepHTML=stepFeats(); break;
+    case 7: stepHTML=stepSkills(); break;
+    case 8: stepHTML=stepSpells(); break;
+    case 9: stepHTML=stepEquipment(); break;
+    case 10: stepHTML=stepFinishing(); break;
+    case 11: stepHTML=stepPortrait(); break;
+    case 12: stepHTML=stepSummary(); break;
   }
 
   c.innerHTML=`<div class="${cardClass} fade-in" style="margin-top:16px">${topBar}${drivePanel}${progress}${stepHTML}</div>`;
   updateNavSubs();
 
   // Re-attach dynamic lists after render
-  if(charState.step===8){ reattachWeaponList(); reattachGearList(); updateScrollCost(); }
+  if(charState.step===9){ reattachWeaponList(); reattachGearList(); updateScrollCost(); }
 }
 
 function renderCharDrivePanel(){
@@ -3369,7 +3382,55 @@ function assignRoll(ab,val){ if(val==='') delete charState.char.rolledAssign[ab]
 function pbChange(ab,d){ const cur=charState.char.pbSpend[ab],next=cur+d; if(next<8||next>18) return; const c=DATA.pointBuyCosts; const spent=DATA.abilities.reduce((s,a)=>s+(c[charState.char.pbSpend[a]]||0),0); if(d>0&&spent+((c[next]||0)-(c[cur]||0))>25) return; charState.char.pbSpend[ab]=next; charState.char.abilityBase[ab]=next; renderChar(); }
 function nextStep3(){ if(charState.char.abilityMethod==='pointbuy') DATA.abilities.forEach(ab=>{ charState.char.abilityBase[ab]=charState.char.pbSpend[ab]; }); DATA.abilities.forEach(ab=>{ charState.char.abilityFinal[ab]=finalAbility(ab); }); charState.step=4; renderChar(); }
 
-// ── STEP 4: Levels ────────────────────────────────────────────────────────
+function getRaceLanguageData(){
+  const race=DATA.races.find(r=>r.name===charState.char.race)||{};
+  const fallback={
+    Human:{starting:['Common'],bonus:['Any']},
+    Dwarf:{starting:['Common','Dwarven'],bonus:['Giant','Gnome','Goblin','Orc','Terran','Undercommon']},
+    Elf:{starting:['Common','Elven'],bonus:['Draconic','Gnoll','Gnome','Goblin','Orc','Sylvan']},
+    Gnome:{starting:['Common','Gnome'],bonus:['Draconic','Dwarven','Elven','Giant','Goblin','Orc']},
+    'Half-Elf':{starting:['Common','Elven'],bonus:['Any']},
+    'Half-Orc':{starting:['Common','Orc'],bonus:['Draconic','Giant','Gnoll','Goblin','Abyssal']},
+    Halfling:{starting:['Common','Halfling'],bonus:['Dwarven','Elven','Gnome','Goblin','Orc']},
+  };
+  const data=fallback[race.name]||{starting:['Common'],bonus:['Any']};
+  return {starting:race.startingLanguages||race.languages||data.starting,bonus:race.bonusLanguages||data.bonus};
+}
+function getBonusLanguageSlots(){ return Math.max(0,modVal(finalAbility('INT'))); }
+function syncStartingLanguages(){
+  const data=getRaceLanguageData();
+  const known=new Set(charState.char.languagesKnown||[]);
+  data.starting.forEach(l=>known.add(l));
+  charState.char.languagesKnown=[...known];
+}
+function setDetailField(key,val){ charState.char[key]=val; }
+function toggleLanguage(lang){
+  syncStartingLanguages();
+  const data=getRaceLanguageData();
+  if(data.starting.includes(lang)) return;
+  const known=new Set(charState.char.languagesKnown||[]);
+  if(known.has(lang)) known.delete(lang); else known.add(lang);
+  charState.char.languagesKnown=[...known];
+  renderChar();
+}
+function stepDetailsLanguages(){
+  syncStartingLanguages();
+  const c=charState.char, data=getRaceLanguageData(), slots=getBonusLanguageSlots();
+  const selectedBonus=(c.languagesKnown||[]).filter(l=>!data.starting.includes(l));
+  const pool=[...new Set([...data.starting,...data.bonus.filter(l=>l!=='Any'),...(data.bonus.includes('Any')?['Abyssal','Aquan','Auran','Celestial','Draconic','Dwarven','Elven','Giant','Gnoll','Gnome','Goblin','Halfling','Ignan','Infernal','Orc','Sylvan','Terran','Undercommon']:[])])].sort();
+  const input=(label,key,type='text',min='')=>`<label class="field-label">${label}<input type="${type}" ${min!==''?`min="${min}"`:''} value="${escAttr(c[key]||'')}" oninput="setDetailField('${key}',this.value)"></label>`;
+  return `<div class="step-heading">🪪 Details & Languages</div>
+    <p class="step-sub">Languages are calculated after final Intelligence because bonus language slots equal positive INT modifier.</p>
+    <div class="summary-grid" style="margin-bottom:12px">
+      <div class="summary-block"><h4>Appearance</h4>${input('Hair','hairColor')}${input('Eyes','eyeColor')}${input('Complexion','complexion')}<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${input('Height ft.','heightFeet','number',0)}${input('Height in.','heightInches','number',0)}</div>${input('Weight lbs.','weightLbs','number',0)}${input('Age','age','number',0)}</div>
+      <div class="summary-block"><h4>Origin & Advancement</h4>${input('Homeland region','homelandRegion')}${input('Residence city','residenceCity')}${input('Experience','experience','number',0)}<div class="info-box" style="font-size:.8rem;margin-top:8px"><strong>INT:</strong> ${finalAbility('INT')} (${modVal(finalAbility('INT'))>=0?'+':''}${modVal(finalAbility('INT'))}) · <strong>Bonus language slots:</strong> ${slots} · <strong>Selected:</strong> ${selectedBonus.length}/${slots}</div></div>
+    </div>
+    <div class="summary-block"><h4>Languages</h4><div style="font-size:.78rem;color:#8a7050;margin-bottom:8px">Starting: ${data.starting.map(escHtml).join(', ')}</div><div style="display:flex;flex-wrap:wrap;gap:6px">${pool.map(l=>`<label class="tag" style="cursor:${data.starting.includes(l)?'default':'pointer'}"><input type="checkbox" ${c.languagesKnown.includes(l)?'checked':''} ${data.starting.includes(l)?'disabled':''} onchange="toggleLanguage('${escAttr(l)}')"> ${escHtml(l)}${data.starting.includes(l)?' (racial)':''}</label>`).join('')}</div>${selectedBonus.length>slots?`<div class="notice notice-warn" style="margin-top:10px">Too many bonus languages selected. Remove ${selectedBonus.length-slots}.</div>`:''}</div>
+    <div class="nav-row"><button class="btn btn-secondary" onclick="prevStep()">&larr; Back</button><button class="btn btn-primary" onclick="nextStepDetailsLanguages()">Continue →</button></div>`;
+}
+function nextStepDetailsLanguages(){ syncStartingLanguages(); charState.step=5; renderChar(); }
+
+// ── STEP 5: Levels ────────────────────────────────────────────────────────
 function stepLevels(){
   if(!charState.char.levels.length){ charState.char.levels=[{className:'',hpRolled:0,hpMode:charState.char.charType==='PC'?'max':'roll'}]; }
   charState.char.levels.forEach((l,i)=>{
@@ -3577,7 +3638,7 @@ function setAbilityIncrease(lvl,ab){
   else delete charState.char.abilityIncreases[lvl];
   renderChar();
 }
-function nextStep4(){ charState.char.hp=calcHP(); charState.char.totalLevel=charState.char.levels.length; initFeatSlots(); charState.step=5; renderChar(); }
+function nextStep4(){ charState.char.hp=calcHP(); charState.char.totalLevel=charState.char.levels.length; initFeatSlots(); charState.step=6; renderChar(); }
 
 // ── ACF Data + Logic ────────────────────────────────────────────────────────
 const ACF_DATA={
@@ -3812,7 +3873,7 @@ function stepFeats(){
     <div class="nav-row"><button class="btn btn-secondary" onclick="prevStep()">&larr; Back</button><button class="btn btn-primary" onclick="nextStep5()">Continue →</button></div>`;
 }
 function setFeat(idx,name){ charState.char.feats[idx].chosen=name; renderChar(); }
-function nextStep5(){ charState.step=6; renderChar(); }
+function nextStep5(){ charState.step=7; renderChar(); }
 
 async function getFeatRecommendations(){
   const statusEl=document.getElementById('feat-ai-status');
@@ -3972,7 +4033,7 @@ function stepSkills(){
     </div>`;
 }
 function setSkRank(name,val){ const v=parseFloat(val)||0; if(v>0) charState.char.skillRanks[name]=v; else delete charState.char.skillRanks[name]; updateSkillPointsRemaining(); }
-function nextStep6(){ charState.step=7; renderChar(); }
+function nextStep6(){ charState.step=8; renderChar(); }
 
 // ── SPELL DATA ────────────────────────────────────────────────────────────
 const SPELL_DATA = [];
@@ -4105,6 +4166,62 @@ function getCasterProgression(className){
     hasCantrips:!['Paladin','Ranger','Hexblade'].includes(className),
     usesSpellbook:className==='Wizard'
   };
+}
+function resolveCasterProgression(){
+  const c=charState.char;
+  const result={arcaneCL:0,divineCL:0,invocationCL:0,casterBreakdown:{},byClass:{},effectiveDCBonus:0,epicScaling:c.levels.length>20};
+  const classCounts={};
+  c.levels.forEach(l=>{ if(l.className) classCounts[l.className]=(classCounts[l.className]||0)+1; });
+  const bases={arcane:[],divine:[],invocations:[]};
+  const advancingOnly=n=>/^(mystic theurge|arcane hierophant|cerebremancer|hierophant|archmage|fatespinner)$/i.test(String(n||''))||/invoker|hellfire warlock/i.test(String(n||''));
+  const addBase=(className,type)=>{
+    const lvl=getClassLevel(className);
+    if(!lvl) return;
+    const key=type==='invocations'?'invocations':type;
+    bases[key].push({className,level:lvl});
+    result.casterBreakdown[className]=lvl;
+    result.byClass[className]=lvl;
+  };
+  Object.keys(classCounts).forEach(className=>{
+    const type=getCasterType(className);
+    const progression=getCasterProgression(className);
+    if((type==='arcane'||type==='divine'||type==='invocations')&&!advancingOnly(className)&&(progression&&progression.spellSlots||type==='invocations')) addBase(className,type);
+  });
+  const best=(type)=>bases[type].sort((a,b)=>b.level-a.level)[0]||null;
+  const addAdvance=(type,className,amount)=>{
+    if(!amount) return;
+    if(type==='arcane') result.arcaneCL+=amount;
+    else if(type==='divine') result.divineCL+=amount;
+    else if(type==='invocations') result.invocationCL+=amount;
+    result.casterBreakdown[className]=(result.casterBreakdown[className]||0)+amount;
+  };
+  bases.arcane.forEach(b=>result.arcaneCL+=b.level);
+  bases.divine.forEach(b=>result.divineCL+=b.level);
+  bases.invocations.forEach(b=>result.invocationCL+=b.level);
+  c.levels.forEach((l,idx)=>{
+    const className=l.className;
+    const cls=getClass(className);
+    if(!cls) return;
+    const classLevel=c.levels.slice(0,idx+1).filter(x=>x.className===className).length;
+    const n=String(className||'').toLowerCase();
+    if(n==='mystic theurge'||n==='arcane hierophant'||n==='cerebremancer'){
+      addAdvance('arcane',`${className} Arcane`,1); addAdvance('divine',`${className} Divine`,1); return;
+    }
+    if(n==='hierophant'){ addAdvance('divine',className,1); result.effectiveDCBonus+=0; return; }
+    if(n==='archmage'||n==='fatespinner'){ addAdvance('arcane',className,1); return; }
+    if(n.includes('invoker')||n.includes('hellfire warlock')){ addAdvance('invocations',className,1); return; }
+    const adv=cls.spellcastingAdvancementLevels;
+    if(Array.isArray(adv)&&adv.includes(classLevel)){
+      const type=(cls.spellcasting&&cls.spellcasting.type)||((best('arcane')&&'arcane')||(best('divine')&&'divine')||(best('invocations')&&'invocations'));
+      addAdvance(type,className,1);
+    } else if(cls.spellcasting&&cls.spellcasting.advances){
+      addAdvance(cls.spellcasting.type||'arcane',className,1);
+    }
+  });
+  bases.arcane.forEach(b=>result.byClass[b.className]=result.arcaneCL);
+  bases.divine.forEach(b=>result.byClass[b.className]=result.divineCL);
+  bases.invocations.forEach(b=>result.byClass[b.className]=result.invocationCL);
+  return result;
 }
 function isInvocationCaster(className){ return getSpellPreparationType(className)==='invocation'; }
 function isSpontaneousCaster(className){ return getSpellPreparationType(className)==='spontaneous'; }
@@ -4686,7 +4803,7 @@ function clearSpellLevel(className, level){
 function nextStep7(){
   const nt=document.getElementById('spell-notes');
   if(nt) charState.char.preparedSpells.__notes=nt.value;
-  charState.step=8; renderChar();
+  charState.step=9; renderChar();
 }
 
 // ── STEP 8: Equipment ─────────────────────────────────────────────────────
@@ -5018,7 +5135,7 @@ function stepEquipment(){
 }
 function reattachWeaponList(){}
 function reattachGearList(){}
-function nextStep8(){ charState.step=9; renderChar(); }
+function nextStep8(){ charState.step=10; renderChar(); }
 
 const DEITY_OPTIONS = ['None / Unaffiliated','Boccob','Corellon Larethian','Ehlonna','Erythnul','Fharlanghn','Garl Glittergold','Gruumsh','Heironeous','Hextor','Kord','Kurtulmak','Lolth','Moradin','Nerull','Obad-Hai','Olidammara','Pelor','St. Cuthbert','Vecna','Wee Jas','Yondalla','Aengrist','Annam','Bahamut','Blibdoolpoolp','Callarduran Smoothhands','Deep Sashelas','Diirinka','Eadro','Grolantor','Hruggek','Ilsensine','Io','Jazirian','Karaan','Kiaransalee','Laogzed','Laduguer','Maglubiyet','Memnor','Merrshaulk','Panzuriel','Rillifane Rallathil','Sekolah','Semuanya','Sheela Peryroyl','Skerrit','Skoraeus Stonebones','Surtur','Tiamat','Urogalan','Vaprak','Zeus','Hera','Athena','Apollo','Artemis','Ares','Aphrodite','Hermes','Demeter','Dionysus','Hephaestus','Hades','Hecate','Nike','Pan','Poseidon','Tyche','Odin','Frigga','Thor','Sif','Tyr','Balder','Heimdall','Freya','Freyr','Loki','Hel','Thrym','Uller','Njord','Ra','Isis','Osiris','Horus','Set','Anubis','Bast','Bes','Hathor','Imhotep','Nephthys','Ptah','Sobek','Thoth'].filter((v,i,a)=>a.indexOf(v)===i).sort((a,b)=>a.localeCompare(b));
 const PHB_DEITY_DETAILS = {
@@ -5158,7 +5275,7 @@ function nextStep9(){
   if(g('f-background')) charState.char.background=g('f-background').value;
   if(g('f-personality')) charState.char.personality=g('f-personality').value;
   if(g('f-notes')) charState.char.notes=g('f-notes').value;
-  charState.step=10; renderChar();
+  charState.step=11; renderChar();
 }
 
 // ── STEP 10: Portrait ─────────────────────────────────────────────────────
@@ -5237,7 +5354,7 @@ function stepPortrait(){
 function nextStep10(){
   const prompt=document.getElementById('portrait-prompt');
   if(prompt) charState.char.portraitPrompt=prompt.value;
-  charState.step=11; renderChar();
+  charState.step=12; renderChar();
 }
 
 // ── STEP 11: Summary ──────────────────────────────────────────────────────
@@ -5271,6 +5388,21 @@ function generateCombatProfiles(){
   damageSources.filter(d=>d.source!=='Weapon Enhancement').forEach(d=>profiles.push({name:d.source,attacks:iteratives(attackBase).map(b=>b+str+weaponEnh),attackRoutine:formatAttacks(iteratives(attackBase).map(b=>b+str+weaponEnh)),damageSources:[d],critRules:[{source:d.source,critMultiplies:d.critMultiplies}],conditions:[d.condition]}));
   return [...profiles,...(c.combatProfiles||[])];
 }
+function iterAttackBonuses(base){ const out=[]; for(let b=base;b>=base-20&&b>0;b-=5) out.push(b); return out; }
+function generateWeaponAttackTables(damageSources){
+  const c=charState.char, race=DATA.races.find(r=>r.name===c.race)||{};
+  const sizeMods={Fine:8,Diminutive:4,Tiny:2,Small:1,Medium:0,Large:-1,Huge:-2,Gargantuan:-4,Colossal:-8};
+  const sizeMod=sizeMods[race.size||'Medium']||0;
+  return (c.equipment.weapons||[]).filter(w=>w&&w.name).map((w,idx)=>{
+    const wd=EQUIPMENT_DATA.weapons.find(x=>x.name===w.name)||{};
+    const abilityMod=wd.ranged?modVal(finalAbility('DEX')):modVal(finalAbility('STR'));
+    const damageAbilityMod=wd.ranged?0:modVal(finalAbility('STR'));
+    const enhancement=Number(w.enhancement||0);
+    const misc=wd.ranged?getUAStatMod('ranged'):getUAStatMod('melee');
+    const attacks=iterAttackBonuses(totalBAB()).map(b=>b+abilityMod+enhancement+sizeMod+misc);
+    return {name:w.name,index:idx,type:wd.ranged?'Ranged':'Melee',damage:wd.damage||'',critical:wd.crit||'',range:wd.range||'',proficient:isWeaponProficient(wd),attackComponents:{bab:totalBAB(),ability:abilityMod,enhancement,size:sizeMod,misc},attackRoutine:attacks.map(a=>a>=0?`+${a}`:String(a)).join('/'),damageComponents:{baseDice:wd.damage||'',ability:damageAbilityMod,enhancement,precision:damageSources.filter(d=>!d.critMultiplies),conditional:damageSources.filter(d=>d.critMultiplies&&d.source!=='Weapon Enhancement')},specialAbilities:w.specialAbilities||[],material:w.material||'',ammo:w.ammo||null};
+  });
+}
 function generateCharacterSheetData(){
   const c=charState.char;
   const classCounts={};
@@ -5283,18 +5415,26 @@ function generateCharacterSheetData(){
   },0)+epicSaveBonus();
   const abilities=Object.fromEntries(DATA.abilities.map(ab=>[ab,{score:finalAbility(ab),mod:modVal(finalAbility(ab))}]));
   const allCS=new Set(c.levels.flatMap(l=>{ const cls=getClass(l.className); return cls?cls.classSkills||[]:[]; }));
+  const acpSkills=new Set(['Balance','Climb','Escape Artist','Hide','Jump','Move Silently','Sleight of Hand','Swim','Tumble']);
+  const acp=getArmorCheckPenalty();
   const skills=Object.entries(c.skillRanks||{}).filter(([,v])=>v>0).map(([name,ranks])=>{
     const sk=DATA.skills.find(s=>s.name===name)||{};
     const ability=sk.ability||'INT';
-    return {name,ranks,ability,classSkill:allCS.has(name),total:ranks+modVal(finalAbility(ability))};
+    const abilityModifier=modVal(finalAbility(ability));
+    const synergyBonus=0;
+    const miscBonus=0;
+    const armorCheckPenaltyApplied=acpSkills.has(name)?-acp:0;
+    const total=ranks+abilityModifier+synergyBonus+miscBonus+armorCheckPenaltyApplied;
+    return {name,ranks,ability,abilityModifier,synergyBonus,miscBonus,armorCheckPenaltyApplied,armorPenaltyApplies:acpSkills.has(name),trainedOnly:!!sk.trained,classSkill:allCS.has(name),total};
   }).sort((a,b)=>b.total-a.total);
+  const casterProgression=resolveCasterProgression();
   const spellcasting=Object.keys(classCounts).map(className=>{
     const progression=getCasterProgression(className);
     if(!progression) return null;
     const clsLvl=classCounts[className];
     const slots=(progression.spellSlots&&progression.spellSlots[Math.min(clsLvl,progression.spellSlots.length)-1])||[];
     const offset=progression.hasCantrips?0:1;
-    return {className,level:clsLvl,mode:progression.preparation,casterLevel:clsLvl,ability:progression.ability,dc0:getSpellDC(className,0),slots:slots.map((cnt,idx)=>{
+    return {className,level:clsLvl,mode:progression.preparation,casterLevel:casterProgression.byClass[className]||clsLvl,ability:progression.ability,dc0:getSpellDC(className,0),slots:slots.map((cnt,idx)=>{
       if(cnt==null) return null;
       const spellLevel=idx+offset;
       const access=isSpontaneousCaster(className)?getKnownSpellAccess(className,spellLevel):getPreparedSpellAccess(className,spellLevel);
@@ -5307,28 +5447,62 @@ function generateCharacterSheetData(){
   const attack={base:totalBAB(),strength:modVal(finalAbility('STR')),dexterity:modVal(finalAbility('DEX')),misc:getUAStatMod('attack'),melee:totalBAB()+modVal(finalAbility('STR'))+getUAStatMod('melee'),ranged:totalBAB()+modVal(finalAbility('DEX'))+getUAStatMod('ranged')};
   const initiative={total:modVal(finalAbility('DEX'))+getUAStatMod('initiative'),dexterity:modVal(finalAbility('DEX')),misc:getUAStatMod('initiative')};
   const acBreakdown={total:ac.total,touch:ac.touch,flatFooted:ac.flatFooted,base:10,armor:ac.armorBonus||0,shield:ac.shieldBonus||0,dexterity:ac.dexMod||0,size:ac.sizeMod||0,natural:ac.naturalArmor||0,deflection:ac.deflection||0,dodge:ac.dodge||0,misc:getUAStatMod('ac')};
+  const acBreakdownExpanded=acBreakdown;
+  const improvedInitiative=(c.feats||[]).some(f=>f&&f.chosen==='Improved Initiative')?4:0;
+  const initiativeBreakdownExpanded={total:modVal(finalAbility('DEX'))+improvedInitiative+getUAStatMod('initiative'),dexterity:modVal(finalAbility('DEX')),improvedInitiative,trait:getUAStatMod('initiative'),misc:0};
   const saves={fort:{total:totalSave('fort'),base:baseSave('fort'),ability:modVal(finalAbility('CON')),magic:getItemBonus('resistance'),misc:(race.saveBonusAll||0)+getUAStatMod('fort')},ref:{total:totalSave('ref'),base:baseSave('ref'),ability:modVal(finalAbility('DEX')),magic:getItemBonus('resistance'),misc:(race.saveBonusAll||0)+getUAStatMod('ref')},will:{total:totalSave('will'),base:baseSave('will'),ability:modVal(finalAbility('WIS')),magic:getItemBonus('resistance'),misc:(race.saveBonusAll||0)+getUAStatMod('will')}};
+  const saveBreakdownsExpanded=saves;
   const equipmentSummary=[...(c.equipment.weapons||[]).filter(w=>w&&w.name).map(w=>({slot:'Weapon',name:w.name,enhancement:w.enhancement||0,material:w.material||''})),armor?{slot:'Armor',name:armor.name,enhancement:(c.equipment.armor&&c.equipment.armor.enhancement)||0,material:(c.equipment.armor&&c.equipment.armor.material)||''}:null,shield?{slot:'Shield',name:shield.name,enhancement:(c.equipment.shield&&c.equipment.shield.enhancement)||0,material:(c.equipment.shield&&c.equipment.shield.material)||''}:null].filter(Boolean);
-  const featSummary=(c.feats||[]).filter(f=>f&&f.chosen).map(f=>{ const fd=[...DATA.feats,...(DATA.epicFeats||[])].find(d=>d.name===f.chosen)||{}; return {name:f.chosen,type:fd.type||'General',slot:f.type||'',epic:!!f.epic}; });
+  const featSummary=(c.feats||[]).filter(f=>f&&f.chosen).map(f=>{ const fd=[...DATA.feats,...(DATA.epicFeats||[])].find(d=>d.name===f.chosen)||{}; return {name:f.chosen,type:fd.type||'General',slot:f.type||'',source:f.label||'',epic:!!f.epic}; });
+  const groupedFeats={level:[],classBonus:[],racial:[],epic:[],flaw:[],other:[]};
+  featSummary.forEach(f=>{
+    const src=String(f.source||f.slot||'');
+    if(f.epic||/epic/i.test(src)) groupedFeats.epic.push(f);
+    else if(/flaw/i.test(src)) groupedFeats.flaw.push(f);
+    else if(/human|racial|race/i.test(src)) groupedFeats.racial.push(f);
+    else if(/fighter|wizard|bonus feat|class/i.test(src)) groupedFeats.classBonus.push(f);
+    else if(/level/i.test(src)) groupedFeats.level.push(f);
+    else groupedFeats.other.push(f);
+  });
   const progressionTimeline=c.levels.map((l,i)=>({level:i+1,className:l.className,hp:l.hp||0,bab:totalBAB(),fort:totalSave('fort'),ref:totalSave('ref'),will:totalSave('will')}));
   const companions=['animal companion','familiar','special mount','fiendish servant'].map(t=>({type:t,...getEffectiveCompanionLevel(t)})).filter(x=>x.level>0);
+  const groupedFeatures={};
   const features=Object.entries(classCounts).flatMap(([className,lvl])=>{
     const cls=getClass(className);
-    return getFilteredClassFeatures(cls,lvl).map(feature=>({className,feature}));
+    return getFilteredClassFeatures(cls,lvl).map(feature=>{
+      const text=String(feature);
+      const m=text.match(/\bLevel\s+(\d+)\s*$/i);
+      const classLevel=m?parseInt(m[1]):null;
+      const clean=text.replace(/\s*—\s*Level\s+\d+\s*$/i,'').trim();
+      const row={className,classLevel,feature:clean};
+      if(!groupedFeatures[className]) groupedFeatures[className]=[];
+      groupedFeatures[className].push(row);
+      return row;
+    });
   });
   const combatProfiles=generateCombatProfiles();
-  return {name:c.name,race:c.race,classes:classCounts,level:c.levels.length,portrait:c.portrait||'',portraitPrompt:c.portraitPrompt||'',hp:calcHP(),bab:babString(),attack,ac:acBreakdown,saves,initiative:initiative.total,initiativeBreakdown:initiative,speed:race.speed||30,abilities,skills,spellcasting,equipment:{armor:armor?armor.name:null,shield:shield?shield.name:null,armorProficient:isArmorProficient(armor),shieldProficient:isShieldProficient(shield),arcaneSpellFailure:asf,summary:equipmentSummary},feats:featSummary,progressionTimeline,combatProfiles,companions,features};
+  const damageSourcesExpanded=[];
+  combatProfiles.forEach(p=>(p.damageSources||[]).forEach(d=>{ if(!damageSourcesExpanded.some(x=>x.source===d.source&&x.condition===d.condition)) damageSourcesExpanded.push(d); }));
+  const weaponAttackTables=generateWeaponAttackTables(damageSourcesExpanded);
+  const attackRoutineString=weaponAttackTables.map(w=>`${w.name} ${w.attackRoutine}`).join(' · ')||babString();
+  const wealthBreakdown={coins:charState.char.wealth||{},totalGP:totalWealthGP(),suggestedGP:getStartingGold()};
+  const consumables={potions:c.equipment.potions||[],scrolls:c.equipment.scrolls||[],wands:c.equipment.wands||[],rods:c.equipment.rods||[],staves:c.equipment.staves||[]};
+  const details={hairColor:c.hairColor||'',eyeColor:c.eyeColor||'',complexion:c.complexion||'',heightFeet:c.heightFeet||'',heightInches:c.heightInches||'',weightLbs:c.weightLbs||'',age:c.age||'',homelandRegion:c.homelandRegion||'',residenceCity:c.residenceCity||'',experience:c.experience||0};
+  const languages={known:c.languagesKnown||[],bonusSlots:typeof getBonusLanguageSlots==='function'?getBonusLanguageSlots():0,racial:getRaceLanguageData().starting,bonusOptions:getRaceLanguageData().bonus};
+  return {name:c.name,race:c.race,classes:classCounts,level:c.levels.length,details,languages,portrait:c.portrait||'',portraitPrompt:c.portraitPrompt||'',hp:calcHP(),bab:babString(),attack,ac:acBreakdown,acBreakdownExpanded,saves,saveBreakdownsExpanded,initiative:initiative.total,initiativeBreakdown:initiative,initiativeBreakdownExpanded,speed:race.speed||30,abilities,skills,spellcasting,casterProgression,equipment:{armor:armor?armor.name:null,shield:shield?shield.name:null,armorProficient:isArmorProficient(armor),shieldProficient:isShieldProficient(shield),arcaneSpellFailure:asf,summary:equipmentSummary},weaponAttackTables,attackRoutineString,damageSourcesExpanded,wealthBreakdown,consumables,feats:featSummary,groupedFeats,progressionTimeline,combatProfiles,companions,features,groupedFeatures};
 }
 function renderCharacterSheetPreview(){
   const s=generateCharacterSheetData();
   const abilityRow=DATA.abilities.map(ab=>`<span class="tag">${ab} ${s.abilities[ab].score} (${s.abilities[ab].mod>=0?'+':''}${s.abilities[ab].mod})</span>`).join('');
   const skillTags=s.skills.slice(0,18).map(sk=>`<span class="tag">${sk.name} ${sk.total>=0?'+':''}${sk.total}</span>`).join('')||'<span class="text-muted">No trained skills</span>';
   const spellRows=s.spellcasting.map(sc=>`<div style="font-size:.76rem;margin:3px 0"><strong>${sc.className}</strong> ${sc.mode} · CL ${sc.casterLevel} · ${sc.ability||'—'} · DC0 ${sc.dc0?sc.dc0.dc:'—'} · ${sc.slots.map(sl=>`${sl.spellLevel}:${sl.selected.length}${sl.domain.slots?` D${sl.domain.used}/${sl.domain.slots}`:''}`).join(' ')}</div>`).join('')||'<span class="text-muted">No spellcasting</span>';
+  const casterSummary=`Arcane CL ${s.casterProgression.arcaneCL} · Divine CL ${s.casterProgression.divineCL} · Invocation CL ${s.casterProgression.invocationCL}${s.casterProgression.epicScaling?' · Epic scaling active':''}`;
   const equipWarn=[s.equipment.armor&&!s.equipment.armorProficient?`Armor not proficient: ${s.equipment.armor}`:'',s.equipment.shield&&!s.equipment.shieldProficient?`Shield not proficient: ${s.equipment.shield}`:'',s.equipment.arcaneSpellFailure.risk?`ASF ${s.equipment.arcaneSpellFailure.total}%: ${s.equipment.arcaneSpellFailure.classes.join(', ')}`:''].filter(Boolean).join(' · ');
   const eqRows=s.equipment.summary.map(e=>`<div class="summary-row"><span class="sr-label">${e.slot}</span><span class="sr-value">${e.enhancement?`+${e.enhancement} `:''}${e.name}${e.material?` · ${e.material}`:''}</span></div>`).join('')||'<span class="text-muted">No equipment selected</span>';
   const featRows=s.feats.map(f=>`<span class="tag">${f.epic?'⚡ ':''}${f.name} · ${f.type}</span>`).join('')||'<span class="text-muted">No feats selected</span>';
   const timeline=s.progressionTimeline.map(l=>`<span class="tag">L${l.level} ${l.className||'—'}</span>`).join('');
   const profileRows=s.combatProfiles.slice(0,8).map(p=>`<div class="summary-row"><span class="sr-label">${p.name}</span><span class="sr-value">${p.attackRoutine||'—'}${p.damageSources&&p.damageSources.length?` · ${p.damageSources.map(d=>`${d.source} ${d.dice||d.flat||''}`).join(', ')}`:''}</span></div>`).join('');
+  const detailLine=[s.details.hairColor&&`Hair ${s.details.hairColor}`,s.details.eyeColor&&`Eyes ${s.details.eyeColor}`,s.details.heightFeet&&`${s.details.heightFeet}'${s.details.heightInches||0}"`,s.details.weightLbs&&`${s.details.weightLbs} lbs`,s.details.age&&`Age ${s.details.age}`,s.details.homelandRegion&&`From ${s.details.homelandRegion}`,s.details.residenceCity&&`Resides ${s.details.residenceCity}`,s.details.experience&&`${s.details.experience} XP`].filter(Boolean).join(' · ');
   return `<div class="summary-block" style="margin-bottom:14px"><h4>Character Sheet Preview — Phase 2</h4>
     <div class="summary-grid" style="margin-bottom:8px">
       <div><div class="summary-row"><span class="sr-label">HP / AC / Init</span><span class="sr-value">${s.hp} / ${s.ac.total} / ${s.initiative>=0?'+':''}${s.initiative}</span></div><div class="summary-row"><span class="sr-label">BAB</span><span class="sr-value">${s.bab}</span></div><div class="summary-row"><span class="sr-label">Saves</span><span class="sr-value">F ${s.saves.fort.total>=0?'+':''}${s.saves.fort.total} R ${s.saves.ref.total>=0?'+':''}${s.saves.ref.total} W ${s.saves.will.total>=0?'+':''}${s.saves.will.total}</span></div></div>
@@ -5338,8 +5512,9 @@ function renderCharacterSheetPreview(){
       <div><h4 style="margin-top:0">Breakdowns</h4><div style="font-size:.76rem;line-height:1.6"><strong>Attack:</strong> melee ${s.attack.melee>=0?'+':''}${s.attack.melee}, ranged ${s.attack.ranged>=0?'+':''}${s.attack.ranged} (BAB ${s.attack.base}, STR ${s.attack.strength}, DEX ${s.attack.dexterity})<br><strong>Init:</strong> ${s.initiative>=0?'+':''}${s.initiative} = DEX ${s.initiativeBreakdown.dexterity} + misc ${s.initiativeBreakdown.misc}<br><strong>AC:</strong> ${s.ac.total} = 10 + armor ${s.ac.armor} + shield ${s.ac.shield} + DEX ${s.ac.dexterity} + size ${s.ac.size} + natural ${s.ac.natural} + deflection ${s.ac.deflection} + dodge ${s.ac.dodge} + misc ${s.ac.misc}</div></div>
       <div><h4 style="margin-top:0">Save Components</h4><div style="font-size:.76rem;line-height:1.6">${['fort','ref','will'].map(k=>`${k.toUpperCase()} ${s.saves[k].total>=0?'+':''}${s.saves[k].total} = base ${s.saves[k].base} + ability ${s.saves[k].ability} + magic ${s.saves[k].magic} + misc ${s.saves[k].misc}`).join('<br>')}</div></div>
     </div>
+    <div style="font-size:.76rem;margin-bottom:8px"><strong>Details:</strong> ${detailLine||'—'}<br><strong>Languages:</strong> ${s.languages.known.map(escHtml).join(', ')||'—'} (${s.languages.bonusSlots} bonus slot${s.languages.bonusSlots===1?'':'s'})</div>
     <div style="font-size:.72rem;color:#8a7050;margin-bottom:5px">Top skills</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">${skillTags}</div>
-    <div style="font-size:.72rem;color:#8a7050;margin-bottom:5px">Spellcasting</div>${spellRows}
+    <div style="font-size:.72rem;color:#8a7050;margin-bottom:5px">Spellcasting</div><div style="font-size:.76rem;margin-bottom:4px"><strong>Effective Progression:</strong> ${casterSummary}</div>${spellRows}
     <div class="summary-grid" style="margin-top:8px;margin-bottom:8px"><div><h4 style="margin-top:0">Equipment</h4>${eqRows}</div><div><h4 style="margin-top:0">Feats</h4><div style="display:flex;flex-wrap:wrap;gap:4px">${featRows}</div></div></div>
     <div class="summary-block" style="margin-top:8px"><h4>Combat Profiles</h4>${profileRows||'<span class="text-muted">No combat profiles generated</span>'}</div>
     <div style="font-size:.72rem;color:#8a7050;margin-bottom:5px">Class Progression</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">${timeline}</div>
@@ -5501,6 +5676,7 @@ function stepSummary(){
     <div class="export-grid" style="margin-bottom:14px">
       <div class="export-card" onclick="openPrintSheet()"><span class="ec-icon">🖨</span><div class="ec-title">Print Sheet</div><div class="ec-desc">El Tesoro del Dragón</div></div>
       <div class="export-card" onclick="openSpellPrint()"><span class="ec-icon">📜</span><div class="ec-title">Spell Sheet</div><div class="ec-desc">Spells &amp; slots</div></div>
+      <div class="export-card" onclick="exportCombatMatrix()"><span class="ec-icon">⚔</span><div class="ec-title">Combat Matrix</div><div class="ec-desc">CSV tactical table</div></div>
       <div class="export-card" onclick="charExportRTF('detailed')"><span class="ec-icon">📖</span><div class="ec-title">Detailed Sheet</div><div class="ec-desc">Full DM reference</div></div>
       <div class="export-card" onclick="charExportRTF('summary')"><span class="ec-icon">📋</span><div class="ec-title">Stat Block</div><div class="ec-desc">Compact format</div></div>
     </div>
@@ -5607,6 +5783,49 @@ function charExportRTF(type){
     if(statusEl) statusEl.innerHTML='<div class="notice notice-ok">✓ Downloaded</div>';
     setTimeout(()=>{ if(statusEl) statusEl.innerHTML=''; },3000);
   },80);
+}
+
+function exportCombatMatrix(){
+  const s=generateCharacterSheetData();
+  const escCsv=v=>`"${String(v==null?'':v).replace(/"/g,'""')}"`;
+  const rows=[['Scenario','Attack Routine','Weapon','Damage Dice','Flat Modifiers','Crit Multiplication','Activation Condition','Damage Sources']];
+  const sourceText=srcs=>(srcs||[]).map(d=>`${d.source}${d.dice?` ${d.dice}`:''}${d.flat?` ${d.flat}`:''}`).join('; ');
+  const critText=srcs=>(srcs||[]).map(d=>`${d.source}: ${d.critMultiplies?'multiplies':'does not multiply'}`).join('; ');
+  const flatText=srcs=>(srcs||[]).filter(d=>d.flat!==''&&d.flat!=null).map(d=>`${d.source} ${d.flat}`).join('; ');
+  const diceText=srcs=>(srcs||[]).filter(d=>d.dice).map(d=>`${d.source} ${d.dice}`).join('; ');
+  (s.combatProfiles||[]).forEach(p=>{
+    rows.push([
+      p.name||'Combat Profile',
+      p.attackRoutine||'',
+      (s.weaponAttackTables&&s.weaponAttackTables[0]&&s.weaponAttackTables[0].name)||'',
+      diceText(p.damageSources),
+      flatText(p.damageSources),
+      critText(p.damageSources),
+      (p.conditions||[]).join('; '),
+      sourceText(p.damageSources)
+    ]);
+  });
+  (s.weaponAttackTables||[]).forEach(w=>{
+    rows.push([
+      `${w.name} Weapon Table`,
+      w.attackRoutine,
+      w.name,
+      w.damageComponents.baseDice,
+      `ability ${w.damageComponents.ability}; enhancement ${w.damageComponents.enhancement}`,
+      `${w.critical||'—'}; flat weapon bonuses multiply`,
+      `${w.type}${w.range?` range ${w.range} ft.`:''}`,
+      [...(w.damageComponents.precision||[]),...(w.damageComponents.conditional||[])].map(d=>d.source).join('; ')
+    ]);
+  });
+  const csv=rows.map(r=>r.map(escCsv).join(',')).join('\r\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download=`${(s.name||'character').replace(/\s+/g,'_')}_combat_matrix.csv`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  const statusEl=document.getElementById('export-status');
+  if(statusEl){ statusEl.innerHTML='<div class="notice notice-ok">✓ Combat matrix CSV downloaded</div>'; setTimeout(()=>{ statusEl.innerHTML=''; },3000); }
 }
 
 function prevStep(){ if(charState.step>0){charState.step--;renderChar();} }
