@@ -1,0 +1,227 @@
+[
+  {
+    "name": "Human",
+    "source": "Player's Handbook v.3.5",
+    "size": "Medium",
+    "speed": 30,
+    "ability": {},
+    "traits": [
+      "Bonus feat at 1st level",
+      "4 extra skill points at 1st, +1/level after",
+      "Favored class: Any"
+    ]
+  },
+  {
+    "name": "Dwarf",
+    "source": "Player's Handbook v.3.5",
+    "size": "Medium",
+    "speed": 20,
+    "ability": {
+      "con": 2,
+      "cha": -2
+    },
+    "traits": [
+      "Darkvision 60ft",
+      "Stonecunning",
+      "Stability (+4 bull rush/trip)",
+      "+2 vs. poison/spells",
+      "Speed never reduced by armor",
+      "Favored class: Fighter"
+    ]
+  },
+  {
+    "name": "Elf",
+    "source": "Player's Handbook v.3.5",
+    "size": "Medium",
+    "speed": 30,
+    "ability": {
+      "dex": 2,
+      "con": -2
+    },
+    "traits": [
+      "Immunity to sleep",
+      "Low-light vision",
+      "+2 vs. enchantment",
+      "+2 Listen/Search/Spot",
+      "Weapon prof: longsword/rapier/bow",
+      "Favored class: Wizard"
+    ]
+  },
+  {
+    "name": "Gnome",
+    "source": "Player's Handbook v.3.5",
+    "size": "Small",
+    "speed": 20,
+    "ability": {
+      "con": 2,
+      "str": -2
+    },
+    "traits": [
+      "Low-light vision",
+      "+2 vs. illusion",
+      "+1 DC illusion spells",
+      "+4 dodge vs. giants",
+      "+2 Listen",
+      "Speak with Animals 1/day",
+      "Favored class: Bard"
+    ]
+  },
+  {
+    "name": "Half-Elf",
+    "source": "Player's Handbook v.3.5",
+    "size": "Medium",
+    "speed": 30,
+    "ability": {},
+    "traits": [
+      "Low-light vision",
+      "Immunity to sleep",
+      "+2 vs. enchantment",
+      "+1 Listen/Search/Spot",
+      "+2 Diplomacy & Gather Information",
+      "Favored class: Any"
+    ]
+  },
+  {
+    "name": "Half-Orc",
+    "source": "Player's Handbook v.3.5",
+    "size": "Medium",
+    "speed": 30,
+    "ability": {
+      "str": 2,
+      "int": -2,
+      "cha": -2
+    },
+    "traits": [
+      "Darkvision 60ft",
+      "Orc Blood",
+      "Favored class: Barbarian"
+    ]
+  },
+  {
+    "name": "Halfling",
+    "source": "Player's Handbook v.3.5",
+    "size": "Small",
+    "speed": 20,
+    "ability": {
+      "dex": 2,
+      "str": -2
+    },
+    "traits": [
+      "Small size bonuses",
+      "+2 Listen",
+      "+1 all saves",
+      "+2 vs. fear",
+      "+1 thrown weapons",
+      "Favored class: Rogue"
+    ]
+  },
+  {
+    "name": "Aasimar",
+    "source": "Dungeon Master's Guide v.3.5",
+    "size": "Medium",
+    "speed": 30,
+    "ability": {
+      "wis": 2,
+      "cha": 2
+    },
+    "traits": [
+      "Darkvision 60ft",
+      "Daylight 1/day",
+      "Resistance: acid/cold/electricity 5",
+      "+2 Spot & Listen",
+      "LA +1"
+    ]
+  },
+  {
+    "name": "Tiefling",
+    "source": "Dungeon Master's Guide v.3.5",
+    "size": "Medium",
+    "speed": 30,
+    "ability": {
+      "dex": 2,
+      "int": 2,
+      "cha": -2
+    },
+    "traits": [
+      "Darkvision 60ft",
+      "Darkness 1/day",
+      "Resistance: cold/fire/electricity 5",
+      "+2 Bluff & Hide",
+      "LA +1"
+    ]
+  },
+  {
+    "name": "Drow",
+    "source": "Monster Manual v.3.5",
+    "size": "Medium",
+    "speed": 30,
+    "ability": {
+      "dex": 2,
+      "int": 2,
+      "cha": 2,
+      "con": -2
+    },
+    "traits": [
+      "Darkvision 120ft",
+      "SR 11+level",
+      "Light blindness",
+      "+2 Will vs. spells",
+      "LA +2"
+    ]
+  },
+  {
+    "name": "Warforged",
+    "source": "ECS",
+    "size": "Medium",
+    "speed": 30,
+    "ability": {
+      "con": 2,
+      "wis": -2,
+      "cha": -2
+    },
+    "traits": [
+      "Living Construct",
+      "Immunity to poison/sleep/paralysis/disease",
+      "Cannot heal naturally",
+      "Composite Plating +2 AC",
+      "LA +0"
+    ]
+  },
+  {
+    "name": "Githzerai",
+    "source": "Monster Manual v.3.5",
+    "size": "Medium",
+    "speed": 30,
+    "ability": {
+      "dex": 6,
+      "wis": 2,
+      "str": -2,
+      "con": -2
+    },
+    "traits": [
+      "Inertial Armor (natural +2 AC)",
+      "Dodge Missiles",
+      "Naturally Psionic (2 PP)",
+      "Spell-like abilities",
+      "LA +2"
+    ]
+  },
+  {
+    "name": "Gnoll",
+    "source": "Monster Manual v.3.5",
+    "size": "Medium",
+    "speed": 30,
+    "ability": {
+      "str": 4,
+      "con": 2,
+      "int": -2,
+      "cha": -2
+    },
+    "traits": [
+      "Darkvision 60ft",
+      "Bite attack (1d4)",
+      "Low-light vision",
+      "LA +1"
+    ]
+  }
+]

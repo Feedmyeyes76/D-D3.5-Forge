@@ -11,6 +11,8 @@ VS Code Workspace/
 Asset Uploads/
 Archive/
 Data/
+!App/data/
+!App/data/*.json
 Design/
 Exports/
 Pipeline/

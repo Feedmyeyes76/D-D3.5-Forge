@@ -1,0 +1,1258 @@
+[
+  {
+    "name": "Barbarian",
+    "source": "Player's Handbook v.3.5",
+    "hitDie": 12,
+    "babProg": "full",
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "skillPoints": 4,
+    "classSkills": [
+      "Climb",
+      "Craft",
+      "Handle Animal",
+      "Intimidate",
+      "Jump",
+      "Listen",
+      "Ride",
+      "Survival",
+      "Swim"
+    ],
+    "spellcasting": null,
+    "description": "A fierce front-line warrior who channels rage into raw martial power, thriving in direct melee and physical challenges.",
+    "classFeatures": [
+      "Fast movement, illiteracy, rage 1/day — Level 1",
+      "Uncanny dodge — Level 2",
+      "Trap sense +1 — Level 3",
+      "Rage 2/day — Level 4",
+      "Improved uncanny dodge — Level 5",
+      "Trap sense +2 — Level 6",
+      "Damage reduction 1/— — Level 7",
+      "Rage 3/day — Level 8",
+      "Trap sense +3 — Level 9",
+      "Damage reduction 2/— — Level 10",
+      "Greater rage — Level 11",
+      "Rage 4/day; trap sense +4 — Level 12",
+      "Damage reduction 3/— — Level 13",
+      "Indomitable will — Level 14",
+      "Trap sense +5 — Level 15",
+      "Damage reduction 4/—, rage 5/day — Level 16",
+      "Tireless rage — Level 17",
+      "Trap sense +6 — Level 18",
+      "Damage reduction 5/— — Level 19",
+      "Mighty rage, rage 6/day — Level 20"
+    ],
+    "epicBonusFeatEvery": 4,
+    "epicFeatures": [
+      "Rage +1/day every 4 levels (24th,28th…)",
+      "Trap Sense +1 every 3 above 18th",
+      "DR +1 every 3 above 19th"
+    ],
+    "progressionTable": {},
+    "desc": "A fierce front-line warrior who channels rage into raw martial power, thriving in direct melee and physical challenges."
+  },
+  {
+    "name": "Bard",
+    "source": "Player's Handbook v.3.5",
+    "hitDie": 6,
+    "babProg": "3quarter",
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "good"
+    },
+    "skillPoints": 6,
+    "classSkills": [
+      "Appraise",
+      "Balance",
+      "Bluff",
+      "Climb",
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Diplomacy",
+      "Disguise",
+      "Escape Artist",
+      "Gather Information",
+      "Hide",
+      "Jump",
+      "Knowledge (all)",
+      "Listen",
+      "Move Silently",
+      "Perform",
+      "Profession",
+      "Sense Motive",
+      "Sleight of Hand",
+      "Speak Language",
+      "Spellcraft",
+      "Swim",
+      "Tumble",
+      "Use Magic Device"
+    ],
+    "spellcasting": {
+      "type": "arcane",
+      "ability": "cha",
+      "prep": "spontaneous"
+    },
+    "description": "A versatile arcane performer who supports allies with bardic music, broad skills, and flexible spellcasting.",
+    "classFeatures": [
+      "Bardic music, bardic knowledge, countersong, fascinate, inspire courage +1 — Level 1",
+      "Inspire competence — Level 3",
+      "Suggestion — Level 6",
+      "Inspire courage +2 — Level 8",
+      "Inspire greatness — Level 9",
+      "Song of freedom — Level 12",
+      "Inspire courage +3 — Level 14",
+      "Inspire heroics — Level 15",
+      "Mass suggestion — Level 18",
+      "Inspire courage +4 — Level 20"
+    ],
+    "epicBonusFeatEvery": 3,
+    "epicFeatures": [
+      "Inspire Courage +1 every 6 above 20th (26th…)",
+      "Spells/day frozen at 20th level",
+      "No new bardic music without epic feats"
+    ],
+    "progressionTable": {},
+    "desc": "A versatile arcane performer who supports allies with bardic music, broad skills, and flexible spellcasting."
+  },
+  {
+    "name": "Cleric",
+    "source": "Player's Handbook v.3.5",
+    "hitDie": 8,
+    "babProg": "3quarter",
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "skillPoints": 2,
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Heal",
+      "Knowledge (arcana)",
+      "Knowledge (history)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "spellcasting": {
+      "type": "divine",
+      "ability": "wis",
+      "prep": "prepared"
+    },
+    "description": "A divine caster and spiritual champion who combines powerful support magic, turning undead, and durable combat presence.",
+    "classFeatures": [
+      "Turn or rebuke undead — Level 1"
+    ],
+    "epicBonusFeatEvery": 3,
+    "epicFeatures": [
+      "Spells/day frozen at 20th level",
+      "CL continues = class level",
+      "Turn undead scales normally"
+    ],
+    "progressionTable": {},
+    "desc": "A divine caster and spiritual champion who combines powerful support magic, turning undead, and durable combat presence."
+  },
+  {
+    "name": "Druid",
+    "source": "Player's Handbook v.3.5",
+    "hitDie": 8,
+    "babProg": "3quarter",
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "skillPoints": 4,
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Handle Animal",
+      "Heal",
+      "Knowledge (nature)",
+      "Listen",
+      "Profession",
+      "Ride",
+      "Spellcraft",
+      "Spot",
+      "Survival",
+      "Swim"
+    ],
+    "spellcasting": {
+      "type": "divine",
+      "ability": "wis",
+      "prep": "prepared"
+    },
+    "description": "A primal divine caster tied to nature, wielding battlefield control, animal companion support, and wild shape versatility.",
+    "classFeatures": [
+      "Animal companion, nature sense, wild empathy — Level 1",
+      "Woodland stride — Level 2",
+      "Trackless step — Level 3",
+      "Resist nature's lure — Level 4",
+      "Wild shape (1/day) — Level 5",
+      "Wild shape (2/day) — Level 6",
+      "Wild shape (Large) — Level 8",
+      "Venom immunity — Level 9",
+      "Wild shape (4/day) — Level 10",
+      "Wild shape (Tiny) — Level 11",
+      "Abundant step, wild shape (5/day) — Level 12",
+      "Wild shape (giant) — Level 13",
+      "Thousand faces — Level 14",
+      "Wild shape (5/day); wild shape (Huge) — Level 15",
+      "Timeless body — Level 16",
+      "Wild shape (6/day, elemental 1/day) — Level 18",
+      "Wild shape (6/day, elemental 2/day) — Level 19",
+      "Wild shape (elemental 3/day, Huge elemental) — Level 20"
+    ],
+    "epicBonusFeatEvery": 4,
+    "epicFeatures": [
+      "Wild Shape +1/day every 4 above 18th (22nd,26th,30th…)",
+      "Animal companion +2HD/+1STR/+1DEX/+1 trick every 3 above 20th",
+      "Spells/day frozen at 20th level"
+    ],
+    "progressionTable": {},
+    "desc": "A primal divine caster tied to nature, wielding battlefield control, animal companion support, and wild shape versatility."
+  },
+  {
+    "name": "Fighter",
+    "source": "Player's Handbook v.3.5",
+    "hitDie": 10,
+    "babProg": "full",
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "skillPoints": 2,
+    "classSkills": [
+      "Climb",
+      "Craft",
+      "Handle Animal",
+      "Intimidate",
+      "Jump",
+      "Knowledge (dungeoneering)",
+      "Knowledge (architecture and engineering)",
+      "Ride",
+      "Swim"
+    ],
+    "spellcasting": null,
+    "description": "A dedicated martial specialist with strong combat fundamentals and a large bonus-feat progression for weapon mastery.",
+    "classFeatures": [
+      "Bonus feat — Level 1",
+      "Bonus feat — Level 2",
+      "Bonus feat — Level 4",
+      "Bonus feat — Level 6",
+      "Bonus feat — Level 8",
+      "Bonus feat — Level 10",
+      "Bonus feat — Level 12",
+      "Bonus feat — Level 14",
+      "Bonus feat — Level 16",
+      "Bonus feat — Level 18",
+      "Bonus feat — Level 20"
+    ],
+    "epicBonusFeatEvery": 2,
+    "epicFeatures": [
+      "Epic bonus feat every 2 levels above 20th (22nd,24th,26th…)",
+      "Must be fighter bonus feats or epic feats"
+    ],
+    "progressionTable": {},
+    "desc": "A dedicated martial specialist with strong combat fundamentals and a large bonus-feat progression for weapon mastery."
+  },
+  {
+    "name": "Monk",
+    "source": "Player's Handbook v.3.5",
+    "hitDie": 8,
+    "babProg": "3quarter",
+    "saves": {
+      "fort": "good",
+      "ref": "good",
+      "will": "good"
+    },
+    "skillPoints": 4,
+    "classSkills": [
+      "Balance",
+      "Climb",
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Escape Artist",
+      "Hide",
+      "Jump",
+      "Knowledge (arcana)",
+      "Knowledge (religion)",
+      "Listen",
+      "Move Silently",
+      "Perform",
+      "Profession",
+      "Sense Motive",
+      "Spot",
+      "Swim",
+      "Tumble"
+    ],
+    "spellcasting": null,
+    "description": "A disciplined unarmed combatant with high mobility, strong saving throws, and supernatural ki-based defenses.",
+    "classFeatures": [
+      "Bonus feat, flurry of blows, unarmed strike — Level 1",
+      "Bonus feat, evasion — Level 2",
+      "Still mind — Level 3",
+      "Ki strike (magic), slow fall 20 ft. — Level 4",
+      "Purity of body — Level 5",
+      "Bonus feat, slow fall 30 ft. — Level 6",
+      "Wholeness of body — Level 7",
+      "Slow fall 40 ft. — Level 8",
+      "Improved evasion — Level 9",
+      "Ki strike (lawful), slow fall 50 ft. — Level 10",
+      "Diamond body, greater flurry — Level 11",
+      "Abundant step, slow fall 60 ft. — Level 12",
+      "Diamond soul — Level 13",
+      "Slow fall 70 ft. — Level 14",
+      "Quivering palm — Level 15",
+      "Ki strike (adamantine), slow fall 80 ft. — Level 16",
+      "Timeless body, tongue of the sun and moon — Level 17",
+      "Slow fall 90 ft. — Level 18",
+      "Empty body — Level 19",
+      "Perfect self, slow fall any distance — Level 20"
+    ],
+    "epicBonusFeatEvery": 5,
+    "epicFeatures": [
+      "AC bonus +1 every 5 above 20th (25th,30th…)",
+      "Speed +10 at 21st then every 3 (24th,27th…)",
+      "Unarmed damage does NOT increase automatically"
+    ],
+    "progressionTable": {},
+    "desc": "A disciplined unarmed combatant with high mobility, strong saving throws, and supernatural ki-based defenses."
+  },
+  {
+    "name": "Paladin",
+    "source": "Player's Handbook v.3.5",
+    "hitDie": 10,
+    "babProg": "full",
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "skillPoints": 2,
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Handle Animal",
+      "Heal",
+      "Knowledge (nobility and royalty)",
+      "Knowledge (religion)",
+      "Profession",
+      "Ride",
+      "Sense Motive"
+    ],
+    "spellcasting": {
+      "type": "divine",
+      "ability": "wis",
+      "prep": "prepared",
+      "startsAt": 4
+    },
+    "description": "A holy warrior blending martial combat, divine support, and anti-evil class features such as smite and a special mount.",
+    "classFeatures": [
+      "Aura of good, detect evil, smite evil 1/day — Level 1",
+      "Divine grace, lay on hands — Level 2",
+      "Aura of courage, divine health — Level 3",
+      "Turn undead — Level 4",
+      "Smite evil 2/day, special mount — Level 5",
+      "Remove disease 1/week — Level 6",
+      "Remove disease 2/week — Level 9",
+      "Smite evil 3/day, remove disease 3/week — Level 10",
+      "Remove disease 4/week, smite evil 4/day — Level 15",
+      "Remove disease 5/week — Level 18",
+      "Smite evil 5/day — Level 20"
+    ],
+    "epicBonusFeatEvery": 3,
+    "epicFeatures": [
+      "Smite Evil +1/day every 5 above 20th (25th,30th…)",
+      "Remove Disease +1/week every 3 above 18th",
+      "Special Mount improves every 5 levels",
+      "Spells/day frozen at 20th level"
+    ],
+    "progressionTable": {},
+    "desc": "A holy warrior blending martial combat, divine support, and anti-evil class features such as smite and a special mount."
+  },
+  {
+    "name": "Ranger",
+    "source": "Player's Handbook v.3.5",
+    "hitDie": 8,
+    "babProg": "full",
+    "saves": {
+      "fort": "good",
+      "ref": "good",
+      "will": "poor"
+    },
+    "skillPoints": 6,
+    "classSkills": [
+      "Climb",
+      "Concentration",
+      "Craft",
+      "Handle Animal",
+      "Heal",
+      "Hide",
+      "Jump",
+      "Knowledge (dungeoneering)",
+      "Knowledge (geography)",
+      "Knowledge (nature)",
+      "Listen",
+      "Move Silently",
+      "Profession",
+      "Ride",
+      "Search",
+      "Spot",
+      "Survival",
+      "Swim",
+      "Use Rope"
+    ],
+    "spellcasting": {
+      "type": "divine",
+      "ability": "wis",
+      "prep": "prepared",
+      "startsAt": 4
+    },
+    "description": "A skilled wilderness combatant with favored enemy bonuses, tracking expertise, and limited divine spellcasting.",
+    "classFeatures": [
+      "1st favored enemy, Track, wild empathy — Level 1",
+      "Combat style — Level 2",
+      "Endurance — Level 3",
+      "Animal companion — Level 4",
+      "2nd favored enemy — Level 5",
+      "Improved combat style — Level 6",
+      "Woodland stride — Level 7",
+      "Swift tracker — Level 8",
+      "Evasion — Level 9",
+      "3rd favored enemy — Level 10",
+      "Combat style mastery — Level 11",
+      "Camouflage — Level 13",
+      "4th favored enemy — Level 15",
+      "Hide in plain sight — Level 17",
+      "5th favored enemy — Level 20"
+    ],
+    "epicBonusFeatEvery": 3,
+    "epicFeatures": [
+      "Favored Enemy +1 group every 5 (25th,30th…)",
+      "Spells/day frozen at 20th level"
+    ],
+    "progressionTable": {},
+    "desc": "A skilled wilderness combatant with favored enemy bonuses, tracking expertise, and limited divine spellcasting."
+  },
+  {
+    "name": "Rogue",
+    "source": "Player's Handbook v.3.5",
+    "hitDie": 6,
+    "babProg": "3quarter",
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "skillPoints": 8,
+    "classSkills": [
+      "Appraise",
+      "Balance",
+      "Bluff",
+      "Climb",
+      "Craft",
+      "Decipher Script",
+      "Diplomacy",
+      "Disable Device",
+      "Disguise",
+      "Escape Artist",
+      "Forgery",
+      "Gather Information",
+      "Hide",
+      "Intimidate",
+      "Jump",
+      "Knowledge (local)",
+      "Listen",
+      "Move Silently",
+      "Open Lock",
+      "Perform",
+      "Profession",
+      "Search",
+      "Sense Motive",
+      "Sleight of Hand",
+      "Spot",
+      "Swim",
+      "Tumble",
+      "Use Magic Device",
+      "Use Rope"
+    ],
+    "spellcasting": null,
+    "description": "A precision-based skill expert focused on stealth, traps, mobility, and sneak attack damage.",
+    "classFeatures": [
+      "Sneak attack +1d6, trapfinding — Level 1",
+      "Evasion — Level 2",
+      "Sneak attack +2d6, trap sense +1 — Level 3",
+      "Uncanny dodge — Level 4",
+      "Sneak attack +3d6 — Level 5",
+      "Trap sense +2 — Level 6",
+      "Sneak attack +4d6 — Level 7",
+      "Improved uncanny dodge — Level 8",
+      "Sneak attack +5d6, trap sense +3 — Level 9",
+      "Special ability — Level 10",
+      "Sneak attack +6d6 — Level 11",
+      "Trap sense +4 — Level 12",
+      "Sneak attack +7d6, special ability — Level 13",
+      "Sneak attack +8d6, trap sense +5 — Level 15",
+      "Special ability — Level 16",
+      "Sneak attack +9d6 — Level 17",
+      "Trap sense +6 — Level 18",
+      "Sneak attack +10d6, special ability — Level 19"
+    ],
+    "epicBonusFeatEvery": 4,
+    "epicFeatures": [
+      "Sneak Attack +1d6 every odd level (21st,23rd,25th…)",
+      "Trap Sense +1 every 3 above 18th"
+    ],
+    "progressionTable": {},
+    "desc": "A precision-based skill expert focused on stealth, traps, mobility, and sneak attack damage."
+  },
+  {
+    "name": "Scout",
+    "source": "Complete Adventurer",
+    "hitDie": 8,
+    "babProg": "3quarter",
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "skillPoints": 8,
+    "startingGold": "5d4 x 10 gp",
+    "alignment": "Any; scouts in military service are usually lawful",
+    "abilitiesNote": "Dexterity helps scouts become stealthy and offsets their light armor. Wisdom supports key perception and wilderness skills such as Spot, Listen, and Survival.",
+    "description": "A scout gathers information for any force on the move. In dungeons and wilderness alike, scouts move quickly through difficult terrain, detect enemies before being detected, and give their allies time to prepare for danger.",
+    "adventures": "Scouts adventure as military outriders, border foresters, wilderness guides, or independent explorers drawn to the challenge and variety of adventuring life.",
+    "characteristics": "A scout combines stealth, observation, mobility, and a skirmishing combat style. She is strongest before battle starts, when she can locate enemies, read terrain, and report what lies ahead, but she can also support a fight with mobile melee or ranged attacks.",
+    "religion": "Scouts follow many faiths. Some honor nature deities, but unlike rangers they do not normally draw power from nature itself; they treat terrain as the ground on which they do their work.",
+    "background": "Many scouts learn their trade in military service, while others grow up in rural or wild regions and develop their skills through exploration, hunting, guiding, or service to local lords.",
+    "races": "Humans, elves, and halflings make especially capable scouts. Dwarves and gnomes can become strong underground scouts, with scout speed helping offset their slower movement.",
+    "otherClasses": "Scouts work well with almost any party. They complement louder or slower groups by ranging ahead or guarding the rear, and they also fit naturally into stealth-heavy parties with rogues, rangers, ninjas, and other scouts.",
+    "role": "A scout detects threats, searches dangerous areas, handles traps, supports combat as a mobile striker or ranged combatant, and helps prevent the party from being surprised.",
+    "weaponProficiencies": [
+      "All simple weapons",
+      "Handaxe",
+      "Throwing axe",
+      "Short sword",
+      "Shortbow"
+    ],
+    "armorProficiencies": [
+      "Light armor"
+    ],
+    "shieldProficiencies": [],
+    "classSkills": [
+      "Balance",
+      "Climb",
+      "Craft",
+      "Disable Device",
+      "Escape Artist",
+      "Hide",
+      "Jump",
+      "Knowledge (dungeoneering)",
+      "Knowledge (geography)",
+      "Knowledge (nature)",
+      "Listen",
+      "Move Silently",
+      "Ride",
+      "Search",
+      "Sense Motive",
+      "Speak Language",
+      "Spot",
+      "Survival",
+      "Swim",
+      "Tumble",
+      "Use Rope"
+    ],
+    "classSkillsDetailed": [
+      {
+        "name": "Balance",
+        "ability": "DEX"
+      },
+      {
+        "name": "Climb",
+        "ability": "STR"
+      },
+      {
+        "name": "Craft",
+        "ability": "INT"
+      },
+      {
+        "name": "Disable Device",
+        "ability": "INT"
+      },
+      {
+        "name": "Escape Artist",
+        "ability": "DEX"
+      },
+      {
+        "name": "Hide",
+        "ability": "DEX"
+      },
+      {
+        "name": "Jump",
+        "ability": "STR"
+      },
+      {
+        "name": "Knowledge (dungeoneering)",
+        "ability": "INT"
+      },
+      {
+        "name": "Knowledge (geography)",
+        "ability": "INT"
+      },
+      {
+        "name": "Knowledge (nature)",
+        "ability": "INT"
+      },
+      {
+        "name": "Listen",
+        "ability": "WIS"
+      },
+      {
+        "name": "Move Silently",
+        "ability": "DEX"
+      },
+      {
+        "name": "Ride",
+        "ability": "DEX"
+      },
+      {
+        "name": "Search",
+        "ability": "INT"
+      },
+      {
+        "name": "Sense Motive",
+        "ability": "WIS"
+      },
+      {
+        "name": "Speak Language",
+        "ability": "n/a"
+      },
+      {
+        "name": "Spot",
+        "ability": "WIS"
+      },
+      {
+        "name": "Survival",
+        "ability": "WIS"
+      },
+      {
+        "name": "Swim",
+        "ability": "STR"
+      },
+      {
+        "name": "Tumble",
+        "ability": "DEX"
+      },
+      {
+        "name": "Use Rope",
+        "ability": "DEX"
+      }
+    ],
+    "skillPointsFirst": "(8 + Int modifier) x 4",
+    "skillPointsEach": "8 + Int modifier",
+    "spellcasting": null,
+    "bonusFeatLevels": [
+      4,
+      8,
+      12,
+      16,
+      20
+    ],
+    "bonusFeatList": [
+      "Acrobatic",
+      "Agile",
+      "Alertness",
+      "Athletic",
+      "Blind-Fight",
+      "Brachiation",
+      "Combat Expertise",
+      "Danger Sense",
+      "Dodge",
+      "Endurance",
+      "Far Shot",
+      "Great Fortitude",
+      "Hear the Unseen",
+      "Improved Initiative",
+      "Improved Swimming",
+      "Iron Will",
+      "Lightning Reflexes",
+      "Mobility",
+      "Point Blank Shot",
+      "Precise Shot",
+      "Quick Draw",
+      "Quick Reconnoiter",
+      "Rapid Reload",
+      "Shot on the Run",
+      "Skill Focus",
+      "Spring Attack",
+      "Track"
+    ],
+    "classFeatures": [
+      "Skirmish (+1d6); trapfinding — Level 1",
+      "Battle fortitude +1; uncanny dodge — Level 2",
+      "Fast movement +10 ft.; skirmish (+1d6, +1 AC); trackless step — Level 3",
+      "Bonus feat — Level 4",
+      "Evasion; skirmish (+2d6, +1 AC) — Level 5",
+      "Flawless stride — Level 6",
+      "Skirmish (+2d6, +2 AC) — Level 7",
+      "Camouflage; bonus feat — Level 8",
+      "Skirmish (+3d6, +2 AC) — Level 9",
+      "Battle fortitude +2; fast movement +20 ft.; skirmish (+3d6, +3 AC) — Level 10",
+      "Bonus feat — Level 11",
+      "Hide in plain sight — Level 12",
+      "Skirmish (+4d6, +3 AC) — Level 13",
+      "Blindsight 30 ft. — Level 14",
+      "Skirmish (+4d6, +4 AC) — Level 15",
+      "Bonus feat — Level 16",
+      "Skirmish (+5d6, +4 AC) — Level 17",
+      "Free movement — Level 18",
+      "Skirmish (+5d6, +5 AC) — Level 19",
+      "Battle fortitude +3; blindsight 30 ft.; bonus feat — Level 20"
+    ],
+    "featureDescriptions": {
+      "Skirmish": "Extra damage applies on attacks made during a round in which the scout moves at least 10 feet. The damage increases at 5th, 9th, 13th, and 17th level. The AC bonus begins at 3rd level and improves at 7th, 11th, 15th, and 19th level. Ranged skirmish attacks apply only within 30 feet. The ability does not function in medium or heavy armor or with a medium or heavy load.",
+      "Trapfinding": "A scout can use Search to locate traps with DCs higher than 20 and can use Disable Device to bypass or disarm magic traps.",
+      "Battle Fortitude": "At 2nd level the scout gains a competence bonus on Fortitude saves and initiative checks. This increases to +2 at 11th level and +3 at 20th level. It is lost in medium or heavy armor or with a medium or heavy load.",
+      "Uncanny Dodge": "At 2nd level the scout cannot be caught flat-footed and reacts to danger before her senses would normally allow it.",
+      "Fast Movement": "At 3rd level the scout gains a +10 foot enhancement bonus to base land speed. At 11th level this improves to +20 feet. It is lost in medium or heavy armor or with a medium or heavy load.",
+      "Trackless Step": "At 3rd level the scout cannot be tracked in natural surroundings.",
+      "Bonus Feats": "At 4th level and every four levels thereafter, the scout gains a bonus feat from the scout bonus feat list and must meet its prerequisites.",
+      "Evasion": "At 5th level the scout can avoid damage from certain attacks with a successful Reflex save.",
+      "Flawless Stride": "At 6th level the scout moves through terrain that would normally slow movement at normal speed and without impairment, except for terrain requiring Climb or Swim checks or magically manipulated terrain. It is lost in medium or heavy armor or with a medium or heavy load.",
+      "Camouflage": "At 8th level the scout can use Hide in natural terrain. It is lost in medium or heavy armor or with a medium or heavy load.",
+      "Blindsense": "At 10th level the scout gains blindsense out to 30 feet.",
+      "Hide in Plain Sight": "At 14th level the scout can use Hide in natural terrain even while observed. It is lost in medium or heavy armor or with a medium or heavy load.",
+      "Free Movement": "At 18th level the scout continuously gains the benefit of freedom of movement. It is lost in medium or heavy armor or with a medium or heavy load.",
+      "Blindsight": "At 20th level the scout gains blindsight out to 30 feet, allowing her to maneuver and fight even in darkness or concealment when she has line of effect."
+    },
+    "classFeatureProgression": [
+      {
+        "level": 1,
+        "bab": "+0",
+        "fort": "+0",
+        "ref": "+2",
+        "will": "+0",
+        "special": "Skirmish +1d6; Trapfinding"
+      },
+      {
+        "level": 2,
+        "bab": "+1",
+        "fort": "+0",
+        "ref": "+3",
+        "will": "+0",
+        "special": "Battle Fortitude +1; Uncanny Dodge"
+      },
+      {
+        "level": 3,
+        "bab": "+2",
+        "fort": "+1",
+        "ref": "+3",
+        "will": "+1",
+        "special": "Fast Movement +10 ft.; Skirmish +1d6/+1 AC; Trackless Step"
+      },
+      {
+        "level": 4,
+        "bab": "+3",
+        "fort": "+1",
+        "ref": "+4",
+        "will": "+1",
+        "special": "Bonus Feat"
+      },
+      {
+        "level": 5,
+        "bab": "+3",
+        "fort": "+1",
+        "ref": "+4",
+        "will": "+1",
+        "special": "Evasion; Skirmish +2d6/+1 AC"
+      },
+      {
+        "level": 6,
+        "bab": "+4",
+        "fort": "+2",
+        "ref": "+5",
+        "will": "+2",
+        "special": "Flawless Stride"
+      },
+      {
+        "level": 7,
+        "bab": "+5",
+        "fort": "+2",
+        "ref": "+5",
+        "will": "+2",
+        "special": "Skirmish +2d6/+2 AC"
+      },
+      {
+        "level": 8,
+        "bab": "+6/+1",
+        "fort": "+2",
+        "ref": "+6",
+        "will": "+2",
+        "special": "Camouflage; Bonus Feat"
+      },
+      {
+        "level": 9,
+        "bab": "+6/+1",
+        "fort": "+3",
+        "ref": "+6",
+        "will": "+3",
+        "special": "Skirmish +3d6/+2 AC"
+      },
+      {
+        "level": 10,
+        "bab": "+7/+2",
+        "fort": "+3",
+        "ref": "+7",
+        "will": "+3",
+        "special": "Blindsense 30 ft."
+      },
+      {
+        "level": 11,
+        "bab": "+8/+3",
+        "fort": "+3",
+        "ref": "+7",
+        "will": "+3",
+        "special": "Battle Fortitude +2; Fast Movement +20 ft.; Skirmish +3d6/+3 AC"
+      },
+      {
+        "level": 12,
+        "bab": "+9/+4",
+        "fort": "+4",
+        "ref": "+8",
+        "will": "+4",
+        "special": "Bonus Feat"
+      },
+      {
+        "level": 13,
+        "bab": "+9/+4",
+        "fort": "+4",
+        "ref": "+8",
+        "will": "+4",
+        "special": "Skirmish +4d6/+3 AC"
+      },
+      {
+        "level": 14,
+        "bab": "+10/+5",
+        "fort": "+4",
+        "ref": "+9",
+        "will": "+4",
+        "special": "Hide in Plain Sight"
+      },
+      {
+        "level": 15,
+        "bab": "+11/+6/+1",
+        "fort": "+5",
+        "ref": "+9",
+        "will": "+5",
+        "special": "Skirmish +4d6/+4 AC"
+      },
+      {
+        "level": 16,
+        "bab": "+12/+7/+2",
+        "fort": "+5",
+        "ref": "+10",
+        "will": "+5",
+        "special": "Bonus Feat"
+      },
+      {
+        "level": 17,
+        "bab": "+12/+7/+2",
+        "fort": "+5",
+        "ref": "+10",
+        "will": "+5",
+        "special": "Skirmish +5d6/+4 AC"
+      },
+      {
+        "level": 18,
+        "bab": "+13/+8/+3",
+        "fort": "+6",
+        "ref": "+11",
+        "will": "+6",
+        "special": "Free Movement"
+      },
+      {
+        "level": 19,
+        "bab": "+14/+9/+4",
+        "fort": "+6",
+        "ref": "+11",
+        "will": "+6",
+        "special": "Skirmish +5d6/+5 AC"
+      },
+      {
+        "level": 20,
+        "bab": "+15/+10/+5",
+        "fort": "+6",
+        "ref": "+12",
+        "will": "+6",
+        "special": "Battle Fortitude +3; Blindsight 30 ft.; Bonus Feat"
+      }
+    ],
+    "epicBonusFeatEvery": 4,
+    "epicFeatures": [
+      "Skirmish progression continues by DM approval",
+      "Scout bonus feat cadence follows the 4-level pattern",
+      "Use Complete Adventurer epic guidance when available"
+    ],
+    "progressionTable": {},
+    "desc": "A scout gathers information for any force on the move. In dungeons and wilderness alike, scouts move quickly through difficult terrain, detect enemies before being detected, and give their allies time to prepare for danger."
+  },
+  {
+    "name": "Sorcerer",
+    "source": "Player's Handbook v.3.5",
+    "hitDie": 4,
+    "babProg": "half",
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "skillPoints": 2,
+    "classSkills": [
+      "Bluff",
+      "Concentration",
+      "Craft",
+      "Knowledge (arcana)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "spellcasting": {
+      "type": "arcane",
+      "ability": "cha",
+      "prep": "spontaneous"
+    },
+    "description": "An innate arcane caster who relies on spontaneous spellcasting and strong spell use frequency.",
+    "classFeatures": [
+      "Summon familiar — Level 1"
+    ],
+    "epicBonusFeatEvery": 3,
+    "epicFeatures": [
+      "Spells/day frozen at 20th level",
+      "Familiar: +1 natural armor & INT every 2 above 20th",
+      "Familiar Spell at 21st and every 10 after"
+    ],
+    "progressionTable": {},
+    "desc": "An innate arcane caster who relies on spontaneous spellcasting and strong spell use frequency."
+  },
+  {
+    "name": "Wizard",
+    "source": "Player's Handbook v.3.5",
+    "hitDie": 4,
+    "babProg": "half",
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "skillPoints": 2,
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Knowledge (all)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "spellcasting": {
+      "type": "arcane",
+      "ability": "int",
+      "prep": "prepared"
+    },
+    "description": "A scholarly arcane caster with the broadest spell access, prepared casting, and exceptional magical utility.",
+    "classFeatures": [
+      "Summon familiar, Scribe scroll — Level 1",
+      "Bonus feat — Level 5",
+      "Bonus feat — Level 10",
+      "Bonus feat — Level 15",
+      "Bonus feat — Level 20"
+    ],
+    "epicBonusFeatEvery": 3,
+    "epicFeatures": [
+      "Spells/day frozen at 20th level",
+      "Learn 2 new spells/level",
+      "Familiar same as Sorcerer"
+    ],
+    "progressionTable": {},
+    "desc": "A scholarly arcane caster with the broadest spell access, prepared casting, and exceptional magical utility."
+  },
+  {
+    "name": "Hexblade",
+    "source": "Complete Warrior",
+    "hitDie": 10,
+    "babProg": "full",
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "skillPoints": 2,
+    "classSkills": [
+      "Bluff",
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Intimidate",
+      "Knowledge (arcana)",
+      "Profession",
+      "Ride",
+      "Spellcraft"
+    ],
+    "spellcasting": {
+      "type": "arcane",
+      "ability": "cha",
+      "prep": "spontaneous",
+      "startsAt": 4
+    },
+    "description": "A martial arcane hybrid who mixes curses, limited spontaneous arcane casting, and durable melee capability.",
+    "classFeatures": [
+      "Hexblade's curse 1/day — Level 1",
+      "Arcane resistance — Level 2",
+      "Summon familiar — Level 4",
+      "Bonus feat, hexblade's curse 2/day — Level 5",
+      "Greater hexblade's curse — Level 8",
+      "Hexblade's curse 3/day — Level 9",
+      "Bonus feat — Level 10",
+      "Hexblade's curse 4/day — Level 13",
+      "Bonus feat — Level 15",
+      "Aura of unluck 2/day — Level 16",
+      "Hexblade's curse 5/day — Level 17",
+      "Dire hexblade's curse — Level 19",
+      "Aura of unluck 3/day, bonus feat — Level 20"
+    ],
+    "epicBonusFeatEvery": 3,
+    "epicFeatures": [
+      "Curse DC continues to improve",
+      "Spell slots continue (arcane)"
+    ],
+    "progressionTable": {},
+    "desc": "A martial arcane hybrid who mixes curses, limited spontaneous arcane casting, and durable melee capability."
+  },
+  {
+    "name": "Warlock",
+    "source": "Complete Arcane",
+    "hitDie": 6,
+    "babProg": "3quarter",
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "skillPoints": 2,
+    "classSkills": [
+      "Bluff",
+      "Concentration",
+      "Craft",
+      "Disguise",
+      "Intimidate",
+      "Knowledge (arcana)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Sense Motive",
+      "Spellcraft",
+      "Use Magic Device"
+    ],
+    "spellcasting": {
+      "type": "invocations",
+      "ability": "cha",
+      "prep": "at-will"
+    },
+    "description": "An at-will invoker using eldritch blast and invocations for repeatable magical offense and utility.",
+    "classFeatures": [
+      "Eldritch blast 1d6; invocation (least) — Level 1",
+      "Detect magic — Level 2",
+      "Damage reduction 1/cold iron; eldritch blast 2d6 — Level 3",
+      "Deceive item — Level 4",
+      "Eldritch blast 3d6 — Level 5",
+      "New invocation (least or lesser) — Level 6",
+      "Damage reduction 2/cold iron; eldritch blast 4d6 — Level 7",
+      "Fiendish resilience 1 — Level 8",
+      "Eldritch blast 5d6 — Level 9",
+      "Energy resistance 5 — Level 10",
+      "Damage reduction 3/cold iron; eldritch blast 6d6; new invocation (least, lesser, or greater) — Level 11",
+      "Imbue item — Level 12",
+      "Fiendish resilience 2 — Level 13",
+      "Eldritch blast 7d6 — Level 14",
+      "Damage reduction 4/cold iron — Level 15",
+      "New invocation (least, lesser, greater, or dark) — Level 16",
+      "Eldritch blast 8d6 — Level 17",
+      "Fiendish resilience 3 — Level 18",
+      "Damage reduction 5/cold iron — Level 19",
+      "Eldritch blast 9d6; energy resistance 10 — Level 20"
+    ],
+    "epicBonusFeatEvery": 3,
+    "epicFeatures": [
+      "Eldritch Blast +1d6 every 2 epic levels",
+      "Epic invocations unlock"
+    ],
+    "progressionTable": {},
+    "desc": "An at-will invoker using eldritch blast and invocations for repeatable magical offense and utility."
+  },
+  {
+    "name": "Dragonfire Adept",
+    "source": "Dragon Magic",
+    "hitDie": 8,
+    "babProg": "3quarter",
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "skillPoints": 4,
+    "classSkills": [
+      "Bluff",
+      "Concentration",
+      "Craft",
+      "Intimidate",
+      "Jump",
+      "Knowledge (arcana)",
+      "Knowledge (local)",
+      "Knowledge (nature)",
+      "Knowledge (the planes)",
+      "Listen",
+      "Search",
+      "Sense Motive",
+      "Speak Language",
+      "Spot",
+      "Survival",
+      "Use Magic Device"
+    ],
+    "spellcasting": {
+      "type": "invocations",
+      "ability": "cha",
+      "prep": "at-will"
+    },
+    "description": "A draconic invoker centered on scalable breath weapon attacks and invocation-based utility.",
+    "classFeatures": [
+      "Breath weapon 1d6 (line 30 ft. or cone 15 ft.); invocation (least) — Level 1",
+      "Draconic heritage — Level 2",
+      "Breath weapon 2d6 — Level 3",
+      "Scales +1 natural armor — Level 4",
+      "Breath weapon 3d6; invocation (lesser) — Level 5",
+      "Blindsense 30 ft. — Level 6",
+      "Breath weapon 4d6 — Level 7",
+      "Scales +2 natural armor — Level 8",
+      "Breath weapon 5d6 — Level 9",
+      "Metabreath — Level 10",
+      "Breath weapon 6d6; invocation (greater) — Level 11",
+      "Scales +3 natural armor — Level 12",
+      "Breath weapon 7d6 — Level 13",
+      "Dragon senses — Level 14",
+      "Breath weapon 8d6 — Level 15",
+      "Scales +4 natural armor — Level 16",
+      "Breath weapon 9d6 — Level 17",
+      "Frightful presence — Level 18",
+      "Breath weapon 10d6 — Level 19",
+      "Scales +5 natural armor; invocation (greater, max) — Level 20"
+    ],
+    "progressionTable": {},
+    "desc": "A draconic invoker centered on scalable breath weapon attacks and invocation-based utility."
+  },
+  {
+    "name": "Favored Soul",
+    "source": "Complete Divine",
+    "hitDie": 8,
+    "babProg": "3quarter",
+    "saves": {
+      "fort": "good",
+      "ref": "good",
+      "will": "good"
+    },
+    "skillPoints": 4,
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Heal",
+      "Knowledge (arcana)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "spellcasting": {
+      "type": "divine",
+      "ability": "cha",
+      "prep": "spontaneous"
+    },
+    "description": "A spontaneous divine caster chosen by a deity, combining resilient saves with broad divine spell access.",
+    "classFeatures": [
+      "Deity's weapon focus — Level 3",
+      "Energy resistance (1st type) — Level 5",
+      "Energy resistance (2nd type) — Level 10",
+      "Deity's weapon specialization — Level 12",
+      "Energy resistance (3rd type) — Level 15",
+      "Wings — Level 17",
+      "Damage reduction — Level 20"
+    ],
+    "epicBonusFeatEvery": 3,
+    "epicFeatures": [
+      "Spells/day frozen at 20th level"
+    ],
+    "progressionTable": {},
+    "desc": "A spontaneous divine caster chosen by a deity, combining resilient saves with broad divine spell access."
+  },
+  {
+    "name": "Duskblade",
+    "source": "Player's Handbook II",
+    "hitDie": 8,
+    "babProg": "full",
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "skillPoints": 2,
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Jump",
+      "Knowledge (arcana)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Ride",
+      "Sense Motive",
+      "Spellcraft",
+      "Swim"
+    ],
+    "spellcasting": {
+      "type": "arcane",
+      "ability": "int",
+      "prep": "prepared"
+    },
+    "description": "A combat mage that blends full-BAB melee with arcane channeling and armored casting progression.",
+    "classFeatures": [
+      "Arcane attunement, armored mage (light) — Level 1",
+      "Arcane channeling — Level 3",
+      "Armored mage (medium) — Level 4",
+      "Spell power +2 — Level 7",
+      "Armored mage (heavy shield) — Level 8",
+      "Arcane channeling (full attack) — Level 13",
+      "Quick cast 3/day — Level 14",
+      "Spell power +3 — Level 15",
+      "Quick cast 4/day — Level 17",
+      "Spell power +4 — Level 18",
+      "Spell power +5 — Level 20"
+    ],
+    "epicBonusFeatEvery": 3,
+    "epicFeatures": [
+      "Spell slots continue",
+      "Epic feat every 3 levels"
+    ],
+    "progressionTable": {},
+    "desc": "A combat mage that blends full-BAB melee with arcane channeling and armored casting progression."
+  }
+]
