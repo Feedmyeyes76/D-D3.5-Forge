@@ -9,9 +9,20 @@ Monsters/
 source/
 VS Code Workspace/
 Asset Uploads/
+Archive/
+Data/
+Design/
+Exports/
+Pipeline/
+Reference/
+Tools/
+github Repo Docs/
 Codex Prompts and work chat.txt
 DnD3.5Index-Classes-Prestige.pdf
 DnD3.5Index-Classes-Prestige.xlsx
+DnD3.5Index-Classes-Prestige.docx
+PrC_Descriptions_Worklog.txt
+forge_testing_checklist.html
 
 # Backup files and old build scripts
 App/*.bak*
