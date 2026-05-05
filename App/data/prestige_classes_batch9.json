@@ -1,0 +1,1524 @@
+[
+  {
+    "name": "Thaumaturgist",
+    "maxLevel": 5,
+    "description": {
+      "summary": "A divine summoning specialist who improves planar ally and summoning magic.",
+      "flavor": "Thaumaturgists bargain with extraplanar powers and strengthen their conjured servants.",
+      "role": "Divine caster advancement class focused on summoning, planar allies, and an extraplanar cohort.",
+      "sourceText": "Dungeon Master's Guide / Complete Divine"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (the planes)",
+          "ranks": 7
+        }
+      ],
+      "feats": [
+        "Spell Focus (conjuration)"
+      ],
+      "spells": "Able to cast lesser planar ally."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "thaumaturgist.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing divine spellcasting class at every thaumaturgist level.",
+          "fullText": "At each thaumaturgist level, the character gains new spells per day and an increase in caster level as if also gaining a level in an existing divine spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "5": {
+            "value": "+1 existing divine spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "thaumaturgist.improved_ally",
+        "name": "Improved Ally",
+        "type": "feature",
+        "description": {
+          "summary": "Call planar allies at reduced payment.",
+          "fullText": "When the thaumaturgist casts a planar ally spell, the called creature requires a reduced payment for its service."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "appliesTo": "planar ally spells",
+              "paymentMultiplier": 0.5
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "thaumaturgist.augmented_summoning",
+        "name": "Augmented Summoning",
+        "type": "feature",
+        "description": {
+          "summary": "Gain Augment Summoning as a bonus feat.",
+          "fullText": "At 2nd level, the thaumaturgist gains Augment Summoning as a bonus feat."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "grantFeat": "Augment Summoning"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "thaumaturgist.extended_summoning",
+        "name": "Extended Summoning",
+        "type": "feature",
+        "description": {
+          "summary": "Summoning spells last longer.",
+          "fullText": "At 3rd level, all conjuration summoning spells cast by the thaumaturgist have their durations doubled as if affected by Extend Spell, without changing spell level."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "appliesTo": "conjuration summoning spells",
+              "durationMultiplier": 2,
+              "noSpellLevelIncrease": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "thaumaturgist.contingent_conjuration",
+        "name": "Contingent Conjuration",
+        "type": "ability",
+        "description": {
+          "summary": "Prepare a summoning spell to trigger later.",
+          "fullText": "At 4th level, the thaumaturgist can prepare a summoning or calling spell to take effect under a stated condition, functioning as a contingency-like class ability with limits."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "effect": "contingency-like summoning or calling spell",
+              "triggeredCondition": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "thaumaturgist.planar_cohort",
+        "name": "Planar Cohort",
+        "type": "feature",
+        "description": {
+          "summary": "Gain a called extraplanar cohort.",
+          "fullText": "At 5th level, the thaumaturgist gains a planar cohort. The cohort is acquired through planar ally magic and follows the class's cohort limitations."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "grantCompanion": "planar cohort",
+              "usesPlanarAllyTheme": true
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "thaumaturgist.spellcasting_advancement"
+          },
+          {
+            "ref": "thaumaturgist.improved_ally"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "thaumaturgist.spellcasting_advancement"
+          },
+          {
+            "ref": "thaumaturgist.augmented_summoning"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "thaumaturgist.spellcasting_advancement"
+          },
+          {
+            "ref": "thaumaturgist.extended_summoning"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "thaumaturgist.spellcasting_advancement"
+          },
+          {
+            "ref": "thaumaturgist.contingent_conjuration"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "thaumaturgist.spellcasting_advancement"
+          },
+          {
+            "ref": "thaumaturgist.planar_cohort"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Radiant Servant of Pelor",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A Pelorite divine caster who channels sunlight, healing, and positive energy.",
+      "flavor": "Radiant servants of Pelor are champions of light and healing who burn away undead corruption.",
+      "role": "Full divine caster progression class with enhanced healing, turning, and anti-undead abilities.",
+      "sourceText": "Complete Divine"
+    },
+    "hitDie": 6,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Neutral good",
+      "skills": [
+        {
+          "name": "Knowledge (religion)",
+          "ranks": 9
+        }
+      ],
+      "spells": "Able to cast 3rd-level divine spells and access the Sun domain.",
+      "special": [
+        "Must worship Pelor"
+      ]
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Heal",
+      "Knowledge (religion)",
+      "Profession",
+      "Sense Motive",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "radiant_servant_of_pelor.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing divine spellcasting class at every level.",
+          "fullText": "At each radiant servant of Pelor level, the character gains new spells per day and an increase in caster level as if gaining a level in an existing divine spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "5": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "7": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "9": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "10": {
+            "value": "+1 existing divine spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "radiant_servant_of_pelor.extra_greater_turning",
+        "name": "Extra Greater Turning",
+        "type": "feature",
+        "description": {
+          "summary": "Gain additional greater turning uses.",
+          "fullText": "The radiant servant gains additional daily uses of greater turning through the Sun domain, using radiant servant levels as applicable."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "extraGreaterTurning": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "radiant_servant_of_pelor.radiance",
+        "name": "Radiance",
+        "type": "feature",
+        "description": {
+          "summary": "Emit holy light.",
+          "fullText": "At 2nd level, the radiant servant can radiate bright light that harms or hinders undead as described by the class ability."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "lightBasedAbility": true,
+              "affectsUndead": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "radiant_servant_of_pelor.divine_health",
+        "name": "Divine Health",
+        "type": "feature",
+        "description": {
+          "summary": "Gain immunity to disease.",
+          "fullText": "At 3rd level, the radiant servant becomes immune to all diseases, including supernatural and magical diseases."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "immuneTo": [
+                "disease"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "radiant_servant_of_pelor.empower_healing",
+        "name": "Empower Healing",
+        "type": "feature",
+        "description": {
+          "summary": "Empower healing domain spells.",
+          "fullText": "At 4th level, healing spells from the Healing domain are empowered as if affected by Empower Spell, without using a higher-level spell slot."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "appliesTo": "Healing domain spells",
+              "metamagic": "Empower Spell",
+              "noSpellLevelIncrease": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "radiant_servant_of_pelor.aura_of_warding",
+        "name": "Aura of Warding",
+        "type": "feature",
+        "description": {
+          "summary": "Ward nearby allies against negative energy and death effects.",
+          "fullText": "At 5th level, the radiant servant projects a protective aura that helps allies resist negative energy and death effects."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "aura": true,
+              "protectsAgainst": [
+                "negative energy",
+                "death effects"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "radiant_servant_of_pelor.maximize_healing",
+        "name": "Maximize Healing",
+        "type": "feature",
+        "description": {
+          "summary": "Maximize healing domain spells.",
+          "fullText": "At 6th level, healing spells from the Healing domain are maximized as if affected by Maximize Spell, without using a higher-level spell slot."
+        },
+        "progression": {
+          "6": {
+            "mechanics": {
+              "appliesTo": "Healing domain spells",
+              "metamagic": "Maximize Spell",
+              "noSpellLevelIncrease": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "radiant_servant_of_pelor.positive_energy_burst",
+        "name": "Positive Energy Burst",
+        "type": "ability",
+        "description": {
+          "summary": "Release positive energy against undead.",
+          "fullText": "At 8th level, the radiant servant can expend turning energy to create a burst of positive energy that damages undead and heals living creatures as specified by the class."
+        },
+        "progression": {
+          "8": {
+            "mechanics": {
+              "usesTurnUndeadResource": true,
+              "energy": "positive",
+              "damagesUndead": true,
+              "healsLiving": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "radiant_servant_of_pelor.supreme_healing",
+        "name": "Supreme Healing",
+        "type": "feature",
+        "description": {
+          "summary": "Healing domain spells heal the maximum possible amount.",
+          "fullText": "At 10th level, healing spells from the Healing domain are treated as maximized and empowered as specified by the class feature."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "appliesTo": "Healing domain spells",
+              "maximized": true,
+              "empowered": true
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "radiant_servant_of_pelor.spellcasting_advancement"
+          },
+          {
+            "ref": "radiant_servant_of_pelor.extra_greater_turning"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "radiant_servant_of_pelor.spellcasting_advancement"
+          },
+          {
+            "ref": "radiant_servant_of_pelor.radiance"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "radiant_servant_of_pelor.spellcasting_advancement"
+          },
+          {
+            "ref": "radiant_servant_of_pelor.divine_health"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "radiant_servant_of_pelor.spellcasting_advancement"
+          },
+          {
+            "ref": "radiant_servant_of_pelor.empower_healing"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "radiant_servant_of_pelor.spellcasting_advancement"
+          },
+          {
+            "ref": "radiant_servant_of_pelor.aura_of_warding"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "radiant_servant_of_pelor.spellcasting_advancement"
+          },
+          {
+            "ref": "radiant_servant_of_pelor.maximize_healing"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "radiant_servant_of_pelor.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "radiant_servant_of_pelor.spellcasting_advancement"
+          },
+          {
+            "ref": "radiant_servant_of_pelor.positive_energy_burst"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "radiant_servant_of_pelor.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "radiant_servant_of_pelor.spellcasting_advancement"
+          },
+          {
+            "ref": "radiant_servant_of_pelor.supreme_healing"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Stormlord",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A divine storm warrior who channels lightning and thunder through weapons.",
+      "flavor": "Stormlords devote themselves to the fury of the skies, becoming warriors of wind, thunder, and lightning.",
+      "role": "Divine martial prestige class with storm-themed weapon enhancements and electricity defenses.",
+      "sourceText": "Complete Divine"
+    },
+    "hitDie": 8,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (nature)",
+          "ranks": 4
+        },
+        {
+          "name": "Survival",
+          "ranks": 4
+        }
+      ],
+      "feats": [
+        "Endurance",
+        "Great Fortitude",
+        "Weapon Focus (spear or javelin)"
+      ],
+      "spells": "Able to cast 3rd-level divine spells.",
+      "special": [
+        "Must worship a storm deity or have similar storm devotion"
+      ]
+    },
+    "classSkills": [
+      "Climb",
+      "Concentration",
+      "Craft",
+      "Intimidate",
+      "Jump",
+      "Knowledge (nature)",
+      "Profession",
+      "Survival",
+      "Swim"
+    ],
+    "features": [
+      {
+        "id": "stormlord.storm_walk",
+        "name": "Storm Walk",
+        "type": "feature",
+        "description": {
+          "summary": "Move through storms and difficult weather more easily.",
+          "fullText": "The stormlord gains resilience and mobility in stormy conditions, including protection from many penalties caused by high winds and storms."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "stormMobility": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "stormlord.shock_weapon",
+        "name": "Shock Weapon",
+        "type": "scaling",
+        "description": {
+          "summary": "Add electricity damage to thrown or spear-like weapons.",
+          "fullText": "The stormlord's favored storm weapons gain electricity damage. The effect improves as class level increases."
+        },
+        "progression": {
+          "1": {
+            "value": "+1d6 electricity"
+          },
+          "6": {
+            "value": "+2d6 electricity"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "stormlord.resist_electricity",
+        "name": "Resist Electricity",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain resistance to electricity.",
+          "fullText": "The stormlord gains resistance to electricity that improves with class level."
+        },
+        "progression": {
+          "2": {
+            "value": "electricity resistance 10"
+          },
+          "7": {
+            "value": "electricity resistance 20"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "stormlord.thundering_weapon",
+        "name": "Thundering Weapon",
+        "type": "feature",
+        "description": {
+          "summary": "Weapons crack with thunder on critical hits.",
+          "fullText": "The stormlord's storm weapons gain a thundering quality or similar sonic critical effect as described by the class."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "weaponProperty": "thundering"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "stormlord.storm_ride",
+        "name": "Storm Ride",
+        "type": "ability",
+        "description": {
+          "summary": "Travel through storms.",
+          "fullText": "At higher level, the stormlord can ride storm winds or otherwise travel through severe weather using supernatural storm power."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "stormTravel": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "stormlord.immunity_to_electricity",
+        "name": "Immunity to Electricity",
+        "type": "feature",
+        "description": {
+          "summary": "Become immune to electricity.",
+          "fullText": "The stormlord eventually becomes immune to electricity."
+        },
+        "progression": {
+          "9": {
+            "mechanics": {
+              "immuneTo": [
+                "electricity"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "stormlord.storm_avatar",
+        "name": "Storm Avatar",
+        "type": "feature",
+        "description": {
+          "summary": "Become a living avatar of storm power.",
+          "fullText": "At 10th level, the stormlord gains a powerful storm-themed transformation or capstone as defined by the class."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "stormCapstone": true
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "stormlord.storm_walk"
+          },
+          {
+            "ref": "stormlord.shock_weapon"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "stormlord.resist_electricity"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "stormlord.thundering_weapon"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "stormlord.storm_ride"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "stormlord.shock_weapon"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "stormlord.resist_electricity"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "stormlord.immunity_to_electricity"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "stormlord.storm_avatar"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Stormlord class features vary by exact Complete Divine table wording; review weapon enhancement and storm travel details in app."
+      ]
+    }
+  },
+  {
+    "name": "Void Disciple",
+    "maxLevel": 13,
+    "description": {
+      "summary": "A contemplative caster who perceives and manipulates the mystical void.",
+      "flavor": "Void disciples seek the emptiness underlying all things, drawing insight and supernatural perception from nothingness.",
+      "role": "Unusual spellcasting prestige class with void perception and supernatural insight abilities.",
+      "sourceText": "Complete Divine"
+    },
+    "hitDie": 6,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (arcana or religion)",
+          "ranks": 8
+        }
+      ],
+      "spells": "Able to cast divination spells.",
+      "special": [
+        "Must pursue training in void mysteries"
+      ]
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Knowledge (arcana)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Sense Motive",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "void_disciple.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing spellcasting class at most levels.",
+          "fullText": "Void disciple levels advance spellcasting at the levels indicated by the class progression."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing spellcasting class"
+          },
+          "5": {
+            "value": "+1 existing spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing spellcasting class"
+          },
+          "7": {
+            "value": "+1 existing spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing spellcasting class"
+          },
+          "9": {
+            "value": "+1 existing spellcasting class"
+          },
+          "10": {
+            "value": "+1 existing spellcasting class"
+          },
+          "11": {
+            "value": "+1 existing spellcasting class"
+          },
+          "12": {
+            "value": "+1 existing spellcasting class"
+          },
+          "13": {
+            "value": "+1 existing spellcasting class"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "void_disciple.sense_void",
+        "name": "Sense Void",
+        "type": "scaling",
+        "description": {
+          "summary": "Extend senses through the void.",
+          "fullText": "The void disciple can extend perception through the void to observe distant locations. Range and potency improve with level."
+        },
+        "progression": {
+          "1": {
+            "value": "sense void"
+          },
+          "4": {
+            "value": "improved sense void"
+          },
+          "7": {
+            "value": "greater sense void"
+          },
+          "10": {
+            "value": "superior sense void"
+          },
+          "13": {
+            "value": "perfect sense void"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "void_disciple.moment_of_clarity",
+        "name": "Moment of Clarity",
+        "type": "ability",
+        "description": {
+          "summary": "Grant insight through the void.",
+          "fullText": "The void disciple can momentarily reveal hidden truth, granting a target a bonus or special insight as described by the class."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "insightAbility": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "void_disciple.void_release",
+        "name": "Void Release",
+        "type": "ability",
+        "description": {
+          "summary": "Release void energy.",
+          "fullText": "The void disciple can release or manipulate void energy as a supernatural class ability."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "voidEnergyAbility": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "void_disciple.void_suppression",
+        "name": "Void Suppression",
+        "type": "ability",
+        "description": {
+          "summary": "Suppress or interfere with a creature through the void.",
+          "fullText": "The void disciple gains the ability to suppress or influence a creature through void manipulation."
+        },
+        "progression": {
+          "8": {
+            "mechanics": {
+              "voidSuppression": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "void_disciple.void_body",
+        "name": "Void Body",
+        "type": "feature",
+        "description": {
+          "summary": "Become partly one with the void.",
+          "fullText": "At the height of the class, the void disciple gains a void-themed transformation or defensive state."
+        },
+        "progression": {
+          "13": {
+            "mechanics": {
+              "voidTransformation": true
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "void_disciple.sense_void"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "void_disciple.moment_of_clarity"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "void_disciple.sense_void"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "void_disciple.void_release"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "void_disciple.sense_void"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "void_disciple.void_suppression"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "void_disciple.sense_void"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 11,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 12,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 13,
+        "features": [
+          {
+            "ref": "void_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "void_disciple.sense_void"
+          },
+          {
+            "ref": "void_disciple.void_body"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine",
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Void Disciple uses unusually specific supernatural abilities; confirm exact level table and mechanics from sourcebook before marking mechanics complete."
+      ]
+    }
+  }
+]

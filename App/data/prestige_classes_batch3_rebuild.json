@@ -1,0 +1,1354 @@
+[
+  {
+    "name": "Dragon Disciple",
+    "description": {
+      "summary": "A spontaneous arcane caster who gradually transforms into a dragon-like being.",
+      "flavor": "Dragon disciples awaken ancient draconic power within themselves.",
+      "role": "Transformation class with natural attacks, ability boosts, breath weapon, and bonus spell slots.",
+      "sourceText": "Dungeon Master's Guide, p. 183"
+    },
+    "hitDie": 12,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "race": "Any nondragon and non-half-dragon.",
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 8
+        }
+      ],
+      "languages": [
+        "Draconic"
+      ],
+      "spells": "Ability to cast arcane spells without preparation."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Escape Artist",
+      "Gather Information",
+      "Knowledge (arcana)",
+      "Listen",
+      "Profession",
+      "Search",
+      "Spellcraft",
+      "Spot",
+      "Speak Language"
+    ],
+    "features": [
+      {
+        "id": "dragon_disciple.bonus_spells",
+        "name": "Bonus Spells",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain bonus spell slots at several levels.",
+          "fullText": "At 1st, 2nd, 3rd, 4th, 7th, and 9th level, the dragon disciple gains one bonus spell slot of any spell level the character can already cast. Once chosen, the spell level of the bonus slot cannot be changed."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 spell slot"
+          },
+          "2": {
+            "value": "+1 spell slot"
+          },
+          "3": {
+            "value": "+1 spell slot"
+          },
+          "4": {
+            "value": "+1 spell slot"
+          },
+          "7": {
+            "value": "+1 spell slot"
+          },
+          "9": {
+            "value": "+1 spell slot"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.draconic_choice",
+        "name": "Draconic Choice",
+        "type": "feature",
+        "description": {
+          "summary": "Choose a dragon variety.",
+          "fullText": "At 1st level, the dragon disciple chooses one variety of dragon. This determines the energy type of the breath weapon and the final half-dragon transformation."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "choice": "dragon variety"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.natural_armor_increase",
+        "name": "Natural Armor Increase",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain increasing natural armor.",
+          "fullText": "The dragon disciple's natural armor bonus increases as the class advances."
+        },
+        "progression": {
+          "1": {
+            "value": "+1"
+          },
+          "4": {
+            "value": "+2"
+          },
+          "7": {
+            "value": "+3"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.ability_boost",
+        "name": "Ability Boost",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain permanent ability score increases.",
+          "fullText": "The dragon disciple gains inherent ability score increases over the course of the class."
+        },
+        "progression": {
+          "2": {
+            "value": "Strength +2"
+          },
+          "4": {
+            "value": "Strength +2"
+          },
+          "7": {
+            "value": "Constitution +2"
+          },
+          "8": {
+            "value": "Intelligence +2"
+          },
+          "10": {
+            "value": "Strength +4"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.claws_and_bite",
+        "name": "Claws and Bite",
+        "type": "feature",
+        "description": {
+          "summary": "Gain claw and bite natural attacks.",
+          "fullText": "At 2nd level, the dragon disciple gains claw and bite attacks if the character does not already have them. Damage depends on size."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "naturalAttacks": [
+                "bite",
+                "claw"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.breath_weapon",
+        "name": "Breath Weapon",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a dragon-type breath weapon.",
+          "fullText": "At 3rd level, the dragon disciple gains a breath weapon based on the chosen dragon variety. Damage increases at higher levels."
+        },
+        "progression": {
+          "3": {
+            "value": "2d8"
+          },
+          "7": {
+            "value": "4d8"
+          },
+          "10": {
+            "value": "6d8"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.blindsense",
+        "name": "Blindsense",
+        "type": "feature",
+        "description": {
+          "summary": "Gain blindsense out to 30 feet.",
+          "fullText": "At 5th level, the dragon disciple gains blindsense out to 30 feet."
+        },
+        "progression": {
+          "5": {
+            "value": "30 ft."
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.wings",
+        "name": "Wings",
+        "type": "feature",
+        "description": {
+          "summary": "Grow wings and gain a fly speed.",
+          "fullText": "At 9th level, a Medium or larger dragon disciple grows wings and can fly at twice the character's land speed with average maneuverability."
+        },
+        "progression": {
+          "9": {
+            "mechanics": {
+              "requiresSize": "Medium or larger",
+              "flySpeed": "twice land speed",
+              "maneuverability": "average"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.apotheosis",
+        "name": "Dragon Apotheosis",
+        "type": "feature",
+        "description": {
+          "summary": "Complete transformation into a half-dragon.",
+          "fullText": "At 10th level, the dragon disciple takes on the half-dragon template and the dragon type."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "template": "half-dragon",
+              "typeChange": "dragon"
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "dragon_disciple.draconic_choice"
+          },
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.natural_armor_increase"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.ability_boost"
+          },
+          {
+            "ref": "dragon_disciple.claws_and_bite"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.breath_weapon"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.natural_armor_increase"
+          },
+          {
+            "ref": "dragon_disciple.ability_boost"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "dragon_disciple.blindsense"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.natural_armor_increase"
+          },
+          {
+            "ref": "dragon_disciple.ability_boost"
+          },
+          {
+            "ref": "dragon_disciple.breath_weapon"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "dragon_disciple.ability_boost"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.wings"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "dragon_disciple.ability_boost"
+          },
+          {
+            "ref": "dragon_disciple.breath_weapon"
+          },
+          {
+            "ref": "dragon_disciple.apotheosis"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Dwarven Defender",
+    "description": {
+      "summary": "A dwarf defensive specialist who becomes an immovable living wall.",
+      "flavor": "Dwarven defenders are masters of holding ground.",
+      "role": "Defensive tank with defensive stance, trap sense, uncanny dodge, and damage reduction.",
+      "sourceText": "Dungeon Master's Guide, p. 186"
+    },
+    "hitDie": 12,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any lawful",
+      "race": "Dwarf",
+      "baseAttackBonus": "+7",
+      "feats": [
+        "Dodge",
+        "Endurance",
+        "Toughness"
+      ]
+    },
+    "classSkills": [
+      "Craft",
+      "Listen",
+      "Sense Motive",
+      "Spot"
+    ],
+    "features": [
+      {
+        "id": "dwarven_defender.defensive_stance",
+        "name": "Defensive Stance",
+        "type": "scaling",
+        "description": {
+          "summary": "Enter a powerful defensive stance a limited number of times per day.",
+          "fullText": "The dwarven defender can enter a defensive stance, gaining bonuses to Strength, Constitution, saving throws, and AC while remaining in place. Uses per day increase with class level."
+        },
+        "progression": {
+          "1": {
+            "value": "1/day"
+          },
+          "3": {
+            "value": "2/day"
+          },
+          "5": {
+            "value": "3/day"
+          },
+          "7": {
+            "value": "4/day"
+          },
+          "9": {
+            "value": "5/day"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dwarven_defender.uncanny_dodge",
+        "name": "Uncanny Dodge",
+        "type": "feature",
+        "description": {
+          "summary": "Retain Dexterity bonus to AC when caught flat-footed.",
+          "fullText": "At 2nd level, the dwarven defender retains Dexterity bonus to AC even when caught flat-footed or attacked by an invisible opponent."
+        },
+        "progression": {
+          "2": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dwarven_defender.trap_sense",
+        "name": "Trap Sense",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a bonus on Reflex saves and AC against traps.",
+          "fullText": "The dwarven defender gains a scaling bonus on Reflex saves made to avoid traps and a dodge bonus to AC against attacks made by traps."
+        },
+        "progression": {
+          "4": {
+            "value": "+1"
+          },
+          "8": {
+            "value": "+2"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dwarven_defender.improved_uncanny_dodge",
+        "name": "Improved Uncanny Dodge",
+        "type": "feature",
+        "description": {
+          "summary": "Cannot be flanked except by sufficiently advanced rogues.",
+          "fullText": "At 6th level, the dwarven defender can no longer be flanked except by a rogue of sufficiently high level."
+        },
+        "progression": {
+          "6": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dwarven_defender.damage_reduction",
+        "name": "Damage Reduction",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain damage reduction that improves with level.",
+          "fullText": "Starting at 6th level, the dwarven defender gains damage reduction. The amount increases at higher levels."
+        },
+        "progression": {
+          "6": {
+            "value": "3/-"
+          },
+          "10": {
+            "value": "6/-"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dwarven_defender.mobile_defense",
+        "name": "Mobile Defense",
+        "type": "feature",
+        "description": {
+          "summary": "Move slightly while maintaining defensive stance.",
+          "fullText": "At 8th level, the dwarven defender can take a 5-foot step while in defensive stance without ending the stance."
+        },
+        "progression": {
+          "8": {}
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "dwarven_defender.defensive_stance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "dwarven_defender.uncanny_dodge"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "dwarven_defender.defensive_stance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "dwarven_defender.trap_sense"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "dwarven_defender.defensive_stance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "dwarven_defender.improved_uncanny_dodge"
+          },
+          {
+            "ref": "dwarven_defender.damage_reduction"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "dwarven_defender.defensive_stance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "dwarven_defender.trap_sense"
+          },
+          {
+            "ref": "dwarven_defender.mobile_defense"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "dwarven_defender.defensive_stance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "dwarven_defender.damage_reduction"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Duelist",
+    "description": {
+      "summary": "An agile combatant who relies on speed, precision, and intellect.",
+      "flavor": "Duelists thrive in single combat, turning aside blows with skill and striking precisely with piercing weapons.",
+      "role": "Mobile finesse melee combatant with AC bonuses, precision damage, initiative, and defensive mobility.",
+      "sourceText": "Dungeon Master's Guide, p. 185"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {
+      "baseAttackBonus": "+6",
+      "skills": [
+        {
+          "name": "Perform",
+          "ranks": 3
+        },
+        {
+          "name": "Tumble",
+          "ranks": 5
+        }
+      ],
+      "feats": [
+        "Dodge",
+        "Mobility",
+        "Weapon Finesse"
+      ]
+    },
+    "classSkills": [
+      "Balance",
+      "Bluff",
+      "Escape Artist",
+      "Jump",
+      "Listen",
+      "Perform",
+      "Sense Motive",
+      "Spot",
+      "Tumble"
+    ],
+    "features": [
+      {
+        "id": "duelist.canny_defense",
+        "name": "Canny Defense",
+        "type": "scaling",
+        "description": {
+          "summary": "Add Intelligence bonus to AC while unarmored and unencumbered.",
+          "fullText": "When not wearing armor or using a shield, the duelist adds Intelligence bonus to AC, limited by class level, while wielding a melee weapon."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 max"
+          },
+          "2": {
+            "value": "+2 max"
+          },
+          "3": {
+            "value": "+3 max"
+          },
+          "4": {
+            "value": "+4 max"
+          },
+          "5": {
+            "value": "+5 max"
+          },
+          "6": {
+            "value": "+6 max"
+          },
+          "7": {
+            "value": "+7 max"
+          },
+          "8": {
+            "value": "+8 max"
+          },
+          "9": {
+            "value": "+9 max"
+          },
+          "10": {
+            "value": "+10 max"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.improved_reaction",
+        "name": "Improved Reaction",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a bonus on initiative checks.",
+          "fullText": "At 2nd level, the duelist gains a bonus on initiative checks. This bonus improves at 8th level."
+        },
+        "progression": {
+          "2": {
+            "value": "+2"
+          },
+          "8": {
+            "value": "+4"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.enhanced_mobility",
+        "name": "Enhanced Mobility",
+        "type": "feature",
+        "description": {
+          "summary": "Gain AC bonus against attacks of opportunity from movement.",
+          "fullText": "At 3rd level, when wearing no armor and not using a shield, the duelist gains a dodge bonus to AC against attacks of opportunity caused by moving."
+        },
+        "progression": {
+          "3": {
+            "value": "+4"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.grace",
+        "name": "Grace",
+        "type": "feature",
+        "description": {
+          "summary": "Gain a bonus on Reflex saves.",
+          "fullText": "At 4th level, the duelist gains a competence bonus on Reflex saves."
+        },
+        "progression": {
+          "4": {
+            "value": "+2"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.precise_strike",
+        "name": "Precise Strike",
+        "type": "scaling",
+        "description": {
+          "summary": "Deal extra precision damage with a light or one-handed piercing weapon.",
+          "fullText": "When using a light or one-handed piercing weapon and not attacking with a weapon in the other hand, the duelist adds extra damage against targets subject to critical hits."
+        },
+        "progression": {
+          "5": {
+            "value": "+1d6"
+          },
+          "10": {
+            "value": "+2d6"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.acrobatic_charge",
+        "name": "Acrobatic Charge",
+        "type": "feature",
+        "description": {
+          "summary": "Charge across difficult terrain or obstacles with a skill check.",
+          "fullText": "At 6th level, the duelist can charge in situations where others cannot, moving across difficult terrain or obstacles with appropriate checks."
+        },
+        "progression": {
+          "6": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.elaborate_parry",
+        "name": "Elaborate Parry",
+        "type": "feature",
+        "description": {
+          "summary": "Gain a large dodge bonus when fighting defensively or using total defense.",
+          "fullText": "At 7th level, when fighting defensively or using total defense in melee combat, the duelist gains an additional dodge bonus to AC equal to class level."
+        },
+        "progression": {
+          "7": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.deflect_arrows",
+        "name": "Deflect Arrows",
+        "type": "feature",
+        "description": {
+          "summary": "Deflect one ranged weapon attack each round.",
+          "fullText": "At 9th level, the duelist gains the benefit of the Deflect Arrows feat when using a light or one-handed piercing weapon."
+        },
+        "progression": {
+          "9": {}
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.improved_reaction"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.enhanced_mobility"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.grace"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.precise_strike"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.acrobatic_charge"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.elaborate_parry"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.improved_reaction"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.deflect_arrows"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.precise_strike"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Loremaster",
+    "description": {
+      "summary": "A spellcaster-scholar who turns deep knowledge into secrets and magical advancement.",
+      "flavor": "Loremasters pursue knowledge above all else.",
+      "role": "Full spellcasting advancement prestige class with knowledge-based utility, secrets, lore, and language benefits.",
+      "sourceText": "Dungeon Master's Guide, p. 191"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (any two)",
+          "ranks": 10
+        }
+      ],
+      "feats": [
+        "Any three metamagic or item creation feats",
+        "Skill Focus (any Knowledge skill)"
+      ],
+      "spells": "Able to cast seven different divination spells, one of which must be 3rd level or higher."
+    },
+    "classSkills": [
+      "Appraise",
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Gather Information",
+      "Knowledge (any)",
+      "Perform",
+      "Profession",
+      "Search",
+      "Speak Language",
+      "Spellcraft",
+      "Use Magic Device"
+    ],
+    "features": [
+      {
+        "id": "loremaster.secret",
+        "name": "Secret",
+        "type": "scaling",
+        "description": {
+          "summary": "Learn special secrets that grant chosen benefits.",
+          "fullText": "At 1st level and every two levels thereafter, the loremaster chooses a secret from the loremaster secrets list."
+        },
+        "progression": {
+          "1": {
+            "value": "1 secret"
+          },
+          "3": {
+            "value": "2 secrets"
+          },
+          "5": {
+            "value": "3 secrets"
+          },
+          "7": {
+            "value": "4 secrets"
+          },
+          "9": {
+            "value": "5 secrets"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "loremaster.lore",
+        "name": "Lore",
+        "type": "feature",
+        "description": {
+          "summary": "Identify legends and information through accumulated knowledge.",
+          "fullText": "At 2nd level, the loremaster gains the lore ability, functioning like bardic knowledge using loremaster level plus Intelligence modifier."
+        },
+        "progression": {
+          "2": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "loremaster.bonus_languages",
+        "name": "Bonus Languages",
+        "type": "feature",
+        "description": {
+          "summary": "Gain additional language knowledge.",
+          "fullText": "At 4th level and again at 8th level, the loremaster gains a bonus language."
+        },
+        "progression": {
+          "4": {
+            "value": "+1 language"
+          },
+          "8": {
+            "value": "+1 language"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "loremaster.greater_lore",
+        "name": "Greater Lore",
+        "type": "feature",
+        "description": {
+          "summary": "Identify magic items with superior lore.",
+          "fullText": "At 6th level, the loremaster gains greater lore, allowing knowledge to identify magic items as if using identify."
+        },
+        "progression": {
+          "6": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "loremaster.true_lore",
+        "name": "True Lore",
+        "type": "feature",
+        "description": {
+          "summary": "Gain powerful lore equivalent to legend lore or analyze dweomer.",
+          "fullText": "At 10th level, the loremaster gains true lore, allowing deep knowledge effects comparable to legend lore or analyze dweomer as specified by the class ability."
+        },
+        "progression": {
+          "10": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "loremaster.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing spellcasting class at every loremaster level.",
+          "fullText": "At each loremaster level, the character gains new spells per day and an increase in caster level as if gaining a level in a spellcasting class the character belonged to before entering loremaster."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing spellcasting class"
+          },
+          "5": {
+            "value": "+1 existing spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing spellcasting class"
+          },
+          "7": {
+            "value": "+1 existing spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing spellcasting class"
+          },
+          "9": {
+            "value": "+1 existing spellcasting class"
+          },
+          "10": {
+            "value": "+1 existing spellcasting class"
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "loremaster.secret"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "loremaster.lore"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "loremaster.secret"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "loremaster.bonus_languages"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "loremaster.secret"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "loremaster.greater_lore"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "loremaster.secret"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "loremaster.bonus_languages"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "loremaster.secret"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "loremaster.true_lore"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  }
+]

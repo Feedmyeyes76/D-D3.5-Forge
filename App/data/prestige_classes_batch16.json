@@ -1,0 +1,434 @@
+[
+  {
+    "name": "Ninja Spy",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Stealth ki specialist",
+      "flavor": "",
+      "role": "Stealth",
+      "sourceText": "Complete Adventurer"
+    },
+    "hitDie": 6,
+    "babProg": "medium",
+    "skillPoints": 6,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "good"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "ninja_spy.ki_power",
+        "name": "Ki Power",
+        "type": "feature",
+        "description": {
+          "summary": "Ki Power",
+          "fullText": "Ki Power ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "ninja_spy.ki_power"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "ninja_spy.ki_power"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "ninja_spy.ki_power"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Nightsong Enforcer",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Team combat specialist",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Adventurer"
+    },
+    "hitDie": 8,
+    "babProg": "full",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "good",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "nightsong_enforcer.teamwork",
+        "name": "Teamwork",
+        "type": "feature",
+        "description": {
+          "summary": "Teamwork",
+          "fullText": "Teamwork ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "nightsong_enforcer.teamwork"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "nightsong_enforcer.teamwork"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "nightsong_enforcer.teamwork"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Nightsong Infiltrator",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Stealth operative",
+      "flavor": "",
+      "role": "Stealth",
+      "sourceText": "Complete Adventurer"
+    },
+    "hitDie": 6,
+    "babProg": "medium",
+    "skillPoints": 6,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "nightsong_infiltrator.infiltration",
+        "name": "Infiltration",
+        "type": "feature",
+        "description": {
+          "summary": "Infiltration",
+          "fullText": "Infiltration ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "nightsong_infiltrator.infiltration"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "nightsong_infiltrator.infiltration"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "nightsong_infiltrator.infiltration"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Thief Acrobat",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Mobility rogue",
+      "flavor": "",
+      "role": "Stealth",
+      "sourceText": "Complete Adventurer"
+    },
+    "hitDie": 6,
+    "babProg": "medium",
+    "skillPoints": 6,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "thief_acrobat.acrobatics",
+        "name": "Acrobatics",
+        "type": "feature",
+        "description": {
+          "summary": "Acrobatics",
+          "fullText": "Acrobatics ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "thief_acrobat.acrobatics"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "thief_acrobat.acrobatics"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "thief_acrobat.acrobatics"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  }
+]

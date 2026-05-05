@@ -1,0 +1,434 @@
+[
+  {
+    "name": "Kensai",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Weapon-bound warrior",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "kensai.signature_weapon",
+        "name": "Signature Weapon",
+        "type": "feature",
+        "description": {
+          "summary": "Signature Weapon",
+          "fullText": "Signature Weapon ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "kensai.signature_weapon"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "kensai.signature_weapon"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "kensai.signature_weapon"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Reaping Mauler",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Grappling specialist",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "reaping_mauler.grapple_mastery",
+        "name": "Grapple Mastery",
+        "type": "feature",
+        "description": {
+          "summary": "Grapple Mastery",
+          "fullText": "Grapple Mastery ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "reaping_mauler.grapple_mastery"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "reaping_mauler.grapple_mastery"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "reaping_mauler.grapple_mastery"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Drunken Master",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Unpredictable combatant",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "good",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "drunken_master.drunken_style",
+        "name": "Drunken Style",
+        "type": "feature",
+        "description": {
+          "summary": "Drunken Style",
+          "fullText": "Drunken Style ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "drunken_master.drunken_style"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "drunken_master.drunken_style"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "drunken_master.drunken_style"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Samurai (CW Variant)",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Honor-bound warrior",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "samurai_prc.daisho_mastery",
+        "name": "Daisho Mastery",
+        "type": "feature",
+        "description": {
+          "summary": "Daisho Mastery",
+          "fullText": "Daisho Mastery ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "samurai_prc.daisho_mastery"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "samurai_prc.daisho_mastery"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "samurai_prc.daisho_mastery"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  }
+]

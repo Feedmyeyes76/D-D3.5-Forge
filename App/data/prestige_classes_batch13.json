@@ -1,0 +1,439 @@
+[
+  {
+    "name": "Order of the Bow Initiate",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Precision archer",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 8,
+    "babProg": "full",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "order_of_the_bow_initiate.ranged_precision",
+        "name": "Ranged Precision",
+        "type": "feature",
+        "description": {
+          "summary": "Ranged Precision",
+          "fullText": "Ranged Precision ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "order_of_the_bow_initiate.ranged_precision"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "order_of_the_bow_initiate.ranged_precision"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "order_of_the_bow_initiate.ranged_precision"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Tempest",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Two-weapon fighter",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "good",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "tempest.two_weapon_mastery",
+        "name": "Two-Weapon Mastery",
+        "type": "feature",
+        "description": {
+          "summary": "Two-Weapon Mastery",
+          "fullText": "Two-Weapon Mastery ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "tempest.two_weapon_mastery"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "tempest.two_weapon_mastery"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "tempest.two_weapon_mastery"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Warshaper",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Shapeshifter combat specialist",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "warshaper.morphic_weapons",
+        "name": "Morphic Weapons",
+        "type": "feature",
+        "description": {
+          "summary": "Morphic Weapons",
+          "fullText": "Morphic Weapons ability."
+        },
+        "progression": {
+          "1": {},
+          "4": {},
+          "7": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "warshaper.morphic_weapons"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "warshaper.morphic_weapons"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "warshaper.morphic_weapons"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "warshaper.morphic_weapons"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Weapon Master",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Weapon specialist",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "weapon_master.ki_critical",
+        "name": "Ki Critical",
+        "type": "feature",
+        "description": {
+          "summary": "Ki Critical",
+          "fullText": "Ki Critical ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "weapon_master.ki_critical"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "weapon_master.ki_critical"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "weapon_master.ki_critical"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  }
+]

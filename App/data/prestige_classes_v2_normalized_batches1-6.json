@@ -1,0 +1,6840 @@
+[
+  {
+    "name": "Assassin",
+    "description": {
+      "summary": "A stealth-based killer specializing in poison use, death attacks, and assassin spellcasting.",
+      "flavor": "Assassins are precise killers who combine patience, stealth, poison, and dark arcane magic to eliminate chosen targets.",
+      "role": "Stealth striker with precision damage, death attack, poison safety, and a dedicated Intelligence-based arcane spell list.",
+      "sourceText": "Dungeon Master's Guide, p. 180"
+    },
+    "hitDie": 6,
+    "babProg": "medium",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any evil",
+      "skills": [
+        {
+          "name": "Disguise",
+          "ranks": 4
+        },
+        {
+          "name": "Hide",
+          "ranks": 8
+        },
+        {
+          "name": "Move Silently",
+          "ranks": 8
+        }
+      ],
+      "special": "Must kill someone as part of the initiation."
+    },
+    "classSkills": [
+      "Balance",
+      "Bluff",
+      "Climb",
+      "Craft",
+      "Decipher Script",
+      "Diplomacy",
+      "Disable Device",
+      "Disguise",
+      "Escape Artist",
+      "Forgery",
+      "Gather Information",
+      "Hide",
+      "Intimidate",
+      "Jump",
+      "Listen",
+      "Move Silently",
+      "Open Lock",
+      "Search",
+      "Sense Motive",
+      "Sleight of Hand",
+      "Spot",
+      "Swim",
+      "Tumble",
+      "Use Magic Device",
+      "Use Rope"
+    ],
+    "features": [
+      {
+        "id": "assassin.sneak_attack",
+        "name": "Sneak Attack",
+        "type": "scaling",
+        "description": {
+          "summary": "Deal extra damage when attacking vulnerable targets.",
+          "fullText": "The assassin gains sneak attack damage. This extra damage applies when the target is denied its Dexterity bonus to AC or when the assassin flanks the target, following normal sneak attack rules."
+        },
+        "progression": {
+          "1": {
+            "value": "1d6"
+          },
+          "3": {
+            "value": "2d6"
+          },
+          "5": {
+            "value": "3d6"
+          },
+          "7": {
+            "value": "4d6"
+          },
+          "9": {
+            "value": "5d6"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.death_attack",
+        "name": "Death Attack",
+        "type": "ability",
+        "description": {
+          "summary": "Study a victim, then make a sneak attack that can kill or paralyze.",
+          "fullText": "If the assassin studies a victim for 3 rounds and then makes a sneak attack with a melee weapon that successfully deals damage, the sneak attack has the additional effect of possibly either paralyzing or killing the target. The target receives a Fortitude save against DC 10 + assassin level + the assassin's Intelligence modifier. The assassin must make the attack within 3 rounds after study is complete. Paralysis lasts 1d6 rounds plus 1 round per assassin level."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "requiresStudyRounds": 3,
+              "attackWindowRounds": 3,
+              "requiresMeleeSneakAttack": true,
+              "saveType": "fortitude",
+              "saveDcFormula": "10 + class level + Intelligence modifier",
+              "effects": [
+                "death",
+                "paralysis"
+              ],
+              "paralysisDuration": "1d6 rounds + assassin level"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.poison_use",
+        "name": "Poison Use",
+        "type": "feature",
+        "description": {
+          "summary": "Apply poison without risking accidental self-poisoning.",
+          "fullText": "Assassins are trained in the use of poison and never risk accidentally poisoning themselves when applying poison to a blade."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "noAccidentalSelfPoisoningWhenApplyingPoison": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.assassin_spellcasting",
+        "name": "Assassin Spellcasting",
+        "type": "casting",
+        "description": {
+          "summary": "Prepare Intelligence-based arcane spells from the assassin spell list.",
+          "fullText": "Beginning at 1st level, the assassin gains the ability to cast a small number of arcane spells. Assassin spellcasting is Intelligence-based and uses the assassin spell list."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "castingType": "prepared",
+              "tradition": "arcane",
+              "ability": "intelligence",
+              "spellList": "Assassin"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.save_bonus_vs_poison",
+        "name": "Save Bonus against Poison",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a scaling bonus on saving throws against poison.",
+          "fullText": "The assassin gains a bonus on saving throws against poison. This bonus improves as assassin level increases."
+        },
+        "progression": {
+          "2": {
+            "value": "+1"
+          },
+          "4": {
+            "value": "+2"
+          },
+          "6": {
+            "value": "+3"
+          },
+          "8": {
+            "value": "+4"
+          },
+          "10": {
+            "value": "+5"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.uncanny_dodge",
+        "name": "Uncanny Dodge",
+        "type": "feature",
+        "description": {
+          "summary": "Retain Dexterity bonus to AC when caught flat-footed or attacked by an invisible foe.",
+          "fullText": "Starting at 2nd level, the assassin retains her Dexterity bonus to AC even if caught flat-footed or struck by an invisible attacker."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "retainDexBonusWhenFlatFooted": true,
+              "retainDexBonusAgainstInvisibleAttacker": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.improved_uncanny_dodge",
+        "name": "Improved Uncanny Dodge",
+        "type": "feature",
+        "description": {
+          "summary": "Cannot be flanked except by sufficiently advanced rogues.",
+          "fullText": "At 5th level, the assassin can no longer be flanked except by a rogue whose rogue level is at least four higher than the assassin's character level, following normal improved uncanny dodge rules."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "cannotBeFlanked": true,
+              "rogueException": "rogue level at least 4 higher"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.hide_in_plain_sight",
+        "name": "Hide in Plain Sight",
+        "type": "feature",
+        "description": {
+          "summary": "Hide while observed when near shadow.",
+          "fullText": "At 8th level, the assassin can use the Hide skill even while being observed, as long as she is within 10 feet of some sort of shadow."
+        },
+        "progression": {
+          "8": {
+            "mechanics": {
+              "allowsHideWhileObserved": true,
+              "requiresShadow": true,
+              "shadowRangeFeet": 10
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "assassin.sneak_attack"
+          },
+          {
+            "ref": "assassin.death_attack"
+          },
+          {
+            "ref": "assassin.poison_use"
+          },
+          {
+            "ref": "assassin.assassin_spellcasting"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "assassin.save_bonus_vs_poison"
+          },
+          {
+            "ref": "assassin.uncanny_dodge"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "assassin.sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "assassin.save_bonus_vs_poison"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "assassin.sneak_attack"
+          },
+          {
+            "ref": "assassin.improved_uncanny_dodge"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "assassin.save_bonus_vs_poison"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "assassin.sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "assassin.save_bonus_vs_poison"
+          },
+          {
+            "ref": "assassin.hide_in_plain_sight"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "assassin.sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "assassin.save_bonus_vs_poison"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Arcane Trickster",
+    "description": {
+      "summary": "A rogue and arcane spellcaster who combines skill, stealth, magic, and precision attacks.",
+      "flavor": "Arcane tricksters use magic to extend their larcenous talents, strike with precision, and manipulate objects from a distance.",
+      "role": "Arcane stealth caster with sneak attack progression, ranged legerdemain, and impromptu sneak attack uses.",
+      "sourceText": "Dungeon Master's Guide, p. 177"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any nonlawful",
+      "skills": [
+        {
+          "name": "Decipher Script",
+          "ranks": 7
+        },
+        {
+          "name": "Disable Device",
+          "ranks": 7
+        },
+        {
+          "name": "Escape Artist",
+          "ranks": 7
+        },
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 4
+        }
+      ],
+      "spells": "Ability to cast mage hand and at least one arcane spell of 3rd level or higher.",
+      "special": "Sneak attack +2d6."
+    },
+    "classSkills": [
+      "Appraise",
+      "Balance",
+      "Bluff",
+      "Climb",
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Diplomacy",
+      "Disable Device",
+      "Disguise",
+      "Escape Artist",
+      "Forgery",
+      "Gather Information",
+      "Hide",
+      "Jump",
+      "Knowledge (arcana)",
+      "Listen",
+      "Move Silently",
+      "Open Lock",
+      "Profession",
+      "Search",
+      "Sense Motive",
+      "Sleight of Hand",
+      "Spellcraft",
+      "Spot",
+      "Swim",
+      "Tumble",
+      "Use Magic Device",
+      "Use Rope"
+    ],
+    "features": [
+      {
+        "id": "arcane_trickster.ranged_legerdemain",
+        "name": "Ranged Legerdemain",
+        "type": "ability",
+        "description": {
+          "summary": "Use legerdemain skills at range.",
+          "fullText": "The arcane trickster can use Disable Device, Open Lock, or Sleight of Hand at a range of 30 feet. Working at range increases the normal skill check DC by 5, and the ability can be used a limited number of times per day."
+        },
+        "progression": {
+          "1": {
+            "value": "1/day",
+            "mechanics": {
+              "skills": [
+                "Disable Device",
+                "Open Lock",
+                "Sleight of Hand"
+              ],
+              "rangeFeet": 30,
+              "dcIncrease": 5
+            }
+          },
+          "5": {
+            "value": "2/day"
+          },
+          "9": {
+            "value": "3/day"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "arcane_trickster.sneak_attack",
+        "name": "Sneak Attack",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain additional sneak attack damage.",
+          "fullText": "The arcane trickster gains additional sneak attack damage at higher levels. This stacks with sneak attack damage from other classes."
+        },
+        "progression": {
+          "3": {
+            "value": "1d6"
+          },
+          "5": {
+            "value": "2d6"
+          },
+          "7": {
+            "value": "3d6"
+          },
+          "9": {
+            "value": "4d6"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "arcane_trickster.impromptu_sneak_attack",
+        "name": "Impromptu Sneak Attack",
+        "type": "ability",
+        "description": {
+          "summary": "Designate an attack as a sneak attack even without normal sneak attack conditions.",
+          "fullText": "Beginning at 3rd level, the arcane trickster can declare one melee or ranged attack to be a sneak attack before making the attack roll. The target can be no more than 30 feet away if the attack is ranged. The ability can be used a limited number of times per day."
+        },
+        "progression": {
+          "3": {
+            "value": "1/day",
+            "mechanics": {
+              "declareBeforeAttack": true,
+              "rangedMaxFeet": 30,
+              "appliesSneakAttack": true
+            }
+          },
+          "7": {
+            "value": "2/day"
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "arcane_trickster.ranged_legerdemain"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "arcane_trickster.sneak_attack"
+          },
+          {
+            "ref": "arcane_trickster.impromptu_sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "arcane_trickster.ranged_legerdemain"
+          },
+          {
+            "ref": "arcane_trickster.sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "arcane_trickster.sneak_attack"
+          },
+          {
+            "ref": "arcane_trickster.impromptu_sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "arcane_trickster.ranged_legerdemain"
+          },
+          {
+            "ref": "arcane_trickster.sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Eldritch Knight",
+    "description": {
+      "summary": "A martial arcane prestige class that combines weapon training with spellcasting advancement.",
+      "flavor": "Eldritch knights are warriors who refuse to choose between battlefield prowess and arcane power.",
+      "role": "Full-BAB arcane gish with one lost casting level and bonus combat feats.",
+      "sourceText": "Dungeon Master's Guide, p. 182"
+    },
+    "hitDie": 6,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "proficiencies": "Proficiency with all martial weapons.",
+      "spells": "Able to cast 3rd-level arcane spells."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Jump",
+      "Knowledge (arcana)",
+      "Knowledge (nobility and royalty)",
+      "Ride",
+      "Sense Motive",
+      "Spellcraft",
+      "Swim"
+    ],
+    "features": [
+      {
+        "id": "eldritch_knight.bonus_feat",
+        "name": "Bonus Feat",
+        "type": "feature",
+        "description": {
+          "summary": "Gain fighter bonus feats at specific levels.",
+          "fullText": "The eldritch knight gains a bonus feat at 1st level, 5th level, and 10th level. The feat must be selected from the fighter bonus feat list."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "grantChoice": "fighter_bonus_feat"
+            }
+          },
+          "5": {
+            "mechanics": {
+              "grantChoice": "fighter_bonus_feat"
+            }
+          },
+          "10": {
+            "mechanics": {
+              "grantChoice": "fighter_bonus_feat"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "eldritch_knight.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class at every level after 1st.",
+          "fullText": "At each eldritch knight level after 1st, the character gains new spells per day and an increase in caster level as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "2": {
+            "value": "+1 existing arcane class"
+          },
+          "3": {
+            "value": "+1 existing arcane class"
+          },
+          "4": {
+            "value": "+1 existing arcane class"
+          },
+          "5": {
+            "value": "+1 existing arcane class"
+          },
+          "6": {
+            "value": "+1 existing arcane class"
+          },
+          "7": {
+            "value": "+1 existing arcane class"
+          },
+          "8": {
+            "value": "+1 existing arcane class"
+          },
+          "9": {
+            "value": "+1 existing arcane class"
+          },
+          "10": {
+            "value": "+1 existing arcane class"
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "eldritch_knight.bonus_feat"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          },
+          {
+            "ref": "eldritch_knight.bonus_feat"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          },
+          {
+            "ref": "eldritch_knight.bonus_feat"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Mystic Theurge",
+    "description": {
+      "summary": "A dual-progression prestige class advancing both arcane and divine spellcasting.",
+      "flavor": "Mystic theurges pursue mastery across two magical traditions, blending arcane study with divine devotion.",
+      "role": "Dual-progression caster that advances one existing arcane class and one existing divine class at every level.",
+      "sourceText": "Dungeon Master's Guide, p. 192"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 6
+        },
+        {
+          "name": "Knowledge (religion)",
+          "ranks": 6
+        }
+      ],
+      "spells": "Able to cast 2nd-level divine spells and 2nd-level arcane spells."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Knowledge (arcana)",
+      "Knowledge (religion)",
+      "Profession",
+      "Sense Motive",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "mystic_theurge.arcane_spellcasting_advancement",
+        "name": "Arcane Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class each level.",
+          "fullText": "At each mystic theurge level, the character gains new spells per day and an increase in caster level as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing arcane class"
+          },
+          "2": {
+            "value": "+1 existing arcane class"
+          },
+          "3": {
+            "value": "+1 existing arcane class"
+          },
+          "4": {
+            "value": "+1 existing arcane class"
+          },
+          "5": {
+            "value": "+1 existing arcane class"
+          },
+          "6": {
+            "value": "+1 existing arcane class"
+          },
+          "7": {
+            "value": "+1 existing arcane class"
+          },
+          "8": {
+            "value": "+1 existing arcane class"
+          },
+          "9": {
+            "value": "+1 existing arcane class"
+          },
+          "10": {
+            "value": "+1 existing arcane class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mystic_theurge.divine_spellcasting_advancement",
+        "name": "Divine Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing divine spellcasting class each level.",
+          "fullText": "At each mystic theurge level, the character gains new spells per day and an increase in caster level as if gaining a level in an existing divine spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing divine class"
+          },
+          "2": {
+            "value": "+1 existing divine class"
+          },
+          "3": {
+            "value": "+1 existing divine class"
+          },
+          "4": {
+            "value": "+1 existing divine class"
+          },
+          "5": {
+            "value": "+1 existing divine class"
+          },
+          "6": {
+            "value": "+1 existing divine class"
+          },
+          "7": {
+            "value": "+1 existing divine class"
+          },
+          "8": {
+            "value": "+1 existing divine class"
+          },
+          "9": {
+            "value": "+1 existing divine class"
+          },
+          "10": {
+            "value": "+1 existing divine class"
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Blackguard",
+    "description": {
+      "summary": "An anti-paladin who gains dark divine powers and a fiendish servant.",
+      "flavor": "Blackguards are champions of evil, wielding divine power through corruption and cruelty.",
+      "role": "Melee striker with divine abilities, debuffs, and servant.",
+      "sourceText": "Dungeon Master's Guide, p. 182"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "features": [
+      {
+        "id": "blackguard.aura_of_evil",
+        "name": "Aura of Evil",
+        "type": "feature",
+        "description": {
+          "summary": "Radiates evil aura.",
+          "fullText": "A blackguard radiates an aura of evil as a cleric of equal level."
+        },
+        "progression": {
+          "1": {}
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "blackguard.aura_of_evil"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Expand full RAW feature set"
+      ]
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Arcane Archer",
+    "description": {
+      "summary": "A ranged combatant who infuses arrows with magic.",
+      "flavor": "Arcane archers blend archery with arcane power to strike distant foes.",
+      "role": "Ranged striker with magical enhancements.",
+      "sourceText": "Dungeon Master's Guide, p. 176"
+    },
+    "hitDie": 8,
+    "babProg": "full",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "good",
+      "ref": "good",
+      "will": "poor"
+    },
+    "features": [
+      {
+        "id": "arcane_archer.enhance_arrow",
+        "name": "Enhance Arrow",
+        "type": "scaling",
+        "description": {
+          "summary": "Arrows gain enhancement bonuses.",
+          "fullText": "Arrows fired gain enhancement bonuses as the arcane archer advances."
+        },
+        "progression": {
+          "1": {
+            "value": "+1"
+          },
+          "3": {
+            "value": "+2"
+          },
+          "5": {
+            "value": "+3"
+          },
+          "7": {
+            "value": "+4"
+          },
+          "9": {
+            "value": "+5"
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "arcane_archer.enhance_arrow"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "arcane_archer.enhance_arrow"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "arcane_archer.enhance_arrow"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "arcane_archer.enhance_arrow"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "arcane_archer.enhance_arrow"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Add remaining class features"
+      ]
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Shadowdancer",
+    "description": {
+      "summary": "Master of shadows and stealth.",
+      "flavor": "Shadowdancers blend into darkness.",
+      "role": "Stealth specialist.",
+      "sourceText": "DMG"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 6,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "features": [
+      {
+        "id": "shadowdancer.hide_in_plain_sight",
+        "name": "Hide in Plain Sight",
+        "type": "feature",
+        "description": {
+          "summary": "Hide while observed.",
+          "fullText": "Can hide even while observed if near shadows."
+        },
+        "progression": {
+          "1": {}
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "shadowdancer.hide_in_plain_sight"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Dragon Disciple",
+    "description": {
+      "summary": "A spontaneous arcane caster who gradually transforms into a dragon-like being.",
+      "flavor": "Dragon disciples awaken ancient draconic power within themselves.",
+      "role": "Transformation class with natural attacks, ability boosts, breath weapon, and bonus spell slots.",
+      "sourceText": "Dungeon Master's Guide, p. 183"
+    },
+    "hitDie": 12,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "race": "Any nondragon and non-half-dragon.",
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 8
+        }
+      ],
+      "languages": [
+        "Draconic"
+      ],
+      "spells": "Ability to cast arcane spells without preparation."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Escape Artist",
+      "Gather Information",
+      "Knowledge (arcana)",
+      "Listen",
+      "Profession",
+      "Search",
+      "Spellcraft",
+      "Spot",
+      "Speak Language"
+    ],
+    "features": [
+      {
+        "id": "dragon_disciple.bonus_spells",
+        "name": "Bonus Spells",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain bonus spell slots at several levels.",
+          "fullText": "At 1st, 2nd, 3rd, 4th, 7th, and 9th level, the dragon disciple gains one bonus spell slot of any spell level the character can already cast. Once chosen, the spell level of the bonus slot cannot be changed."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 spell slot"
+          },
+          "2": {
+            "value": "+1 spell slot"
+          },
+          "3": {
+            "value": "+1 spell slot"
+          },
+          "4": {
+            "value": "+1 spell slot"
+          },
+          "7": {
+            "value": "+1 spell slot"
+          },
+          "9": {
+            "value": "+1 spell slot"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.draconic_choice",
+        "name": "Draconic Choice",
+        "type": "feature",
+        "description": {
+          "summary": "Choose a dragon variety.",
+          "fullText": "At 1st level, the dragon disciple chooses one variety of dragon. This determines the energy type of the breath weapon and the final half-dragon transformation."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "choice": "dragon variety"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.natural_armor_increase",
+        "name": "Natural Armor Increase",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain increasing natural armor.",
+          "fullText": "The dragon disciple's natural armor bonus increases as the class advances."
+        },
+        "progression": {
+          "1": {
+            "value": "+1"
+          },
+          "4": {
+            "value": "+2"
+          },
+          "7": {
+            "value": "+3"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.ability_boost",
+        "name": "Ability Boost",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain permanent ability score increases.",
+          "fullText": "The dragon disciple gains inherent ability score increases over the course of the class."
+        },
+        "progression": {
+          "2": {
+            "value": "Strength +2"
+          },
+          "4": {
+            "value": "Strength +2"
+          },
+          "7": {
+            "value": "Constitution +2"
+          },
+          "8": {
+            "value": "Intelligence +2"
+          },
+          "10": {
+            "value": "Strength +4"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.claws_and_bite",
+        "name": "Claws and Bite",
+        "type": "feature",
+        "description": {
+          "summary": "Gain claw and bite natural attacks.",
+          "fullText": "At 2nd level, the dragon disciple gains claw and bite attacks if the character does not already have them. Damage depends on size."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "naturalAttacks": [
+                "bite",
+                "claw"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.breath_weapon",
+        "name": "Breath Weapon",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a dragon-type breath weapon.",
+          "fullText": "At 3rd level, the dragon disciple gains a breath weapon based on the chosen dragon variety. Damage increases at higher levels."
+        },
+        "progression": {
+          "3": {
+            "value": "2d8"
+          },
+          "7": {
+            "value": "4d8"
+          },
+          "10": {
+            "value": "6d8"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.blindsense",
+        "name": "Blindsense",
+        "type": "feature",
+        "description": {
+          "summary": "Gain blindsense out to 30 feet.",
+          "fullText": "At 5th level, the dragon disciple gains blindsense out to 30 feet."
+        },
+        "progression": {
+          "5": {
+            "value": "30 ft."
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.wings",
+        "name": "Wings",
+        "type": "feature",
+        "description": {
+          "summary": "Grow wings and gain a fly speed.",
+          "fullText": "At 9th level, a Medium or larger dragon disciple grows wings and can fly at twice the character's land speed with average maneuverability."
+        },
+        "progression": {
+          "9": {
+            "mechanics": {
+              "requiresSize": "Medium or larger",
+              "flySpeed": "twice land speed",
+              "maneuverability": "average"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dragon_disciple.apotheosis",
+        "name": "Dragon Apotheosis",
+        "type": "feature",
+        "description": {
+          "summary": "Complete transformation into a half-dragon.",
+          "fullText": "At 10th level, the dragon disciple takes on the half-dragon template and the dragon type."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "template": "half-dragon",
+              "typeChange": "dragon"
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "dragon_disciple.draconic_choice"
+          },
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.natural_armor_increase"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.ability_boost"
+          },
+          {
+            "ref": "dragon_disciple.claws_and_bite"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.breath_weapon"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.natural_armor_increase"
+          },
+          {
+            "ref": "dragon_disciple.ability_boost"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "dragon_disciple.blindsense"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.natural_armor_increase"
+          },
+          {
+            "ref": "dragon_disciple.ability_boost"
+          },
+          {
+            "ref": "dragon_disciple.breath_weapon"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "dragon_disciple.ability_boost"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "dragon_disciple.bonus_spells"
+          },
+          {
+            "ref": "dragon_disciple.wings"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "dragon_disciple.ability_boost"
+          },
+          {
+            "ref": "dragon_disciple.breath_weapon"
+          },
+          {
+            "ref": "dragon_disciple.apotheosis"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Dwarven Defender",
+    "description": {
+      "summary": "A dwarf defensive specialist who becomes an immovable living wall.",
+      "flavor": "Dwarven defenders are masters of holding ground.",
+      "role": "Defensive tank with defensive stance, trap sense, uncanny dodge, and damage reduction.",
+      "sourceText": "Dungeon Master's Guide, p. 186"
+    },
+    "hitDie": 12,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any lawful",
+      "race": "Dwarf",
+      "baseAttackBonus": "+7",
+      "feats": [
+        "Dodge",
+        "Endurance",
+        "Toughness"
+      ]
+    },
+    "classSkills": [
+      "Craft",
+      "Listen",
+      "Sense Motive",
+      "Spot"
+    ],
+    "features": [
+      {
+        "id": "dwarven_defender.defensive_stance",
+        "name": "Defensive Stance",
+        "type": "scaling",
+        "description": {
+          "summary": "Enter a powerful defensive stance a limited number of times per day.",
+          "fullText": "The dwarven defender can enter a defensive stance, gaining bonuses to Strength, Constitution, saving throws, and AC while remaining in place. Uses per day increase with class level."
+        },
+        "progression": {
+          "1": {
+            "value": "1/day"
+          },
+          "3": {
+            "value": "2/day"
+          },
+          "5": {
+            "value": "3/day"
+          },
+          "7": {
+            "value": "4/day"
+          },
+          "9": {
+            "value": "5/day"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dwarven_defender.uncanny_dodge",
+        "name": "Uncanny Dodge",
+        "type": "feature",
+        "description": {
+          "summary": "Retain Dexterity bonus to AC when caught flat-footed.",
+          "fullText": "At 2nd level, the dwarven defender retains Dexterity bonus to AC even when caught flat-footed or attacked by an invisible opponent."
+        },
+        "progression": {
+          "2": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dwarven_defender.trap_sense",
+        "name": "Trap Sense",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a bonus on Reflex saves and AC against traps.",
+          "fullText": "The dwarven defender gains a scaling bonus on Reflex saves made to avoid traps and a dodge bonus to AC against attacks made by traps."
+        },
+        "progression": {
+          "4": {
+            "value": "+1"
+          },
+          "8": {
+            "value": "+2"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dwarven_defender.improved_uncanny_dodge",
+        "name": "Improved Uncanny Dodge",
+        "type": "feature",
+        "description": {
+          "summary": "Cannot be flanked except by sufficiently advanced rogues.",
+          "fullText": "At 6th level, the dwarven defender can no longer be flanked except by a rogue of sufficiently high level."
+        },
+        "progression": {
+          "6": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dwarven_defender.damage_reduction",
+        "name": "Damage Reduction",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain damage reduction that improves with level.",
+          "fullText": "Starting at 6th level, the dwarven defender gains damage reduction. The amount increases at higher levels."
+        },
+        "progression": {
+          "6": {
+            "value": "3/-"
+          },
+          "10": {
+            "value": "6/-"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "dwarven_defender.mobile_defense",
+        "name": "Mobile Defense",
+        "type": "feature",
+        "description": {
+          "summary": "Move slightly while maintaining defensive stance.",
+          "fullText": "At 8th level, the dwarven defender can take a 5-foot step while in defensive stance without ending the stance."
+        },
+        "progression": {
+          "8": {}
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "dwarven_defender.defensive_stance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "dwarven_defender.uncanny_dodge"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "dwarven_defender.defensive_stance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "dwarven_defender.trap_sense"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "dwarven_defender.defensive_stance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "dwarven_defender.improved_uncanny_dodge"
+          },
+          {
+            "ref": "dwarven_defender.damage_reduction"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "dwarven_defender.defensive_stance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "dwarven_defender.trap_sense"
+          },
+          {
+            "ref": "dwarven_defender.mobile_defense"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "dwarven_defender.defensive_stance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "dwarven_defender.damage_reduction"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Duelist",
+    "description": {
+      "summary": "An agile combatant who relies on speed, precision, and intellect.",
+      "flavor": "Duelists thrive in single combat, turning aside blows with skill and striking precisely with piercing weapons.",
+      "role": "Mobile finesse melee combatant with AC bonuses, precision damage, initiative, and defensive mobility.",
+      "sourceText": "Dungeon Master's Guide, p. 185"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {
+      "baseAttackBonus": "+6",
+      "skills": [
+        {
+          "name": "Perform",
+          "ranks": 3
+        },
+        {
+          "name": "Tumble",
+          "ranks": 5
+        }
+      ],
+      "feats": [
+        "Dodge",
+        "Mobility",
+        "Weapon Finesse"
+      ]
+    },
+    "classSkills": [
+      "Balance",
+      "Bluff",
+      "Escape Artist",
+      "Jump",
+      "Listen",
+      "Perform",
+      "Sense Motive",
+      "Spot",
+      "Tumble"
+    ],
+    "features": [
+      {
+        "id": "duelist.canny_defense",
+        "name": "Canny Defense",
+        "type": "scaling",
+        "description": {
+          "summary": "Add Intelligence bonus to AC while unarmored and unencumbered.",
+          "fullText": "When not wearing armor or using a shield, the duelist adds Intelligence bonus to AC, limited by class level, while wielding a melee weapon."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 max"
+          },
+          "2": {
+            "value": "+2 max"
+          },
+          "3": {
+            "value": "+3 max"
+          },
+          "4": {
+            "value": "+4 max"
+          },
+          "5": {
+            "value": "+5 max"
+          },
+          "6": {
+            "value": "+6 max"
+          },
+          "7": {
+            "value": "+7 max"
+          },
+          "8": {
+            "value": "+8 max"
+          },
+          "9": {
+            "value": "+9 max"
+          },
+          "10": {
+            "value": "+10 max"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.improved_reaction",
+        "name": "Improved Reaction",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a bonus on initiative checks.",
+          "fullText": "At 2nd level, the duelist gains a bonus on initiative checks. This bonus improves at 8th level."
+        },
+        "progression": {
+          "2": {
+            "value": "+2"
+          },
+          "8": {
+            "value": "+4"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.enhanced_mobility",
+        "name": "Enhanced Mobility",
+        "type": "feature",
+        "description": {
+          "summary": "Gain AC bonus against attacks of opportunity from movement.",
+          "fullText": "At 3rd level, when wearing no armor and not using a shield, the duelist gains a dodge bonus to AC against attacks of opportunity caused by moving."
+        },
+        "progression": {
+          "3": {
+            "value": "+4"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.grace",
+        "name": "Grace",
+        "type": "feature",
+        "description": {
+          "summary": "Gain a bonus on Reflex saves.",
+          "fullText": "At 4th level, the duelist gains a competence bonus on Reflex saves."
+        },
+        "progression": {
+          "4": {
+            "value": "+2"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.precise_strike",
+        "name": "Precise Strike",
+        "type": "scaling",
+        "description": {
+          "summary": "Deal extra precision damage with a light or one-handed piercing weapon.",
+          "fullText": "When using a light or one-handed piercing weapon and not attacking with a weapon in the other hand, the duelist adds extra damage against targets subject to critical hits."
+        },
+        "progression": {
+          "5": {
+            "value": "+1d6"
+          },
+          "10": {
+            "value": "+2d6"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.acrobatic_charge",
+        "name": "Acrobatic Charge",
+        "type": "feature",
+        "description": {
+          "summary": "Charge across difficult terrain or obstacles with a skill check.",
+          "fullText": "At 6th level, the duelist can charge in situations where others cannot, moving across difficult terrain or obstacles with appropriate checks."
+        },
+        "progression": {
+          "6": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.elaborate_parry",
+        "name": "Elaborate Parry",
+        "type": "feature",
+        "description": {
+          "summary": "Gain a large dodge bonus when fighting defensively or using total defense.",
+          "fullText": "At 7th level, when fighting defensively or using total defense in melee combat, the duelist gains an additional dodge bonus to AC equal to class level."
+        },
+        "progression": {
+          "7": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "duelist.deflect_arrows",
+        "name": "Deflect Arrows",
+        "type": "feature",
+        "description": {
+          "summary": "Deflect one ranged weapon attack each round.",
+          "fullText": "At 9th level, the duelist gains the benefit of the Deflect Arrows feat when using a light or one-handed piercing weapon."
+        },
+        "progression": {
+          "9": {}
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.improved_reaction"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.enhanced_mobility"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.grace"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.precise_strike"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.acrobatic_charge"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.elaborate_parry"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.improved_reaction"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.deflect_arrows"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.precise_strike"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Loremaster",
+    "description": {
+      "summary": "A spellcaster-scholar who turns deep knowledge into secrets and magical advancement.",
+      "flavor": "Loremasters pursue knowledge above all else.",
+      "role": "Full spellcasting advancement prestige class with knowledge-based utility, secrets, lore, and language benefits.",
+      "sourceText": "Dungeon Master's Guide, p. 191"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (any two)",
+          "ranks": 10
+        }
+      ],
+      "feats": [
+        "Any three metamagic or item creation feats",
+        "Skill Focus (any Knowledge skill)"
+      ],
+      "spells": "Able to cast seven different divination spells, one of which must be 3rd level or higher."
+    },
+    "classSkills": [
+      "Appraise",
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Gather Information",
+      "Knowledge (any)",
+      "Perform",
+      "Profession",
+      "Search",
+      "Speak Language",
+      "Spellcraft",
+      "Use Magic Device"
+    ],
+    "features": [
+      {
+        "id": "loremaster.secret",
+        "name": "Secret",
+        "type": "scaling",
+        "description": {
+          "summary": "Learn special secrets that grant chosen benefits.",
+          "fullText": "At 1st level and every two levels thereafter, the loremaster chooses a secret from the loremaster secrets list."
+        },
+        "progression": {
+          "1": {
+            "value": "1 secret"
+          },
+          "3": {
+            "value": "2 secrets"
+          },
+          "5": {
+            "value": "3 secrets"
+          },
+          "7": {
+            "value": "4 secrets"
+          },
+          "9": {
+            "value": "5 secrets"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "loremaster.lore",
+        "name": "Lore",
+        "type": "feature",
+        "description": {
+          "summary": "Identify legends and information through accumulated knowledge.",
+          "fullText": "At 2nd level, the loremaster gains the lore ability, functioning like bardic knowledge using loremaster level plus Intelligence modifier."
+        },
+        "progression": {
+          "2": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "loremaster.bonus_languages",
+        "name": "Bonus Languages",
+        "type": "feature",
+        "description": {
+          "summary": "Gain additional language knowledge.",
+          "fullText": "At 4th level and again at 8th level, the loremaster gains a bonus language."
+        },
+        "progression": {
+          "4": {
+            "value": "+1 language"
+          },
+          "8": {
+            "value": "+1 language"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "loremaster.greater_lore",
+        "name": "Greater Lore",
+        "type": "feature",
+        "description": {
+          "summary": "Identify magic items with superior lore.",
+          "fullText": "At 6th level, the loremaster gains greater lore, allowing knowledge to identify magic items as if using identify."
+        },
+        "progression": {
+          "6": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "loremaster.true_lore",
+        "name": "True Lore",
+        "type": "feature",
+        "description": {
+          "summary": "Gain powerful lore equivalent to legend lore or analyze dweomer.",
+          "fullText": "At 10th level, the loremaster gains true lore, allowing deep knowledge effects comparable to legend lore or analyze dweomer as specified by the class ability."
+        },
+        "progression": {
+          "10": {}
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "loremaster.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing spellcasting class at every loremaster level.",
+          "fullText": "At each loremaster level, the character gains new spells per day and an increase in caster level as if gaining a level in a spellcasting class the character belonged to before entering loremaster."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing spellcasting class"
+          },
+          "5": {
+            "value": "+1 existing spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing spellcasting class"
+          },
+          "7": {
+            "value": "+1 existing spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing spellcasting class"
+          },
+          "9": {
+            "value": "+1 existing spellcasting class"
+          },
+          "10": {
+            "value": "+1 existing spellcasting class"
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "loremaster.secret"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "loremaster.lore"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "loremaster.secret"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "loremaster.bonus_languages"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "loremaster.secret"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "loremaster.greater_lore"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "loremaster.secret"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "loremaster.bonus_languages"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "loremaster.secret"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "loremaster.true_lore"
+          },
+          {
+            "ref": "loremaster.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Acolyte of the Skin",
+    "description": {
+      "summary": "A spellcaster who bonds fiendish skin to gain infernal powers.",
+      "flavor": "Acolytes of the skin pursue power by undergoing a blasphemous ritual that grafts the essence of a fiend to their own flesh.",
+      "role": "Arcane prestige class with partial spellcasting, fiendish resistances, spell-like abilities, and outsider transformation.",
+      "sourceText": "Complete Arcane, p. 19"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any nongood",
+      "skills": [
+        {
+          "name": "Knowledge (the planes)",
+          "ranks": 6
+        }
+      ],
+      "spells": "Caster level 5th with spells or spell-like abilities.",
+      "special": "Must have made peaceful contact with a summoned evil outsider and must undergo the Ritual of Bonding."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Intimidate",
+      "Knowledge (arcana)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "acolyte_of_the_skin.wear_fiend",
+        "name": "Wear Fiend",
+        "type": "feature",
+        "description": {
+          "summary": "Bond fiendish skin to gain armor, Dexterity, and darkvision.",
+          "fullText": "The acolyte bonds fiendish skin to his own. The skin grants +1 natural armor, a +2 inherent bonus to Dexterity, and darkvision out to 60 feet."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "naturalArmorBonus": 1,
+              "dexterityInherentBonus": 2,
+              "darkvisionFeet": 60
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.poison",
+        "name": "Poison",
+        "type": "scaling",
+        "description": {
+          "summary": "Use poison as a spell-like ability.",
+          "fullText": "The acolyte can use poison as a spell-like ability. Uses per day improve at 5th level."
+        },
+        "progression": {
+          "1": {
+            "value": "1/day",
+            "mechanics": {
+              "spellLikeAbility": "poison",
+              "casterLevel": 8,
+              "saveDcFormula": "14 + primary spellcasting ability modifier"
+            }
+          },
+          "5": {
+            "value": "2/day"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing spellcasting class at even levels.",
+          "fullText": "At each even-numbered acolyte level, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing spellcasting class."
+        },
+        "progression": {
+          "2": {
+            "value": "+1 existing spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing spellcasting class"
+          },
+          "10": {
+            "value": "+1 existing spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.flame_resistant",
+        "name": "Flame Resistant",
+        "type": "feature",
+        "description": {
+          "summary": "Gain resistance to fire.",
+          "fullText": "The fiendish skin grants resistance to fire 10."
+        },
+        "progression": {
+          "2": {
+            "value": "fire resistance 10",
+            "mechanics": {
+              "resistance": {
+                "fire": 10
+              }
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.fiendish_glare",
+        "name": "Fiendish Glare",
+        "type": "ability",
+        "description": {
+          "summary": "Unnerve a foe with a supernatural glare.",
+          "fullText": "The acolyte can use a supernatural glare once per day as a standard action against a creature within 100 feet and line of effect. The target becomes shaken and must save or be stunned for a duration based on hit points."
+        },
+        "progression": {
+          "3": {
+            "value": "1/day",
+            "mechanics": {
+              "rangeFeet": 100,
+              "action": "standard",
+              "saveType": "will",
+              "saveDcFormula": "10 + class level + Charisma modifier",
+              "effects": [
+                "shaken",
+                "stunned"
+              ],
+              "mindAffecting": true,
+              "fear": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.skin_adaptation",
+        "name": "Skin Adaptation",
+        "type": "feature",
+        "description": {
+          "summary": "The fiendish skin adapts to the wearer.",
+          "fullText": "The natural armor from wear fiend improves to +2, the acolyte gains a +2 inherent bonus to Constitution, and darkvision extends to 120 feet."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "naturalArmorBonusTotal": 2,
+              "constitutionInherentBonus": 2,
+              "darkvisionFeet": 120
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.cold_resistant",
+        "name": "Cold Resistant",
+        "type": "feature",
+        "description": {
+          "summary": "Gain resistance to cold.",
+          "fullText": "The acolyte gains resistance to cold 10."
+        },
+        "progression": {
+          "6": {
+            "value": "cold resistance 10",
+            "mechanics": {
+              "resistance": {
+                "cold": 10
+              }
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.glare_of_the_pit",
+        "name": "Glare of the Pit",
+        "type": "ability",
+        "description": {
+          "summary": "Fire rays from the eyes.",
+          "fullText": "Once per day as a standard action, the acolyte projects two fiery rays with a range of 100 feet. Each ray requires a ranged touch attack and deals 8d6 fire damage."
+        },
+        "progression": {
+          "7": {
+            "value": "1/day",
+            "mechanics": {
+              "action": "standard",
+              "rangeFeet": 100,
+              "rays": 2,
+              "attack": "ranged touch",
+              "damage": "8d6 fire per ray"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.summon_fiend",
+        "name": "Summon Fiend",
+        "type": "ability",
+        "description": {
+          "summary": "Summon a fiend from the bonded skin.",
+          "fullText": "Once per day, the acolyte can summon a babau if the skin is demonic or a chain devil if it is devilish. The summoned creature serves for 1 hour and cannot use innate summoning abilities."
+        },
+        "progression": {
+          "9": {
+            "value": "1/day",
+            "mechanics": {
+              "duration": "1 hour",
+              "options": [
+                "babau",
+                "chain devil"
+              ],
+              "cannotUseInnateSummoning": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.fiendish_symbiosis",
+        "name": "Fiendish Symbiosis",
+        "type": "feature",
+        "description": {
+          "summary": "Become fully joined with the fiendish skin.",
+          "fullText": "At 10th level, the acolyte's type changes to outsider and he gains damage reduction 10/good. Unlike most outsiders, he can still be raised or resurrected."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "typeChange": "outsider",
+              "damageReduction": "10/good",
+              "canBeRaisedOrResurrected": true
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.wear_fiend"
+          },
+          {
+            "ref": "acolyte_of_the_skin.poison"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.spellcasting_advancement"
+          },
+          {
+            "ref": "acolyte_of_the_skin.flame_resistant"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.fiendish_glare"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.skin_adaptation"
+          },
+          {
+            "ref": "acolyte_of_the_skin.poison"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.spellcasting_advancement"
+          },
+          {
+            "ref": "acolyte_of_the_skin.cold_resistant"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.glare_of_the_pit"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.summon_fiend"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.spellcasting_advancement"
+          },
+          {
+            "ref": "acolyte_of_the_skin.fiendish_symbiosis"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Alienist",
+    "description": {
+      "summary": "A spellcaster who studies and summons entities from beyond normal reality.",
+      "flavor": "Alienists pierce the boundaries of sane magic, calling pseudonatural creatures and drawing power from terrifying reaches outside ordinary space and time.",
+      "role": "Full spellcasting summoner with pseudonatural summons, familiar changes, metamagic secrets, and alien transformation.",
+      "sourceText": "Complete Arcane, p. 21"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any nonlawful",
+      "skills": [
+        {
+          "name": "Knowledge (the planes)",
+          "ranks": 8
+        }
+      ],
+      "feats": [
+        "Augment Summoning"
+      ],
+      "spells": "Able to cast at least one summoning spell of 3rd level or higher.",
+      "special": "Must have made peaceful contact with an alienist or a pseudonatural creature."
+    },
+    "classSkills": [
+      "Concentration",
+      "Gather Information",
+      "Knowledge (arcana)",
+      "Knowledge (architecture and engineering)",
+      "Knowledge (dungeoneering)",
+      "Knowledge (geography)",
+      "Knowledge (history)",
+      "Knowledge (local)",
+      "Knowledge (nature)",
+      "Knowledge (nobility and royalty)",
+      "Knowledge (psionics)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Listen",
+      "Profession",
+      "Spellcraft",
+      "Spot"
+    ],
+    "features": [
+      {
+        "id": "alienist.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing spellcasting class at every level.",
+          "fullText": "At each alienist level, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing spellcasting class"
+          },
+          "5": {
+            "value": "+1 existing spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing spellcasting class"
+          },
+          "7": {
+            "value": "+1 existing spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing spellcasting class"
+          },
+          "9": {
+            "value": "+1 existing spellcasting class"
+          },
+          "10": {
+            "value": "+1 existing spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.familiar_abilities",
+        "name": "Familiar Abilities",
+        "type": "feature",
+        "description": {
+          "summary": "Stack alienist levels for familiar benefits.",
+          "fullText": "Alienist levels stack with levels in a class that grants a familiar for determining the familiar's natural armor, Intelligence, and special abilities. This does not grant a familiar if the character lacks one."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "stacksWithFamiliarClass": true,
+              "doesNotGrantFamiliar": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.summon_alien",
+        "name": "Summon Alien",
+        "type": "feature",
+        "description": {
+          "summary": "Summon pseudonatural creatures instead of celestial or fiendish creatures.",
+          "fullText": "Whenever the alienist would use summon monster to summon a celestial or fiendish creature, she instead summons a pseudonatural version of that creature and gives up summoning nonpseudonatural creatures with summon monster."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "summonMonsterTemplate": "pseudonatural",
+              "replaces": [
+                "celestial",
+                "fiendish"
+              ],
+              "cannotSummonNonPseudonaturalWithSummonMonster": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.alien_blessing",
+        "name": "Alien Blessing",
+        "type": "feature",
+        "description": {
+          "summary": "Gain alien resilience at a mental cost.",
+          "fullText": "The alienist gains a +1 insight bonus on saving throws but takes a -2 penalty to Wisdom."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "savingThrowInsightBonus": 1,
+              "wisdomPenalty": -2
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.metamagic_secret",
+        "name": "Metamagic Secret",
+        "type": "feature",
+        "description": {
+          "summary": "Gain metamagic knowledge.",
+          "fullText": "The alienist gains a metamagic feat as a bonus feat at 3rd level and again at 7th level."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "grantChoice": "metamagic_feat"
+            }
+          },
+          "7": {
+            "mechanics": {
+              "grantChoice": "metamagic_feat"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.mad_certainty",
+        "name": "Mad Certainty",
+        "type": "feature",
+        "description": {
+          "summary": "Gain unnatural conviction while becoming less socially grounded.",
+          "fullText": "The alienist gains 3 hit points, but takes a penalty on Bluff, Diplomacy, and Handle Animal checks made to influence nonpseudonatural creatures."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "bonusHitPoints": 3,
+              "skillPenalty": {
+                "Bluff": -4,
+                "Diplomacy": -4,
+                "Handle Animal": -4
+              },
+              "appliesAgainst": "nonpseudonatural creatures"
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "alienist.pseudonatural_familiar",
+        "name": "Pseudonatural Familiar",
+        "type": "feature",
+        "description": {
+          "summary": "The familiar becomes pseudonatural.",
+          "fullText": "The alienist's familiar, if any, becomes pseudonatural. Newly summoned familiars also possess the pseudonatural template."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "familiarTemplate": "pseudonatural",
+              "requiresFamiliar": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.extra_summoning",
+        "name": "Extra Summoning",
+        "type": "feature",
+        "description": {
+          "summary": "Gain an extra summon monster slot.",
+          "fullText": "The alienist gains one extra spell slot at her highest spell level. This slot can be used only for a summon monster spell and migrates upward as higher spell levels become available."
+        },
+        "progression": {
+          "6": {
+            "mechanics": {
+              "extraSlot": "highest spell level",
+              "restrictedTo": "summon monster"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.insane_certainty",
+        "name": "Insane Certainty",
+        "type": "feature",
+        "description": {
+          "summary": "Mad certainty intensifies.",
+          "fullText": "The alienist gains an additional 3 hit points, while her penalty on Bluff, Diplomacy, and Handle Animal checks made to influence nonpseudonatural creatures worsens."
+        },
+        "progression": {
+          "8": {
+            "mechanics": {
+              "additionalBonusHitPoints": 3,
+              "skillPenaltyTotal": {
+                "Bluff": -10,
+                "Diplomacy": -10,
+                "Handle Animal": -10
+              },
+              "appliesAgainst": "nonpseudonatural creatures"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.timeless_body",
+        "name": "Timeless Body",
+        "type": "feature",
+        "description": {
+          "summary": "Stop suffering physical aging penalties.",
+          "fullText": "The alienist no longer takes ability score penalties for aging and cannot be magically aged. Existing penalties remain, and bonuses still accrue."
+        },
+        "progression": {
+          "9": {
+            "mechanics": {
+              "noFurtherAgingPenalties": true,
+              "cannotBeMagicallyAged": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.alien_transcendence",
+        "name": "Alien Transcendence",
+        "type": "feature",
+        "description": {
+          "summary": "Transcend mortality into an alien form.",
+          "fullText": "At 10th level, the alienist's type changes to outsider and she gains damage reduction and resistance reflecting her alien transformation."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "typeChange": "outsider",
+              "transformation": "alien transcendence"
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.familiar_abilities"
+          },
+          {
+            "ref": "alienist.summon_alien"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.alien_blessing"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.metamagic_secret"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.mad_certainty"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.pseudonatural_familiar"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.extra_summoning"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.metamagic_secret"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.insane_certainty"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.timeless_body"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.alien_transcendence"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Confirm exact mechanical details for Mad Certainty initial penalty and Alien Transcendence benefits from primary source table/text."
+      ]
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Argent Savant",
+    "description": {
+      "summary": "Silver energy specialist.",
+      "flavor": "",
+      "role": "Arcane caster",
+      "sourceText": "Complete Arcane"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "features": [
+      {
+        "id": "argent_savant.silver_power",
+        "name": "Silver Power",
+        "type": "feature",
+        "description": {
+          "summary": "Enhances force spells.",
+          "fullText": "Force spells gain bonuses."
+        },
+        "progression": {
+          "1": {}
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "argent_savant.silver_power"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    },
+    "maxLevel": 5
+  },
+  {
+    "name": "Blood Magus",
+    "description": {
+      "summary": "A returned-from-death arcane caster who fuels magic through blood.",
+      "flavor": "Blood magi learn the mystical value of blood after dying and returning to life, carving magic into flesh and turning blood into a conduit for arcane power.",
+      "role": "Arcane prestige class with strong spellcasting advancement and blood-based utility, damage, crafting, and travel abilities.",
+      "sourceText": "Complete Arcane, p. 26"
+    },
+    "hitDie": 6,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {
+      "alignment": "Any but lawful good",
+      "skills": [
+        {
+          "name": "Concentration",
+          "ranks": 4
+        }
+      ],
+      "feats": [
+        "Great Fortitude",
+        "Toughness"
+      ],
+      "spells": "Arcane caster level 5th.",
+      "special": "The character must have been killed and then returned to life."
+    },
+    "classSkills": [
+      "Bluff",
+      "Concentration",
+      "Craft",
+      "Heal",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "blood_magus.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class at most levels.",
+          "fullText": "At each blood magus level except 5th and 10th, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "7": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "9": {
+            "value": "+1 existing arcane spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.blood_component",
+        "name": "Blood Component",
+        "type": "ability",
+        "description": {
+          "summary": "Use blood to empower spellcasting.",
+          "fullText": "The blood magus may substitute a drop of his own blood for material components of 1 gp or less, dealing 1 point of damage to himself and increasing the spell's caster level by 1. Costly material components must still be provided."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "selfDamage": 1,
+              "casterLevelBonus": 1,
+              "replacesMaterialComponentsUpToGp": 1,
+              "costlyComponentsStillRequired": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.durable_casting",
+        "name": "Durable Casting",
+        "type": "feature",
+        "description": {
+          "summary": "Reduce effective damage for Concentration checks.",
+          "fullText": "When damage might disrupt casting, concentration, or directing a spell, the blood magus subtracts his class level from the damage for the purpose of determining the Concentration DC only."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "concentrationDcDamageReduction": "class level"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.stanch",
+        "name": "Stanch",
+        "type": "feature",
+        "description": {
+          "summary": "Automatically stabilize when dying.",
+          "fullText": "The blood magus automatically becomes stable when reduced below 0 hit points, though he still dies at -10 hit points or lower."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "autoStabilizeBelowZero": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.scarification",
+        "name": "Scarification",
+        "type": "feature",
+        "description": {
+          "summary": "Inscribe spells into scars.",
+          "fullText": "The blood magus can inscribe spells on his own skin as an alternative to scribing scrolls. The rules, XP costs, and expenses of Scribe Scroll apply, and he can have up to six spell scars at one time."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "actsAs": "Scribe Scroll",
+              "medium": "own skin",
+              "maxScars": 6
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.death_knell",
+        "name": "Death Knell",
+        "type": "spell_like",
+        "description": {
+          "summary": "Use death knell once per day.",
+          "fullText": "The blood magus can use death knell as a spell-like ability once per day."
+        },
+        "progression": {
+          "3": {
+            "value": "1/day",
+            "mechanics": {
+              "spellLikeAbility": "death knell"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.blood_draught",
+        "name": "Blood Draught",
+        "type": "feature",
+        "description": {
+          "summary": "Store potion-like magic in blood.",
+          "fullText": "The blood magus can store spells of up to 3rd level in his own blood, functioning like Brew Potion with special restrictions. Stored draughts circulate in his body and are ruined if he dies."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "actsAs": "Brew Potion",
+              "maxSpellLevel": 3,
+              "storage": "own blood",
+              "maxStoredFormula": "blood magus level + Constitution score"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.homunculus",
+        "name": "Homunculus",
+        "type": "feature",
+        "description": {
+          "summary": "Create and empower a blood-linked homunculus.",
+          "fullText": "The blood magus can create a homunculus using his blood without meeting the normal prerequisites, permanently sacrificing 1 hit point. The homunculus advances as the blood magus gains class levels, to a maximum of 6 Hit Dice at 9th level."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "companion": "homunculus",
+              "permanentHitPointSacrifice": 1,
+              "creationTime": "1 hour",
+              "advancesWithClassLevels": true,
+              "maxHitDiceAtClassLevel9": 6
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.bloodseeking_spell",
+        "name": "Bloodseeking Spell",
+        "type": "ability",
+        "description": {
+          "summary": "Add blood-drawing damage to damaging spells.",
+          "fullText": "By taking 3 points of self-inflicted damage while casting, the blood magus can cause a spell that deals hit point damage to deal an extra 1d6 damage to each affected target that has blood or a similar substance."
+        },
+        "progression": {
+          "6": {
+            "mechanics": {
+              "selfDamage": 3,
+              "extraDamage": "1d6",
+              "appliesTo": "spells that deal hit point damage",
+              "immuneTargetTypes": [
+                "construct",
+                "elemental",
+                "ooze",
+                "plant",
+                "undead",
+                "bloodless creatures"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.thicker_than_water",
+        "name": "Thicker than Water",
+        "type": "feature",
+        "description": {
+          "summary": "Gain damage reduction as blood withdraws from wounds.",
+          "fullText": "The blood magus gains damage reduction 1/bludgeoning as his vital fluids avoid injury."
+        },
+        "progression": {
+          "7": {
+            "value": "DR 1/bludgeoning",
+            "mechanics": {
+              "damageReduction": "1/bludgeoning"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.awaken_blood",
+        "name": "Awaken Blood",
+        "type": "ability",
+        "description": {
+          "summary": "Cause a foe's blood to violently awaken.",
+          "fullText": "Once per day, the blood magus can make a melee touch attack to deal 10d10 damage to a creature with blood or a similar substance. If the attempt fails, he can try again later that day."
+        },
+        "progression": {
+          "8": {
+            "value": "1/day",
+            "mechanics": {
+              "attack": "melee touch",
+              "damage": "10d10",
+              "immuneTargetTypes": [
+                "construct",
+                "elemental",
+                "ooze",
+                "plant",
+                "undead",
+                "bloodless creatures"
+              ],
+              "failedAttemptDoesNotExpendUse": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.infusion",
+        "name": "Infusion",
+        "type": "feature",
+        "description": {
+          "summary": "Permanently improve Constitution through blood infusion.",
+          "fullText": "The blood magus prepares and drinks a special distillation of his own blood, gaining a +2 increase to Constitution."
+        },
+        "progression": {
+          "9": {
+            "mechanics": {
+              "constitutionIncrease": 2
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.bloodwalk",
+        "name": "Bloodwalk",
+        "type": "ability",
+        "description": {
+          "summary": "Travel through the blood of living creatures.",
+          "fullText": "Once per day as a standard action that does not provoke attacks of opportunity, the blood magus can enter a suitable living creature and pass through blood to another living creature on the same plane. A bloody exit can damage the destination creature."
+        },
+        "progression": {
+          "10": {
+            "value": "1/day",
+            "mechanics": {
+              "action": "standard",
+              "provokesAttackOfOpportunity": false,
+              "transportMedium": "blood of living creatures",
+              "samePlane": true,
+              "bloodyExitDamage": "10d6",
+              "bloodyExitSave": "Fortitude negates or reduces per source",
+              "selfStunRisk": "DC 15 Fortitude or stunned 1 round after bloody exit"
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.blood_component"
+          },
+          {
+            "ref": "blood_magus.durable_casting"
+          },
+          {
+            "ref": "blood_magus.stanch"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.scarification"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.death_knell"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.blood_draught"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "blood_magus.homunculus"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.bloodseeking_spell"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.thicker_than_water"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.awaken_blood"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.infusion"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "blood_magus.bloodwalk"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Elemental Savant",
+    "description": {
+      "summary": "A spellcaster who transforms into an elemental being through mastery of one energy type.",
+      "flavor": "Elemental savants devote themselves to one of the classic elements, reshaping their magic and bodies until they transcend mortal form.",
+      "role": "Energy-specialized caster with strong elemental defenses and near-full spellcasting advancement.",
+      "sourceText": "Complete Arcane, p. 32"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 8
+        },
+        {
+          "name": "Knowledge (the planes)",
+          "ranks": 4
+        }
+      ],
+      "feats": [
+        "Energy Substitution (acid, cold, electricity, or fire)"
+      ],
+      "spells": "Able to cast at least three spells sharing the acid, cold, electricity, or fire descriptor, one of which must be at least 3rd level.",
+      "special": "Must have made peaceful contact with an elemental or an outsider with an elemental subtype."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Knowledge (arcana)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "elemental_savant.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing spellcasting class at all levels except 5th and 10th.",
+          "fullText": "At each elemental savant level except 5th and 10th, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing spellcasting class"
+          },
+          "7": {
+            "value": "+1 existing spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing spellcasting class"
+          },
+          "9": {
+            "value": "+1 existing spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.elemental_specialty",
+        "name": "Elemental Specialty",
+        "type": "feature",
+        "description": {
+          "summary": "Choose an elemental specialty tied to an energy type.",
+          "fullText": "At 1st level, the elemental savant chooses air/electricity, earth/acid, fire/fire, or water/cold. This choice must match the Energy Substitution feat used to qualify. Spells that deal energy damage change to the chosen energy type and descriptor."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "choices": [
+                {
+                  "element": "air",
+                  "energy": "electricity"
+                },
+                {
+                  "element": "earth",
+                  "energy": "acid"
+                },
+                {
+                  "element": "fire",
+                  "energy": "fire"
+                },
+                {
+                  "element": "water",
+                  "energy": "cold"
+                }
+              ],
+              "convertsEnergyDamageToChosenType": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.resistance_to_energy",
+        "name": "Resistance to Energy",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain resistance to the energy type tied to the chosen element.",
+          "fullText": "The elemental savant gains resistance against the energy type associated with the chosen elemental specialty. The resistance improves at higher levels."
+        },
+        "progression": {
+          "1": {
+            "value": "5"
+          },
+          "4": {
+            "value": "10"
+          },
+          "7": {
+            "value": "20"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.immunity_to_sleep",
+        "name": "Immunity to Sleep",
+        "type": "feature",
+        "description": {
+          "summary": "Become immune to sleep effects.",
+          "fullText": "At 2nd level, the elemental savant gains immunity to sleep effects."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "immuneTo": [
+                "sleep"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.energy_penetration",
+        "name": "Energy Penetration",
+        "type": "scaling",
+        "description": {
+          "summary": "Improve caster level checks to overcome spell resistance with chosen energy spells.",
+          "fullText": "When casting spells using the energy type associated with the chosen element, the elemental savant gains a competence bonus on caster level checks to overcome spell resistance."
+        },
+        "progression": {
+          "3": {
+            "value": "+2",
+            "mechanics": {
+              "bonusType": "competence",
+              "appliesTo": "caster level checks to overcome spell resistance with chosen energy spells"
+            }
+          },
+          "8": {
+            "value": "+4",
+            "mechanics": {
+              "bonusType": "competence",
+              "appliesTo": "caster level checks to overcome spell resistance with chosen energy spells"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.energy_focus",
+        "name": "Energy Focus",
+        "type": "scaling",
+        "description": {
+          "summary": "Increase save DCs for spells with the chosen energy descriptor.",
+          "fullText": "The save DC for spells with the energy descriptor associated with the elemental savant's chosen element increases at 5th level and again at 10th level."
+        },
+        "progression": {
+          "5": {
+            "value": "+1",
+            "mechanics": {
+              "appliesTo": "spell save DCs with chosen energy descriptor"
+            }
+          },
+          "10": {
+            "value": "+2",
+            "mechanics": {
+              "appliesTo": "spell save DCs with chosen energy descriptor",
+              "totalBonus": 2
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.darkvision",
+        "name": "Darkvision",
+        "type": "feature",
+        "description": {
+          "summary": "Gain darkvision.",
+          "fullText": "At 6th level, the elemental savant gains darkvision out to 60 feet."
+        },
+        "progression": {
+          "6": {
+            "mechanics": {
+              "darkvisionFeet": 60
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.immunity_to_paralysis_and_poison",
+        "name": "Immunity to Paralysis and Poison",
+        "type": "feature",
+        "description": {
+          "summary": "Become immune to paralysis and poison.",
+          "fullText": "At 9th level, the elemental savant gains immunity to paralysis and poison."
+        },
+        "progression": {
+          "9": {
+            "mechanics": {
+              "immuneTo": [
+                "paralysis",
+                "poison"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.elemental_perfection",
+        "name": "Elemental Perfection",
+        "type": "feature",
+        "description": {
+          "summary": "Become an elemental creature.",
+          "fullText": "At 10th level, the elemental savant's type changes to elemental. The savant no longer needs to eat, sleep, or breathe, gains immunity to stunning, and is no longer subject to extra damage from critical hits or flanking. The savant gains appropriate movement modes, natural attacks, special attacks, and special qualities of a Medium elemental of the chosen specialty, with the listed save DC adjustment for elemental attack forms."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "typeChange": "elemental",
+              "noNeedToEat": true,
+              "noNeedToSleep": true,
+              "noNeedToBreathe": true,
+              "immuneTo": [
+                "stunning"
+              ],
+              "notSubjectTo": [
+                "extra damage from critical hits",
+                "extra damage from flanking"
+              ],
+              "elementalAttackSaveDcFormula": "20 + Constitution modifier"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.energy_immunity",
+        "name": "Energy Immunity",
+        "type": "feature",
+        "description": {
+          "summary": "Become immune to the chosen energy type.",
+          "fullText": "At 10th level, the elemental savant gains immunity to the energy type associated with the chosen elemental specialty."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "immuneToChosenEnergyType": true
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.elemental_specialty"
+          },
+          {
+            "ref": "elemental_savant.resistance_to_energy"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.immunity_to_sleep"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.energy_penetration"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.resistance_to_energy"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "elemental_savant.energy_focus"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.darkvision"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.resistance_to_energy"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.energy_penetration"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.immunity_to_paralysis_and_poison"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "elemental_savant.energy_focus"
+          },
+          {
+            "ref": "elemental_savant.elemental_perfection"
+          },
+          {
+            "ref": "elemental_savant.energy_immunity"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  },
+  {
+    "name": "Fatespinner",
+    "description": {
+      "summary": "An arcane caster who manipulates luck, probability, and fate.",
+      "flavor": "Fatespinners glimpse the hidden structure of chance and bend fortune for themselves or against their enemies.",
+      "role": "Arcane caster advancement class with save DC boosts, rerolls, stabilization, and saving throw manipulation.",
+      "sourceText": "Complete Arcane, p. 37"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 10
+        },
+        {
+          "name": "Profession (gambler)",
+          "ranks": 5
+        }
+      ],
+      "spells": "Able to cast 4th-level arcane spells, including at least one divination spell of 1st level or higher.",
+      "special": "Must have avoided death or severe calamity through the machinations of fate."
+    },
+    "classSkills": [
+      "Appraise",
+      "Concentration",
+      "Craft",
+      "Knowledge (arcana)",
+      "Profession",
+      "Sleight of Hand",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "fatespinner.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing spellcasting class at levels 1 through 4.",
+          "fullText": "At each fatespinner level except 5th, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.spin_fate",
+        "name": "Spin Fate",
+        "type": "scaling",
+        "description": {
+          "summary": "Spend daily spin points to increase spell save DCs.",
+          "fullText": "Each day, the fatespinner has a number of spin points equal to class level. As a free action, the fatespinner can spend spin to increase the save DC of a spell being cast on a point-for-point basis. Spin is replenished when the character regains spells."
+        },
+        "progression": {
+          "1": {
+            "value": "1 spin point/day",
+            "mechanics": {
+              "dailyPoolFormula": "fatespinner class level",
+              "useAction": "free action",
+              "appliesTo": "spell save DC",
+              "cost": "1 spin point per +1 DC"
+            }
+          },
+          "2": {
+            "value": "2 spin points/day",
+            "mechanics": {
+              "dailyPoolFormula": "fatespinner class level",
+              "useAction": "free action",
+              "appliesTo": "spell save DC",
+              "cost": "1 spin point per +1 DC"
+            }
+          },
+          "3": {
+            "value": "3 spin points/day",
+            "mechanics": {
+              "dailyPoolFormula": "fatespinner class level",
+              "useAction": "free action",
+              "appliesTo": "spell save DC",
+              "cost": "1 spin point per +1 DC"
+            }
+          },
+          "4": {
+            "value": "4 spin points/day",
+            "mechanics": {
+              "dailyPoolFormula": "fatespinner class level",
+              "useAction": "free action",
+              "appliesTo": "spell save DC",
+              "cost": "1 spin point per +1 DC"
+            }
+          },
+          "5": {
+            "value": "5 spin points/day",
+            "mechanics": {
+              "dailyPoolFormula": "fatespinner class level",
+              "useAction": "free action",
+              "appliesTo": "spell save DC",
+              "cost": "1 spin point per +1 DC"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.fickle_finger_of_fate",
+        "name": "Fickle Finger of Fate",
+        "type": "ability",
+        "description": {
+          "summary": "Force another creature to reroll a just-made roll.",
+          "fullText": "At 2nd level, once per day as an immediate action, the fatespinner can force another creature in line of sight to reroll a roll it has just made. The creature must keep the reroll result."
+        },
+        "progression": {
+          "2": {
+            "value": "1/day",
+            "mechanics": {
+              "action": "immediate",
+              "target": "another creature",
+              "requiresLineOfSight": true,
+              "forcesReroll": true,
+              "targetKeepsReroll": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.spin_destiny",
+        "name": "Spin Destiny",
+        "type": "ability",
+        "description": {
+          "summary": "Spend spin points on the fatespinner's own checks, attacks, or saves.",
+          "fullText": "At 3rd level, the fatespinner can spend spin to add a point-for-point bonus to a skill check, attack roll, or saving throw he attempts. The spin must be applied before the roll and comes from the same daily spin pool."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "appliesTo": [
+                "skill checks",
+                "attack rolls",
+                "saving throws"
+              ],
+              "mustApplyBeforeRoll": true,
+              "usesSpinPool": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.deny_fate",
+        "name": "Deny Fate",
+        "type": "feature",
+        "description": {
+          "summary": "Automatically stabilize once per day when dying.",
+          "fullText": "At 4th level, once per day, the first time the fatespinner must make a check to become stable when dying, the check automatically succeeds."
+        },
+        "progression": {
+          "4": {
+            "value": "1/day",
+            "mechanics": {
+              "automaticStabilizationCheck": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.resist_fate",
+        "name": "Resist Fate",
+        "type": "ability",
+        "description": {
+          "summary": "Reroll one of the fatespinner's own rolls once per day.",
+          "fullText": "At 4th level, once per day, the fatespinner can reroll one roll he has just made. He must keep the reroll result even if it is worse."
+        },
+        "progression": {
+          "4": {
+            "value": "1/day",
+            "mechanics": {
+              "selfReroll": true,
+              "mustKeepReroll": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.seal_fate",
+        "name": "Seal Fate",
+        "type": "ability",
+        "description": {
+          "summary": "Apply a major bonus or penalty to a target's next saving throw.",
+          "fullText": "At 5th level, once per day as a free action, the fatespinner selects a visible target within 30 feet with Hit Dice no greater than his own. The target receives either a +10 bonus or a -10 penalty on its next saving throw, as chosen by the fatespinner. The effect lasts 1 round."
+        },
+        "progression": {
+          "5": {
+            "value": "1/day",
+            "mechanics": {
+              "action": "free",
+              "rangeFeet": 30,
+              "targetMustBeVisible": true,
+              "targetHdMaximum": "fatespinner Hit Dice",
+              "nextSavingThrowModifierChoice": [
+                "+10",
+                "-10"
+              ],
+              "duration": "1 round"
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "fatespinner.spellcasting_advancement"
+          },
+          {
+            "ref": "fatespinner.spin_fate"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "fatespinner.spellcasting_advancement"
+          },
+          {
+            "ref": "fatespinner.spin_fate"
+          },
+          {
+            "ref": "fatespinner.fickle_finger_of_fate"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "fatespinner.spellcasting_advancement"
+          },
+          {
+            "ref": "fatespinner.spin_fate"
+          },
+          {
+            "ref": "fatespinner.spin_destiny"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "fatespinner.spellcasting_advancement"
+          },
+          {
+            "ref": "fatespinner.spin_fate"
+          },
+          {
+            "ref": "fatespinner.deny_fate"
+          },
+          {
+            "ref": "fatespinner.resist_fate"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "fatespinner.spin_fate"
+          },
+          {
+            "ref": "fatespinner.seal_fate"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 5
+  },
+  {
+    "name": "Geometer",
+    "description": {
+      "summary": "An arcane caster who encodes spells into diagrams, glyphs, and perfect magical geometry.",
+      "flavor": "Geometers study the hidden diagrams behind magic, reducing spells to sigils and precise arcane forms.",
+      "role": "Full arcane casting progression class focused on spellglyphs, glyph spells, and magical writing traps.",
+      "sourceText": "Complete Arcane, p. 39"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Decipher Script",
+          "ranks": 9
+        },
+        {
+          "name": "Disable Device",
+          "ranks": 4
+        },
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 9
+        },
+        {
+          "name": "Search",
+          "ranks": 4
+        }
+      ],
+      "feats": [
+        "Scribe Scroll"
+      ],
+      "spells": "Able to prepare and cast 3rd-level arcane spells."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Disable Device",
+      "Knowledge (all)",
+      "Profession",
+      "Search",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "geometer.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class at every level.",
+          "fullText": "At each geometer level, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing arcane class"
+          },
+          "2": {
+            "value": "+1 existing arcane class"
+          },
+          "3": {
+            "value": "+1 existing arcane class"
+          },
+          "4": {
+            "value": "+1 existing arcane class"
+          },
+          "5": {
+            "value": "+1 existing arcane class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.glyph_of_warding",
+        "name": "Glyph of Warding",
+        "type": "feature",
+        "description": {
+          "summary": "Add glyph of warding to the geometer's spellbook as an arcane spell.",
+          "fullText": "At 1st level, the geometer adds glyph of warding to his spellbook as a 3rd-level arcane spell and can prepare and cast it like any other spell he knows."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "addSpellToSpellbook": "glyph of warding",
+              "spellLevel": 3,
+              "tradition": "arcane"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.spellglyph",
+        "name": "Spellglyph",
+        "type": "ability",
+        "description": {
+          "summary": "Use a prepared diagram in place of verbal and material spell components.",
+          "fullText": "A spellglyph is an arcane diagram that can substitute for a specific prepared spell's verbal and material components, if any. When used, the spell is treated as if affected by Silent Spell, and the spellglyph replaces normal material components other than foci. Preparing a spellglyph takes 1 hour and rare inks costing 25 gp per spell level, plus the cost of expensive material components if applicable."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "preparationTime": "1 hour",
+              "inkCost": "25 gp per spell level",
+              "substitutesFor": [
+                "verbal components",
+                "material components except focus"
+              ],
+              "silentSpellEffect": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.book_of_geometry",
+        "name": "Book of Geometry",
+        "type": "feature",
+        "description": {
+          "summary": "Reduce new spellbook page requirements and make the spellbook harder for others to use.",
+          "fullText": "At 2nd level and higher, every spell the geometer learns from that point forward requires only a single page in his spellbook. It still takes 24 hours and 100 gp per page to scribe a spell. Non-geometers have the Spellcraft DC to decipher or prepare spells from the geometer's spellbook increased by 5."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "spellbookPagesPerNewSpell": 1,
+              "scribeTime": "24 hours",
+              "scribeCostPerPageGp": 100,
+              "nonGeometerSpellcraftDcIncrease": 5
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.sigilsight",
+        "name": "Sigilsight",
+        "type": "feature",
+        "description": {
+          "summary": "Find magical writing traps as a rogue and gain a caster-level bonus on such Search checks.",
+          "fullText": "At 3rd level, the geometer can use Search to find magical traps based on runes, glyphs, sigils, symbols, or other writings as a rogue can. He gains a bonus equal to caster level on Search checks to find such traps, and coming within 10 feet allows a Search check as if actively searching."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "findMagicWritingTrapsAsRogue": true,
+              "searchBonusFormula": "caster level",
+              "proximityTriggerFeet": 10
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.pass_sigil",
+        "name": "Pass Sigil",
+        "type": "ability",
+        "description": {
+          "summary": "Temporarily suppress magical wards based on written symbols.",
+          "fullText": "At 4th level, as a standard action, the geometer can attempt to pass a magical sigil, rune, glyph, or written ward he can see. He makes a level check against DC 6 + the sigil creator's caster level. On success, the device is suppressed while he maintains concentration."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "action": "standard",
+              "levelCheckDcFormula": "6 + sigil creator's caster level",
+              "requiresSight": true,
+              "suppressionDuration": "while maintaining concentration"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.powerful_spellglyph",
+        "name": "Powerful Spellglyph",
+        "type": "feature",
+        "description": {
+          "summary": "Increase caster level when casting through a spellglyph.",
+          "fullText": "At 5th level, when the geometer casts a spell using a spellglyph, his caster level is treated as 1 higher for that spell."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "casterLevelBonusWhenUsingSpellglyph": 1
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.greater_glyph_of_warding",
+        "name": "Greater Glyph of Warding",
+        "type": "feature",
+        "description": {
+          "summary": "Add greater glyph of warding to the geometer's spellbook as an arcane spell.",
+          "fullText": "At 5th level, the geometer adds greater glyph of warding to his spellbook as a 6th-level arcane spell and can prepare and cast it like any other spell he knows."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "addSpellToSpellbook": "greater glyph of warding",
+              "spellLevel": 6,
+              "tradition": "arcane"
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "geometer.spellcasting_advancement"
+          },
+          {
+            "ref": "geometer.glyph_of_warding"
+          },
+          {
+            "ref": "geometer.spellglyph"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "geometer.spellcasting_advancement"
+          },
+          {
+            "ref": "geometer.book_of_geometry"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "geometer.spellcasting_advancement"
+          },
+          {
+            "ref": "geometer.sigilsight"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "geometer.spellcasting_advancement"
+          },
+          {
+            "ref": "geometer.pass_sigil"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "geometer.spellcasting_advancement"
+          },
+          {
+            "ref": "geometer.powerful_spellglyph"
+          },
+          {
+            "ref": "geometer.greater_glyph_of_warding"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 5
+  },
+  {
+    "name": "Green Star Adept",
+    "description": {
+      "summary": "An arcane warrior who consumes starmetal and slowly transforms into a living green starmetal construct.",
+      "flavor": "Green Star adepts seek fallen starmetal from the comet Alhazarde, trading flesh for durability, power, and unnatural immortality.",
+      "role": "Durable arcane gish with partial casting, scaling damage reduction, physical transformation, and construct-like end state.",
+      "sourceText": "Complete Arcane, p. 41"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "bab": 4,
+      "skills": [
+        {
+          "name": "Decipher Script",
+          "ranks": 2
+        },
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 8
+        },
+        {
+          "name": "Knowledge (architecture and engineering)",
+          "ranks": 2
+        },
+        {
+          "name": "Knowledge (geography)",
+          "ranks": 2
+        },
+        {
+          "name": "Knowledge (history)",
+          "ranks": 2
+        }
+      ],
+      "feats": [
+        "Combat Casting"
+      ],
+      "spells": "Arcane caster level 1st.",
+      "special": "Must acquire at least 2 ounces of starmetal, powder it, and consume it in a specially prepared infusion requiring arcane reagents costing 1,000 gp and one week to prepare."
+    },
+    "classSkills": [
+      "Appraise",
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Knowledge (arcana)",
+      "Knowledge (architecture and engineering)",
+      "Knowledge (geography)",
+      "Knowledge (history)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "green_star_adept.damage_reduction",
+        "name": "Damage Reduction",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain scaling damage reduction overcome by adamantine.",
+          "fullText": "The Green Star adept's starmetal-infused flesh grants damage reduction 1/adamantine at 1st level. The damage reduction improves by 1 each class level, reaching damage reduction 10/adamantine at 10th level."
+        },
+        "progression": {
+          "1": {
+            "value": "1/adamantine"
+          },
+          "2": {
+            "value": "2/adamantine"
+          },
+          "3": {
+            "value": "3/adamantine"
+          },
+          "4": {
+            "value": "4/adamantine"
+          },
+          "5": {
+            "value": "5/adamantine"
+          },
+          "6": {
+            "value": "6/adamantine"
+          },
+          "7": {
+            "value": "7/adamantine"
+          },
+          "8": {
+            "value": "8/adamantine"
+          },
+          "9": {
+            "value": "9/adamantine"
+          },
+          "10": {
+            "value": "10/adamantine"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.improved_caster_level",
+        "name": "Improved Caster Level",
+        "type": "casting",
+        "description": {
+          "summary": "Add Green Star adept level to an arcane caster level for effective caster level.",
+          "fullText": "A Green Star adept adds class level to the caster level of one arcane spellcasting class to determine effective caster level, even though spells per day advance only at even-numbered levels."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "2": {
+            "value": "+2 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "3": {
+            "value": "+3 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "4": {
+            "value": "+4 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "5": {
+            "value": "+5 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "6": {
+            "value": "+6 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "7": {
+            "value": "+7 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "8": {
+            "value": "+8 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "9": {
+            "value": "+9 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "10": {
+            "value": "+10 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.starmetal_dependency",
+        "name": "Starmetal Dependency",
+        "type": "feature",
+        "description": {
+          "summary": "Require additional starmetal rituals to gain later class features.",
+          "fullText": "After 1st level, the Green Star adept does not gain special class features for a new class level until completing a 24-hour ritual requiring 1 pound of starmetal and 1,000 gp in arcane reagents and materials. Base attack bonus, saving throws, skills, feats, and ability score increases are not delayed by this ritual."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "appliesAfterLevel": 1,
+              "ritualTime": "24 hours",
+              "starmetalRequired": "1 pound",
+              "reagentCostGp": 1000,
+              "delaysSpecialClassFeaturesOnly": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.starmetal_rigor",
+        "name": "Starmetal Rigor",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain Strength and natural armor while losing Dexterity as the body becomes starmetal.",
+          "fullText": "The Green Star adept's body becomes denser and stronger. Strength and natural armor increase at 1st, 4th, 7th, and 10th levels, while Dexterity is reduced at 1st, 7th, and 10th level to a minimum of 3."
+        },
+        "progression": {
+          "1": {
+            "value": "Str +1, Dex -1, natural armor +1",
+            "mechanics": {
+              "strengthBonusTotal": 1,
+              "dexterityPenaltyTotal": -1,
+              "naturalArmorBonusTotal": 1,
+              "minimumDexterity": 3
+            }
+          },
+          "4": {
+            "value": "Str +2, Dex -1, natural armor +2",
+            "mechanics": {
+              "strengthBonusTotal": 2,
+              "dexterityPenaltyTotal": -1,
+              "naturalArmorBonusTotal": 2,
+              "minimumDexterity": 3
+            }
+          },
+          "7": {
+            "value": "Str +4, Dex -2, natural armor +4",
+            "mechanics": {
+              "strengthBonusTotal": 4,
+              "dexterityPenaltyTotal": -2,
+              "naturalArmorBonusTotal": 4,
+              "minimumDexterity": 3
+            }
+          },
+          "10": {
+            "value": "Str +6, Dex -3, natural armor +6",
+            "mechanics": {
+              "strengthBonusTotal": 6,
+              "dexterityPenaltyTotal": -3,
+              "naturalArmorBonusTotal": 6,
+              "minimumDexterity": 3
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.natural_attack",
+        "name": "Natural Attack",
+        "type": "feature",
+        "description": {
+          "summary": "Gain a slam attack.",
+          "fullText": "At 2nd level, the Green Star adept gains a slam attack dealing bludgeoning damage equal to a club sized for the character, plus 1-1/2 times Strength modifier."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "naturalAttack": "slam",
+              "damageBySize": {
+                "Small": "1d4",
+                "Medium": "1d6",
+                "Large": "1d8"
+              },
+              "strengthMultiplier": 1.5
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.unnatural_metabolism",
+        "name": "Unnatural Metabolism",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a scaling bonus on saves against several biological and necromantic effects.",
+          "fullText": "At 2nd level, the Green Star adept gains a +2 bonus on saves against poison, sleep effects, paralysis, stunning, disease, death effects, and necromancy effects. This bonus improves at 5th and 8th level."
+        },
+        "progression": {
+          "2": {
+            "value": "+2",
+            "mechanics": {
+              "saveBonus": 2,
+              "appliesAgainst": [
+                "poison",
+                "sleep effects",
+                "paralysis",
+                "stunning",
+                "disease",
+                "death effects",
+                "necromancy effects"
+              ]
+            }
+          },
+          "5": {
+            "value": "+4",
+            "mechanics": {
+              "saveBonus": 4,
+              "appliesAgainst": [
+                "poison",
+                "sleep effects",
+                "paralysis",
+                "stunning",
+                "disease",
+                "death effects",
+                "necromancy effects"
+              ]
+            }
+          },
+          "8": {
+            "value": "+6",
+            "mechanics": {
+              "saveBonus": 6,
+              "appliesAgainst": [
+                "poison",
+                "sleep effects",
+                "paralysis",
+                "stunning",
+                "disease",
+                "death effects",
+                "necromancy effects"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.fortification",
+        "name": "Fortification",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a chance to negate critical hits and sneak attacks.",
+          "fullText": "At 3rd level and higher, the Green Star adept gains fortification. When a critical hit or sneak attack is scored, there is a chance that the extra effect is negated and damage is rolled normally. The chance improves at 6th and 9th level."
+        },
+        "progression": {
+          "3": {
+            "value": "25%",
+            "mechanics": {
+              "negateCriticalOrSneakAttackChance": 25
+            }
+          },
+          "6": {
+            "value": "50%",
+            "mechanics": {
+              "negateCriticalOrSneakAttackChance": 50
+            }
+          },
+          "9": {
+            "value": "75%",
+            "mechanics": {
+              "negateCriticalOrSneakAttackChance": 75
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.otherworldly_vision",
+        "name": "Otherworldly Vision",
+        "type": "feature",
+        "description": {
+          "summary": "Gain darkvision and low-light vision.",
+          "fullText": "At 4th level, the Green Star adept gains darkvision out to 60 feet and low-light vision."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "darkvisionFeet": 60,
+              "lowLightVision": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.null_metabolism",
+        "name": "Null Metabolism",
+        "type": "feature",
+        "description": {
+          "summary": "No longer need to breathe, eat, or sleep and ignore fatigue and exhaustion.",
+          "fullText": "At 7th level, the Green Star adept no longer needs to breathe, eat, or sleep, gains immunity to inhaled poisons, drowning, suffocation, and sleep effects, and is no longer subject to fatigue or exhaustion."
+        },
+        "progression": {
+          "7": {
+            "mechanics": {
+              "noNeedToBreathe": true,
+              "noNeedToEat": true,
+              "noNeedToSleep": true,
+              "immuneTo": [
+                "inhaled poisons",
+                "drowning",
+                "suffocation",
+                "sleep effects"
+              ],
+              "notSubjectTo": [
+                "fatigue",
+                "exhaustion"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.emerald_perfection",
+        "name": "Emerald Perfection",
+        "type": "feature",
+        "description": {
+          "summary": "Complete the transformation into a construct-like starmetal being.",
+          "fullText": "At 10th level, the Green Star adept's type changes to construct. The adept loses Constitution, gains size-based bonus hit points, keeps a mind and does not gain normal construct immunity to mind-affecting effects, and gains multiple immunities and construct-like traits described by the class."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "typeChange": "construct",
+              "losesConstitutionScore": true,
+              "bonusHitPointsBySize": {
+                "Small": 10,
+                "Medium": 20,
+                "Large": 30
+              },
+              "notImmuneToMindAffectingFromConstructType": true,
+              "immuneTo": [
+                "poison",
+                "paralysis",
+                "stunning",
+                "disease",
+                "extra damage from sneak attacks",
+                "death effects",
+                "necromancy effects",
+                "critical hits",
+                "nonlethal damage",
+                "ability damage",
+                "ability drain",
+                "energy drain"
+              ],
+              "fortitudeSaveImmunityExceptObjectsOrHarmless": true,
+              "destroyedAtZeroHitPoints": true,
+              "cannotDieOfOldAge": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.rapid_repair",
+        "name": "Rapid Repair",
+        "type": "feature",
+        "description": {
+          "summary": "Repair damage during rest.",
+          "fullText": "At 10th level, the Green Star adept repairs 1 point of damage per hour of rest as long as he has at least 1 hit point. This does not regrow or reattach lost body parts."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "repairRate": "1 hit point per hour of rest",
+              "requiresAtLeastOneHitPoint": true,
+              "doesNotRegrowOrReattachBodyParts": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class at even-numbered levels.",
+          "fullText": "At every even-numbered Green Star adept level, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "2": {
+            "value": "+1 existing arcane class"
+          },
+          "4": {
+            "value": "+1 existing arcane class"
+          },
+          "6": {
+            "value": "+1 existing arcane class"
+          },
+          "8": {
+            "value": "+1 existing arcane class"
+          },
+          "10": {
+            "value": "+1 existing arcane class"
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.starmetal_dependency"
+          },
+          {
+            "ref": "green_star_adept.starmetal_rigor"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.natural_attack"
+          },
+          {
+            "ref": "green_star_adept.unnatural_metabolism"
+          },
+          {
+            "ref": "green_star_adept.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.fortification"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.starmetal_rigor"
+          },
+          {
+            "ref": "green_star_adept.otherworldly_vision"
+          },
+          {
+            "ref": "green_star_adept.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.unnatural_metabolism"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.fortification"
+          },
+          {
+            "ref": "green_star_adept.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.starmetal_rigor"
+          },
+          {
+            "ref": "green_star_adept.null_metabolism"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.unnatural_metabolism"
+          },
+          {
+            "ref": "green_star_adept.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.fortification"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.starmetal_rigor"
+          },
+          {
+            "ref": "green_star_adept.emerald_perfection"
+          },
+          {
+            "ref": "green_star_adept.rapid_repair"
+          },
+          {
+            "ref": "green_star_adept.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    },
+    "maxLevel": 10
+  }
+]

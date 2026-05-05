@@ -1,0 +1,1698 @@
+[
+  {
+    "name": "Contemplative",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A divine spellcaster who deepens communion with a deity and gains domains and divine protections.",
+      "flavor": "Contemplatives withdraw from worldly concerns to become vessels of divine insight and power.",
+      "role": "Full divine casting prestige class with bonus domains, immunities, and mystical self-enhancement.",
+      "sourceText": "Complete Divine, p. 30"
+    },
+    "hitDie": 6,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (religion)",
+          "ranks": 13
+        }
+      ],
+      "spells": "Able to cast 1st-level divine spells.",
+      "special": "Must have direct contact with a representative of the character's deity."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Heal",
+      "Intimidate",
+      "Knowledge (religion)",
+      "Profession",
+      "Sense Motive",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "contemplative.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "scaling",
+        "description": {
+          "summary": "Advance an existing divine spellcasting class at every level.",
+          "fullText": "At each contemplative level, the character gains new spells per day and an increase in caster level as if gaining a level in an existing divine spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing divine class"
+          },
+          "2": {
+            "value": "+1 existing divine class"
+          },
+          "3": {
+            "value": "+1 existing divine class"
+          },
+          "4": {
+            "value": "+1 existing divine class"
+          },
+          "5": {
+            "value": "+1 existing divine class"
+          },
+          "6": {
+            "value": "+1 existing divine class"
+          },
+          "7": {
+            "value": "+1 existing divine class"
+          },
+          "8": {
+            "value": "+1 existing divine class"
+          },
+          "9": {
+            "value": "+1 existing divine class"
+          },
+          "10": {
+            "value": "+1 existing divine class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "contemplative.bonus_domain",
+        "name": "Bonus Domain",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain additional clerical domains.",
+          "fullText": "The contemplative gains an additional domain granted by the character's deity. A second bonus domain is gained at 6th level."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 domain",
+            "mechanics": {
+              "grantChoice": "deity_domain"
+            }
+          },
+          "6": {
+            "value": "+1 domain",
+            "mechanics": {
+              "grantChoice": "deity_domain"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "contemplative.divine_health",
+        "name": "Divine Health",
+        "type": "feature",
+        "description": {
+          "summary": "Gain immunity to disease.",
+          "fullText": "The contemplative is immune to all diseases, including supernatural and magical diseases."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "immuneTo": [
+                "disease"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "contemplative.slippery_mind",
+        "name": "Slippery Mind",
+        "type": "feature",
+        "description": {
+          "summary": "Gain a second chance against enchantments.",
+          "fullText": "If the contemplative fails a saving throw against an enchantment spell or effect, the character can attempt the save again 1 round later."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "rerollFailedEnchantmentSaveAfterRounds": 1
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "contemplative.divine_wholeness",
+        "name": "Divine Wholeness",
+        "type": "feature",
+        "description": {
+          "summary": "Heal damage through divine contemplation.",
+          "fullText": "The contemplative can cure hit point damage to herself as a supernatural ability, drawing on a daily pool based on class level."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "selfHealingPoolFormula": "class level \u00d7 Charisma modifier"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "contemplative.divine_body",
+        "name": "Divine Body",
+        "type": "feature",
+        "description": {
+          "summary": "Gain resistance to poison.",
+          "fullText": "The contemplative gains immunity to poison as divine power purifies the body."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "immuneTo": [
+                "poison"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "contemplative.divine_soul",
+        "name": "Divine Soul",
+        "type": "feature",
+        "description": {
+          "summary": "Gain spell resistance.",
+          "fullText": "The contemplative gains spell resistance as the soul becomes suffused with divine power."
+        },
+        "progression": {
+          "7": {
+            "mechanics": {
+              "spellResistanceFormula": "class level + 15"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "contemplative.eternal_body",
+        "name": "Eternal Body",
+        "type": "feature",
+        "description": {
+          "summary": "No longer suffer the physical penalties of aging.",
+          "fullText": "The contemplative no longer takes ability score penalties for aging and cannot be magically aged, though existing penalties remain and bonuses still accrue."
+        },
+        "progression": {
+          "9": {
+            "mechanics": {
+              "noFurtherAgingPenalties": true,
+              "cannotBeMagicallyAged": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "contemplative.mystic_union",
+        "name": "Mystic Union",
+        "type": "feature",
+        "description": {
+          "summary": "Become united with the divine.",
+          "fullText": "At 10th level, the contemplative achieves a mystic union with the divine, gaining an outsider-like spiritual transformation appropriate to the deity and faith."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "transformation": "mystic union"
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "contemplative.spellcasting_advancement"
+          },
+          {
+            "ref": "contemplative.bonus_domain"
+          },
+          {
+            "ref": "contemplative.divine_health"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "contemplative.spellcasting_advancement"
+          },
+          {
+            "ref": "contemplative.slippery_mind"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "contemplative.spellcasting_advancement"
+          },
+          {
+            "ref": "contemplative.divine_wholeness"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "contemplative.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "contemplative.spellcasting_advancement"
+          },
+          {
+            "ref": "contemplative.divine_body"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "contemplative.spellcasting_advancement"
+          },
+          {
+            "ref": "contemplative.bonus_domain"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "contemplative.spellcasting_advancement"
+          },
+          {
+            "ref": "contemplative.divine_soul"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "contemplative.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "contemplative.spellcasting_advancement"
+          },
+          {
+            "ref": "contemplative.eternal_body"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "contemplative.spellcasting_advancement"
+          },
+          {
+            "ref": "contemplative.mystic_union"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Confirm late-level contemplative feature names/effects against primary source during in-app review."
+      ]
+    }
+  },
+  {
+    "name": "Divine Disciple",
+    "maxLevel": 5,
+    "description": {
+      "summary": "A devoted divine spellcaster who becomes an emissary of a patron deity.",
+      "flavor": "Divine disciples channel a patron deity's power more directly than ordinary priests.",
+      "role": "Five-level divine caster prestige class with a bonus domain, outsider interaction, and sacred defenses.",
+      "sourceText": "Forgotten Realms Campaign Setting / Player's Guide to Faer\u00fbn"
+    },
+    "hitDie": 8,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Diplomacy",
+          "ranks": 5
+        },
+        {
+          "name": "Knowledge (religion)",
+          "ranks": 8
+        }
+      ],
+      "spells": "Able to cast 4th-level divine spells.",
+      "special": "Must be dedicated to a patron deity."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Heal",
+      "Knowledge (arcana)",
+      "Knowledge (history)",
+      "Knowledge (nature)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Spellcraft",
+      "Survival"
+    ],
+    "features": [
+      {
+        "id": "divine_disciple.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "scaling",
+        "description": {
+          "summary": "Advance an existing divine spellcasting class at every level.",
+          "fullText": "At each divine disciple level, the character gains new spells per day and an increase in caster level as if gaining a level in an existing divine spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing divine class"
+          },
+          "2": {
+            "value": "+1 existing divine class"
+          },
+          "3": {
+            "value": "+1 existing divine class"
+          },
+          "4": {
+            "value": "+1 existing divine class"
+          },
+          "5": {
+            "value": "+1 existing divine class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "divine_disciple.bonus_domain",
+        "name": "Bonus Domain",
+        "type": "feature",
+        "description": {
+          "summary": "Gain access to another domain.",
+          "fullText": "At 1st level, the divine disciple gains access to an additional domain offered by the character's patron deity."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "grantChoice": "deity_domain"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "divine_disciple.divine_emissary",
+        "name": "Divine Emissary",
+        "type": "feature",
+        "description": {
+          "summary": "Communicate with aligned or deity-serving outsiders.",
+          "fullText": "The divine disciple can communicate telepathically with outsiders that serve the character's deity or share the character's alignment, and gains a bonus on Charisma-based checks when dealing with them."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "telepathyWith": "outsiders serving patron deity or sharing alignment",
+              "rangeFeet": 60,
+              "charismaCheckBonusFormula": "class level"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "divine_disciple.sacred_defense",
+        "name": "Sacred Defense",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a bonus against divine and outsider powers.",
+          "fullText": "The divine disciple gains a sacred bonus on saving throws against divine spells and against spell-like or supernatural abilities of outsiders. The bonus improves at 4th level."
+        },
+        "progression": {
+          "2": {
+            "value": "+1"
+          },
+          "4": {
+            "value": "+2"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "divine_disciple.imbue_with_spell_ability",
+        "name": "Imbue with Spell Ability",
+        "type": "ability",
+        "description": {
+          "summary": "Bestow spells on another creature.",
+          "fullText": "The divine disciple can use imbue with spell ability as a spell-like ability, allowing the disciple to grant limited spellcasting ability to another creature."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "spellLikeAbility": "imbue with spell ability"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "divine_disciple.transcendence",
+        "name": "Transcendence",
+        "type": "feature",
+        "description": {
+          "summary": "Achieve a divine transformation.",
+          "fullText": "At 5th level, the divine disciple undergoes a divine transformation, becoming more closely tied to the patron deity and gaining an outsider-like spiritual nature."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "transformation": "divine transcendence"
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "divine_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "divine_disciple.bonus_domain"
+          },
+          {
+            "ref": "divine_disciple.divine_emissary"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "divine_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "divine_disciple.sacred_defense"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "divine_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "divine_disciple.imbue_with_spell_ability"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "divine_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "divine_disciple.sacred_defense"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "divine_disciple.spellcasting_advancement"
+          },
+          {
+            "ref": "divine_disciple.transcendence"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Divine Disciple is not a Complete Divine class; retained in this batch from requested list. Confirm 5th-level transformation wording/effects in app review."
+      ]
+    }
+  },
+  {
+    "name": "Hospitaler",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A divine warrior-caster devoted to protection, healing, and martial service.",
+      "flavor": "Hospitalers defend the helpless and bring divine healing to those under their care.",
+      "role": "Full-BAB divine class with spellcasting advancement, lay on hands, domains, and bonus martial feats.",
+      "sourceText": "Complete Divine, p. 48"
+    },
+    "hitDie": 8,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {
+      "alignment": "LG, NG, LN, N, LE, or NE",
+      "baseAttackBonus": "+4",
+      "skills": [
+        {
+          "name": "Handle Animal",
+          "ranks": 5
+        },
+        {
+          "name": "Ride",
+          "ranks": 5
+        }
+      ],
+      "feats": [
+        "Mounted Combat",
+        "Ride-By Attack"
+      ],
+      "spells": "Able to cast 1st-level divine spells."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Handle Animal",
+      "Heal",
+      "Knowledge (religion)",
+      "Profession",
+      "Ride"
+    ],
+    "features": [
+      {
+        "id": "hospitaler.divine_spellcasting_advancement",
+        "name": "Divine Spellcasting Advancement",
+        "type": "scaling",
+        "description": {
+          "summary": "Advance divine spellcasting at every hospitaler level.",
+          "fullText": "At each hospitaler level, the character gains new spells per day and an increase in caster level as if gaining a level in an existing divine spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing divine class"
+          },
+          "2": {
+            "value": "+1 existing divine class"
+          },
+          "3": {
+            "value": "+1 existing divine class"
+          },
+          "4": {
+            "value": "+1 existing divine class"
+          },
+          "5": {
+            "value": "+1 existing divine class"
+          },
+          "6": {
+            "value": "+1 existing divine class"
+          },
+          "7": {
+            "value": "+1 existing divine class"
+          },
+          "8": {
+            "value": "+1 existing divine class"
+          },
+          "9": {
+            "value": "+1 existing divine class"
+          },
+          "10": {
+            "value": "+1 existing divine class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "hospitaler.hospitaler_domains",
+        "name": "Hospitaler Domains",
+        "type": "feature",
+        "description": {
+          "summary": "Cast as a cleric and gain two hospitaler domains.",
+          "fullText": "The hospitaler casts spells as a cleric and gains two domains from the hospitaler domain options. These domains supersede any current domains as described by the class."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "domainChoices": [
+                "Healing",
+                "Protection",
+                "War",
+                "Glory",
+                "Domination"
+              ],
+              "domainsGranted": 2
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "hospitaler.lay_on_hands",
+        "name": "Lay on Hands",
+        "type": "scaling",
+        "description": {
+          "summary": "Heal others with a daily pool.",
+          "fullText": "The hospitaler can heal a total number of hit points per day equal to class level \u00d7 Charisma modifier. This stacks with other lay on hands abilities."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "healingPoolFormula": "class level \u00d7 Charisma modifier",
+              "stacksWithOtherLayOnHands": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "hospitaler.bonus_fighter_feat",
+        "name": "Bonus Fighter Feat",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain bonus feats selected from the fighter bonus feat list.",
+          "fullText": "The hospitaler gains bonus fighter feats over the course of the class."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "grantChoice": "fighter_bonus_feat"
+            }
+          },
+          "4": {
+            "mechanics": {
+              "grantChoice": "fighter_bonus_feat"
+            }
+          },
+          "7": {
+            "mechanics": {
+              "grantChoice": "fighter_bonus_feat"
+            }
+          },
+          "10": {
+            "mechanics": {
+              "grantChoice": "fighter_bonus_feat"
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "hospitaler.remove_disease",
+        "name": "Remove Disease",
+        "type": "scaling",
+        "description": {
+          "summary": "Use remove disease a limited number of times per week.",
+          "fullText": "The hospitaler gains the ability to remove disease as the class advances."
+        },
+        "progression": {
+          "3": {
+            "value": "1/week"
+          },
+          "6": {
+            "value": "2/week"
+          },
+          "9": {
+            "value": "3/week"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "hospitaler.special_mount_progression",
+        "name": "Special Mount Progression",
+        "type": "feature",
+        "description": {
+          "summary": "Hospitaler levels stack for special mount benefits.",
+          "fullText": "Hospitaler levels stack with paladin levels for purposes of determining a paladin special mount's abilities when applicable."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "stacksWithPaladinForSpecialMount": true
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "hospitaler.divine_spellcasting_advancement"
+          },
+          {
+            "ref": "hospitaler.hospitaler_domains"
+          },
+          {
+            "ref": "hospitaler.lay_on_hands"
+          },
+          {
+            "ref": "hospitaler.bonus_fighter_feat"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "hospitaler.divine_spellcasting_advancement"
+          },
+          {
+            "ref": "hospitaler.special_mount_progression"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "hospitaler.divine_spellcasting_advancement"
+          },
+          {
+            "ref": "hospitaler.remove_disease"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "hospitaler.divine_spellcasting_advancement"
+          },
+          {
+            "ref": "hospitaler.bonus_fighter_feat"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "hospitaler.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "hospitaler.divine_spellcasting_advancement"
+          },
+          {
+            "ref": "hospitaler.remove_disease"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "hospitaler.divine_spellcasting_advancement"
+          },
+          {
+            "ref": "hospitaler.bonus_fighter_feat"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "hospitaler.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "hospitaler.divine_spellcasting_advancement"
+          },
+          {
+            "ref": "hospitaler.remove_disease"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "hospitaler.divine_spellcasting_advancement"
+          },
+          {
+            "ref": "hospitaler.bonus_fighter_feat"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Confirm Hospitaler domain replacement text, bonus feat levels, remove disease progression, and mount interaction against primary source."
+      ]
+    }
+  },
+  {
+    "name": "Sacred Exorcist",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A divine spellcaster dedicated to expelling possessing spirits and evil supernatural forces.",
+      "flavor": "Sacred exorcists are called to confront fiends, undead, and corrupting spirits wherever they hide.",
+      "role": "Full divine casting prestige class with turning, anti-possession abilities, and anti-evil supernatural tools.",
+      "sourceText": "Complete Divine, p. 56"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any good",
+      "skills": [
+        {
+          "name": "Knowledge (the planes)",
+          "ranks": 10
+        },
+        {
+          "name": "Knowledge (religion)",
+          "ranks": 7
+        }
+      ],
+      "spells": "Able to cast dismissal or dispel evil as a divine spell.",
+      "special": "Must be sanctioned by a church or order to perform exorcisms."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Heal",
+      "Intimidate",
+      "Knowledge (arcana)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Sense Motive",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "sacred_exorcist.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "scaling",
+        "description": {
+          "summary": "Advance an existing divine spellcasting class at every level.",
+          "fullText": "At each sacred exorcist level, the character gains new spells per day and an increase in caster level as if gaining a level in an existing divine spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing divine class"
+          },
+          "2": {
+            "value": "+1 existing divine class"
+          },
+          "3": {
+            "value": "+1 existing divine class"
+          },
+          "4": {
+            "value": "+1 existing divine class"
+          },
+          "5": {
+            "value": "+1 existing divine class"
+          },
+          "6": {
+            "value": "+1 existing divine class"
+          },
+          "7": {
+            "value": "+1 existing divine class"
+          },
+          "8": {
+            "value": "+1 existing divine class"
+          },
+          "9": {
+            "value": "+1 existing divine class"
+          },
+          "10": {
+            "value": "+1 existing divine class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "sacred_exorcist.turn_undead",
+        "name": "Turn Undead",
+        "type": "feature",
+        "description": {
+          "summary": "Gain the ability to turn undead.",
+          "fullText": "At 1st level, the sacred exorcist can turn undead as a cleric. Sacred exorcist levels stack with other turning classes for turning checks and turning damage."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "turnUndead": true,
+              "stacksWithOtherTurningClasses": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "sacred_exorcist.exorcism",
+        "name": "Exorcism",
+        "type": "ability",
+        "description": {
+          "summary": "Force possessing spirits out of a victim.",
+          "fullText": "The sacred exorcist can attempt to force a possessing creature or spirit out of a victim, using divine authority against possession and similar control."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "targets": [
+                "possessing spirits",
+                "possessing creatures"
+              ],
+              "ability": "exorcism"
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "sacred_exorcist.resist_possession",
+        "name": "Resist Possession",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain bonuses against possession and compulsion.",
+          "fullText": "The sacred exorcist gains a sacred bonus on saving throws against possession and similar mental control. The bonus improves at higher levels."
+        },
+        "progression": {
+          "1": {
+            "value": "+2"
+          },
+          "5": {
+            "value": "+4"
+          },
+          "9": {
+            "value": "+6"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "sacred_exorcist.detect_evil",
+        "name": "Detect Evil",
+        "type": "feature",
+        "description": {
+          "summary": "Detect evil at will.",
+          "fullText": "The sacred exorcist can use detect evil at will as a spell-like ability."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "spellLikeAbility": "detect evil",
+              "uses": "at will"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "sacred_exorcist.chosen_foe",
+        "name": "Chosen Foe",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain bonuses against evil outsiders.",
+          "fullText": "The sacred exorcist gains bonuses against evil outsiders and creatures involved in possession or corruption. The bonus improves with class level."
+        },
+        "progression": {
+          "3": {
+            "value": "+1"
+          },
+          "6": {
+            "value": "+2"
+          },
+          "9": {
+            "value": "+3"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "sacred_exorcist.dispel_evil",
+        "name": "Dispel Evil",
+        "type": "ability",
+        "description": {
+          "summary": "Use dispel evil as a limited spell-like ability.",
+          "fullText": "The sacred exorcist gains the ability to use dispel evil as a spell-like ability a limited number of times per week."
+        },
+        "progression": {
+          "4": {
+            "value": "1/week"
+          },
+          "8": {
+            "value": "2/week"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "sacred_exorcist.consecrated_presence",
+        "name": "Consecrated Presence",
+        "type": "feature",
+        "description": {
+          "summary": "Radiate holy power against evil influences.",
+          "fullText": "The sacred exorcist radiates consecrated power that helps oppose evil creatures, possession, and undead within the exorcist's presence."
+        },
+        "progression": {
+          "7": {
+            "mechanics": {
+              "aura": "consecrated presence"
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "sacred_exorcist.holy_aura",
+        "name": "Holy Aura",
+        "type": "ability",
+        "description": {
+          "summary": "Manifest powerful holy protection.",
+          "fullText": "At 10th level, the sacred exorcist can manifest a powerful holy protective effect as the culmination of the class's anti-evil powers."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "effect": "holy aura-like protection"
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "sacred_exorcist.spellcasting_advancement"
+          },
+          {
+            "ref": "sacred_exorcist.turn_undead"
+          },
+          {
+            "ref": "sacred_exorcist.exorcism"
+          },
+          {
+            "ref": "sacred_exorcist.resist_possession"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "sacred_exorcist.spellcasting_advancement"
+          },
+          {
+            "ref": "sacred_exorcist.detect_evil"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "sacred_exorcist.spellcasting_advancement"
+          },
+          {
+            "ref": "sacred_exorcist.chosen_foe"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "sacred_exorcist.spellcasting_advancement"
+          },
+          {
+            "ref": "sacred_exorcist.dispel_evil"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "sacred_exorcist.spellcasting_advancement"
+          },
+          {
+            "ref": "sacred_exorcist.resist_possession"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "sacred_exorcist.spellcasting_advancement"
+          },
+          {
+            "ref": "sacred_exorcist.chosen_foe"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "sacred_exorcist.spellcasting_advancement"
+          },
+          {
+            "ref": "sacred_exorcist.consecrated_presence"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "sacred_exorcist.spellcasting_advancement"
+          },
+          {
+            "ref": "sacred_exorcist.dispel_evil"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "sacred_exorcist.spellcasting_advancement"
+          },
+          {
+            "ref": "sacred_exorcist.resist_possession"
+          },
+          {
+            "ref": "sacred_exorcist.chosen_foe"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "sacred_exorcist.spellcasting_advancement"
+          },
+          {
+            "ref": "sacred_exorcist.holy_aura"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Confirm Sacred Exorcist exact feature names, chosen foe scaling, dispel evil uses, and 10th-level capstone against primary source during in-app review."
+      ]
+    }
+  }
+]

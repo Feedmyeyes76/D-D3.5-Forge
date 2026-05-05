@@ -1,0 +1,207 @@
+[
+{
+  "name": "Loremaster",
+  "description": {
+    "summary": "A master of knowledge who gains secret abilities through study.",
+    "flavor": "Loremaster uncover ancient secrets and gain unique magical insights.",
+    "role": "Knowledge-based caster support class.",
+    "sourceText": "Dungeon Master's Guide, p. 191"
+  },
+  "hitDie": 4,
+  "babProg": "poor",
+  "skillPoints": 4,
+  "saves": { "fort": "poor", "ref": "poor", "will": "good" },
+  "features": [
+    {
+      "id": "loremaster.secrets",
+      "name": "Secrets",
+      "type": "feature",
+      "description": {
+        "summary": "Gain special abilities called secrets.",
+        "fullText": "At certain levels, a loremaster learns a secret, granting a special ability."
+      },
+      "progression": {
+        "1": { "mechanics": { "grantChoice": "loremaster_secret" } },
+        "3": {},
+        "5": {},
+        "7": {},
+        "9": {}
+      },
+      "confidence": "medium"
+    },
+    {
+      "id": "loremaster.lore",
+      "name": "Lore",
+      "type": "feature",
+      "description": {
+        "summary": "Gain knowledge similar to bardic knowledge.",
+        "fullText": "Loremaster can recall lore about various topics."
+      },
+      "progression": {
+        "1": {
+          "mechanics": {
+            "bardicKnowledgeLike": true
+          }
+        }
+      },
+      "confidence": "high"
+    }
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "features": [
+        { "ref": "loremaster.secrets" },
+        { "ref": "loremaster.lore" }
+      ],
+      "casting": [
+        {
+          "type": "existing",
+          "progression": 1,
+          "choice": { "type": "category", "options": ["arcane"] }
+        }
+      ]
+    }
+  ],
+  "migrationStatus": {
+    "progression": "partial",
+    "metadata": "complete",
+    "mechanics": "partial",
+    "needsReview": true,
+    "reviewNotes": ["Secret list not yet defined"]
+  }
+},
+
+{
+  "name": "Thaumaturgist",
+  "description": {
+    "summary": "A summoning specialist who enhances planar ally spells.",
+    "flavor": "Thaumaturgists bind extraplanar creatures into service.",
+    "role": "Summoning-focused divine caster.",
+    "sourceText": "Dungeon Master's Guide, p. 190"
+  },
+  "hitDie": 4,
+  "babProg": "poor",
+  "skillPoints": 2,
+  "saves": { "fort": "poor", "ref": "poor", "will": "good" },
+  "features": [
+    {
+      "id": "thaumaturgist.augmented_summoning",
+      "name": "Augmented Summoning",
+      "type": "feature",
+      "description": {
+        "summary": "Improves summoned creatures.",
+        "fullText": "Creatures summoned gain bonuses to Strength and Constitution."
+      },
+      "progression": {
+        "1": {
+          "mechanics": {
+            "summonBonus": { "str": 4, "con": 4 }
+          }
+        }
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "thaumaturgist.planar_cohort",
+      "name": "Planar Cohort",
+      "type": "feature",
+      "description": {
+        "summary": "Gain a planar companion.",
+        "fullText": "Allows a planar ally to serve as a cohort."
+      },
+      "progression": {
+        "5": {
+          "mechanics": {
+            "companionType": "planar",
+            "scalesWithLevel": true
+          }
+        }
+      },
+      "confidence": "medium"
+    }
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "features": [
+        { "ref": "thaumaturgist.augmented_summoning" }
+      ],
+      "casting": [
+        {
+          "type": "existing",
+          "progression": 1,
+          "choice": { "type": "category", "options": ["divine"] }
+        }
+      ]
+    }
+  ],
+  "migrationStatus": {
+    "progression": "partial",
+    "metadata": "complete",
+    "mechanics": "partial",
+    "needsReview": true,
+    "reviewNotes": ["Planar cohort mechanics incomplete"]
+  }
+},
+
+{
+  "name": "Beastmaster",
+  "description": {
+    "summary": "A master of animal companions.",
+    "flavor": "Beastmasters command powerful animal allies.",
+    "role": "Companion-focused class.",
+    "sourceText": "Complete Adventurer, p. 30"
+  },
+  "hitDie": 8,
+  "babProg": "medium",
+  "skillPoints": 4,
+  "saves": { "fort": "good", "ref": "good", "will": "poor" },
+  "features": [
+    {
+      "id": "beastmaster.animal_companion",
+      "name": "Animal Companion",
+      "type": "feature",
+      "description": {
+        "summary": "Gain and enhance animal companions.",
+        "fullText": "Beastmaster improves and gains additional animal companions."
+      },
+      "progression": {
+        "1": {
+          "mechanics": {
+            "companionScaling": true,
+            "extraCompanions": 1
+          }
+        },
+        "4": {
+          "mechanics": {
+            "extraCompanions": 2
+          }
+        },
+        "7": {
+          "mechanics": {
+            "extraCompanions": 3
+          }
+        }
+      },
+      "confidence": "medium"
+    }
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "features": [
+        { "ref": "beastmaster.animal_companion" }
+      ],
+      "casting": []
+    }
+  ],
+  "migrationStatus": {
+    "progression": "partial",
+    "metadata": "complete",
+    "mechanics": "partial",
+    "needsReview": true,
+    "reviewNotes": ["Companion progression incomplete"]
+  }
+}
+]

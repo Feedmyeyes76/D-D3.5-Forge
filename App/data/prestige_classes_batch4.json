@@ -1,0 +1,1759 @@
+[
+  {
+    "name": "Acolyte of the Skin",
+    "description": {
+      "summary": "A spellcaster who bonds fiendish skin to gain infernal powers.",
+      "flavor": "Acolytes of the skin pursue power by undergoing a blasphemous ritual that grafts the essence of a fiend to their own flesh.",
+      "role": "Arcane prestige class with partial spellcasting, fiendish resistances, spell-like abilities, and outsider transformation.",
+      "sourceText": "Complete Arcane, p. 19"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any nongood",
+      "skills": [
+        {
+          "name": "Knowledge (the planes)",
+          "ranks": 6
+        }
+      ],
+      "spells": "Caster level 5th with spells or spell-like abilities.",
+      "special": "Must have made peaceful contact with a summoned evil outsider and must undergo the Ritual of Bonding."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Intimidate",
+      "Knowledge (arcana)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "acolyte_of_the_skin.wear_fiend",
+        "name": "Wear Fiend",
+        "type": "feature",
+        "description": {
+          "summary": "Bond fiendish skin to gain armor, Dexterity, and darkvision.",
+          "fullText": "The acolyte bonds fiendish skin to his own. The skin grants +1 natural armor, a +2 inherent bonus to Dexterity, and darkvision out to 60 feet."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "naturalArmorBonus": 1,
+              "dexterityInherentBonus": 2,
+              "darkvisionFeet": 60
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.poison",
+        "name": "Poison",
+        "type": "scaling",
+        "description": {
+          "summary": "Use poison as a spell-like ability.",
+          "fullText": "The acolyte can use poison as a spell-like ability. Uses per day improve at 5th level."
+        },
+        "progression": {
+          "1": {
+            "value": "1/day",
+            "mechanics": {
+              "spellLikeAbility": "poison",
+              "casterLevel": 8,
+              "saveDcFormula": "14 + primary spellcasting ability modifier"
+            }
+          },
+          "5": {
+            "value": "2/day"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing spellcasting class at even levels.",
+          "fullText": "At each even-numbered acolyte level, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing spellcasting class."
+        },
+        "progression": {
+          "2": {
+            "value": "+1 existing spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing spellcasting class"
+          },
+          "10": {
+            "value": "+1 existing spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.flame_resistant",
+        "name": "Flame Resistant",
+        "type": "feature",
+        "description": {
+          "summary": "Gain resistance to fire.",
+          "fullText": "The fiendish skin grants resistance to fire 10."
+        },
+        "progression": {
+          "2": {
+            "value": "fire resistance 10",
+            "mechanics": {
+              "resistance": {
+                "fire": 10
+              }
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.fiendish_glare",
+        "name": "Fiendish Glare",
+        "type": "ability",
+        "description": {
+          "summary": "Unnerve a foe with a supernatural glare.",
+          "fullText": "The acolyte can use a supernatural glare once per day as a standard action against a creature within 100 feet and line of effect. The target becomes shaken and must save or be stunned for a duration based on hit points."
+        },
+        "progression": {
+          "3": {
+            "value": "1/day",
+            "mechanics": {
+              "rangeFeet": 100,
+              "action": "standard",
+              "saveType": "will",
+              "saveDcFormula": "10 + class level + Charisma modifier",
+              "effects": [
+                "shaken",
+                "stunned"
+              ],
+              "mindAffecting": true,
+              "fear": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.skin_adaptation",
+        "name": "Skin Adaptation",
+        "type": "feature",
+        "description": {
+          "summary": "The fiendish skin adapts to the wearer.",
+          "fullText": "The natural armor from wear fiend improves to +2, the acolyte gains a +2 inherent bonus to Constitution, and darkvision extends to 120 feet."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "naturalArmorBonusTotal": 2,
+              "constitutionInherentBonus": 2,
+              "darkvisionFeet": 120
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.cold_resistant",
+        "name": "Cold Resistant",
+        "type": "feature",
+        "description": {
+          "summary": "Gain resistance to cold.",
+          "fullText": "The acolyte gains resistance to cold 10."
+        },
+        "progression": {
+          "6": {
+            "value": "cold resistance 10",
+            "mechanics": {
+              "resistance": {
+                "cold": 10
+              }
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.glare_of_the_pit",
+        "name": "Glare of the Pit",
+        "type": "ability",
+        "description": {
+          "summary": "Fire rays from the eyes.",
+          "fullText": "Once per day as a standard action, the acolyte projects two fiery rays with a range of 100 feet. Each ray requires a ranged touch attack and deals 8d6 fire damage."
+        },
+        "progression": {
+          "7": {
+            "value": "1/day",
+            "mechanics": {
+              "action": "standard",
+              "rangeFeet": 100,
+              "rays": 2,
+              "attack": "ranged touch",
+              "damage": "8d6 fire per ray"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.summon_fiend",
+        "name": "Summon Fiend",
+        "type": "ability",
+        "description": {
+          "summary": "Summon a fiend from the bonded skin.",
+          "fullText": "Once per day, the acolyte can summon a babau if the skin is demonic or a chain devil if it is devilish. The summoned creature serves for 1 hour and cannot use innate summoning abilities."
+        },
+        "progression": {
+          "9": {
+            "value": "1/day",
+            "mechanics": {
+              "duration": "1 hour",
+              "options": [
+                "babau",
+                "chain devil"
+              ],
+              "cannotUseInnateSummoning": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "acolyte_of_the_skin.fiendish_symbiosis",
+        "name": "Fiendish Symbiosis",
+        "type": "feature",
+        "description": {
+          "summary": "Become fully joined with the fiendish skin.",
+          "fullText": "At 10th level, the acolyte's type changes to outsider and he gains damage reduction 10/good. Unlike most outsiders, he can still be raised or resurrected."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "typeChange": "outsider",
+              "damageReduction": "10/good",
+              "canBeRaisedOrResurrected": true
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.wear_fiend"
+          },
+          {
+            "ref": "acolyte_of_the_skin.poison"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.spellcasting_advancement"
+          },
+          {
+            "ref": "acolyte_of_the_skin.flame_resistant"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.fiendish_glare"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.skin_adaptation"
+          },
+          {
+            "ref": "acolyte_of_the_skin.poison"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.spellcasting_advancement"
+          },
+          {
+            "ref": "acolyte_of_the_skin.cold_resistant"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.glare_of_the_pit"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.summon_fiend"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "acolyte_of_the_skin.spellcasting_advancement"
+          },
+          {
+            "ref": "acolyte_of_the_skin.fiendish_symbiosis"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Alienist",
+    "description": {
+      "summary": "A spellcaster who studies and summons entities from beyond normal reality.",
+      "flavor": "Alienists pierce the boundaries of sane magic, calling pseudonatural creatures and drawing power from terrifying reaches outside ordinary space and time.",
+      "role": "Full spellcasting summoner with pseudonatural summons, familiar changes, metamagic secrets, and alien transformation.",
+      "sourceText": "Complete Arcane, p. 21"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any nonlawful",
+      "skills": [
+        {
+          "name": "Knowledge (the planes)",
+          "ranks": 8
+        }
+      ],
+      "feats": [
+        "Augment Summoning"
+      ],
+      "spells": "Able to cast at least one summoning spell of 3rd level or higher.",
+      "special": "Must have made peaceful contact with an alienist or a pseudonatural creature."
+    },
+    "classSkills": [
+      "Concentration",
+      "Gather Information",
+      "Knowledge (arcana)",
+      "Knowledge (architecture and engineering)",
+      "Knowledge (dungeoneering)",
+      "Knowledge (geography)",
+      "Knowledge (history)",
+      "Knowledge (local)",
+      "Knowledge (nature)",
+      "Knowledge (nobility and royalty)",
+      "Knowledge (psionics)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Listen",
+      "Profession",
+      "Spellcraft",
+      "Spot"
+    ],
+    "features": [
+      {
+        "id": "alienist.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing spellcasting class at every level.",
+          "fullText": "At each alienist level, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing spellcasting class"
+          },
+          "5": {
+            "value": "+1 existing spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing spellcasting class"
+          },
+          "7": {
+            "value": "+1 existing spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing spellcasting class"
+          },
+          "9": {
+            "value": "+1 existing spellcasting class"
+          },
+          "10": {
+            "value": "+1 existing spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.familiar_abilities",
+        "name": "Familiar Abilities",
+        "type": "feature",
+        "description": {
+          "summary": "Stack alienist levels for familiar benefits.",
+          "fullText": "Alienist levels stack with levels in a class that grants a familiar for determining the familiar's natural armor, Intelligence, and special abilities. This does not grant a familiar if the character lacks one."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "stacksWithFamiliarClass": true,
+              "doesNotGrantFamiliar": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.summon_alien",
+        "name": "Summon Alien",
+        "type": "feature",
+        "description": {
+          "summary": "Summon pseudonatural creatures instead of celestial or fiendish creatures.",
+          "fullText": "Whenever the alienist would use summon monster to summon a celestial or fiendish creature, she instead summons a pseudonatural version of that creature and gives up summoning nonpseudonatural creatures with summon monster."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "summonMonsterTemplate": "pseudonatural",
+              "replaces": [
+                "celestial",
+                "fiendish"
+              ],
+              "cannotSummonNonPseudonaturalWithSummonMonster": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.alien_blessing",
+        "name": "Alien Blessing",
+        "type": "feature",
+        "description": {
+          "summary": "Gain alien resilience at a mental cost.",
+          "fullText": "The alienist gains a +1 insight bonus on saving throws but takes a -2 penalty to Wisdom."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "savingThrowInsightBonus": 1,
+              "wisdomPenalty": -2
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.metamagic_secret",
+        "name": "Metamagic Secret",
+        "type": "feature",
+        "description": {
+          "summary": "Gain metamagic knowledge.",
+          "fullText": "The alienist gains a metamagic feat as a bonus feat at 3rd level and again at 7th level."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "grantChoice": "metamagic_feat"
+            }
+          },
+          "7": {
+            "mechanics": {
+              "grantChoice": "metamagic_feat"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.mad_certainty",
+        "name": "Mad Certainty",
+        "type": "feature",
+        "description": {
+          "summary": "Gain unnatural conviction while becoming less socially grounded.",
+          "fullText": "The alienist gains 3 hit points, but takes a penalty on Bluff, Diplomacy, and Handle Animal checks made to influence nonpseudonatural creatures."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "bonusHitPoints": 3,
+              "skillPenalty": {
+                "Bluff": -4,
+                "Diplomacy": -4,
+                "Handle Animal": -4
+              },
+              "appliesAgainst": "nonpseudonatural creatures"
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "alienist.pseudonatural_familiar",
+        "name": "Pseudonatural Familiar",
+        "type": "feature",
+        "description": {
+          "summary": "The familiar becomes pseudonatural.",
+          "fullText": "The alienist's familiar, if any, becomes pseudonatural. Newly summoned familiars also possess the pseudonatural template."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "familiarTemplate": "pseudonatural",
+              "requiresFamiliar": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.extra_summoning",
+        "name": "Extra Summoning",
+        "type": "feature",
+        "description": {
+          "summary": "Gain an extra summon monster slot.",
+          "fullText": "The alienist gains one extra spell slot at her highest spell level. This slot can be used only for a summon monster spell and migrates upward as higher spell levels become available."
+        },
+        "progression": {
+          "6": {
+            "mechanics": {
+              "extraSlot": "highest spell level",
+              "restrictedTo": "summon monster"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.insane_certainty",
+        "name": "Insane Certainty",
+        "type": "feature",
+        "description": {
+          "summary": "Mad certainty intensifies.",
+          "fullText": "The alienist gains an additional 3 hit points, while her penalty on Bluff, Diplomacy, and Handle Animal checks made to influence nonpseudonatural creatures worsens."
+        },
+        "progression": {
+          "8": {
+            "mechanics": {
+              "additionalBonusHitPoints": 3,
+              "skillPenaltyTotal": {
+                "Bluff": -10,
+                "Diplomacy": -10,
+                "Handle Animal": -10
+              },
+              "appliesAgainst": "nonpseudonatural creatures"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.timeless_body",
+        "name": "Timeless Body",
+        "type": "feature",
+        "description": {
+          "summary": "Stop suffering physical aging penalties.",
+          "fullText": "The alienist no longer takes ability score penalties for aging and cannot be magically aged. Existing penalties remain, and bonuses still accrue."
+        },
+        "progression": {
+          "9": {
+            "mechanics": {
+              "noFurtherAgingPenalties": true,
+              "cannotBeMagicallyAged": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "alienist.alien_transcendence",
+        "name": "Alien Transcendence",
+        "type": "feature",
+        "description": {
+          "summary": "Transcend mortality into an alien form.",
+          "fullText": "At 10th level, the alienist's type changes to outsider and she gains damage reduction and resistance reflecting her alien transformation."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "typeChange": "outsider",
+              "transformation": "alien transcendence"
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.familiar_abilities"
+          },
+          {
+            "ref": "alienist.summon_alien"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.alien_blessing"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.metamagic_secret"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.mad_certainty"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.pseudonatural_familiar"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.extra_summoning"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.metamagic_secret"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.insane_certainty"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.timeless_body"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "alienist.spellcasting_advancement"
+          },
+          {
+            "ref": "alienist.alien_transcendence"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Confirm exact mechanical details for Mad Certainty initial penalty and Alien Transcendence benefits from primary source table/text."
+      ]
+    }
+  },
+  {
+    "name": "Argent Savant",
+    "description": {
+      "summary": "An arcane specialist devoted to force spells.",
+      "flavor": "Argent savants regard magical force as the purest and most compelling expression of arcane power.",
+      "role": "Five-level arcane specialist focused on force descriptor spells and partial spellcasting advancement.",
+      "sourceText": "Complete Arcane, p. 24"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 6
+        },
+        {
+          "name": "Spellcraft",
+          "ranks": 12
+        }
+      ],
+      "spells": "Able to cast at least five spells with the force descriptor, at least one of which must be 5th level or higher."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Knowledge (arcana)",
+      "Knowledge (architecture and engineering)",
+      "Knowledge (dungeoneering)",
+      "Knowledge (geography)",
+      "Knowledge (history)",
+      "Knowledge (local)",
+      "Knowledge (nature)",
+      "Knowledge (nobility and royalty)",
+      "Knowledge (psionics)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "argent_savant.force_specialization",
+        "name": "Force Specialization",
+        "type": "feature",
+        "description": {
+          "summary": "Improve spells with the force descriptor.",
+          "fullText": "The argent savant specializes in force magic, improving the effectiveness of spells with the force descriptor."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "appliesToDescriptor": "force"
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "argent_savant.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class after 1st level.",
+          "fullText": "At each argent savant level after 1st, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "2": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "5": {
+            "value": "+1 existing arcane spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "argent_savant.force_armor",
+        "name": "Force Armor",
+        "type": "feature",
+        "description": {
+          "summary": "Gain protection from force magic.",
+          "fullText": "The argent savant gains a defensive benefit associated with mastery of force effects."
+        },
+        "progression": {
+          "2": {}
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "argent_savant.extended_force",
+        "name": "Extended Force",
+        "type": "feature",
+        "description": {
+          "summary": "Extend force effects.",
+          "fullText": "The argent savant can extend the duration or persistence of suitable force effects."
+        },
+        "progression": {
+          "3": {}
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "argent_savant.ablate_force",
+        "name": "Ablate Force",
+        "type": "feature",
+        "description": {
+          "summary": "Reduce incoming force damage or effects.",
+          "fullText": "The argent savant can ablate force, reducing the impact of hostile force effects."
+        },
+        "progression": {
+          "4": {}
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "argent_savant.unbind_force",
+        "name": "Unbind Force",
+        "type": "feature",
+        "description": {
+          "summary": "Disrupt force effects.",
+          "fullText": "The argent savant can unbind or disrupt force effects through advanced force mastery."
+        },
+        "progression": {
+          "5": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "argent_savant.force_specialization"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "argent_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "argent_savant.force_armor"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "argent_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "argent_savant.extended_force"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "argent_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "argent_savant.ablate_force"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "argent_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "argent_savant.unbind_force"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Feature names and level placement verified; detailed mechanics for force specialty abilities require primary source text before machine-readable mechanics are expanded."
+      ]
+    }
+  },
+  {
+    "name": "Blood Magus",
+    "description": {
+      "summary": "A returned-from-death arcane caster who fuels magic through blood.",
+      "flavor": "Blood magi learn the mystical value of blood after dying and returning to life, carving magic into flesh and turning blood into a conduit for arcane power.",
+      "role": "Arcane prestige class with strong spellcasting advancement and blood-based utility, damage, crafting, and travel abilities.",
+      "sourceText": "Complete Arcane, p. 26"
+    },
+    "hitDie": 6,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {
+      "alignment": "Any but lawful good",
+      "skills": [
+        {
+          "name": "Concentration",
+          "ranks": 4
+        }
+      ],
+      "feats": [
+        "Great Fortitude",
+        "Toughness"
+      ],
+      "spells": "Arcane caster level 5th.",
+      "special": "The character must have been killed and then returned to life."
+    },
+    "classSkills": [
+      "Bluff",
+      "Concentration",
+      "Craft",
+      "Heal",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "blood_magus.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class at most levels.",
+          "fullText": "At each blood magus level except 5th and 10th, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "7": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing arcane spellcasting class"
+          },
+          "9": {
+            "value": "+1 existing arcane spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.blood_component",
+        "name": "Blood Component",
+        "type": "ability",
+        "description": {
+          "summary": "Use blood to empower spellcasting.",
+          "fullText": "The blood magus may substitute a drop of his own blood for material components of 1 gp or less, dealing 1 point of damage to himself and increasing the spell's caster level by 1. Costly material components must still be provided."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "selfDamage": 1,
+              "casterLevelBonus": 1,
+              "replacesMaterialComponentsUpToGp": 1,
+              "costlyComponentsStillRequired": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.durable_casting",
+        "name": "Durable Casting",
+        "type": "feature",
+        "description": {
+          "summary": "Reduce effective damage for Concentration checks.",
+          "fullText": "When damage might disrupt casting, concentration, or directing a spell, the blood magus subtracts his class level from the damage for the purpose of determining the Concentration DC only."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "concentrationDcDamageReduction": "class level"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.stanch",
+        "name": "Stanch",
+        "type": "feature",
+        "description": {
+          "summary": "Automatically stabilize when dying.",
+          "fullText": "The blood magus automatically becomes stable when reduced below 0 hit points, though he still dies at -10 hit points or lower."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "autoStabilizeBelowZero": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.scarification",
+        "name": "Scarification",
+        "type": "feature",
+        "description": {
+          "summary": "Inscribe spells into scars.",
+          "fullText": "The blood magus can inscribe spells on his own skin as an alternative to scribing scrolls. The rules, XP costs, and expenses of Scribe Scroll apply, and he can have up to six spell scars at one time."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "actsAs": "Scribe Scroll",
+              "medium": "own skin",
+              "maxScars": 6
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.death_knell",
+        "name": "Death Knell",
+        "type": "spell_like",
+        "description": {
+          "summary": "Use death knell once per day.",
+          "fullText": "The blood magus can use death knell as a spell-like ability once per day."
+        },
+        "progression": {
+          "3": {
+            "value": "1/day",
+            "mechanics": {
+              "spellLikeAbility": "death knell"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.blood_draught",
+        "name": "Blood Draught",
+        "type": "feature",
+        "description": {
+          "summary": "Store potion-like magic in blood.",
+          "fullText": "The blood magus can store spells of up to 3rd level in his own blood, functioning like Brew Potion with special restrictions. Stored draughts circulate in his body and are ruined if he dies."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "actsAs": "Brew Potion",
+              "maxSpellLevel": 3,
+              "storage": "own blood",
+              "maxStoredFormula": "blood magus level + Constitution score"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.homunculus",
+        "name": "Homunculus",
+        "type": "feature",
+        "description": {
+          "summary": "Create and empower a blood-linked homunculus.",
+          "fullText": "The blood magus can create a homunculus using his blood without meeting the normal prerequisites, permanently sacrificing 1 hit point. The homunculus advances as the blood magus gains class levels, to a maximum of 6 Hit Dice at 9th level."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "companion": "homunculus",
+              "permanentHitPointSacrifice": 1,
+              "creationTime": "1 hour",
+              "advancesWithClassLevels": true,
+              "maxHitDiceAtClassLevel9": 6
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.bloodseeking_spell",
+        "name": "Bloodseeking Spell",
+        "type": "ability",
+        "description": {
+          "summary": "Add blood-drawing damage to damaging spells.",
+          "fullText": "By taking 3 points of self-inflicted damage while casting, the blood magus can cause a spell that deals hit point damage to deal an extra 1d6 damage to each affected target that has blood or a similar substance."
+        },
+        "progression": {
+          "6": {
+            "mechanics": {
+              "selfDamage": 3,
+              "extraDamage": "1d6",
+              "appliesTo": "spells that deal hit point damage",
+              "immuneTargetTypes": [
+                "construct",
+                "elemental",
+                "ooze",
+                "plant",
+                "undead",
+                "bloodless creatures"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.thicker_than_water",
+        "name": "Thicker than Water",
+        "type": "feature",
+        "description": {
+          "summary": "Gain damage reduction as blood withdraws from wounds.",
+          "fullText": "The blood magus gains damage reduction 1/bludgeoning as his vital fluids avoid injury."
+        },
+        "progression": {
+          "7": {
+            "value": "DR 1/bludgeoning",
+            "mechanics": {
+              "damageReduction": "1/bludgeoning"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.awaken_blood",
+        "name": "Awaken Blood",
+        "type": "ability",
+        "description": {
+          "summary": "Cause a foe's blood to violently awaken.",
+          "fullText": "Once per day, the blood magus can make a melee touch attack to deal 10d10 damage to a creature with blood or a similar substance. If the attempt fails, he can try again later that day."
+        },
+        "progression": {
+          "8": {
+            "value": "1/day",
+            "mechanics": {
+              "attack": "melee touch",
+              "damage": "10d10",
+              "immuneTargetTypes": [
+                "construct",
+                "elemental",
+                "ooze",
+                "plant",
+                "undead",
+                "bloodless creatures"
+              ],
+              "failedAttemptDoesNotExpendUse": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.infusion",
+        "name": "Infusion",
+        "type": "feature",
+        "description": {
+          "summary": "Permanently improve Constitution through blood infusion.",
+          "fullText": "The blood magus prepares and drinks a special distillation of his own blood, gaining a +2 increase to Constitution."
+        },
+        "progression": {
+          "9": {
+            "mechanics": {
+              "constitutionIncrease": 2
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "blood_magus.bloodwalk",
+        "name": "Bloodwalk",
+        "type": "ability",
+        "description": {
+          "summary": "Travel through the blood of living creatures.",
+          "fullText": "Once per day as a standard action that does not provoke attacks of opportunity, the blood magus can enter a suitable living creature and pass through blood to another living creature on the same plane. A bloody exit can damage the destination creature."
+        },
+        "progression": {
+          "10": {
+            "value": "1/day",
+            "mechanics": {
+              "action": "standard",
+              "provokesAttackOfOpportunity": false,
+              "transportMedium": "blood of living creatures",
+              "samePlane": true,
+              "bloodyExitDamage": "10d6",
+              "bloodyExitSave": "Fortitude negates or reduces per source",
+              "selfStunRisk": "DC 15 Fortitude or stunned 1 round after bloody exit"
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.blood_component"
+          },
+          {
+            "ref": "blood_magus.durable_casting"
+          },
+          {
+            "ref": "blood_magus.stanch"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.scarification"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.death_knell"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.blood_draught"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "blood_magus.homunculus"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.bloodseeking_spell"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.thicker_than_water"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.awaken_blood"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "blood_magus.spellcasting_advancement"
+          },
+          {
+            "ref": "blood_magus.infusion"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "blood_magus.bloodwalk"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  }
+]

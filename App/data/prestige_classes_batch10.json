@@ -1,0 +1,1506 @@
+[
+  {
+    "name": "Church Inquisitor",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A lawful divine agent who exposes corruption, deception, and supernatural infiltration.",
+      "flavor": "Church inquisitors protect their faith from corruption within and threats disguised as truth.",
+      "role": "Full divine casting advancement prestige class with truth detection, enchantment immunities, and investigative divine powers.",
+      "sourceText": "Complete Divine, p. 26"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Lawful good or lawful neutral",
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 8
+        },
+        {
+          "name": "Knowledge (religion)",
+          "ranks": 4
+        },
+        {
+          "name": "Spellcraft",
+          "ranks": 8
+        }
+      ],
+      "spells": "Able to cast dispel magic as a divine spell.",
+      "special": [
+        "Must be a member of a lawful good church or religious order and must have uncovered corruption within it."
+      ]
+    },
+    "classSkills": [
+      "Bluff",
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Diplomacy",
+      "Gather Information",
+      "Intimidate",
+      "Knowledge (arcana)",
+      "Knowledge (local)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Search",
+      "Sense Motive",
+      "Spellcraft",
+      "Spot"
+    ],
+    "features": [
+      {
+        "id": "church_inquisitor.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing divine spellcasting class at each class level.",
+          "fullText": "At each church inquisitor level, the character gains new spells per day and an increase in caster level as if gaining a level in an existing divine spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "5": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "7": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "9": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "10": {
+            "value": "+1 existing divine spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "church_inquisitor.detect_evil",
+        "name": "Detect Evil",
+        "type": "ability",
+        "description": {
+          "summary": "Detect evil at will.",
+          "fullText": "The church inquisitor can use detect evil at will as a spell-like ability."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "spellLikeAbility": "detect evil",
+              "uses": "at will"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "church_inquisitor.inquisition_domain",
+        "name": "Inquisition Domain",
+        "type": "feature",
+        "description": {
+          "summary": "Gain the Inquisition domain.",
+          "fullText": "The church inquisitor gains access to the Inquisition domain and its granted power."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "grantDomain": "Inquisition"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "church_inquisitor.immune_to_charms",
+        "name": "Immunity to Charms",
+        "type": "feature",
+        "description": {
+          "summary": "Become immune to charm effects.",
+          "fullText": "The church inquisitor becomes immune to enchantment charm spells and effects."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "immuneTo": [
+                "enchantment charm effects"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "church_inquisitor.pierce_illusion",
+        "name": "Pierce Illusion",
+        "type": "ability",
+        "description": {
+          "summary": "Gain a bonus or special check against illusions.",
+          "fullText": "The church inquisitor gains a class ability that helps pierce illusions and deceptive magic."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "antiIllusionAbility": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "church_inquisitor.pierce_disguise",
+        "name": "Pierce Disguise",
+        "type": "ability",
+        "description": {
+          "summary": "Gain superior ability to detect disguises and hidden identities.",
+          "fullText": "The church inquisitor gains a class ability that helps detect mundane or magical disguises and concealed identities."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "antiDisguiseAbility": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "church_inquisitor.immune_to_compulsions",
+        "name": "Immunity to Compulsions",
+        "type": "feature",
+        "description": {
+          "summary": "Become immune to compulsion effects.",
+          "fullText": "The church inquisitor becomes immune to enchantment compulsion spells and effects."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "immuneTo": [
+                "enchantment compulsion effects"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "church_inquisitor.force_shapechange",
+        "name": "Force Shapechange",
+        "type": "ability",
+        "description": {
+          "summary": "Force a shapechanged creature toward its true form.",
+          "fullText": "The church inquisitor gains the ability to challenge or suppress shapechanging and reveal a creature's true form."
+        },
+        "progression": {
+          "6": {
+            "mechanics": {
+              "antiShapechangeAbility": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "church_inquisitor.discern_lies",
+        "name": "Discern Lies",
+        "type": "ability",
+        "description": {
+          "summary": "Discern lies as a spell-like ability.",
+          "fullText": "The church inquisitor can discern lies as a spell-like ability with limited daily uses."
+        },
+        "progression": {
+          "7": {
+            "value": "limited uses/day",
+            "mechanics": {
+              "spellLikeAbility": "discern lies"
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "church_inquisitor.immune_to_possession",
+        "name": "Immunity to Possession",
+        "type": "feature",
+        "description": {
+          "summary": "Resist or ignore possession and mental control.",
+          "fullText": "The church inquisitor gains immunity or strong protection against possession and similar controlling effects."
+        },
+        "progression": {
+          "8": {
+            "mechanics": {
+              "protectsAgainst": [
+                "possession",
+                "mental control"
+              ]
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "church_inquisitor.learn_the_truth",
+        "name": "Learn the Truth",
+        "type": "ability",
+        "description": {
+          "summary": "Compel or reveal truth through divine insight.",
+          "fullText": "The church inquisitor gains a high-level truth-revealing ability suitable for exposing corruption and deception."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "truthRevealingAbility": true
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "church_inquisitor.spellcasting_advancement"
+          },
+          {
+            "ref": "church_inquisitor.detect_evil"
+          },
+          {
+            "ref": "church_inquisitor.inquisition_domain"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "church_inquisitor.spellcasting_advancement"
+          },
+          {
+            "ref": "church_inquisitor.immune_to_charms"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "church_inquisitor.spellcasting_advancement"
+          },
+          {
+            "ref": "church_inquisitor.pierce_illusion"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "church_inquisitor.spellcasting_advancement"
+          },
+          {
+            "ref": "church_inquisitor.pierce_disguise"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "church_inquisitor.spellcasting_advancement"
+          },
+          {
+            "ref": "church_inquisitor.immune_to_compulsions"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "church_inquisitor.spellcasting_advancement"
+          },
+          {
+            "ref": "church_inquisitor.force_shapechange"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "church_inquisitor.spellcasting_advancement"
+          },
+          {
+            "ref": "church_inquisitor.discern_lies"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "church_inquisitor.spellcasting_advancement"
+          },
+          {
+            "ref": "church_inquisitor.immune_to_possession"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "church_inquisitor.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "church_inquisitor.spellcasting_advancement"
+          },
+          {
+            "ref": "church_inquisitor.learn_the_truth"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Several mid/high-level inquisitor abilities should be verified against the primary class table/text in-app."
+      ]
+    }
+  },
+  {
+    "name": "Consecrated Harrier",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A church-sanctioned hunter who tracks and destroys enemies of the faith.",
+      "flavor": "Consecrated harriers pursue marked enemies relentlessly, empowered by scripture and divine mandate.",
+      "role": "Divine tracking prestige class with quarry bonuses, limited casting progression, and pursuit abilities.",
+      "sourceText": "Complete Divine, p. 28"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any lawful",
+      "baseAttackBonus": "+5",
+      "skills": [
+        {
+          "name": "Disguise",
+          "ranks": 5
+        },
+        {
+          "name": "Gather Information",
+          "ranks": 5
+        },
+        {
+          "name": "Profession (lawyer)",
+          "ranks": 5
+        }
+      ],
+      "feats": [
+        "Track"
+      ],
+      "special": [
+        "Must successfully track down and destroy a target selected by the character's church."
+      ]
+    },
+    "classSkills": [
+      "Bluff",
+      "Climb",
+      "Diplomacy",
+      "Disguise",
+      "Gather Information",
+      "Intimidate",
+      "Knowledge (local)",
+      "Profession",
+      "Ride",
+      "Search",
+      "Use Rope"
+    ],
+    "features": [
+      {
+        "id": "consecrated_harrier.blessing_of_scripture",
+        "name": "Blessing of Scripture",
+        "type": "feature",
+        "description": {
+          "summary": "Gain bonuses against a church-assigned target.",
+          "fullText": "The consecrated harrier gains sacred bonuses on certain skill checks and attack/damage rolls against a church-assigned target."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "appliesAgainst": "church-assigned target",
+              "sacredBonuses": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "consecrated_harrier.detect_chaos",
+        "name": "Detect Chaos",
+        "type": "ability",
+        "description": {
+          "summary": "Detect chaos at will.",
+          "fullText": "The consecrated harrier can use detect chaos at will as a spell-like ability."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "spellLikeAbility": "detect chaos",
+              "uses": "at will"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "consecrated_harrier.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance divine spellcasting at selected levels.",
+          "fullText": "The consecrated harrier gains spellcasting advancement at the levels indicated by the class table, advancing an existing divine spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "10": {
+            "value": "+1 existing divine spellcasting class"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "consecrated_harrier.sanctified_sight",
+        "name": "Sanctified Sight",
+        "type": "feature",
+        "description": {
+          "summary": "Gain a bonus against illusions.",
+          "fullText": "The consecrated harrier gains a bonus on saving throws against illusion effects."
+        },
+        "progression": {
+          "2": {
+            "value": "+4 vs illusions",
+            "mechanics": {
+              "saveBonus": 4,
+              "appliesAgainst": [
+                "illusion effects"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "consecrated_harrier.faithful_hound",
+        "name": "Faithful Hound",
+        "type": "ability",
+        "description": {
+          "summary": "Summon or call a divine hunting aid.",
+          "fullText": "The consecrated harrier gains a divinely empowered hunting ability or hound-themed aid as described by the class."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "huntingAid": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "consecrated_harrier.implacable_hunt",
+        "name": "Implacable Hunt",
+        "type": "scaling",
+        "description": {
+          "summary": "Improve pursuit of the assigned target.",
+          "fullText": "The consecrated harrier gains increasing bonuses or abilities related to pursuing the church-assigned quarry."
+        },
+        "progression": {
+          "5": {
+            "value": "improved pursuit"
+          },
+          "9": {
+            "value": "greater pursuit"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "consecrated_harrier.discern_location",
+        "name": "Discern Location",
+        "type": "ability",
+        "description": {
+          "summary": "Locate the assigned quarry through divine power.",
+          "fullText": "At high level, the consecrated harrier can use a powerful divination effect to locate the assigned target."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "divinationEffect": "locate quarry"
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "consecrated_harrier.blessing_of_scripture"
+          },
+          {
+            "ref": "consecrated_harrier.detect_chaos"
+          },
+          {
+            "ref": "consecrated_harrier.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "consecrated_harrier.spellcasting_advancement"
+          },
+          {
+            "ref": "consecrated_harrier.sanctified_sight"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "consecrated_harrier.spellcasting_advancement"
+          },
+          {
+            "ref": "consecrated_harrier.faithful_hound"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "consecrated_harrier.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "consecrated_harrier.implacable_hunt"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "consecrated_harrier.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "consecrated_harrier.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "consecrated_harrier.implacable_hunt"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "consecrated_harrier.spellcasting_advancement"
+          },
+          {
+            "ref": "consecrated_harrier.discern_location"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Spellcasting level pattern and later pursuit abilities should be checked against primary source table."
+      ]
+    }
+  },
+  {
+    "name": "Doomguide",
+    "maxLevel": 5,
+    "description": {
+      "summary": "A servant of Kelemvor who hunts undead and enforces the proper passage of souls.",
+      "flavor": "Doomguides oppose undeath as a violation of natural death and divine judgment.",
+      "role": "Short undead-hunter prestige class with turning and anti-undead abilities.",
+      "sourceText": "Faiths and Pantheons / Forgotten Realms"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Usually lawful neutral or compatible with Kelemvor's clergy",
+      "skills": [
+        {
+          "name": "Knowledge (religion)",
+          "ranks": 8
+        }
+      ],
+      "special": [
+        "Turn undead ability",
+        "Must serve Kelemvor or the appropriate death faith."
+      ]
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Heal",
+      "Knowledge (religion)",
+      "Profession",
+      "Sense Motive",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "doomguide.turn_undead_advancement",
+        "name": "Turn Undead Advancement",
+        "type": "scaling",
+        "description": {
+          "summary": "Improve effective level for turning undead.",
+          "fullText": "Doomguide levels improve or stack with cleric levels for turning undead as described by the class."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "turnUndeadAdvancement": true
+            }
+          },
+          "3": {
+            "mechanics": {
+              "turnUndeadAdvancement": true
+            }
+          },
+          "5": {
+            "mechanics": {
+              "turnUndeadAdvancement": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "doomguide.extra_turning",
+        "name": "Extra Turning",
+        "type": "feature",
+        "description": {
+          "summary": "Gain additional turning uses.",
+          "fullText": "The doomguide gains additional uses or improved capability with turn undead."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "extraTurning": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "doomguide.save_bonus_vs_undead",
+        "name": "Save Bonus against Undead",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain bonuses against undead abilities.",
+          "fullText": "The doomguide gains a scaling sacred or class bonus against attacks and abilities of undead creatures."
+        },
+        "progression": {
+          "2": {
+            "value": "+2"
+          },
+          "4": {
+            "value": "+4"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "doomguide.death_touch",
+        "name": "Death Touch",
+        "type": "ability",
+        "description": {
+          "summary": "Channel death against undead or living foes.",
+          "fullText": "The doomguide gains a death-themed touch or channeling ability associated with Kelemvor's judgment of the undead."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "deathThemedTouch": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "doomguide.true_death",
+        "name": "True Death",
+        "type": "feature",
+        "description": {
+          "summary": "Prevent undead from returning easily.",
+          "fullText": "The doomguide gains a capstone or high-level ability that helps destroy undead permanently or prevent their return."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "antiUndeadFinality": true
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "doomguide.turn_undead_advancement"
+          },
+          {
+            "ref": "doomguide.extra_turning"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "doomguide.save_bonus_vs_undead"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "doomguide.turn_undead_advancement"
+          },
+          {
+            "ref": "doomguide.death_touch"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "doomguide.save_bonus_vs_undead"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "doomguide.turn_undead_advancement"
+          },
+          {
+            "ref": "doomguide.true_death"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Doomguide is not a Complete Divine class; primary Forgotten Realms source mechanics should be verified in-app/source before marking complete."
+      ]
+    }
+  },
+  {
+    "name": "Black Flame Zealot",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A divine assassin of Kossuth who combines stealth, death attacks, poison, and black fire.",
+      "flavor": "Black flame zealots are ruthless temple killers who wield sacred fire as a weapon of execution.",
+      "role": "Sneak-attack divine prestige class with death attack, poison use, partial divine casting, and fire-themed abilities.",
+      "sourceText": "Complete Divine, p. 21"
+    },
+    "hitDie": 6,
+    "babProg": "medium",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any nongood",
+      "skills": [
+        {
+          "name": "Hide",
+          "ranks": 8
+        },
+        {
+          "name": "Knowledge (religion)",
+          "ranks": 8
+        },
+        {
+          "name": "Move Silently",
+          "ranks": 8
+        }
+      ],
+      "feats": [
+        "Exotic Weapon Proficiency (kukri)",
+        "Iron Will"
+      ],
+      "spells": "Able to cast 2nd-level divine spells.",
+      "special": [
+        "Sneak attack +1d6",
+        "Must worship Kossuth or meet the class's faith requirement."
+      ]
+    },
+    "classSkills": [
+      "Balance",
+      "Climb",
+      "Concentration",
+      "Craft",
+      "Escape Artist",
+      "Hide",
+      "Jump",
+      "Knowledge (religion)",
+      "Listen",
+      "Move Silently",
+      "Open Lock",
+      "Profession",
+      "Search",
+      "Sleight of Hand",
+      "Spellcraft",
+      "Spot",
+      "Swim",
+      "Tumble",
+      "Use Rope"
+    ],
+    "features": [
+      {
+        "id": "black_flame_zealot.death_attack",
+        "name": "Death Attack",
+        "type": "ability",
+        "description": {
+          "summary": "Study a target and deliver a deadly sneak attack.",
+          "fullText": "The black flame zealot gains a death attack similar to the assassin, allowing a studied melee sneak attack to kill or otherwise incapacitate a target."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "requiresStudyRounds": 3,
+              "requiresMeleeSneakAttack": true,
+              "saveType": "fortitude"
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "black_flame_zealot.fear_immunity",
+        "name": "Fear Immunity",
+        "type": "feature",
+        "description": {
+          "summary": "Become immune to fear.",
+          "fullText": "The black flame zealot becomes immune to magical and mundane fear effects."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "immuneTo": [
+                "fear"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "black_flame_zealot.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance existing divine spellcasting at selected levels.",
+          "fullText": "The black flame zealot gains new spells per day and caster level as if gaining a level in an existing divine spellcasting class at the levels indicated by the class progression."
+        },
+        "progression": {
+          "2": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing divine spellcasting class"
+          },
+          "10": {
+            "value": "+1 existing divine spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "black_flame_zealot.poison_use",
+        "name": "Poison Use",
+        "type": "feature",
+        "description": {
+          "summary": "Use poison without risking accidental self-poisoning.",
+          "fullText": "The black flame zealot is trained in the use of poison and does not risk accidentally poisoning himself when applying poison to a blade."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "noAccidentalSelfPoisoningWhenApplyingPoison": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "black_flame_zealot.sneak_attack",
+        "name": "Sneak Attack",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain additional sneak attack damage.",
+          "fullText": "The black flame zealot gains additional sneak attack damage at specific levels. This damage stacks with sneak attack from other sources."
+        },
+        "progression": {
+          "3": {
+            "value": "+1d6"
+          },
+          "6": {
+            "value": "+2d6"
+          },
+          "9": {
+            "value": "+3d6"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "black_flame_zealot.black_flame",
+        "name": "Black Flame",
+        "type": "ability",
+        "description": {
+          "summary": "Channel black fire through attacks or divine wrath.",
+          "fullText": "The black flame zealot gains the signature black flame ability, channeling supernatural fire associated with the deity's wrath."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "blackFlameAbility": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "black_flame_zealot.unholy_immolation",
+        "name": "Unholy Immolation",
+        "type": "ability",
+        "description": {
+          "summary": "Burn enemies with black divine fire.",
+          "fullText": "At higher levels, the black flame zealot can immolate foes with black flame or enhance attacks with destructive divine fire."
+        },
+        "progression": {
+          "7": {
+            "mechanics": {
+              "blackFlameDamageAbility": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "black_flame_zealot.death_attack_improvement",
+        "name": "Improved Death Attack",
+        "type": "scaling",
+        "description": {
+          "summary": "Improve the lethality of death attack.",
+          "fullText": "The black flame zealot's death attack becomes more dangerous as class level increases."
+        },
+        "progression": {
+          "5": {
+            "value": "improved"
+          },
+          "10": {
+            "value": "greater"
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "black_flame_zealot.death_attack"
+          },
+          {
+            "ref": "black_flame_zealot.fear_immunity"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "black_flame_zealot.spellcasting_advancement"
+          },
+          {
+            "ref": "black_flame_zealot.poison_use"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "black_flame_zealot.sneak_attack"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "black_flame_zealot.spellcasting_advancement"
+          },
+          {
+            "ref": "black_flame_zealot.black_flame"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "black_flame_zealot.death_attack_improvement"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "black_flame_zealot.spellcasting_advancement"
+          },
+          {
+            "ref": "black_flame_zealot.sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "black_flame_zealot.unholy_immolation"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "black_flame_zealot.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "black_flame_zealot.sneak_attack"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "black_flame_zealot.spellcasting_advancement"
+          },
+          {
+            "ref": "black_flame_zealot.death_attack_improvement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Black flame feature details and exact death attack improvement should be verified against source text/table."
+      ]
+    }
+  }
+]

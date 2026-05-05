@@ -1,0 +1,218 @@
+{
+  "name": "Assassin",
+  "description": {
+    "summary": "A stealth-based killer specializing in poison use and death attacks.",
+    "flavor": "Assassins study the art of killing, blending stealth, precision, and deadly toxins.",
+    "role": "Stealth striker with spellcasting and precision damage.",
+    "sourceText": "Dungeon Master's Guide, p. 180"
+  },
+
+  "hitDie": 6,
+  "babProg": "medium",
+  "skillPoints": 4,
+
+  "saves": {
+    "fort": "poor",
+    "ref": "good",
+    "will": "good"
+  },
+
+  "features": [
+    {
+      "id": "assassin.death_attack",
+      "name": "Death Attack",
+      "type": "ability",
+      "description": {
+        "summary": "Study a target to deliver a deadly strike.",
+        "fullText": "If the assassin studies a victim for 3 rounds and then makes a sneak attack, the attack can either paralyze or kill the target."
+      },
+      "progression": {
+        "1": {}
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "assassin.poison_use",
+      "name": "Poison Use",
+      "type": "feature",
+      "description": {
+        "summary": "Use poison safely.",
+        "fullText": "Assassins are trained in the use of poison and never risk accidentally poisoning themselves."
+      },
+      "progression": {
+        "1": {}
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "assassin.sneak_attack",
+      "name": "Sneak Attack",
+      "type": "scaling",
+      "description": {
+        "summary": "Extra damage when attacking unaware targets.",
+        "fullText": "The assassin deals extra damage when the opponent is denied Dexterity bonus or is flanked."
+      },
+      "progression": {
+        "1": { "value": "1d6" },
+        "3": { "value": "2d6" },
+        "5": { "value": "3d6" },
+        "7": { "value": "4d6" },
+        "9": { "value": "5d6" }
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "assassin.save_bonus_poison",
+      "name": "Save Bonus vs Poison",
+      "type": "scaling",
+      "description": {
+        "summary": "Bonus on saves against poison.",
+        "fullText": "The assassin gains a bonus on saving throws against poison."
+      },
+      "progression": {
+        "2": { "value": "+1" },
+        "5": { "value": "+2" },
+        "8": { "value": "+3" }
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "assassin.uncanny_dodge",
+      "name": "Uncanny Dodge",
+      "type": "feature",
+      "description": {
+        "summary": "Retain Dex bonus to AC when flat-footed.",
+        "fullText": "The assassin retains her Dexterity bonus to AC even when caught flat-footed."
+      },
+      "progression": {
+        "2": {}
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "assassin.improved_uncanny_dodge",
+      "name": "Improved Uncanny Dodge",
+      "type": "feature",
+      "description": {
+        "summary": "Cannot be flanked easily.",
+        "fullText": "The assassin cannot be flanked except by a rogue of higher level."
+      },
+      "progression": {
+        "5": {}
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "assassin.hide_in_plain_sight",
+      "name": "Hide in Plain Sight",
+      "type": "feature",
+      "description": {
+        "summary": "Hide while observed in shadows.",
+        "fullText": "The assassin can use the Hide skill even while being observed, as long as she is within 10 feet of a shadow."
+      },
+      "progression": {
+        "8": {}
+      },
+      "confidence": "high"
+    }
+  ],
+
+  "levels": [
+    {
+      "level": 1,
+      "features": [
+        { "ref": "assassin.death_attack" },
+        { "ref": "assassin.poison_use" },
+        { "ref": "assassin.sneak_attack" }
+      ],
+      "casting": []
+    },
+    {
+      "level": 2,
+      "features": [
+        { "ref": "assassin.uncanny_dodge" },
+        { "ref": "assassin.save_bonus_poison" }
+      ],
+      "casting": [
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }
+      ]
+    },
+    {
+      "level": 3,
+      "features": [
+        { "ref": "assassin.sneak_attack" }
+      ],
+      "casting": [
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }
+      ]
+    },
+    {
+      "level": 4,
+      "features": [],
+      "casting": [
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }
+      ]
+    },
+    {
+      "level": 5,
+      "features": [
+        { "ref": "assassin.sneak_attack" },
+        { "ref": "assassin.improved_uncanny_dodge" },
+        { "ref": "assassin.save_bonus_poison" }
+      ],
+      "casting": [
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }
+      ]
+    },
+    {
+      "level": 6,
+      "features": [],
+      "casting": [
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }
+      ]
+    },
+    {
+      "level": 7,
+      "features": [
+        { "ref": "assassin.sneak_attack" }
+      ],
+      "casting": [
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }
+      ]
+    },
+    {
+      "level": 8,
+      "features": [
+        { "ref": "assassin.hide_in_plain_sight" },
+        { "ref": "assassin.save_bonus_poison" }
+      ],
+      "casting": [
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }
+      ]
+    },
+    {
+      "level": 9,
+      "features": [
+        { "ref": "assassin.sneak_attack" }
+      ],
+      "casting": [
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }
+      ]
+    },
+    {
+      "level": 10,
+      "features": [],
+      "casting": [
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }
+      ]
+    }
+  ],
+
+  "migrationStatus": {
+    "progression": "complete",
+    "metadata": "complete",
+    "mechanics": "complete",
+    "needsReview": false,
+    "reviewNotes": []
+  }
+}

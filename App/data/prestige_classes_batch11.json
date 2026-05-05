@@ -1,0 +1,618 @@
+[
+  {
+    "name": "Duelist",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Agile melee specialist",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "duelist.canny_defense",
+        "name": "Canny Defense",
+        "type": "feature",
+        "description": {
+          "summary": "Canny Defense",
+          "fullText": "Canny Defense ability."
+        },
+        "progression": {
+          "1": {}
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "duelist.precise_strike",
+        "name": "Precise Strike",
+        "type": "scaling",
+        "description": {
+          "summary": "Precise Strike",
+          "fullText": "Precise Strike ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "duelist.enhanced_mobility",
+        "name": "Enhanced Mobility",
+        "type": "feature",
+        "description": {
+          "summary": "Enhanced Mobility",
+          "fullText": "Enhanced Mobility ability."
+        },
+        "progression": {
+          "3": {}
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "duelist.acrobatic_charge",
+        "name": "Acrobatic Charge",
+        "type": "feature",
+        "description": {
+          "summary": "Acrobatic Charge",
+          "fullText": "Acrobatic Charge ability."
+        },
+        "progression": {
+          "7": {}
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "duelist.improved_reaction",
+        "name": "Improved Reaction",
+        "type": "feature",
+        "description": {
+          "summary": "Improved Reaction",
+          "fullText": "Improved Reaction ability."
+        },
+        "progression": {
+          "2": {}
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "duelist.elaborate_parry",
+        "name": "Elaborate Parry",
+        "type": "feature",
+        "description": {
+          "summary": "Elaborate Parry",
+          "fullText": "Elaborate Parry ability."
+        },
+        "progression": {
+          "6": {}
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "duelist.deflect_arrows",
+        "name": "Deflect Arrows",
+        "type": "feature",
+        "description": {
+          "summary": "Deflect Arrows",
+          "fullText": "Deflect Arrows ability."
+        },
+        "progression": {
+          "9": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "duelist.canny_defense"
+          },
+          {
+            "ref": "duelist.precise_strike"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "duelist.improved_reaction"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "duelist.enhanced_mobility"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "duelist.precise_strike"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "duelist.elaborate_parry"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "duelist.acrobatic_charge"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "duelist.deflect_arrows"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "duelist.precise_strike"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Bear Warrior",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Rage-fueled shapeshifter",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 12,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "bear_warrior.bear_form",
+        "name": "Bear Form",
+        "type": "scaling",
+        "description": {
+          "summary": "Bear Form",
+          "fullText": "Bear Form ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "bear_warrior.bear_form"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "bear_warrior.bear_form"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "bear_warrior.bear_form"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Cavalier",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Mounted combat specialist",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "cavalier.mounted_mastery",
+        "name": "Mounted Mastery",
+        "type": "scaling",
+        "description": {
+          "summary": "Mounted Mastery",
+          "fullText": "Mounted Mastery ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "cavalier.mounted_mastery"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "cavalier.mounted_mastery"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "cavalier.mounted_mastery"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Dervish",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Mobile dual-wielder",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 8,
+    "babProg": "full",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "dervish.dervish_dance",
+        "name": "Dervish Dance",
+        "type": "scaling",
+        "description": {
+          "summary": "Dervish Dance",
+          "fullText": "Dervish Dance ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "dervish.dervish_dance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "dervish.dervish_dance"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "dervish.dervish_dance"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Exotic Weapon Master",
+    "maxLevel": 5,
+    "description": {
+      "summary": "Exotic weapon specialist",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 8,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "exotic_weapon_master.weapon_tricks",
+        "name": "Weapon Tricks",
+        "type": "scaling",
+        "description": {
+          "summary": "Weapon Tricks",
+          "fullText": "Weapon Tricks ability."
+        },
+        "progression": {
+          "1": {},
+          "3": {},
+          "5": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "exotic_weapon_master.weapon_tricks"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "exotic_weapon_master.weapon_tricks"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "exotic_weapon_master.weapon_tricks"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  }
+]

@@ -1,0 +1,434 @@
+[
+  {
+    "name": "Tattooed Monk",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Mystic tattoo warrior",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "good",
+      "ref": "good",
+      "will": "good"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "tattooed_monk.tattoos",
+        "name": "Mystic Tattoos",
+        "type": "feature",
+        "description": {
+          "summary": "Mystic Tattoos",
+          "fullText": "Mystic Tattoos ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "tattooed_monk.tattoos"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "tattooed_monk.tattoos"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "tattooed_monk.tattoos"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Gladiator",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Arena combatant",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Complete Warrior"
+    },
+    "hitDie": 10,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "gladiator.arena_mastery",
+        "name": "Arena Mastery",
+        "type": "feature",
+        "description": {
+          "summary": "Arena Mastery",
+          "fullText": "Arena Mastery ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "gladiator.arena_mastery"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "gladiator.arena_mastery"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "gladiator.arena_mastery"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "War Hulk",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Brute strength specialist",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Miniatures Handbook"
+    },
+    "hitDie": 12,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "war_hulk.massive_strength",
+        "name": "Massive Strength",
+        "type": "feature",
+        "description": {
+          "summary": "Massive Strength",
+          "fullText": "Massive Strength ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "war_hulk.massive_strength"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "war_hulk.massive_strength"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "war_hulk.massive_strength"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Deepwarden",
+    "maxLevel": 10,
+    "description": {
+      "summary": "Defensive stone warrior",
+      "flavor": "",
+      "role": "Martial",
+      "sourceText": "Races of Stone"
+    },
+    "hitDie": 12,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {},
+    "classSkills": [],
+    "features": [
+      {
+        "id": "deepwarden.stone_guard",
+        "name": "Stone Guard",
+        "type": "feature",
+        "description": {
+          "summary": "Stone Guard",
+          "fullText": "Stone Guard ability."
+        },
+        "progression": {
+          "1": {},
+          "5": {},
+          "10": {}
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "deepwarden.stone_guard"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "deepwarden.stone_guard"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "deepwarden.stone_guard"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": []
+    }
+  }
+]

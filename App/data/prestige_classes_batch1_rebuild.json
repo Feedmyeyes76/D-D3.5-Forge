@@ -1,0 +1,1566 @@
+[
+  {
+    "name": "Assassin",
+    "description": {
+      "summary": "A stealth-based killer specializing in poison use, death attacks, and assassin spellcasting.",
+      "flavor": "Assassins are precise killers who combine patience, stealth, poison, and dark arcane magic to eliminate chosen targets.",
+      "role": "Stealth striker with precision damage, death attack, poison safety, and a dedicated Intelligence-based arcane spell list.",
+      "sourceText": "Dungeon Master's Guide, p. 180"
+    },
+    "hitDie": 6,
+    "babProg": "medium",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any evil",
+      "skills": [
+        {
+          "name": "Disguise",
+          "ranks": 4
+        },
+        {
+          "name": "Hide",
+          "ranks": 8
+        },
+        {
+          "name": "Move Silently",
+          "ranks": 8
+        }
+      ],
+      "special": "Must kill someone as part of the initiation."
+    },
+    "classSkills": [
+      "Balance",
+      "Bluff",
+      "Climb",
+      "Craft",
+      "Decipher Script",
+      "Diplomacy",
+      "Disable Device",
+      "Disguise",
+      "Escape Artist",
+      "Forgery",
+      "Gather Information",
+      "Hide",
+      "Intimidate",
+      "Jump",
+      "Listen",
+      "Move Silently",
+      "Open Lock",
+      "Search",
+      "Sense Motive",
+      "Sleight of Hand",
+      "Spot",
+      "Swim",
+      "Tumble",
+      "Use Magic Device",
+      "Use Rope"
+    ],
+    "features": [
+      {
+        "id": "assassin.sneak_attack",
+        "name": "Sneak Attack",
+        "type": "scaling",
+        "description": {
+          "summary": "Deal extra damage when attacking vulnerable targets.",
+          "fullText": "The assassin gains sneak attack damage. This extra damage applies when the target is denied its Dexterity bonus to AC or when the assassin flanks the target, following normal sneak attack rules."
+        },
+        "progression": {
+          "1": {
+            "value": "1d6"
+          },
+          "3": {
+            "value": "2d6"
+          },
+          "5": {
+            "value": "3d6"
+          },
+          "7": {
+            "value": "4d6"
+          },
+          "9": {
+            "value": "5d6"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.death_attack",
+        "name": "Death Attack",
+        "type": "ability",
+        "description": {
+          "summary": "Study a victim, then make a sneak attack that can kill or paralyze.",
+          "fullText": "If the assassin studies a victim for 3 rounds and then makes a sneak attack with a melee weapon that successfully deals damage, the sneak attack has the additional effect of possibly either paralyzing or killing the target. The target receives a Fortitude save against DC 10 + assassin level + the assassin's Intelligence modifier. The assassin must make the attack within 3 rounds after study is complete. Paralysis lasts 1d6 rounds plus 1 round per assassin level."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "requiresStudyRounds": 3,
+              "attackWindowRounds": 3,
+              "requiresMeleeSneakAttack": true,
+              "saveType": "fortitude",
+              "saveDcFormula": "10 + class level + Intelligence modifier",
+              "effects": [
+                "death",
+                "paralysis"
+              ],
+              "paralysisDuration": "1d6 rounds + assassin level"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.poison_use",
+        "name": "Poison Use",
+        "type": "feature",
+        "description": {
+          "summary": "Apply poison without risking accidental self-poisoning.",
+          "fullText": "Assassins are trained in the use of poison and never risk accidentally poisoning themselves when applying poison to a blade."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "noAccidentalSelfPoisoningWhenApplyingPoison": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.assassin_spellcasting",
+        "name": "Assassin Spellcasting",
+        "type": "casting",
+        "description": {
+          "summary": "Prepare Intelligence-based arcane spells from the assassin spell list.",
+          "fullText": "Beginning at 1st level, the assassin gains the ability to cast a small number of arcane spells. Assassin spellcasting is Intelligence-based and uses the assassin spell list."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "castingType": "prepared",
+              "tradition": "arcane",
+              "ability": "intelligence",
+              "spellList": "Assassin"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.save_bonus_vs_poison",
+        "name": "Save Bonus against Poison",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a scaling bonus on saving throws against poison.",
+          "fullText": "The assassin gains a bonus on saving throws against poison. This bonus improves as assassin level increases."
+        },
+        "progression": {
+          "2": {
+            "value": "+1"
+          },
+          "4": {
+            "value": "+2"
+          },
+          "6": {
+            "value": "+3"
+          },
+          "8": {
+            "value": "+4"
+          },
+          "10": {
+            "value": "+5"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.uncanny_dodge",
+        "name": "Uncanny Dodge",
+        "type": "feature",
+        "description": {
+          "summary": "Retain Dexterity bonus to AC when caught flat-footed or attacked by an invisible foe.",
+          "fullText": "Starting at 2nd level, the assassin retains her Dexterity bonus to AC even if caught flat-footed or struck by an invisible attacker."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "retainDexBonusWhenFlatFooted": true,
+              "retainDexBonusAgainstInvisibleAttacker": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.improved_uncanny_dodge",
+        "name": "Improved Uncanny Dodge",
+        "type": "feature",
+        "description": {
+          "summary": "Cannot be flanked except by sufficiently advanced rogues.",
+          "fullText": "At 5th level, the assassin can no longer be flanked except by a rogue whose rogue level is at least four higher than the assassin's character level, following normal improved uncanny dodge rules."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "cannotBeFlanked": true,
+              "rogueException": "rogue level at least 4 higher"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "assassin.hide_in_plain_sight",
+        "name": "Hide in Plain Sight",
+        "type": "feature",
+        "description": {
+          "summary": "Hide while observed when near shadow.",
+          "fullText": "At 8th level, the assassin can use the Hide skill even while being observed, as long as she is within 10 feet of some sort of shadow."
+        },
+        "progression": {
+          "8": {
+            "mechanics": {
+              "allowsHideWhileObserved": true,
+              "requiresShadow": true,
+              "shadowRangeFeet": 10
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "assassin.sneak_attack"
+          },
+          {
+            "ref": "assassin.death_attack"
+          },
+          {
+            "ref": "assassin.poison_use"
+          },
+          {
+            "ref": "assassin.assassin_spellcasting"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "assassin.save_bonus_vs_poison"
+          },
+          {
+            "ref": "assassin.uncanny_dodge"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "assassin.sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "assassin.save_bonus_vs_poison"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "assassin.sneak_attack"
+          },
+          {
+            "ref": "assassin.improved_uncanny_dodge"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "assassin.save_bonus_vs_poison"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "assassin.sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "assassin.save_bonus_vs_poison"
+          },
+          {
+            "ref": "assassin.hide_in_plain_sight"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "assassin.sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "assassin.save_bonus_vs_poison"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Assassin",
+            "progression": 1,
+            "spellList": "Assassin",
+            "ability": "intelligence",
+            "castingType": "prepared"
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Arcane Trickster",
+    "description": {
+      "summary": "A rogue and arcane spellcaster who combines skill, stealth, magic, and precision attacks.",
+      "flavor": "Arcane tricksters use magic to extend their larcenous talents, strike with precision, and manipulate objects from a distance.",
+      "role": "Arcane stealth caster with sneak attack progression, ranged legerdemain, and impromptu sneak attack uses.",
+      "sourceText": "Dungeon Master's Guide, p. 177"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any nonlawful",
+      "skills": [
+        {
+          "name": "Decipher Script",
+          "ranks": 7
+        },
+        {
+          "name": "Disable Device",
+          "ranks": 7
+        },
+        {
+          "name": "Escape Artist",
+          "ranks": 7
+        },
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 4
+        }
+      ],
+      "spells": "Ability to cast mage hand and at least one arcane spell of 3rd level or higher.",
+      "special": "Sneak attack +2d6."
+    },
+    "classSkills": [
+      "Appraise",
+      "Balance",
+      "Bluff",
+      "Climb",
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Diplomacy",
+      "Disable Device",
+      "Disguise",
+      "Escape Artist",
+      "Forgery",
+      "Gather Information",
+      "Hide",
+      "Jump",
+      "Knowledge (arcana)",
+      "Listen",
+      "Move Silently",
+      "Open Lock",
+      "Profession",
+      "Search",
+      "Sense Motive",
+      "Sleight of Hand",
+      "Spellcraft",
+      "Spot",
+      "Swim",
+      "Tumble",
+      "Use Magic Device",
+      "Use Rope"
+    ],
+    "features": [
+      {
+        "id": "arcane_trickster.ranged_legerdemain",
+        "name": "Ranged Legerdemain",
+        "type": "ability",
+        "description": {
+          "summary": "Use legerdemain skills at range.",
+          "fullText": "The arcane trickster can use Disable Device, Open Lock, or Sleight of Hand at a range of 30 feet. Working at range increases the normal skill check DC by 5, and the ability can be used a limited number of times per day."
+        },
+        "progression": {
+          "1": {
+            "value": "1/day",
+            "mechanics": {
+              "skills": [
+                "Disable Device",
+                "Open Lock",
+                "Sleight of Hand"
+              ],
+              "rangeFeet": 30,
+              "dcIncrease": 5
+            }
+          },
+          "5": {
+            "value": "2/day"
+          },
+          "9": {
+            "value": "3/day"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "arcane_trickster.sneak_attack",
+        "name": "Sneak Attack",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain additional sneak attack damage.",
+          "fullText": "The arcane trickster gains additional sneak attack damage at higher levels. This stacks with sneak attack damage from other classes."
+        },
+        "progression": {
+          "3": {
+            "value": "1d6"
+          },
+          "5": {
+            "value": "2d6"
+          },
+          "7": {
+            "value": "3d6"
+          },
+          "9": {
+            "value": "4d6"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "arcane_trickster.impromptu_sneak_attack",
+        "name": "Impromptu Sneak Attack",
+        "type": "ability",
+        "description": {
+          "summary": "Designate an attack as a sneak attack even without normal sneak attack conditions.",
+          "fullText": "Beginning at 3rd level, the arcane trickster can declare one melee or ranged attack to be a sneak attack before making the attack roll. The target can be no more than 30 feet away if the attack is ranged. The ability can be used a limited number of times per day."
+        },
+        "progression": {
+          "3": {
+            "value": "1/day",
+            "mechanics": {
+              "declareBeforeAttack": true,
+              "rangedMaxFeet": 30,
+              "appliesSneakAttack": true
+            }
+          },
+          "7": {
+            "value": "2/day"
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "arcane_trickster.ranged_legerdemain"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "arcane_trickster.sneak_attack"
+          },
+          {
+            "ref": "arcane_trickster.impromptu_sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "arcane_trickster.ranged_legerdemain"
+          },
+          {
+            "ref": "arcane_trickster.sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "arcane_trickster.sneak_attack"
+          },
+          {
+            "ref": "arcane_trickster.impromptu_sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "arcane_trickster.ranged_legerdemain"
+          },
+          {
+            "ref": "arcane_trickster.sneak_attack"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Eldritch Knight",
+    "description": {
+      "summary": "A martial arcane prestige class that combines weapon training with spellcasting advancement.",
+      "flavor": "Eldritch knights are warriors who refuse to choose between battlefield prowess and arcane power.",
+      "role": "Full-BAB arcane gish with one lost casting level and bonus combat feats.",
+      "sourceText": "Dungeon Master's Guide, p. 182"
+    },
+    "hitDie": 6,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "proficiencies": "Proficiency with all martial weapons.",
+      "spells": "Able to cast 3rd-level arcane spells."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Jump",
+      "Knowledge (arcana)",
+      "Knowledge (nobility and royalty)",
+      "Ride",
+      "Sense Motive",
+      "Spellcraft",
+      "Swim"
+    ],
+    "features": [
+      {
+        "id": "eldritch_knight.bonus_feat",
+        "name": "Bonus Feat",
+        "type": "feature",
+        "description": {
+          "summary": "Gain fighter bonus feats at specific levels.",
+          "fullText": "The eldritch knight gains a bonus feat at 1st level, 5th level, and 10th level. The feat must be selected from the fighter bonus feat list."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "grantChoice": "fighter_bonus_feat"
+            }
+          },
+          "5": {
+            "mechanics": {
+              "grantChoice": "fighter_bonus_feat"
+            }
+          },
+          "10": {
+            "mechanics": {
+              "grantChoice": "fighter_bonus_feat"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "eldritch_knight.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class at every level after 1st.",
+          "fullText": "At each eldritch knight level after 1st, the character gains new spells per day and an increase in caster level as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "2": {
+            "value": "+1 existing arcane class"
+          },
+          "3": {
+            "value": "+1 existing arcane class"
+          },
+          "4": {
+            "value": "+1 existing arcane class"
+          },
+          "5": {
+            "value": "+1 existing arcane class"
+          },
+          "6": {
+            "value": "+1 existing arcane class"
+          },
+          "7": {
+            "value": "+1 existing arcane class"
+          },
+          "8": {
+            "value": "+1 existing arcane class"
+          },
+          "9": {
+            "value": "+1 existing arcane class"
+          },
+          "10": {
+            "value": "+1 existing arcane class"
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "eldritch_knight.bonus_feat"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          },
+          {
+            "ref": "eldritch_knight.bonus_feat"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "eldritch_knight.spellcasting_advancement"
+          },
+          {
+            "ref": "eldritch_knight.bonus_feat"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Mystic Theurge",
+    "description": {
+      "summary": "A dual-progression prestige class advancing both arcane and divine spellcasting.",
+      "flavor": "Mystic theurges pursue mastery across two magical traditions, blending arcane study with divine devotion.",
+      "role": "Dual-progression caster that advances one existing arcane class and one existing divine class at every level.",
+      "sourceText": "Dungeon Master's Guide, p. 192"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 6
+        },
+        {
+          "name": "Knowledge (religion)",
+          "ranks": 6
+        }
+      ],
+      "spells": "Able to cast 2nd-level divine spells and 2nd-level arcane spells."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Knowledge (arcana)",
+      "Knowledge (religion)",
+      "Profession",
+      "Sense Motive",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "mystic_theurge.arcane_spellcasting_advancement",
+        "name": "Arcane Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class each level.",
+          "fullText": "At each mystic theurge level, the character gains new spells per day and an increase in caster level as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing arcane class"
+          },
+          "2": {
+            "value": "+1 existing arcane class"
+          },
+          "3": {
+            "value": "+1 existing arcane class"
+          },
+          "4": {
+            "value": "+1 existing arcane class"
+          },
+          "5": {
+            "value": "+1 existing arcane class"
+          },
+          "6": {
+            "value": "+1 existing arcane class"
+          },
+          "7": {
+            "value": "+1 existing arcane class"
+          },
+          "8": {
+            "value": "+1 existing arcane class"
+          },
+          "9": {
+            "value": "+1 existing arcane class"
+          },
+          "10": {
+            "value": "+1 existing arcane class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mystic_theurge.divine_spellcasting_advancement",
+        "name": "Divine Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing divine spellcasting class each level.",
+          "fullText": "At each mystic theurge level, the character gains new spells per day and an increase in caster level as if gaining a level in an existing divine spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing divine class"
+          },
+          "2": {
+            "value": "+1 existing divine class"
+          },
+          "3": {
+            "value": "+1 existing divine class"
+          },
+          "4": {
+            "value": "+1 existing divine class"
+          },
+          "5": {
+            "value": "+1 existing divine class"
+          },
+          "6": {
+            "value": "+1 existing divine class"
+          },
+          "7": {
+            "value": "+1 existing divine class"
+          },
+          "8": {
+            "value": "+1 existing divine class"
+          },
+          "9": {
+            "value": "+1 existing divine class"
+          },
+          "10": {
+            "value": "+1 existing divine class"
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "mystic_theurge.arcane_spellcasting_advancement"
+          },
+          {
+            "ref": "mystic_theurge.divine_spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          },
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  }
+]

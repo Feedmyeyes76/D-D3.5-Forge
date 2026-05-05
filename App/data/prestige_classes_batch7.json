@@ -1,0 +1,1916 @@
+[
+  {
+    "name": "Mage of the Arcane Order",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A guild wizard who draws on the Arcane Order's shared Spellpool.",
+      "flavor": "Mages of the Arcane Order gain power through disciplined study, professional ties, and access to the Order's shared magical resources.",
+      "role": "Full arcane casting progression prestige class with Spellpool access, bonus metamagic, language, and spellbook benefits.",
+      "sourceText": "Complete Arcane, p. 48"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 8
+        }
+      ],
+      "feats": [
+        "Cooperative Spell",
+        "Any one other metamagic feat"
+      ],
+      "spells": "Able to prepare and cast 2nd-level arcane spells.",
+      "special": [
+        "Prospective members must pay an initiation fee of 750 gp."
+      ]
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Knowledge (arcana)",
+      "Knowledge (architecture and engineering)",
+      "Knowledge (dungeoneering)",
+      "Knowledge (geography)",
+      "Knowledge (history)",
+      "Knowledge (local)",
+      "Knowledge (nature)",
+      "Knowledge (nobility and royalty)",
+      "Knowledge (psionics)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Speak Language",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "mage_of_the_arcane_order.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "scaling",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class at every level.",
+          "fullText": "At each mage of the Arcane Order level, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing arcane class"
+          },
+          "2": {
+            "value": "+1 existing arcane class"
+          },
+          "3": {
+            "value": "+1 existing arcane class"
+          },
+          "4": {
+            "value": "+1 existing arcane class"
+          },
+          "5": {
+            "value": "+1 existing arcane class"
+          },
+          "6": {
+            "value": "+1 existing arcane class"
+          },
+          "7": {
+            "value": "+1 existing arcane class"
+          },
+          "8": {
+            "value": "+1 existing arcane class"
+          },
+          "9": {
+            "value": "+1 existing arcane class"
+          },
+          "10": {
+            "value": "+1 existing arcane class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mage_of_the_arcane_order.guild_member",
+        "name": "Guild Member",
+        "type": "feature",
+        "description": {
+          "summary": "Gain Arcane Order membership benefits and obligations.",
+          "fullText": "The mage is a guild member of the Arcane Order, paying dues and accepting duties in exchange for access to lodging, library resources, laboratories, job boards, professional contacts, and the Spellpool while in good standing."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "monthlyDuesGp": 30,
+              "commonLodgingCostSpPerDay": 5,
+              "losesSpellpoolIfDuesArrearsMonthsGreaterThan": 3
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mage_of_the_arcane_order.spellpool",
+        "name": "Spellpool",
+        "type": "scaling",
+        "description": {
+          "summary": "Call spells from the Arcane Order's shared spell reservoir.",
+          "fullText": "Using a guild focus, the mage can call spells from the Spellpool. Spellpool I allows 1st\u20133rd level spells, Spellpool II allows 4th\u20136th level spells, and Spellpool III allows 7th\u20139th level spells. Calling a spell requires an open slot and a full-round action; the spell must be repaid as Spellpool debt within the allowed time."
+        },
+        "progression": {
+          "1": {
+            "value": "Spellpool I",
+            "mechanics": {
+              "spellLevelsAvailable": "1st-3rd",
+              "callAction": "full-round",
+              "dailyCalledSpellLevelLimit": "half caster level, minimum 1",
+              "debtRepaymentWindow": "days equal to class level"
+            }
+          },
+          "4": {
+            "value": "Spellpool II",
+            "mechanics": {
+              "spellLevelsAvailable": "4th-6th"
+            }
+          },
+          "7": {
+            "value": "Spellpool III",
+            "mechanics": {
+              "spellLevelsAvailable": "7th-9th"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mage_of_the_arcane_order.bonus_metamagic_feat",
+        "name": "Bonus Metamagic Feat",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a bonus metamagic feat.",
+          "fullText": "At 2nd and 9th level, the mage gains a metamagic feat as a bonus feat and must still meet the feat's prerequisites."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "grantChoice": "metamagic_feat"
+            }
+          },
+          "9": {
+            "mechanics": {
+              "grantChoice": "metamagic_feat"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mage_of_the_arcane_order.bonus_language",
+        "name": "Bonus Language",
+        "type": "scaling",
+        "description": {
+          "summary": "Learn an additional language from Arcane Order resources.",
+          "fullText": "At 3rd and 6th level, access to the Arcane Order's library and resources allows the mage to learn a new language."
+        },
+        "progression": {
+          "3": {
+            "value": "+1 language"
+          },
+          "6": {
+            "value": "+1 language"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mage_of_the_arcane_order.new_spell",
+        "name": "New Spell",
+        "type": "scaling",
+        "description": {
+          "summary": "Copy a spell from another wizard's spellbook without a Spellcraft check.",
+          "fullText": "At 5th and 8th level, a fellow wizard allows the mage to copy a spell from a spellbook, chosen by the player and subject to DM approval. No Spellcraft check is needed, though specialist wizards still cannot learn spells from prohibited schools. Spellcasters without spellbooks gain no benefit."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "copySpellWithoutSpellcraftCheck": true,
+              "requiresSpellbook": true
+            }
+          },
+          "8": {
+            "mechanics": {
+              "copySpellWithoutSpellcraftCheck": true,
+              "requiresSpellbook": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mage_of_the_arcane_order.regent",
+        "name": "Regent",
+        "type": "feature",
+        "description": {
+          "summary": "Become a governing member of the Arcane Order.",
+          "fullText": "At 10th level, the mage becomes a regent of the Arcane Order, gaining a +2 competence bonus on Charisma-based interaction checks with lower-level members and participating in the Council of Regents."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "competenceBonusOnCharismaChecksWithLowerLevelOrderMembers": 2
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "mage_of_the_arcane_order.spellcasting_advancement"
+          },
+          {
+            "ref": "mage_of_the_arcane_order.guild_member"
+          },
+          {
+            "ref": "mage_of_the_arcane_order.spellpool"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "mage_of_the_arcane_order.spellcasting_advancement"
+          },
+          {
+            "ref": "mage_of_the_arcane_order.bonus_metamagic_feat"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "mage_of_the_arcane_order.spellcasting_advancement"
+          },
+          {
+            "ref": "mage_of_the_arcane_order.bonus_language"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "mage_of_the_arcane_order.spellcasting_advancement"
+          },
+          {
+            "ref": "mage_of_the_arcane_order.spellpool"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "mage_of_the_arcane_order.spellcasting_advancement"
+          },
+          {
+            "ref": "mage_of_the_arcane_order.new_spell"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "mage_of_the_arcane_order.spellcasting_advancement"
+          },
+          {
+            "ref": "mage_of_the_arcane_order.bonus_language"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "mage_of_the_arcane_order.spellcasting_advancement"
+          },
+          {
+            "ref": "mage_of_the_arcane_order.spellpool"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "mage_of_the_arcane_order.spellcasting_advancement"
+          },
+          {
+            "ref": "mage_of_the_arcane_order.new_spell"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "mage_of_the_arcane_order.spellcasting_advancement"
+          },
+          {
+            "ref": "mage_of_the_arcane_order.bonus_metamagic_feat"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "mage_of_the_arcane_order.spellcasting_advancement"
+          },
+          {
+            "ref": "mage_of_the_arcane_order.regent"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Mindbender",
+    "maxLevel": 10,
+    "description": {
+      "summary": "An arcane manipulator who controls thoughts, emotions, and wills.",
+      "flavor": "Mindbenders seek mastery over the thoughts and dreams of others, using both magic and mundane manipulation.",
+      "role": "Partial arcane casting progression prestige class with telepathy, charm, suggestion, mind-reading, and domination abilities.",
+      "sourceText": "Complete Arcane, p. 54"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "alignment": "Any nongood",
+      "skills": [
+        {
+          "name": "Bluff",
+          "ranks": 4
+        },
+        {
+          "name": "Diplomacy",
+          "ranks": 4
+        },
+        {
+          "name": "Intimidate",
+          "ranks": 4
+        },
+        {
+          "name": "Sense Motive",
+          "ranks": 4
+        }
+      ],
+      "spells": "Able to cast charm person, use charm person as a spell-like ability, or use the charm invocation.",
+      "special": [
+        "Arcane caster level 5th."
+      ]
+    },
+    "classSkills": [
+      "Bluff",
+      "Concentration",
+      "Diplomacy",
+      "Intimidate",
+      "Knowledge (arcana)",
+      "Knowledge (architecture and engineering)",
+      "Knowledge (dungeoneering)",
+      "Knowledge (geography)",
+      "Knowledge (history)",
+      "Knowledge (local)",
+      "Knowledge (nature)",
+      "Knowledge (nobility and royalty)",
+      "Knowledge (psionics)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Sense Motive",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "mindbender.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "scaling",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class at odd-numbered levels.",
+          "fullText": "At each odd-numbered mindbender level, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing arcane class"
+          },
+          "3": {
+            "value": "+1 existing arcane class"
+          },
+          "5": {
+            "value": "+1 existing arcane class"
+          },
+          "7": {
+            "value": "+1 existing arcane class"
+          },
+          "9": {
+            "value": "+1 existing arcane class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mindbender.telepathy",
+        "name": "Telepathy",
+        "type": "feature",
+        "description": {
+          "summary": "Communicate telepathically with nearby creatures that have language.",
+          "fullText": "At 1st level, the mindbender can communicate telepathically with any creature within 100 feet that has a language."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "telepathyFeet": 100,
+              "requiresTargetHasLanguage": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mindbender.skill_boost",
+        "name": "Skill Boost",
+        "type": "feature",
+        "description": {
+          "summary": "Gain a competence bonus on manipulation and insight skills.",
+          "fullText": "Beginning at 2nd level, the mindbender adds one-half class level as a competence bonus on Bluff, Diplomacy, Intimidate, and Sense Motive checks."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "bonusFormula": "one-half class level",
+              "bonusType": "competence",
+              "skills": [
+                "Bluff",
+                "Diplomacy",
+                "Intimidate",
+                "Sense Motive"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mindbender.push_the_weak_mind",
+        "name": "Push the Weak Mind",
+        "type": "scaling",
+        "description": {
+          "summary": "Use a suggestion-like ability on a living creature.",
+          "fullText": "At 2nd level, the mindbender can influence a Large or smaller living creature within 100 feet as suggestion, with duration 5 hours plus 1 hour per class level and a Will save to negate. Uses per day increase at 5th and 8th level."
+        },
+        "progression": {
+          "2": {
+            "value": "1/day",
+            "mechanics": {
+              "rangeFeet": 100,
+              "target": "Large or smaller living creature",
+              "saveType": "Will",
+              "saveDcFormula": "13 + primary spellcasting ability modifier",
+              "duration": "5 hours + 1 hour per class level",
+              "communicateSuggestionTelepathically": true
+            }
+          },
+          "5": {
+            "value": "2/day"
+          },
+          "8": {
+            "value": "3/day"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mindbender.mindread",
+        "name": "Mindread",
+        "type": "scaling",
+        "description": {
+          "summary": "Read the surface thoughts of a visible living creature.",
+          "fullText": "At 3rd level, the mindbender can read the surface thoughts of a visible living creature within 100 feet. The ability is mind-affecting, requires a standard action, allows a Will save, and lasts up to 10 minutes with concentration. Uses improve at 7th level."
+        },
+        "progression": {
+          "3": {
+            "value": "2/day",
+            "mechanics": {
+              "rangeFeet": 100,
+              "action": "standard",
+              "requiresSight": true,
+              "saveType": "Will",
+              "saveDcFormula": "12 + primary spellcasting ability modifier",
+              "duration": "up to 10 minutes with concentration",
+              "mindAffecting": true
+            }
+          },
+          "7": {
+            "value": "4/day"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mindbender.eternal_charm",
+        "name": "Eternal Charm",
+        "type": "scaling",
+        "description": {
+          "summary": "Maintain permanent charm monster effects on a limited number of creatures.",
+          "fullText": "At 4th level, the mindbender can charm a single Large or smaller living creature within 100 feet as charm monster. The duration is permanent, but the number of simultaneous charms is limited and improves with level."
+        },
+        "progression": {
+          "4": {
+            "value": "1 creature",
+            "mechanics": {
+              "rangeFeet": 100,
+              "target": "Large or smaller living creature",
+              "asSpell": "charm monster",
+              "saveType": "Will",
+              "saveDcFormula": "14 + primary spellcasting ability modifier",
+              "duration": "permanent",
+              "breaksIfTargetInjuredByMindbenderOrAlly": true
+            }
+          },
+          "6": {
+            "value": "2 creatures"
+          },
+          "8": {
+            "value": "3 creatures"
+          },
+          "10": {
+            "value": "4 creatures"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mindbender.enchantment_spell_power",
+        "name": "Enchantment Spell Power",
+        "type": "scaling",
+        "description": {
+          "summary": "Increase caster level for enchantment spells.",
+          "fullText": "At 6th level, the mindbender adds +2 to caster level when casting enchantment spells. This improves to +4 at 10th level."
+        },
+        "progression": {
+          "6": {
+            "value": "+2",
+            "mechanics": {
+              "casterLevelBonus": 2,
+              "appliesTo": "enchantment spells"
+            }
+          },
+          "10": {
+            "value": "+4",
+            "mechanics": {
+              "casterLevelBonus": 4,
+              "appliesTo": "enchantment spells"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mindbender.dominate",
+        "name": "Dominate",
+        "type": "ability",
+        "description": {
+          "summary": "Dominate a Large or smaller living creature once per day.",
+          "fullText": "At 7th level, the mindbender can dominate a single Large or smaller living creature within 100 feet as dominate monster once per day. A Will save negates the effect and the duration is 24 hours."
+        },
+        "progression": {
+          "7": {
+            "value": "1/day",
+            "mechanics": {
+              "rangeFeet": 100,
+              "target": "Large or smaller living creature",
+              "asSpell": "dominate monster",
+              "saveType": "Will",
+              "saveDcFormula": "19 + primary spellcasting ability modifier",
+              "duration": "24 hours"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "mindbender.thrall",
+        "name": "Thrall",
+        "type": "feature",
+        "description": {
+          "summary": "Make one dominate effect permanent.",
+          "fullText": "At 10th level, the mindbender can choose to make the duration of dominate permanent on one target at a time. If a new permanent thrall is created, the previous thrall is freed."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "dominateCanBePermanent": true,
+              "maxPermanentThralls": 1
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "mindbender.spellcasting_advancement"
+          },
+          {
+            "ref": "mindbender.telepathy"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "mindbender.skill_boost"
+          },
+          {
+            "ref": "mindbender.push_the_weak_mind"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "mindbender.spellcasting_advancement"
+          },
+          {
+            "ref": "mindbender.mindread"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "mindbender.eternal_charm"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "mindbender.spellcasting_advancement"
+          },
+          {
+            "ref": "mindbender.push_the_weak_mind"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "mindbender.enchantment_spell_power"
+          },
+          {
+            "ref": "mindbender.eternal_charm"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "mindbender.spellcasting_advancement"
+          },
+          {
+            "ref": "mindbender.dominate"
+          },
+          {
+            "ref": "mindbender.mindread"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "mindbender.eternal_charm"
+          },
+          {
+            "ref": "mindbender.push_the_weak_mind"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "mindbender.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "mindbender.enchantment_spell_power"
+          },
+          {
+            "ref": "mindbender.eternal_charm"
+          },
+          {
+            "ref": "mindbender.thrall"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Seeker of the Song",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A bardic music specialist who learns primal songs beyond ordinary bardic performance.",
+      "flavor": "Seekers of the song wield primal music in ways that amaze even skilled bards, transforming performance into elemental power, healing, dispelling, and planar banishment.",
+      "role": "Bardic music prestige class with no spellcasting progression, new seeker music effects, refrains, and stacking daily music uses.",
+      "sourceText": "Complete Arcane, p. 56"
+    },
+    "hitDie": 6,
+    "babProg": "poor",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 13
+        },
+        {
+          "name": "Perform (any one)",
+          "ranks": 13
+        }
+      ],
+      "feats": [
+        "Skill Focus (Perform [any one])"
+      ],
+      "special": [
+        "Bardic music ability.",
+        "Must have heard seeker music from another seeker of the song."
+      ]
+    },
+    "classSkills": [
+      "Climb",
+      "Concentration",
+      "Craft",
+      "Diplomacy",
+      "Jump",
+      "Knowledge (arcana)",
+      "Listen",
+      "Perform",
+      "Profession",
+      "Ride",
+      "Sense Motive",
+      "Spot",
+      "Swim"
+    ],
+    "features": [
+      {
+        "id": "seeker_of_the_song.rapture_of_the_song",
+        "name": "Rapture of the Song",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain insight benefits while using bardic music, seeker music, or similar music.",
+          "fullText": "While using bardic music, seeker music, or a similar ability, the seeker gains a +2 insight bonus to AC. At 4th level, she also gains a +2 insight bonus on saving throws. At 7th level, she also gains damage reduction 2/-. At 10th level, she also acts as though affected by freedom of movement."
+        },
+        "progression": {
+          "1": {
+            "value": "+2 AC",
+            "mechanics": {
+              "insightBonusToAC": 2,
+              "requiresMusicActive": true
+            }
+          },
+          "4": {
+            "value": "+2 saves",
+            "mechanics": {
+              "insightBonusToSaves": 2,
+              "requiresMusicActive": true
+            }
+          },
+          "7": {
+            "value": "DR 2/-",
+            "mechanics": {
+              "damageReduction": "2/-",
+              "requiresMusicActive": true
+            }
+          },
+          "10": {
+            "value": "freedom of movement",
+            "mechanics": {
+              "actsAsFreedomOfMovement": true,
+              "requiresMusicActive": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.seeker_music",
+        "name": "Seeker Music",
+        "type": "feature",
+        "description": {
+          "summary": "Use bardic music uses to activate seeker music and refrains.",
+          "fullText": "Seeker music follows bardic music rules. Each seeker music effect costs one daily bardic music use to activate, seeker levels stack with bard levels to determine daily uses, and a refrain can be activated as a swift action by expending another daily use while maintaining the original music."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "usesBardicMusicUses": true,
+              "classLevelsStackForDailyUses": true,
+              "refrainAction": "swift",
+              "refrainCostsAdditionalUse": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.burning_melody",
+        "name": "Burning Melody",
+        "type": "ability",
+        "description": {
+          "summary": "Grant fire resistance to allies and unleash a cone of fire as a refrain.",
+          "fullText": "At 1st level, a seeker with at least 14 Perform ranks can use Burning Melody. Allies within 30 feet who can hear the music gain fire resistance 15. The refrain creates a 30-foot cone of fire dealing 6d6 fire damage, Reflex half with DC 10 + Perform ranks."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "performRanksRequired": 14,
+              "allyRangeFeet": 30,
+              "resistance": {
+                "fire": 15
+              },
+              "refrain": {
+                "area": "30-ft cone",
+                "damage": "6d6 fire",
+                "save": "Reflex half",
+                "saveDcFormula": "10 + Perform ranks"
+              }
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.combine_songs",
+        "name": "Combine Songs",
+        "type": "feature",
+        "description": {
+          "summary": "Activate and maintain two music abilities together.",
+          "fullText": "At 2nd level, the seeker can combine two types of bardic music or seeker music, activating both with the same standard action and maintaining concentration on both with one standard action each round."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "combineTwoMusicAbilities": true,
+              "activationAction": "standard",
+              "maintainBothWithOneStandardAction": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.song_of_unmaking",
+        "name": "Song of Unmaking",
+        "type": "ability",
+        "description": {
+          "summary": "Damage constructs with a burst of primal music.",
+          "fullText": "At 2nd level, a seeker with at least 15 Perform ranks can expend a bardic music use and make a Perform check to deal 1d8 damage per seeker level to all constructs within a 30-foot burst. There is no saving throw."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "performRanksRequired": 15,
+              "target": "constructs",
+              "area": "30-ft burst centered on seeker",
+              "damage": "1d8 per seeker level",
+              "save": "none"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.dirge_of_frozen_loss",
+        "name": "Dirge of Frozen Loss",
+        "type": "ability",
+        "description": {
+          "summary": "Grant cold resistance and unleash a freezing line as a refrain.",
+          "fullText": "At 3rd level, a seeker with at least 16 Perform ranks can grant allies within 30 feet cold resistance 15. The refrain creates a 60-foot line dealing 10d6 cold damage and fatigue, Fortitude half and negates fatigue with DC 10 + Perform ranks."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "performRanksRequired": 16,
+              "allyRangeFeet": 30,
+              "resistance": {
+                "cold": 15
+              },
+              "refrain": {
+                "area": "60-ft line",
+                "damage": "10d6 cold",
+                "additionalEffect": "fatigue",
+                "save": "Fortitude half and negates fatigue",
+                "saveDcFormula": "10 + Perform ranks"
+              }
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.song_of_life",
+        "name": "Song of Life",
+        "type": "ability",
+        "description": {
+          "summary": "Protect allies from poison and disease and heal with a refrain.",
+          "fullText": "At 4th level, a seeker with at least 17 Perform ranks can grant allies within 30 feet immunity to poison and disease. The refrain heals a touched living creature for an amount equal to the Perform check result, up to its normal maximum hit points."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "performRanksRequired": 17,
+              "allyRangeFeet": 30,
+              "immuneTo": [
+                "poison",
+                "disease"
+              ],
+              "refrain": {
+                "target": "touched living creature",
+                "healing": "Perform check result",
+                "max": "normal full hit points"
+              }
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.subvocalize",
+        "name": "Subvocalize",
+        "type": "feature",
+        "description": {
+          "summary": "Begin a new music effect as a swift action while one music effect is active.",
+          "fullText": "At 5th level, the seeker can begin a new bardic music or seeker music effect as a swift action if exactly one bardic music or seeker music ability is already active."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "startMusicAsSwiftAction": true,
+              "requiresExactlyOneMusicAlreadyActive": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.anthem_of_thunder_and_pain",
+        "name": "Anthem of Thunder and Pain",
+        "type": "ability",
+        "description": {
+          "summary": "Grant electricity resistance and arc electrical rays as a refrain.",
+          "fullText": "At 5th level, a seeker with at least 18 Perform ranks can grant allies within 30 feet electricity resistance 15. The refrain fires an initial 20-foot ranged touch ray dealing 10d6 electricity damage, then arcs to secondary foes within 20 feet of the first target; secondary rays deal half damage."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "performRanksRequired": 18,
+              "allyRangeFeet": 30,
+              "resistance": {
+                "electricity": 15
+              },
+              "refrain": {
+                "initialRayRangeFeet": 20,
+                "damage": "10d6 electricity",
+                "secondaryRays": "one per three seeker levels",
+                "secondaryRayDamage": "half initial damage"
+              }
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.hymn_of_spelldeath",
+        "name": "Hymn of Spelldeath",
+        "type": "ability",
+        "description": {
+          "summary": "Disrupt spellcasting and dispel magic as a refrain.",
+          "fullText": "At 6th level, a seeker with at least 19 Perform ranks can force creatures that hear the hymn to make Concentration checks opposed by the seeker's Perform check to cast spells. The refrain works like area dispel magic centered on the seeker, with optional exclusion of the seeker and allies."
+        },
+        "progression": {
+          "6": {
+            "mechanics": {
+              "performRanksRequired": 19,
+              "opposesSpellcastingWithPerformCheck": true,
+              "mindAffecting": true,
+              "refrain": {
+                "asSpell": "dispel magic",
+                "version": "area",
+                "centeredOn": "seeker",
+                "canExcludeSelfAndAllies": true,
+                "levelCheckModifier": "bard levels + seeker levels"
+              }
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.ballad_of_agony_reborn",
+        "name": "Ballad of Agony Reborn",
+        "type": "ability",
+        "description": {
+          "summary": "Grant acid resistance and fire a lingering acid ray as a refrain.",
+          "fullText": "At 7th level, a seeker with at least 20 Perform ranks can grant allies within 30 feet acid resistance 15. The refrain fires a 60-foot ranged touch ray dealing 10d6 acid damage and another 10d6 acid damage 1 round later."
+        },
+        "progression": {
+          "7": {
+            "mechanics": {
+              "performRanksRequired": 20,
+              "allyRangeFeet": 30,
+              "resistance": {
+                "acid": 15
+              },
+              "refrain": {
+                "rayRangeFeet": 60,
+                "damage": "10d6 acid",
+                "delayedDamage": "10d6 acid 1 round later"
+              }
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.aria_of_everywhere",
+        "name": "Aria of Everywhere",
+        "type": "ability",
+        "description": {
+          "summary": "Teleport a short distance as a dimension door-like effect.",
+          "fullText": "At 8th level, a seeker with at least 21 Perform ranks can expend a use of bardic music or seeker music to transport herself to any spot within 25 feet + 5 feet per level. This otherwise functions as dimension door, except she cannot bring other creatures."
+        },
+        "progression": {
+          "8": {
+            "mechanics": {
+              "performRanksRequired": 21,
+              "teleportRange": "25 ft. + 5 ft./level",
+              "asSpell": "dimension door",
+              "selfOnly": true,
+              "cost": "one bardic music or seeker music use"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.dirge_of_songdeath",
+        "name": "Dirge of Songdeath",
+        "type": "ability",
+        "description": {
+          "summary": "Grant sonic resistance, suppress nearby music abilities, and fire a sonic ray as a refrain.",
+          "fullText": "At 9th level, a seeker with at least 22 Perform ranks can grant allies within 30 feet sonic resistance 15. While singing, other creatures within 30 feet must beat the seeker's Perform check with their own Perform check to use bardic music, seeker music, or similar abilities. The refrain fires a 60-foot ranged touch ray dealing 15d6 sonic damage."
+        },
+        "progression": {
+          "9": {
+            "mechanics": {
+              "performRanksRequired": 22,
+              "allyRangeFeet": 30,
+              "resistance": {
+                "sonic": 15
+              },
+              "opposesMusicAbilitiesWithinFeet": 30,
+              "refrain": {
+                "rayRangeFeet": 60,
+                "damage": "15d6 sonic"
+              }
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "seeker_of_the_song.note_of_solitude",
+        "name": "Note of Solitude",
+        "type": "ability",
+        "description": {
+          "summary": "Send extraplanar creatures back to their home planes.",
+          "fullText": "At 10th level, a seeker with at least 23 Perform ranks can spend music uses to affect extraplanar creatures within 60 feet. Affected creatures must make a Will save against DC 10 + Perform ranks, with a bonus equal to Hit Dice; those that fail are sent to their home plane."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "performRanksRequired": 23,
+              "target": "extraplanar creatures",
+              "rangeFeet": 60,
+              "saveType": "Will",
+              "saveDcFormula": "10 + Perform ranks",
+              "targetSaveBonus": "Hit Dice",
+              "effect": "sent to home plane",
+              "duration": "instantaneous"
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "seeker_of_the_song.rapture_of_the_song"
+          },
+          {
+            "ref": "seeker_of_the_song.seeker_music"
+          },
+          {
+            "ref": "seeker_of_the_song.burning_melody"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "seeker_of_the_song.combine_songs"
+          },
+          {
+            "ref": "seeker_of_the_song.song_of_unmaking"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "seeker_of_the_song.dirge_of_frozen_loss"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "seeker_of_the_song.rapture_of_the_song"
+          },
+          {
+            "ref": "seeker_of_the_song.song_of_life"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "seeker_of_the_song.subvocalize"
+          },
+          {
+            "ref": "seeker_of_the_song.anthem_of_thunder_and_pain"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "seeker_of_the_song.hymn_of_spelldeath"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "seeker_of_the_song.rapture_of_the_song"
+          },
+          {
+            "ref": "seeker_of_the_song.ballad_of_agony_reborn"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "seeker_of_the_song.aria_of_everywhere"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "seeker_of_the_song.dirge_of_songdeath"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "seeker_of_the_song.rapture_of_the_song"
+          },
+          {
+            "ref": "seeker_of_the_song.note_of_solitude"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Sublime Chord",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A bardic arcane caster who abandons ordinary bardic music progression to master high-level arcane harmony.",
+      "flavor": "Sublime chords hear the music underlying magic itself, turning performance into access to powerful arcane spells and cosmic songs.",
+      "role": "High-level spontaneous arcane caster with bardic knowledge/music interaction and unique bardic music powers.",
+      "sourceText": "Complete Arcane, p. 60"
+    },
+    "hitDie": 6,
+    "babProg": "poor",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 13
+        },
+        {
+          "name": "Listen",
+          "ranks": 13
+        },
+        {
+          "name": "Perform (any one)",
+          "ranks": 10
+        },
+        {
+          "name": "Profession (astrologer)",
+          "ranks": 6
+        },
+        {
+          "name": "Spellcraft",
+          "ranks": 6
+        }
+      ],
+      "spells": "Able to cast 3rd-level arcane spells.",
+      "special": [
+        "Bardic music ability."
+      ]
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Diplomacy",
+      "Knowledge (arcana)",
+      "Knowledge (architecture and engineering)",
+      "Knowledge (dungeoneering)",
+      "Knowledge (geography)",
+      "Knowledge (history)",
+      "Knowledge (local)",
+      "Knowledge (nature)",
+      "Knowledge (nobility and royalty)",
+      "Knowledge (psionics)",
+      "Knowledge (religion)",
+      "Knowledge (the planes)",
+      "Listen",
+      "Perform",
+      "Profession",
+      "Search",
+      "Speak Language",
+      "Spellcraft",
+      "Spot"
+    ],
+    "features": [
+      {
+        "id": "sublime_chord.sublime_chord_spellcasting",
+        "name": "Sublime Chord Spellcasting",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain spontaneous arcane spellcasting from 4th through 9th level spells.",
+          "fullText": "A sublime chord casts a small number of spontaneous arcane spells of 4th level and higher. Spells are chosen from the sorcerer/wizard and bard spell lists, using the bard version when a spell appears on both lists at different levels. Spellcasting is Charisma-based."
+        },
+        "progression": {
+          "1": {
+            "value": "4th: 2/day, 5th: 1/day; known 4th: 3, 5th: 1"
+          },
+          "2": {
+            "value": "4th: 2/day, 5th: 2/day; known 4th: 4, 5th: 2"
+          },
+          "3": {
+            "value": "4th: 3/day, 5th: 2/day, 6th: 1/day; known 4th: 4, 5th: 2, 6th: 1"
+          },
+          "4": {
+            "value": "4th: 3/day, 5th: 3/day, 6th: 2/day; known 4th: 4, 5th: 3, 6th: 2"
+          },
+          "5": {
+            "value": "4th: 3/day, 5th: 3/day, 6th: 2/day, 7th: 1/day; known 4th: 4, 5th: 3, 6th: 2, 7th: 1"
+          },
+          "6": {
+            "value": "4th: 4/day, 5th: 3/day, 6th: 3/day, 7th: 2/day; known 4th: 4, 5th: 4, 6th: 3, 7th: 2"
+          },
+          "7": {
+            "value": "4th: 4/day, 5th: 4/day, 6th: 3/day, 7th: 2/day, 8th: 1/day; known 4th: 4, 5th: 4, 6th: 3, 7th: 2, 8th: 1"
+          },
+          "8": {
+            "value": "4th: 4/day, 5th: 4/day, 6th: 3/day, 7th: 3/day, 8th: 2/day; known 4th: 4, 5th: 4, 6th: 4, 7th: 3, 8th: 2"
+          },
+          "9": {
+            "value": "4th: 4/day, 5th: 4/day, 6th: 4/day, 7th: 3/day, 8th: 2/day, 9th: 1/day; known 4th: 4, 5th: 4, 6th: 4, 7th: 3, 8th: 2, 9th: 1"
+          },
+          "10": {
+            "value": "4th: 5/day, 5th: 4/day, 6th: 4/day, 7th: 3/day, 8th: 3/day, 9th: 2/day; known 4th: 4, 5th: 4, 6th: 4, 7th: 4, 8th: 3, 9th: 2"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "sublime_chord.light_armor_casting",
+        "name": "Light Armor Casting",
+        "type": "feature",
+        "description": {
+          "summary": "Avoid arcane spell failure for sublime chord spells in light armor.",
+          "fullText": "As with bard spells, the somatic components for sublime chord spells do not incur arcane spell failure chance if the sublime chord wears light armor."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "ignoreArcaneSpellFailureInLightArmorForSublimeChordSpells": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "sublime_chord.bardic_knowledge",
+        "name": "Bardic Knowledge",
+        "type": "feature",
+        "description": {
+          "summary": "Add sublime chord levels to bardic knowledge checks.",
+          "fullText": "The sublime chord adds her sublime chord class level to bardic knowledge checks."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "addsClassLevelToBardicKnowledge": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "sublime_chord.bardic_music",
+        "name": "Bardic Music",
+        "type": "feature",
+        "description": {
+          "summary": "Gain new sublime chord songs and partial stacking for bardic music uses.",
+          "fullText": "Sublime chord songs expend daily bardic music uses and function like bardic music effects. The sublime chord adds one-half class level, rounded down, to bard level to determine daily uses of bardic music."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "usesBardicMusicUses": true,
+              "dailyUsesStacking": "one-half sublime chord level, rounded down"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "sublime_chord.song_of_arcane_power",
+        "name": "Song of Arcane Power",
+        "type": "ability",
+        "description": {
+          "summary": "Spend bardic music to increase the caster level of the next spell.",
+          "fullText": "At 2nd level, as a move action, the sublime chord can spend a bardic music use to prepare a spell with song. The next spell cast by the end of her next turn gains a caster level bonus based on the Perform check: +0 for 9 or lower, +1 for 10\u201319, +2 for 20\u201329, and +4 for 30 or higher."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "action": "move",
+              "cost": "one bardic music use",
+              "performCheckCasterLevelBonus": {
+                "9 or lower": "+0",
+                "10-19": "+1",
+                "20-29": "+2",
+                "30 or higher": "+4"
+              },
+              "mustCastBy": "end of next turn"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "sublime_chord.song_of_timelessness",
+        "name": "Song of Timelessness",
+        "type": "ability",
+        "description": {
+          "summary": "Freeze a creature in a timeless state.",
+          "fullText": "At 6th level, as a standard action, the sublime chord can envelop a creature within 60 feet in timelessness. A Will save negates. On failure, the target can take no actions and cannot be affected by outside forces while the performance is maintained, up to 1 minute per level."
+        },
+        "progression": {
+          "6": {
+            "mechanics": {
+              "action": "standard",
+              "rangeFeet": 60,
+              "saveType": "Will",
+              "saveDcFormula": "10 + sublime chord level + Charisma modifier",
+              "duration": "concentration, up to 1 minute per level",
+              "targetCanTakeActions": false,
+              "outsideForcesCannotAffectTarget": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "sublime_chord.song_of_cosmic_fire",
+        "name": "Song of Cosmic Fire",
+        "type": "ability",
+        "description": {
+          "summary": "Create a damaging burst of cosmic fire.",
+          "fullText": "At 10th level, the sublime chord can spend two bardic music uses to create a 20-foot-radius spread of fire anywhere within 100 feet and line of effect. Creatures in the area take damage equal to the sublime chord's Perform check result, Reflex half."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "cost": "two bardic music uses",
+              "rangeFeet": 100,
+              "area": "20-ft-radius spread",
+              "damage": "Perform check result fire damage",
+              "saveType": "Reflex",
+              "saveDcFormula": "10 + sublime chord level + Charisma modifier",
+              "saveEffect": "half damage"
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "sublime_chord.sublime_chord_spellcasting"
+          },
+          {
+            "ref": "sublime_chord.light_armor_casting"
+          },
+          {
+            "ref": "sublime_chord.bardic_knowledge"
+          },
+          {
+            "ref": "sublime_chord.bardic_music"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Sublime Chord",
+            "progression": 1,
+            "spellList": "Sublime Chord",
+            "ability": "charisma",
+            "castingType": "spontaneous"
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "sublime_chord.sublime_chord_spellcasting"
+          },
+          {
+            "ref": "sublime_chord.song_of_arcane_power"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Sublime Chord",
+            "progression": 1,
+            "spellList": "Sublime Chord",
+            "ability": "charisma",
+            "castingType": "spontaneous"
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "sublime_chord.sublime_chord_spellcasting"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Sublime Chord",
+            "progression": 1,
+            "spellList": "Sublime Chord",
+            "ability": "charisma",
+            "castingType": "spontaneous"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "sublime_chord.sublime_chord_spellcasting"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Sublime Chord",
+            "progression": 1,
+            "spellList": "Sublime Chord",
+            "ability": "charisma",
+            "castingType": "spontaneous"
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "sublime_chord.sublime_chord_spellcasting"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Sublime Chord",
+            "progression": 1,
+            "spellList": "Sublime Chord",
+            "ability": "charisma",
+            "castingType": "spontaneous"
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "sublime_chord.sublime_chord_spellcasting"
+          },
+          {
+            "ref": "sublime_chord.song_of_timelessness"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Sublime Chord",
+            "progression": 1,
+            "spellList": "Sublime Chord",
+            "ability": "charisma",
+            "castingType": "spontaneous"
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "sublime_chord.sublime_chord_spellcasting"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Sublime Chord",
+            "progression": 1,
+            "spellList": "Sublime Chord",
+            "ability": "charisma",
+            "castingType": "spontaneous"
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "sublime_chord.sublime_chord_spellcasting"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Sublime Chord",
+            "progression": 1,
+            "spellList": "Sublime Chord",
+            "ability": "charisma",
+            "castingType": "spontaneous"
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "sublime_chord.sublime_chord_spellcasting"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Sublime Chord",
+            "progression": 1,
+            "spellList": "Sublime Chord",
+            "ability": "charisma",
+            "castingType": "spontaneous"
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "sublime_chord.sublime_chord_spellcasting"
+          },
+          {
+            "ref": "sublime_chord.song_of_cosmic_fire"
+          }
+        ],
+        "casting": [
+          {
+            "type": "classSpellcasting",
+            "class": "Sublime Chord",
+            "progression": 1,
+            "spellList": "Sublime Chord",
+            "ability": "charisma",
+            "castingType": "spontaneous"
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  }
+]

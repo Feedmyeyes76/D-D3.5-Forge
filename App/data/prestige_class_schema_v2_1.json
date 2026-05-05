@@ -1,0 +1,91 @@
+{
+  "version": "2.1",
+  "description": "D&D 3.5 Prestige Class Schema with MaxLevel support",
+  "classSchema": {
+    "name": "string",
+    "maxLevel": "integer (required, defines total levels for class, e.g., 5 or 10)",
+    "description": {
+      "summary": "string",
+      "flavor": "string",
+      "role": "string",
+      "sourceText": "string"
+    },
+    "hitDie": "integer",
+    "babProg": "string (full | medium | poor)",
+    "skillPoints": "integer",
+    "saves": {
+      "fort": "string (good | poor)",
+      "ref": "string (good | poor)",
+      "will": "string (good | poor)"
+    },
+    "features": [
+      {
+        "id": "string (format: <class_slug>.<feature_slug>)",
+        "name": "string",
+        "type": "string (feature | ability | scaling)",
+        "description": {
+          "summary": "string",
+          "fullText": "string"
+        },
+        "progression": {
+          "level_number": {
+            "value": "string (optional)",
+            "mechanics": "object (optional)"
+          }
+        },
+        "confidence": "string (high | medium | low)"
+      }
+    ],
+    "levels": [
+      {
+        "level": "integer (must be between 1 and maxLevel)",
+        "features": [
+          {
+            "ref": "string (must match feature id)"
+          }
+        ],
+        "casting": [
+          {
+            "type": "string (existing)",
+            "progression": "integer",
+            "choice": {
+              "type": "string (category)",
+              "options": [
+                "arcane",
+                "divine"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requirements": {
+      "alignment": "string (optional)",
+      "feats": [
+        "string"
+      ],
+      "skills": [
+        "string"
+      ],
+      "special": [
+        "string"
+      ]
+    },
+    "migrationStatus": {
+      "progression": "string (complete | partial)",
+      "metadata": "string (complete)",
+      "mechanics": "string (complete | partial)",
+      "needsReview": "boolean",
+      "reviewNotes": [
+        "string"
+      ]
+    }
+  },
+  "validationNotes": [
+    "levels array must include all levels from 1 to maxLevel",
+    "feature progression levels must not exceed maxLevel",
+    "validator should use maxLevel instead of assuming 10",
+    "all feature refs must exist in features[]",
+    "each feature should be used at least once in levels[]"
+  ]
+}

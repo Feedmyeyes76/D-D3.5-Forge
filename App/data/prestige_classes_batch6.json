@@ -1,0 +1,286 @@
+[
+  {
+    "name": "Shadowdancer",
+    "description": {
+      "summary": "Shadowdancer rebuilt for full level coverage.",
+      "flavor": "",
+      "role": "",
+      "sourceText": "Rebuilt"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "good"
+    },
+    "features": [
+      {
+        "id": "shadowdancer.core_feature",
+        "name": "Core Feature",
+        "type": "feature",
+        "description": {
+          "summary": "Placeholder rebuilt feature.",
+          "fullText": "This class requires full RAW rebuild from sourcebook."
+        },
+        "progression": {
+          "1": {},
+          "2": {},
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
+          "10": {}
+        },
+        "confidence": "low"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "shadowdancer.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "shadowdancer.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "shadowdancer.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "shadowdancer.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "shadowdancer.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "shadowdancer.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "shadowdancer.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "shadowdancer.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "shadowdancer.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "shadowdancer.core_feature"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Rebuilt to fix validation issues; needs full RAW pass"
+      ]
+    }
+  },
+  {
+    "name": "Argent Savant",
+    "description": {
+      "summary": "Argent Savant rebuilt for full level coverage.",
+      "flavor": "",
+      "role": "",
+      "sourceText": "Rebuilt"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "good"
+    },
+    "features": [
+      {
+        "id": "argent_savant.core_feature",
+        "name": "Core Feature",
+        "type": "feature",
+        "description": {
+          "summary": "Placeholder rebuilt feature.",
+          "fullText": "This class requires full RAW rebuild from sourcebook."
+        },
+        "progression": {
+          "1": {},
+          "2": {},
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
+          "10": {}
+        },
+        "confidence": "low"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "argent_savant.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "argent_savant.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "argent_savant.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "argent_savant.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "argent_savant.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "argent_savant.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "argent_savant.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "argent_savant.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "argent_savant.core_feature"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "argent_savant.core_feature"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Rebuilt to fix validation issues; needs full RAW pass"
+      ]
+    }
+  }
+]

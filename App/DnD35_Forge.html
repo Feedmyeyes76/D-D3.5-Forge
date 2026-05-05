@@ -1773,11 +1773,34 @@ function openPreviewPanel(title,html){
   requestAnimationFrame(()=>panel.classList.add('open'));
 }
 function closePreviewPanel(){ const panel=document.getElementById('forge-preview-panel'); if(panel) panel.classList.remove('open'); }
+function renderPrcProgressionPanel(prc){
+  const progression=Array.isArray(prc.progression)?prc.progression:[];
+  if(!progression.length) return `<div class="forge-preview-kv"><strong>Progression</strong><span>No progression data available</span></div>`;
+  const levels=progression.map(row=>{
+    const lvl=parseInt(row.level)||1;
+    const features=Array.isArray(row.features)?row.features:[];
+    const featureHtml=features.length?features.map(f=>`
+      <div style="border-top:1px solid rgba(196,170,122,.45);padding:7px 0">
+        <div style="font-family:'Cinzel',serif;font-size:.78rem;font-weight:700;color:var(--prc2)">
+          ${escHtml(f.name||'Unnamed Feature')}${f.abilityType?` <span style="font-size:.68rem;background:rgba(58,122,171,.15);padding:1px 5px;border-radius:2px">${escHtml(f.abilityType)}</span>`:''}
+        </div>
+        <div style="font-size:.8rem;color:#3a2a10;line-height:1.55;margin-top:3px;white-space:pre-wrap">${escHtml(f.description||'No description yet.')}</div>
+      </div>`).join(''):`<div style="font-size:.8rem;color:#8a7050;font-style:italic;padding-top:6px">No features at this level</div>`;
+    return `<details style="border:1px solid #d4c090;border-radius:4px;background:#faf6ea;margin-bottom:7px;overflow:hidden">
+      <summary style="cursor:pointer;padding:8px 10px;font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;color:var(--prc2);display:flex;justify-content:space-between;gap:8px">
+        <span>Level ${lvl}</span><span style="font-family:inherit;font-size:.72rem;color:#8a7050">${features.length} feature${features.length===1?'':'s'}</span>
+      </summary>
+      <div style="padding:0 10px 8px">${featureHtml}</div>
+    </details>`;
+  }).join('');
+  return `<div style="margin-top:12px"><div class="forge-preview-kv"><strong>Progression</strong><span>Level-based class progression</span></div>${levels}</div>`;
+}
 function openClassPreview(name){
   const c=getClass(name); if(!c) return;
-  const features=(c.classFeatures||[]).map((f,i)=>typeof f==='string'?`<div class="forge-preview-kv"><strong>Feature ${i+1}</strong><span>${escHtml(f)}</span></div>`:`<div class="forge-preview-kv"><strong>Level ${escHtml(f.level||i+1)}</strong><span>${escHtml(f.name||f.feature||JSON.stringify(f))}</span></div>`).join('');
+  const prc=DATA.prestigeClasses.some(p=>p.name===c.name);
+  const features=prc?renderPrcProgressionPanel(c):(c.classFeatures||[]).map((f,i)=>typeof f==='string'?`<div class="forge-preview-kv"><strong>Feature ${i+1}</strong><span>${escHtml(f)}</span></div>`:`<div class="forge-preview-kv"><strong>Level ${escHtml(f.level||i+1)}</strong><span>${escHtml(f.name||f.feature||JSON.stringify(f))}</span></div>`).join('');
   const descHtml5273=(c.desc||c.description||c.role||c.help)?`<div class="forge-preview-kv"><strong>Description</strong><span style="white-space:pre-wrap;line-height:1.7;display:block;margin-top:3px">${escHtml(c.desc||c.description||c.role||c.help)}</span></div>`:'';
-  openPreviewPanel(c.name, previewKv('Type', DATA.prestigeClasses.some(p=>p.name===c.name)?'Prestige Class':'Base Class')+previewKv('Source',c.source)+previewKv('Hit Die',c.hitDie?`d${c.hitDie}`:'')+previewKv('BAB',c.babProg)+previewKv('Saves',c.saves)+previewKv('Skill Points',c.skillPoints)+previewKv('Class Skills',c.classSkills)+previewKv('Requirements',c.requirements)+descHtml5273+features);
+  openPreviewPanel(c.name, previewKv('Type', prc?'Prestige Class':'Base Class')+previewKv('Source',c.source)+previewKv('Hit Die',c.hitDie?`d${c.hitDie}`:'')+previewKv('BAB',c.babProg)+previewKv('Saves',c.saves)+previewKv('Skill Points',c.skillPoints)+previewKv('Class Skills',c.classSkills)+previewKv('Requirements',c.requirements)+descHtml5273+features);
 }
 function openClassChoicePreview(name,levelIdx){
   const c=getClass(name); if(!c) return;
@@ -1791,7 +1814,7 @@ function openClassChoicePreview(name,levelIdx){
     ${aiBtn}
   </div>`;
   const unmet=req.length?previewKv('Unmet Requirements',req):'';
-  const features=(c.classFeatures||[]).slice(0,24).map((f,i)=>typeof f==='string'?`<div class="forge-preview-kv"><strong>Feature ${i+1}</strong><span>${escHtml(f)}</span></div>`:`<div class="forge-preview-kv"><strong>Level ${escHtml(f.level||i+1)}</strong><span>${escHtml(f.name||f.feature||JSON.stringify(f))}</span></div>`).join('');
+  const features=prc?renderPrcProgressionPanel(c):(c.classFeatures||[]).slice(0,24).map((f,i)=>typeof f==='string'?`<div class="forge-preview-kv"><strong>Feature ${i+1}</strong><span>${escHtml(f)}</span></div>`:`<div class="forge-preview-kv"><strong>Level ${escHtml(f.level||i+1)}</strong><span>${escHtml(f.name||f.feature||JSON.stringify(f))}</span></div>`).join('');
   const aiSection=`<div style="margin-top:14px;border-top:1px solid rgba(74,103,65,.3);padding-top:10px">
     <div id="prc-ai-status" style="font-size:.78rem;min-height:1.2em;margin-bottom:6px"></div>
     <pre id="prc-ai-output" style="display:none;font-size:.75rem;line-height:1.6;white-space:pre-wrap;word-wrap:break-word;background:rgba(74,103,65,.06);border:1px solid rgba(74,103,65,.25);border-radius:3px;padding:9px;font-family:inherit;color:var(--ink);max-height:320px;overflow-y:auto"></pre>
@@ -7065,6 +7088,39 @@ function exportMonRTF(){
 // Storage for all homebrew PrCs (persists in memory; saved to Drive)
 let homebrewPrcs = [];
 
+const PRC_DEFINITIONS = {
+  featureTypes:[
+    {id:'passive',label:'Passive',description:'Always-on class feature with no activation cost.'},
+    {id:'bonus_feat',label:'Bonus Feat',description:'Grants a feat or a selected feat from an allowed list.'},
+    {id:'scaling_passive',label:'Scaling Passive',description:'Always-on class feature whose value changes by level.'},
+    {id:'activated',label:'Activated',description:'Feature the character chooses to activate.'},
+    {id:'resource',label:'Resource',description:'Feature with tracked uses, pool, charges, or recovery rules.'},
+    {id:'upgrade',label:'Upgrade',description:'Improves or modifies an earlier class feature.'},
+    {id:'action_modifier',label:'Action Modifier',description:'Changes action cost, timing, or action economy.'},
+    {id:'conditional_passive',label:'Conditional Passive',description:'Passive benefit that applies only under listed conditions.'},
+    {id:'targeting_modifier',label:'Targeting Modifier',description:'Changes valid targets, range, area, or targeting rules.'},
+    {id:'selection',label:'Selection',description:'Player chooses from a defined option list.'},
+    {id:'custom',label:'Custom',description:'Structured fallback for unusual features that still need category, tags, and description.'},
+  ],
+  categories:[
+    {id:'combat',label:'Combat',description:'Attack, defense, damage, maneuvers, or battlefield effects.'},
+    {id:'magic',label:'Magic',description:'Spellcasting, spell-like abilities, supernatural powers, or caster advancement.'},
+    {id:'skill',label:'Skill',description:'Skill bonuses, skill unlocks, or skill-use changes.'},
+    {id:'social',label:'Social',description:'Influence, leadership, intimidation, diplomacy, or reputation effects.'},
+    {id:'movement',label:'Movement',description:'Speed, mobility, terrain, travel, or positioning effects.'},
+    {id:'defense',label:'Defense',description:'Armor, saves, immunities, resistances, or mitigation.'},
+    {id:'utility',label:'Utility',description:'Noncombat exploration, crafting, knowledge, or support effects.'},
+    {id:'other',label:'Other',description:'Feature does not fit another category.'},
+  ],
+};
+
+const PRC_MODEL_DEFAULTS = {
+  core:{name:'',source:'Homebrew',hitDie:8,levels:10,babProgression:'3quarter',saves:{fort:'poor',ref:'poor',will:'good'},skillPoints:4},
+  requirements:{bab:'',alignment:[],race:'',skills:[],feats:[],casting:{category:'',minSpellLevel:''},special:[]},
+  classSkills:[],
+  progression:[],
+};
+
 // Blank PrC template
 const BLANK_PRC = () => ({
   name: '',
@@ -7086,13 +7142,18 @@ const BLANK_PRC = () => ({
     skills: '',           // free text e.g. "Knowledge (arcana) 8 ranks"
     feats: '',
     spellcasting: '',     // e.g. "Ability to cast 3rd-level arcane spells"
+    casting: { category:'', minSpellLevel:'' },
     alignment: '',
+    alignments: [],
     race: '',
     special: '',
+    specialList: [],
   },
   features: [],           // [{level, name, description, isBonusFeat}]
+  progression: [],
   bonusFeatLevels: [],    // array of level numbers that grant bonus feats
   bonusFeatList: '',      // text description of available bonus feats
+  castingTracks: [],
   notes: '',
 });
 
@@ -7100,11 +7161,133 @@ const prcState = {
   prc: BLANK_PRC(),
   activeSection: 'basics',  // 'basics' | 'requirements' | 'features' | 'spells' | 'preview'
   saveStatus: '',
+  selectedExistingId: '',
 };
 
 // All available skills for class skill selection
 function prcReqEsc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
 function prcFeatList(){ return [...DATA.feats].map(f=>f.name).filter(Boolean).sort((a,b)=>a.localeCompare(b)); }
+function normalizePrcFeatures(features) {
+  if(!Array.isArray(features)) return [];
+  return features.map(f => {
+    if(!f || typeof f !== 'object') return {level:1,name:'',description:'',abilityType:'',featureType:'passive',category:'combat'};
+    const normalized = {...f};
+    if(['Ex','Su','Sp'].includes(normalized.type)) {
+      if(!normalized.abilityType) normalized.abilityType = normalized.type;
+      delete normalized.type;
+    }
+    normalized.abilityType = normalized.abilityType || '';
+    normalized.featureType = normalized.featureType || 'passive';
+    normalized.category = normalized.category || 'combat';
+    return normalized;
+  });
+}
+function ensurePrcProgression(prc) {
+  if(!prc) return [];
+  const levels = parseInt(prc.levels) || 1;
+  if(!Array.isArray(prc.progression)) prc.progression = [];
+  for(let i=0;i<levels;i++) {
+    const existing = prc.progression[i] && typeof prc.progression[i] === 'object' ? prc.progression[i] : {};
+    prc.progression[i] = {
+      ...existing,
+      level: i + 1,
+      features: normalizePrcFeatures(Array.isArray(existing.features) ? existing.features : []),
+      casting: Array.isArray(existing.casting) ? existing.casting : [],
+    };
+  }
+  if(prc.progression.length > levels) prc.progression = prc.progression.slice(0, levels);
+  prc.features = normalizePrcFeatures(prc.features || []);
+  if(prc.features.length && prc.progression[0] && prc.progression[0].features.length === 0) {
+    prc.progression[0].features = [...prc.features];
+  }
+  return prc.progression;
+}
+
+function getPrcProgressionFeatures(prc) {
+  const progression = ensurePrcProgression(prc);
+  const flat = progression.flatMap(row => (row.features || []).map(f => ({...f, level: row.level})));
+  return flat.length ? flat : normalizePrcFeatures(prc.features || []);
+}
+
+function setPrcProgressionFeaturesFromFlat(prc, features) {
+  const progression = ensurePrcProgression(prc);
+  progression.forEach(row => row.features = []);
+  normalizePrcFeatures(features || []).forEach(f => {
+    const lvl = Math.min(Math.max(parseInt(f.level) || 1, 1), prc.levels || 1);
+    const entry = {...f, level:lvl};
+    progression[lvl - 1].features.push(entry);
+  });
+}
+
+function setPrcProgressionFeature(lvl, idx, field, value) {
+  const progression = ensurePrcProgression(prcState.prc);
+  const row = progression[(parseInt(lvl) || 1) - 1] || progression[0];
+  if(!row || !row.features[idx]) return;
+  row.features[idx][field] = value;
+  if(field === 'featureType') renderPrcTool();
+}
+
+function prcExistingOptions() {
+  return (DATA.prestigeClasses || []).map((p, idx) => ({id:`data:${idx}`, prc:p, label:`${p.name || 'Unnamed Prestige Class'}${p.source ? ` (${p.source})` : ''}`}));
+}
+
+function normalizePrcForForge(raw) {
+  const base = BLANK_PRC();
+  const p = {...base, ...JSON.parse(JSON.stringify(raw || {}))};
+  p.name = p.name || '';
+  p.flavor = p.flavor || p.desc || p.description || p.role || '';
+  p.source = p.source || 'Homebrew';
+  p.levels = parseInt(p.levels || p.maxLevel || p.maxLevels || 10) || 10;
+  p.hitDie = parseInt(p.hitDie || String(p.hd || '').replace(/^d/i,'') || 8) || 8;
+  p.babProg = p.babProg || p.babProgression || p.bab || '3quarter';
+  if(!['full','3quarter','half'].includes(p.babProg)) p.babProg = String(p.babProg).toLowerCase().includes('full') ? 'full' : String(p.babProg).includes('1/2') || String(p.babProg).toLowerCase().includes('half') ? 'half' : '3quarter';
+  p.saves = typeof p.saves === 'object' && !Array.isArray(p.saves) ? {...base.saves, ...p.saves} : {...base.saves};
+  p.skillPoints = parseInt(p.skillPoints || p.skillsPerLevel || 4) || 4;
+  p.classSkills = Array.isArray(p.classSkills) ? [...p.classSkills] : String(p.classSkills || '').split(',').map(s=>s.trim()).filter(Boolean);
+  p.spellcasting = {...base.spellcasting, ...(typeof p.spellcasting === 'object' && p.spellcasting ? p.spellcasting : {})};
+  p.spellcasting.levelsGained = Array.isArray(p.spellcasting.levelsGained) ? p.spellcasting.levelsGained : [];
+  p.requirements = {...base.requirements, ...(typeof p.requirements === 'object' && p.requirements ? p.requirements : {})};
+  p.bonusFeatLevels = Array.isArray(p.bonusFeatLevels) ? p.bonusFeatLevels : [];
+  p.bonusFeatList = p.bonusFeatList || '';
+  p.castingTracks = Array.isArray(p.castingTracks) ? p.castingTracks : [];
+  p.notes = p.notes || '';
+  p.features = normalizePrcFeatures(p.features || []);
+  if(!Array.isArray(p.progression) || !p.progression.length) {
+    p.progression = [];
+    const classFeatures = Array.isArray(p.classFeatures) ? p.classFeatures : [];
+    classFeatures.forEach((f, idx) => {
+      const text = typeof f === 'string' ? f : (f.name || f.feature || '');
+      const level = parseInt((typeof f === 'object' && f.level) || (String(text).match(/Level\s+(\d+)/i) || [])[1] || idx + 1) || 1;
+      const target = Math.min(Math.max(level, 1), p.levels);
+      if(!p.progression[target - 1]) p.progression[target - 1] = {level:target, features:[], casting:[]};
+      p.progression[target - 1].features.push({level:target, name:typeof f === 'object' ? (f.name || f.feature || `Feature ${idx + 1}`) : String(text).replace(/\s*[—-]\s*Level\s+\d+\s*$/i,''), description:typeof f === 'object' ? (f.description || f.desc || '') : '', abilityType:typeof f === 'object' ? (f.abilityType || '') : '', featureType:typeof f === 'object' ? (f.featureType || 'passive') : 'passive', category:typeof f === 'object' ? (f.category || 'combat') : 'combat'});
+    });
+  }
+  ensurePrcProgression(p);
+  return p;
+}
+
+function loadExistingPrcIntoForge(id) {
+  if(!id) {
+    prcState.selectedExistingId = '';
+    prcState.prc = BLANK_PRC();
+    prcState.activeSection = 'basics';
+    prcState.saveStatus = '';
+    renderPrcTool();
+    return;
+  }
+  const option = prcExistingOptions().find(o => o.id === id);
+  if(!option) return;
+  prcState.selectedExistingId = id;
+  const normalized = normalizePrcForForge(option.prc);
+  Object.keys(option.prc).forEach(k => delete option.prc[k]);
+  Object.assign(option.prc, normalized);
+  prcState.prc = option.prc;
+  prcState.activeSection = 'basics';
+  prcState.saveStatus = `<span style="color:var(--sage)">Loaded ${prcReqEsc(prcState.prc.name || 'existing prestige class')} for editing.</span>`;
+  renderPrcTool();
+}
+
 function prcEnsureRequirementRows(){ const r=prcState.prc.requirements; if(!Array.isArray(r.skillReqs)){ r.skillReqs=[]; if(r.skills&&!r.skillsOther) r.skillsOther=r.skills; } if(!Array.isArray(r.featReqs)){ r.featReqs=[]; if(r.feats&&!r.featsOther) r.featsOther=r.feats; } r.skillsOther=r.skillsOther||''; r.featsOther=r.featsOther||''; }
 function syncPrcRequirementText(){ prcEnsureRequirementRows(); const r=prcState.prc.requirements; const skillParts=r.skillReqs.filter(x=>x.skill).map(x=>`${x.skill} ${parseInt(x.ranks)||1} ranks`); if(r.skillsOther.trim()) skillParts.push(r.skillsOther.trim()); r.skills=skillParts.join(', '); const featParts=r.featReqs.filter(Boolean); if(r.featsOther.trim()) featParts.push(r.featsOther.trim()); r.feats=featParts.join(', '); }
 function addPrcSkillReq(){ prcEnsureRequirementRows(); prcState.prc.requirements.skillReqs.push({skill:'',ranks:1}); syncPrcRequirementText(); renderPrcTool(); }
@@ -7145,10 +7328,12 @@ function getPrcSave(quality, level) {
 // ── RENDER ────────────────────────────────────────────────────────────────
 function renderPrcTool() {
   const p = prcState.prc;
+  const existingOptions = prcExistingOptions();
   const tabs = [
-    { id:'basics',       label:'📋 Basics' },
+    { id:'basics',       label:'📋 Core Info' },
     { id:'requirements', label:'⚔ Requirements' },
-    { id:'features',     label:'✨ Class Features' },
+    { id:'skills',       label:'🧰 Class Skills' },
+    { id:'features',     label:'✨ Progression' },
     { id:'spells',       label:'🔮 Spellcasting' },
     { id:'preview',      label:'📜 Preview & Export' },
   ];
@@ -7158,6 +7343,17 @@ function renderPrcTool() {
     box-shadow:0 0 0 4px #0e1e2e,0 0 0 6px #3a7aab,0 12px 48px rgba(0,0,0,.6)">
     <div class="step-heading" style="color:var(--prc2)">📜 Prestige Class Forge</div>
     <p class="step-sub">Design homebrew prestige classes. When you Accept, the class is exported as RTF, saved to Drive, and added to your Character Forge class list for immediate use.</p>
+
+    <div style="background:#faf6ea;border:1px solid #c4aa7a;border-radius:4px;padding:10px;margin-bottom:14px">
+      <label style="font-family:'Cinzel',serif;font-size:.78rem;font-weight:700;color:var(--prc2);display:block;margin-bottom:5px">Select Existing Prestige Class</label>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <select onchange="loadExistingPrcIntoForge(this.value)" style="flex:1;min-width:260px;font-size:.82rem">
+          <option value="">-- Create New Prestige Class --</option>
+          ${existingOptions.map(o=>`<option value="${prcReqEsc(o.id)}" ${prcState.selectedExistingId===o.id?'selected':''}>${prcReqEsc(o.label)}</option>`).join('')}
+        </select>
+        <button class="btn btn-sm btn-secondary" onclick="loadExistingPrcIntoForge('')">New Class</button>
+      </div>
+    </div>
 
     <!-- Tab bar -->
     <div style="display:flex;gap:4px;margin-bottom:18px;border-bottom:2px solid #c4aa7a;padding-bottom:0;flex-wrap:wrap">
@@ -7173,6 +7369,7 @@ function renderPrcTool() {
     <div id="prc-section-content">
       ${prcState.activeSection==='basics'       ? renderPrcBasics()       : ''}
       ${prcState.activeSection==='requirements'  ? renderPrcRequirements()  : ''}
+      ${prcState.activeSection==='skills'        ? renderPrcClassSkills()   : ''}
       ${prcState.activeSection==='features'      ? renderPrcFeatures()      : ''}
       ${prcState.activeSection==='spells'        ? renderPrcSpells()        : ''}
       ${prcState.activeSection==='preview'       ? renderPrcPreview()       : ''}
@@ -7307,16 +7504,43 @@ function renderPrcRequirements() {
   return `<div class="section-heading" style="color:var(--prc2)">Entry Requirements</div><p class="step-sub">Define what a character needs to qualify for this prestige class.</p><div class="flex-row"><div class="field-group"><label>Minimum Base Attack Bonus</label><input type="number" min="0" max="20" value="${r.bab||''}" placeholder="e.g. 5" oninput="prcState.prc.requirements.bab=this.value"></div><div class="field-group"><label>Alignment Requirement</label><input type="text" value="${prcReqEsc(r.alignment)}" placeholder="e.g. Any non-lawful; Any evil" oninput="prcState.prc.requirements.alignment=this.value"></div></div><div class="field-group"><label>Skills Required</label><div style="padding:10px;background:#faf6ea;border:1px solid #c4aa7a;border-radius:4px">${skillRows || '<div style="font-size:.8rem;color:#8a7050;margin-bottom:6px">No skill prerequisites added.</div>'}<button class="btn btn-xs btn-secondary" onclick="addPrcSkillReq()">+ Add Skill Requirement</button></div></div><div class="field-group"><label>Other Skill Requirement Text</label><input type="text" value="${prcReqEsc(r.skillsOther)}" placeholder="e.g. Speak Language (Draconic)" oninput="setPrcReqOther('skillsOther',this.value)"></div><div class="field-group"><label>Feats Required</label><div style="padding:10px;background:#faf6ea;border:1px solid #c4aa7a;border-radius:4px">${featRows || '<div style="font-size:.8rem;color:#8a7050;margin-bottom:6px">No feat prerequisites added.</div>'}<button class="btn btn-xs btn-secondary" onclick="addPrcFeatReq()">+ Add Feat Requirement</button></div></div><div class="field-group"><label>Other Feat Requirement Text</label><input type="text" value="${prcReqEsc(r.featsOther)}" placeholder="e.g. any metamagic feat" oninput="setPrcReqOther('featsOther',this.value)"></div><div class="info-box" style="font-size:.78rem;color:#8a7050;margin-bottom:12px">Current requirement text: <strong>Skills:</strong> ${r.skills||'none'} | <strong>Feats:</strong> ${r.feats||'none'}</div><div class="field-group"><label>Spellcasting Requirement</label><input type="text" value="${prcReqEsc(r.spellcasting)}" placeholder="e.g. Ability to cast 3rd-level arcane spells" oninput="prcState.prc.requirements.spellcasting=this.value"></div><div class="flex-row"><div class="field-group"><label>Race / Type Requirement</label><input type="text" value="${prcReqEsc(r.race)}" placeholder="e.g. Elf or half-elf; humanoid only" oninput="prcState.prc.requirements.race=this.value"></div><div class="field-group"><label>Special Requirement</label><input type="text" value="${prcReqEsc(r.special)}" placeholder="e.g. Must have been trained by a member of the order" oninput="prcState.prc.requirements.special=this.value"></div></div><div class="nav-row"><button class="btn btn-secondary" onclick="prcState.activeSection='basics';renderPrcTool()">Basics</button><button class="btn btn-primary" onclick="prcState.activeSection='features';renderPrcTool()">Class Features</button></div>`;
 }
 
+
+function renderPrcClassSkills() {
+  const p = prcState.prc;
+  const skillBoxes = ALL_SKILLS.map(sk => {
+    const sel = p.classSkills.includes(sk);
+    return `<label style="display:flex;align-items:center;gap:5px;font-size:.78rem;cursor:pointer;padding:3px 6px;background:${sel?'rgba(58,122,171,.1)':'transparent'};border-radius:3px;border:1px solid ${sel?'var(--prc2)':'transparent'}">
+      <input type="checkbox" ${sel?'checked':''} onchange="togglePrcSkill('${sk.replace(/'/g,'\\\'').replace(/\(/g,'\\(').replace(/\)/g,'\\)')}')"
+        style="width:auto;accent-color:var(--prc2)">
+      ${sk}
+    </label>`;
+  }).join('');
+  return `
+    <div class="section-heading" style="color:var(--prc2)">Class Skills (${p.classSkills.length} selected)</div>
+    <p class="step-sub">Select the class skills available to this prestige class.</p>
+    <div style="display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap">
+      <button class="btn btn-xs btn-secondary" onclick="prcState.prc.classSkills=[...ALL_SKILLS];renderPrcTool()">Select All</button>
+      <button class="btn btn-xs btn-secondary" onclick="prcState.prc.classSkills=[];renderPrcTool()">Clear All</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:4px;max-height:360px;overflow-y:auto;padding:4px;background:#faf6ea;border:1px solid #c4aa7a;border-radius:4px;margin-bottom:14px">
+      ${skillBoxes}
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-secondary" onclick="prcState.activeSection='requirements';renderPrcTool()">&larr; Requirements</button>
+      <button class="btn btn-primary" onclick="prcState.activeSection='features';renderPrcTool()">Progression →</button>
+    </div>`;
+}
+
 // ── SECTION: CLASS FEATURES ───────────────────────────────────────────────
 function renderPrcFeatures() {
   const p = prcState.prc;
+  ensurePrcProgression(p);
   syncPrcFeatures(); // ensure feature array matches level count
 
   // Group features by level
   const byLevel = {};
-  p.features.forEach(f => {
-    if(!byLevel[f.level]) byLevel[f.level] = [];
-    byLevel[f.level].push(f);
+  p.progression.forEach(row => {
+    byLevel[row.level] = row.features || [];
   });
 
   const levelRows = Array.from({length: p.levels}, (_,i) => {
@@ -7337,24 +7561,39 @@ function renderPrcFeatures() {
         </div>
       </div>
       ${levelFeats.map((f,fi) => {
-        const idx = p.features.indexOf(f);
+        const idx = fi;
         return `
         <div style="background:#fff;border:1px solid #e4d8b0;border-radius:3px;padding:9px;margin-bottom:6px">
           <div class="flex-row" style="gap:7px;margin-bottom:6px">
             <input type="text" value="${f.name}" placeholder="Feature name…"
-              oninput="prcState.prc.features[${idx}].name=this.value"
+              oninput="setPrcProgressionFeature(${lvl},${idx},'name',this.value)"
               style="font-family:'Cinzel',serif;font-weight:600;font-size:.82rem;flex:1">
-            <select onchange="prcState.prc.features[${idx}].type=this.value" style="width:130px;font-size:.8rem">
-              <option value="Ex" ${f.type==='Ex'?'selected':''}>Ex (Extraordinary)</option>
-              <option value="Su" ${f.type==='Su'?'selected':''}>Su (Supernatural)</option>
-              <option value="Sp" ${f.type==='Sp'?'selected':''}>Sp (Spell-Like)</option>
-              <option value=""   ${!f.type?'selected':''}>No tag</option>
+            <select onchange="setPrcProgressionFeature(${lvl},${idx},'abilityType',this.value)" style="width:130px;font-size:.8rem">
+              <option value="" ${!f.abilityType?'selected':''}>None</option>
+              <option value="Ex" ${f.abilityType==='Ex'?'selected':''}>Ex</option>
+              <option value="Su" ${f.abilityType==='Su'?'selected':''}>Su</option>
+              <option value="Sp" ${f.abilityType==='Sp'?'selected':''}>Sp</option>
             </select>
-            <button class="btn btn-xs btn-danger" onclick="removePrcFeature(${idx})">✕</button>
+            <select onchange="setPrcProgressionFeature(${lvl},${idx},'featureType',this.value)" style="width:170px;font-size:.8rem" title="${(PRC_DEFINITIONS.featureTypes.find(d=>d.id===(f.featureType||'passive'))||{}).description||''}">
+              ${PRC_DEFINITIONS.featureTypes.map(d=>`<option value="${d.id}" ${(f.featureType||'passive')===d.id?'selected':''}>${d.label}</option>`).join('')}
+            </select>
+            <select onchange="setPrcProgressionFeature(${lvl},${idx},'category',this.value)" style="width:130px;font-size:.8rem">
+              ${PRC_DEFINITIONS.categories.map(d=>`<option value="${d.id}" ${(f.category||'combat')===d.id?'selected':''}>${d.label}</option>`).join('')}
+            </select>
+            <button class="btn btn-xs btn-danger" onclick="removePrcFeature(${lvl},${idx})">✕</button>
           </div>
+          <div class="info-box" style="font-size:.74rem;padding:5px 8px;margin-bottom:6px;color:#6b4c1a">
+            ${(PRC_DEFINITIONS.featureTypes.find(d=>d.id===(f.featureType||'passive'))||PRC_DEFINITIONS.featureTypes[0]).description}
+          </div>
+          ${(f.featureType||'passive')==='bonus_feat'?`<select onchange="setPrcProgressionFeature(${lvl},${idx},'feat',this.value)" style="font-size:.78rem;margin-bottom:6px"><option value="">-- Select Granted Feat --</option>${prcFeatOptionHtml(f.feat||'')}</select>`:''}
+          ${(f.featureType||'passive')==='resource'?`<div class="flex-row" style="gap:6px;margin-bottom:6px"><input type="text" value="${prcReqEsc(f.uses||'')}" placeholder="Uses / pool" oninput="setPrcProgressionFeature(${lvl},${idx},'uses',this.value)"><input type="text" value="${prcReqEsc(f.scaling||'')}" placeholder="Scaling / recovery" oninput="setPrcProgressionFeature(${lvl},${idx},'scaling',this.value)"></div>`:''}
+          ${(f.featureType||'passive')==='upgrade'?`<input type="text" value="${prcReqEsc(f.modifies||'')}" placeholder="Feature modified" oninput="setPrcProgressionFeature(${lvl},${idx},'modifies',this.value)" style="margin-bottom:6px">`:''}
+          ${(f.featureType||'passive')==='conditional_passive'?`<input type="text" value="${prcReqEsc(f.conditions||'')}" placeholder="Conditions" oninput="setPrcProgressionFeature(${lvl},${idx},'conditions',this.value)" style="margin-bottom:6px">`:''}
+          ${(f.featureType||'passive')==='selection'?`<input type="text" value="${prcReqEsc(f.options||'')}" placeholder="Options, comma separated" oninput="setPrcProgressionFeature(${lvl},${idx},'options',this.value)" style="margin-bottom:6px">`:''}
+          ${(f.featureType||'passive')==='custom'?`<input type="text" value="${prcReqEsc(f.tags||'')}" placeholder="Tags, comma separated" oninput="setPrcProgressionFeature(${lvl},${idx},'tags',this.value)" style="margin-bottom:6px">`:''}
           <textarea style="min-height:60px;font-size:.85rem;line-height:1.5"
             placeholder="Describe the feature — mechanics, saves, limitations…"
-            oninput="prcState.prc.features[${idx}].description=this.value">${f.description}</textarea>
+            oninput="setPrcProgressionFeature(${lvl},${idx},'description',this.value)">${f.description}</textarea>
         </div>`;
       }).join('')}
       ${isBonusFeatLvl?`<div class="info-box" style="font-size:.78rem;padding:6px 10px;margin-top:4px">
@@ -7395,7 +7634,7 @@ async function prcAiGenerateFeatures(){
   const statusEl=document.getElementById('prc-feat-ai-status');
   if(statusEl) statusEl.innerHTML='<span class="spinner"></span> Generating features…';
   const p=prcState.prc;
-  const existing=p.features.filter(f=>f.name).map(f=>`Lvl ${f.level}: ${f.name}`).join(', ')||'none yet';
+  const existing=getPrcProgressionFeatures(p).filter(f=>f.name).map(f=>`Lvl ${f.level}: ${f.name}`).join(', ')||'none yet';
   const prompt=`You are a D&D 3.5 prestige class designer. Generate class features for this prestige class.
 
 CLASS: ${p.name||'Unnamed Class'}
@@ -7420,7 +7659,7 @@ One object per feature. Multiple features at the same level = multiple objects w
     if(!jsonMatch) throw new Error('No JSON array found in response');
     const features=JSON.parse(jsonMatch[0]);
     // Replace existing features
-    p.features=features.map(f=>({level:parseInt(f.level)||1,name:f.name||'',type:f.type||'',description:f.description||''}));
+    setPrcProgressionFeaturesFromFlat(p, features.map(f=>({...f,level:parseInt(f.level)||1,name:f.name||'',abilityType:f.abilityType||'',featureType:f.featureType||'passive',description:f.description||''})));
     if(statusEl) statusEl.innerHTML=`<span style="color:var(--sage)">✓ Generated ${features.length} features — review and edit below.</span>`;
     renderPrcTool();
   }catch(e){
@@ -7524,6 +7763,7 @@ function renderPrcPreview() {
   const p = prcState.prc;
   const r = p.requirements;
   const sp = p.spellcasting;
+  const displayFeatures = getPrcProgressionFeatures(p);
 
   // Build the full class table
   const tableRows = Array.from({length: p.levels}, (_,i) => {
@@ -7533,9 +7773,9 @@ function renderPrcPreview() {
     const rf = getPrcSave(p.saves.ref, lvl);
     const wl = getPrcSave(p.saves.will, lvl);
     const isBF = p.bonusFeatLevels.includes(lvl);
-    const featureNames = p.features
+    const featureNames = displayFeatures
       .filter(f=>f.level===lvl)
-      .map(f=>`${f.name}${f.type?` (${f.type})`:''}`);
+      .map(f=>`${f.name}${f.abilityType?` (${f.abilityType})`:''}`);
     if(isBF) featureNames.push('Bonus Feat');
     const spAdv = sp.advances && sp.levelsGained[i];
     return `<tr>
@@ -7591,12 +7831,12 @@ function renderPrcPreview() {
       </table>
     </div>
 
-    ${p.features.length?`
+    ${displayFeatures.length?`
     <div class="section-heading" style="color:var(--prc2)">Class Feature Descriptions</div>
-    ${p.features.map(f=>`
+    ${displayFeatures.map(f=>`
       <div style="margin-bottom:12px">
         <div style="font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;color:var(--prc2)">
-          ${f.name}${f.type?` <span style="font-size:.72rem;background:rgba(58,122,171,.15);padding:1px 6px;border-radius:2px">${f.type}</span>`:''}</div>
+          ${f.name}${f.abilityType?` <span style="font-size:.72rem;background:rgba(58,122,171,.15);padding:1px 6px;border-radius:2px">${f.abilityType}</span>`:''}</div>
         <div style="font-size:.88rem;color:#3a2a10;line-height:1.6;margin-top:4px">${f.description||'<em style="color:#8a7050">No description yet.</em>'}</div>
       </div>`).join('')}`:''}
 
@@ -7665,12 +7905,19 @@ function setPrcBonusFeat(lvl, featName) {
 }
 
 function addPrcFeature(lvl) {
-  prcState.prc.features.push({level:lvl, name:'', description:'', type:''});
+  const level = parseInt(lvl) || 1;
+  const progression = ensurePrcProgression(prcState.prc);
+  const row = progression[level - 1] || progression[0];
+  if(!row) return;
+  row.features.push({level:row.level, name:'', description:'', abilityType:'', featureType:'passive', category:'combat', feat:'', uses:'', scaling:'', modifies:'', conditions:'', options:'', tags:''});
   renderPrcTool();
 }
 
-function removePrcFeature(idx) {
-  prcState.prc.features.splice(idx,1);
+function removePrcFeature(lvl, idx) {
+  const progression = ensurePrcProgression(prcState.prc);
+  const row = progression[(parseInt(lvl) || 1) - 1] || progression[0];
+  if(!row) return;
+  row.features.splice(idx,1);
   renderPrcTool();
 }
 
@@ -7734,7 +7981,7 @@ function buildPrcRTF() {
     const rf='+'+getPrcSave(p.saves.ref,lvl);
     const wl='+'+getPrcSave(p.saves.will,lvl);
     const spAdv=sp.advances&&sp.levelsGained[i]?'+1 level':'—      ';
-    const featureNames=p.features.filter(f=>f.level===lvl).map(f=>`${f.name}${f.type?` (${f.type})`:''}`);
+    const featureNames=p.features.filter(f=>f.level===lvl).map(f=>`${f.name}${f.abilityType?` (${f.abilityType})`:''}`);
     if(p.bonusFeatLevels.includes(lvl)) featureNames.push((p.bonusFeatSelections&&p.bonusFeatSelections[lvl])?`Bonus Feat: ${p.bonusFeatSelections[lvl]}`:'Bonus Feat');
     const pad=(s,n)=>String(s).padEnd(n,' ');
     txt += `\\pard{\\f2\\fs16 ${pad(lvl+'.',4)} ${pad(bab,5)} ${pad(ft,5)} ${pad(rf,5)} ${pad(wl,5)} ${sp.advances?pad(spAdv,10):''}${rE(featureNames.join(', ')||'—')}}\\par\n`;
@@ -7746,7 +7993,7 @@ function buildPrcRTF() {
     txt += `\\pard\\sb120{\\f1\\fs22\\b\\cf1 Class Feature Descriptions}\\par\n`;
     p.features.forEach(f=>{
       if(!f.name) return;
-      txt += `\\pard\\sb100{\\f1\\fs18\\b\\cf1 ${rE(f.name)}${f.type?` {\\f0\\fs16\\cf3 (${f.type})}`:''}}\\par\n`;
+      txt += `\\pard\\sb100{\\f1\\fs18\\b\\cf1 ${rE(f.name)}${f.abilityType?` {\\f0\\fs16\\cf3 (${f.abilityType})}`:''}}\\par\n`;
       txt += `\\pard\\sb40{\\f0\\fs18 ${rE(f.description||'—')}}\\par\n`;
     });
   }
@@ -7808,7 +8055,7 @@ async function acceptPrc() {
       prep: 'prepared',
     } : null,
     classFeatures: [
-      ...p.features.filter(f=>f.name).map(f=>`${f.name}${f.type?` (${f.type})`:''} — Level ${f.level}`),
+      ...p.features.filter(f=>f.name).map(f=>`${f.name}${f.abilityType?` (${f.abilityType})`:''} — Level ${f.level}`),
       ...p.bonusFeatLevels.map(lvl=>(p.bonusFeatSelections&&p.bonusFeatSelections[lvl])?`Bonus Feat: ${p.bonusFeatSelections[lvl]} — Level ${lvl}`:`Bonus Feat — Level ${lvl}`)
     ],
     epicBonusFeatEvery: 3,
@@ -11960,7 +12207,7 @@ async function loadHomebrewPrcsFromDrive(){
           } : null,
           classFeatures: (prc.features || [])
             .filter(f => f.name)
-            .map(f => `${f.name}${f.type ? ` (${f.type})` : ''} — Level ${f.level}`),
+            .map(f => `${f.name}${f.abilityType ? ` (${f.abilityType})` : ''} — Level ${f.level}`),
           epicBonusFeatEvery: 3,
           epicFeatures: [],
           requirements: { ...(prc.requirements || {}) },

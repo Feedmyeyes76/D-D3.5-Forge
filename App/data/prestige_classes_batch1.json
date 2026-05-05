@@ -1,0 +1,265 @@
+[
+{
+  "name": "Assassin",
+  "description": {
+    "summary": "A stealth-based killer specializing in poison use and death attacks.",
+    "flavor": "Assassins study the art of killing, blending stealth, precision, and deadly toxins.",
+    "role": "Stealth striker with burst damage and poison specialization.",
+    "sourceText": "Dungeon Master's Guide, p. 180"
+  },
+  "hitDie": 6,
+  "babProg": "medium",
+  "skillPoints": 4,
+  "saves": { "fort": "poor", "ref": "good", "will": "good" },
+
+  "features": [
+    {
+      "id": "assassin.death_attack",
+      "name": "Death Attack",
+      "type": "ability",
+      "description": {
+        "summary": "Study a target to deliver a deadly strike.",
+        "fullText": "If the assassin studies a target for 3 rounds and then makes a sneak attack, the attack can paralyze or kill the target."
+      },
+      "progression": {
+        "1": {
+          "mechanics": {
+            "requiresStudyRounds": 3,
+            "saveType": "fortitude",
+            "effect": ["death", "paralysis"]
+          }
+        }
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "assassin.poison_use",
+      "name": "Poison Use",
+      "type": "feature",
+      "description": {
+        "summary": "Use poison safely.",
+        "fullText": "Assassins are trained in the use of poison and never risk poisoning themselves."
+      },
+      "progression": { "1": {} },
+      "confidence": "high"
+    },
+    {
+      "id": "assassin.sneak_attack",
+      "name": "Sneak Attack",
+      "type": "scaling",
+      "description": {
+        "summary": "Extra damage when attacking unaware targets.",
+        "fullText": "Deals extra damage when the opponent is denied Dex bonus."
+      },
+      "progression": {
+        "1": { "value": "1d6" },
+        "3": { "value": "2d6" },
+        "5": { "value": "3d6" },
+        "7": { "value": "4d6" },
+        "9": { "value": "5d6" }
+      },
+      "confidence": "high"
+    }
+  ],
+
+  "levels": [
+    { "level": 1, "features": [{ "ref": "assassin.death_attack" }, { "ref": "assassin.poison_use" }, { "ref": "assassin.sneak_attack" }], "casting": [] },
+    { "level": 2, "features": [], "casting": [] },
+    { "level": 3, "features": [{ "ref": "assassin.sneak_attack" }], "casting": [] },
+    { "level": 4, "features": [], "casting": [] },
+    { "level": 5, "features": [{ "ref": "assassin.sneak_attack" }], "casting": [] },
+    { "level": 6, "features": [], "casting": [] },
+    { "level": 7, "features": [{ "ref": "assassin.sneak_attack" }], "casting": [] },
+    { "level": 8, "features": [], "casting": [] },
+    { "level": 9, "features": [{ "ref": "assassin.sneak_attack" }], "casting": [] },
+    { "level": 10, "features": [], "casting": [] }
+  ],
+
+  "migrationStatus": {
+    "progression": "complete",
+    "metadata": "complete",
+    "mechanics": "complete",
+    "needsReview": false,
+    "reviewNotes": []
+  }
+},
+
+{
+  "name": "Arcane Trickster",
+  "description": {
+    "summary": "A rogue/mage hybrid who enhances sneak attacks with magic.",
+    "flavor": "Arcane tricksters blend stealth and spellcasting to strike unseen.",
+    "role": "Hybrid stealth caster.",
+    "sourceText": "Dungeon Master's Guide, p. 177"
+  },
+  "hitDie": 4,
+  "babProg": "poor",
+  "skillPoints": 4,
+  "saves": { "fort": "poor", "ref": "good", "will": "good" },
+
+  "features": [
+    {
+      "id": "arcane_trickster.ranged_ledgerdemain",
+      "name": "Ranged Legerdemain",
+      "type": "ability",
+      "description": {
+        "summary": "Use rogue skills at range.",
+        "fullText": "Allows use of Disable Device, Open Lock, and Sleight of Hand at range."
+      },
+      "progression": {
+        "1": { "value": "1/day" },
+        "5": { "value": "2/day" },
+        "9": { "value": "3/day" }
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "arcane_trickster.sneak_attack",
+      "name": "Sneak Attack",
+      "type": "scaling",
+      "description": {
+        "summary": "Extra damage when attacking unaware targets.",
+        "fullText": "Arcane trickster gains additional sneak attack damage."
+      },
+      "progression": {
+        "3": { "value": "1d6" },
+        "5": { "value": "2d6" },
+        "7": { "value": "3d6" },
+        "9": { "value": "4d6" }
+      },
+      "confidence": "high"
+    }
+  ],
+
+  "levels": [
+    { "level": 1, "features": [{ "ref": "arcane_trickster.ranged_ledgerdemain" }], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 2, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 3, "features": [{ "ref": "arcane_trickster.sneak_attack" }], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 4, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 5, "features": [{ "ref": "arcane_trickster.sneak_attack" }, { "ref": "arcane_trickster.ranged_ledgerdemain" }], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 6, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 7, "features": [{ "ref": "arcane_trickster.sneak_attack" }], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 8, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 9, "features": [{ "ref": "arcane_trickster.sneak_attack" }, { "ref": "arcane_trickster.ranged_ledgerdemain" }], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 10, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] }
+  ],
+
+  "migrationStatus": {
+    "progression": "complete",
+    "metadata": "complete",
+    "mechanics": "complete",
+    "needsReview": false,
+    "reviewNotes": []
+  }
+},
+
+{
+  "name": "Eldritch Knight",
+  "description": {
+    "summary": "A warrior who advances arcane spellcasting while maintaining combat ability.",
+    "flavor": "Eldritch knights combine martial prowess with arcane magic.",
+    "role": "Martial caster hybrid.",
+    "sourceText": "Dungeon Master's Guide, p. 182"
+  },
+  "hitDie": 6,
+  "babProg": "full",
+  "skillPoints": 2,
+  "saves": { "fort": "good", "ref": "poor", "will": "good" },
+
+  "features": [
+    {
+      "id": "eldritch_knight.bonus_feat",
+      "name": "Bonus Feat",
+      "type": "feature",
+      "description": {
+        "summary": "Gain bonus combat feats.",
+        "fullText": "Gains bonus feats at levels 1, 5, and 10."
+      },
+      "progression": {
+        "1": {},
+        "5": {},
+        "10": {}
+      },
+      "confidence": "high"
+    }
+  ],
+
+  "levels": [
+    { "level": 1, "features": [{ "ref": "eldritch_knight.bonus_feat" }], "casting": [] },
+    { "level": 2, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 3, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 4, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 5, "features": [{ "ref": "eldritch_knight.bonus_feat" }], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 6, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 7, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 8, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 9, "features": [], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] },
+    { "level": 10, "features": [{ "ref": "eldritch_knight.bonus_feat" }], "casting": [{ "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } }] }
+  ],
+
+  "migrationStatus": {
+    "progression": "complete",
+    "metadata": "complete",
+    "mechanics": "complete",
+    "needsReview": false,
+    "reviewNotes": []
+  }
+},
+
+{
+  "name": "Mystic Theurge",
+  "description": {
+    "summary": "A spellcaster who advances both arcane and divine magic.",
+    "flavor": "Mystic theurges combine two magical traditions.",
+    "role": "Dual-progression caster.",
+    "sourceText": "Dungeon Master's Guide, p. 192"
+  },
+  "hitDie": 4,
+  "babProg": "poor",
+  "skillPoints": 2,
+  "saves": { "fort": "poor", "ref": "poor", "will": "good" },
+
+  "features": [
+    {
+      "id": "mystic_theurge.spellcasting",
+      "name": "Spellcasting Advancement",
+      "type": "feature",
+      "description": {
+        "summary": "Advances arcane and divine spellcasting.",
+        "fullText": "At each level, you gain spellcasting advancement in both an arcane and divine class."
+      },
+      "progression": {
+        "1": {}
+      },
+      "confidence": "high"
+    }
+  ],
+
+  "levels": [
+    {
+      "level": 1,
+      "features": [{ "ref": "mystic_theurge.spellcasting" }],
+      "casting": [
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } },
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["divine"] } }
+      ]
+    },
+    {
+      "level": 2,
+      "features": [{ "ref": "mystic_theurge.spellcasting" }],
+      "casting": [
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["arcane"] } },
+        { "type": "existing", "progression": 1, "choice": { "type": "category", "options": ["divine"] } }
+      ]
+    }
+  ],
+
+  "migrationStatus": {
+    "progression": "partial",
+    "metadata": "complete",
+    "mechanics": "complete",
+    "needsReview": true,
+    "reviewNotes": ["Extend to full 10 levels"]
+  }
+}
+]

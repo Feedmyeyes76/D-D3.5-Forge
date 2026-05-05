@@ -1,0 +1,883 @@
+[
+  {
+    "name": "Frenzied Berserker",
+    "maxLevel": 10,
+    "description": {
+      "summary": "A warrior who channels rage into uncontrollable destructive frenzy.",
+      "flavor": "Frenzied berserkers surrender restraint for terrifying battlefield power.",
+      "role": "High-risk melee striker with frenzy, enhanced Power Attack, and death-defying rage mechanics.",
+      "sourceText": "Complete Warrior, p. 34"
+    },
+    "hitDie": 12,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "poor"
+    },
+    "requirements": {
+      "alignment": "Any nonlawful",
+      "baseAttackBonus": "+6",
+      "feats": [
+        "Cleave",
+        "Destructive Rage",
+        "Intimidating Rage",
+        "Power Attack"
+      ],
+      "special": [
+        "Rage or frenzy ability"
+      ]
+    },
+    "classSkills": [
+      "Climb",
+      "Intimidate",
+      "Jump",
+      "Ride",
+      "Survival"
+    ],
+    "features": [
+      {
+        "id": "frenzied_berserker.frenzy",
+        "name": "Frenzy",
+        "type": "scaling",
+        "description": {
+          "summary": "Enter a powerful but dangerous frenzy.",
+          "fullText": "The frenzied berserker can enter a frenzy, gaining a large Strength bonus and an extra attack while risking loss of control. Uses per day increase by level."
+        },
+        "progression": {
+          "1": {
+            "value": "1/day",
+            "mechanics": {
+              "state": "frenzy",
+              "strengthBonus": 6,
+              "extraAttack": true,
+              "lossOfControl": true
+            }
+          },
+          "4": {
+            "value": "2/day"
+          },
+          "7": {
+            "value": "3/day"
+          },
+          "10": {
+            "value": "4/day"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "frenzied_berserker.supreme_power_attack",
+        "name": "Supreme Power Attack",
+        "type": "scaling",
+        "description": {
+          "summary": "Increase the damage return from Power Attack.",
+          "fullText": "The frenzied berserker improves Power Attack damage, with a stronger multiplier for two-handed weapons as the class advances."
+        },
+        "progression": {
+          "2": {
+            "value": "improved multiplier",
+            "mechanics": {
+              "enhancesPowerAttack": true
+            }
+          },
+          "5": {
+            "value": "greater multiplier",
+            "mechanics": {
+              "enhancesPowerAttack": true
+            }
+          },
+          "10": {
+            "value": "supreme multiplier",
+            "mechanics": {
+              "enhancesPowerAttack": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "frenzied_berserker.deathless_frenzy",
+        "name": "Deathless Frenzy",
+        "type": "feature",
+        "description": {
+          "summary": "Keep fighting while below dying thresholds.",
+          "fullText": "At higher level, the frenzied berserker can continue fighting while in frenzy even when damage would normally render the character dying or dead until the frenzy ends."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "continuesActingWhileBelowZeroDuringFrenzy": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "frenzied_berserker.improved_frenzy",
+        "name": "Improved Frenzy",
+        "type": "feature",
+        "description": {
+          "summary": "Improve frenzy benefits.",
+          "fullText": "The frenzied berserker gains an improved form of frenzy with increased offensive power."
+        },
+        "progression": {
+          "6": {
+            "mechanics": {
+              "improvesFrenzy": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "frenzied_berserker.inspire_frenzy",
+        "name": "Inspire Frenzy",
+        "type": "ability",
+        "description": {
+          "summary": "Drive allies into frenzy.",
+          "fullText": "The frenzied berserker can inspire frenzy in willing allies or nearby creatures as described by the class feature."
+        },
+        "progression": {
+          "8": {
+            "mechanics": {
+              "grantsFrenzyToOthers": true
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "frenzied_berserker.frenzy"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "frenzied_berserker.supreme_power_attack"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "frenzied_berserker.frenzy"
+          },
+          {
+            "ref": "frenzied_berserker.deathless_frenzy"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "frenzied_berserker.supreme_power_attack"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "frenzied_berserker.improved_frenzy"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "frenzied_berserker.frenzy"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "frenzied_berserker.inspire_frenzy"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 9,
+        "features": [],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "frenzied_berserker.frenzy"
+          },
+          {
+            "ref": "frenzied_berserker.supreme_power_attack"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Exact frenzy compulsion, save DCs, fatigue/exhaustion, and Power Attack multiplier text should be reviewed in-app against Complete Warrior."
+      ]
+    }
+  },
+  {
+    "name": "Invisible Blade",
+    "maxLevel": 5,
+    "description": {
+      "summary": "A dagger and feint specialist who turns deception into lethal precision.",
+      "flavor": "Invisible blades are knife fighters whose hands move faster than the eye can follow.",
+      "role": "Short melee precision class focused on feinting, bleeding wounds, and defense while lightly equipped.",
+      "sourceText": "Complete Warrior, p. 44"
+    },
+    "hitDie": 6,
+    "babProg": "full",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {
+      "baseAttackBonus": "+6",
+      "skills": [
+        {
+          "name": "Bluff",
+          "ranks": 8
+        },
+        {
+          "name": "Sense Motive",
+          "ranks": 6
+        }
+      ],
+      "feats": [
+        "Far Shot",
+        "Point Blank Shot",
+        "Precise Shot",
+        "Weapon Focus (dagger, kukri, or punching dagger)"
+      ]
+    },
+    "classSkills": [
+      "Balance",
+      "Bluff",
+      "Climb",
+      "Craft",
+      "Escape Artist",
+      "Hide",
+      "Jump",
+      "Move Silently",
+      "Perform",
+      "Profession",
+      "Sense Motive",
+      "Sleight of Hand",
+      "Tumble"
+    ],
+    "features": [
+      {
+        "id": "invisible_blade.unfettered_defense",
+        "name": "Unfettered Defense",
+        "type": "scaling",
+        "description": {
+          "summary": "Add Intelligence bonus to AC while fighting lightly.",
+          "fullText": "The invisible blade adds Intelligence bonus to Armor Class when unarmored or lightly equipped under the class restrictions, limited by class level or feature wording."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 max"
+          },
+          "2": {
+            "value": "+2 max"
+          },
+          "3": {
+            "value": "+3 max"
+          },
+          "4": {
+            "value": "+4 max"
+          },
+          "5": {
+            "value": "+5 max"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "invisible_blade.bleeding_wound",
+        "name": "Bleeding Wound",
+        "type": "scaling",
+        "description": {
+          "summary": "Cause sneak attacks to bleed.",
+          "fullText": "The invisible blade can forgo sneak attack dice to cause bleeding wounds that deal ongoing damage."
+        },
+        "progression": {
+          "1": {
+            "value": "1 point/round"
+          },
+          "3": {
+            "value": "2 points/round"
+          },
+          "5": {
+            "value": "3 points/round"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "invisible_blade.uncanny_feint",
+        "name": "Uncanny Feint",
+        "type": "scaling",
+        "description": {
+          "summary": "Feint more quickly in combat.",
+          "fullText": "The invisible blade gains improved action economy when using Bluff to feint in combat."
+        },
+        "progression": {
+          "2": {
+            "value": "move action"
+          },
+          "5": {
+            "value": "free action"
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "invisible_blade.feint_mastery",
+        "name": "Feint Mastery",
+        "type": "feature",
+        "description": {
+          "summary": "Improve combat feint reliability.",
+          "fullText": "The invisible blade gains additional benefits or reliability with feinting in combat as represented by the class feature progression."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "improvesFeinting": true
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "invisible_blade.unfettered_defense"
+          },
+          {
+            "ref": "invisible_blade.bleeding_wound"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "invisible_blade.unfettered_defense"
+          },
+          {
+            "ref": "invisible_blade.uncanny_feint"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "invisible_blade.unfettered_defense"
+          },
+          {
+            "ref": "invisible_blade.bleeding_wound"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "invisible_blade.unfettered_defense"
+          },
+          {
+            "ref": "invisible_blade.feint_mastery"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "invisible_blade.unfettered_defense"
+          },
+          {
+            "ref": "invisible_blade.bleeding_wound"
+          },
+          {
+            "ref": "invisible_blade.uncanny_feint"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Invisible Blade requirements and feature wording changed in errata/discussion; review against the chosen Complete Warrior source/errata policy."
+      ]
+    }
+  },
+  {
+    "name": "Master Thrower",
+    "maxLevel": 5,
+    "description": {
+      "summary": "A specialist in thrown weapons and precision throwing tricks.",
+      "flavor": "Master throwers turn knives, axes, and other thrown weapons into a deadly art.",
+      "role": "Short martial prestige class built around selectable thrown weapon tricks and ranged precision.",
+      "sourceText": "Complete Warrior, p. 58"
+    },
+    "hitDie": 8,
+    "babProg": "full",
+    "skillPoints": 4,
+    "saves": {
+      "fort": "poor",
+      "ref": "good",
+      "will": "poor"
+    },
+    "requirements": {
+      "baseAttackBonus": "+5",
+      "skills": [
+        {
+          "name": "Sleight of Hand",
+          "ranks": 5
+        }
+      ],
+      "feats": [
+        "Point Blank Shot",
+        "Precise Shot",
+        "Weapon Focus (any thrown weapon)"
+      ]
+    },
+    "classSkills": [
+      "Balance",
+      "Bluff",
+      "Climb",
+      "Craft",
+      "Hide",
+      "Jump",
+      "Listen",
+      "Profession",
+      "Sleight of Hand",
+      "Spot",
+      "Tumble"
+    ],
+    "features": [
+      {
+        "id": "master_thrower.quick_draw",
+        "name": "Quick Draw",
+        "type": "feature",
+        "description": {
+          "summary": "Gain Quick Draw as a bonus feat.",
+          "fullText": "The master thrower gains Quick Draw as a bonus feat if the character does not already have it."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "grantFeat": "Quick Draw"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "master_thrower.thrown_weapon_trick",
+        "name": "Thrown Weapon Trick",
+        "type": "scaling",
+        "description": {
+          "summary": "Learn special thrown weapon tricks.",
+          "fullText": "The master thrower learns a thrown weapon trick at multiple class levels, chosen from the master thrower trick list."
+        },
+        "progression": {
+          "1": {
+            "value": "1 trick"
+          },
+          "3": {
+            "value": "2 tricks"
+          },
+          "5": {
+            "value": "3 tricks"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "master_thrower.evasion",
+        "name": "Evasion",
+        "type": "feature",
+        "description": {
+          "summary": "Avoid damage on successful Reflex saves.",
+          "fullText": "At 2nd level, the master thrower gains evasion."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "evasion": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "master_thrower.critical_throw",
+        "name": "Critical Throw",
+        "type": "feature",
+        "description": {
+          "summary": "Improve thrown weapon criticals.",
+          "fullText": "The master thrower gains improved critical performance or a related thrown weapon benefit as described by the class progression."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "improvesThrownWeaponCriticals": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "master_thrower.weak_spot",
+        "name": "Weak Spot",
+        "type": "feature",
+        "description": {
+          "summary": "Target vulnerable points with thrown weapons.",
+          "fullText": "The master thrower can use a specialized trick or feature to target weak spots with thrown weapons."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "targetWeakSpot": true
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "master_thrower.quick_draw"
+          },
+          {
+            "ref": "master_thrower.thrown_weapon_trick"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "master_thrower.evasion"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "master_thrower.thrown_weapon_trick"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "master_thrower.critical_throw"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "master_thrower.thrown_weapon_trick"
+          },
+          {
+            "ref": "master_thrower.weak_spot"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Thrown weapon trick list should be modeled later as selectable subfeatures/options."
+      ]
+    }
+  },
+  {
+    "name": "Occult Slayer",
+    "maxLevel": 5,
+    "description": {
+      "summary": "A martial anti-mage trained to resist and destroy spellcasters.",
+      "flavor": "Occult slayers distrust magic and train to survive the tricks of spellcasters.",
+      "role": "Short martial prestige class with anti-magic defenses and spellcaster-hunting tools.",
+      "sourceText": "Complete Warrior, p. 66"
+    },
+    "hitDie": 8,
+    "babProg": "full",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "good",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "baseAttackBonus": "+5",
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 2
+        },
+        {
+          "name": "Spellcraft",
+          "ranks": 2
+        }
+      ],
+      "feats": [
+        "Improved Initiative",
+        "Iron Will",
+        "Weapon Focus (any weapon)"
+      ]
+    },
+    "classSkills": [
+      "Climb",
+      "Craft",
+      "Jump",
+      "Knowledge (arcana)",
+      "Listen",
+      "Profession",
+      "Spellcraft",
+      "Spot",
+      "Survival"
+    ],
+    "features": [
+      {
+        "id": "occult_slayer.magical_defense",
+        "name": "Magical Defense",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain bonuses on saves against spells and spell-like abilities.",
+          "fullText": "The occult slayer gains a scaling bonus on saving throws against spells and spell-like abilities."
+        },
+        "progression": {
+          "1": {
+            "value": "+1"
+          },
+          "3": {
+            "value": "+2"
+          },
+          "5": {
+            "value": "+3"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "occult_slayer.weapon_bond",
+        "name": "Weapon Bond",
+        "type": "feature",
+        "description": {
+          "summary": "Bond with a weapon for anti-magic combat.",
+          "fullText": "The occult slayer forms a bond with a chosen weapon, allowing class features to function through that weapon."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "bondedWeapon": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "occult_slayer.mind_over_magic",
+        "name": "Mind over Magic",
+        "type": "ability",
+        "description": {
+          "summary": "Turn magic back through force of will.",
+          "fullText": "The occult slayer can use a special defense against spells or spell-like abilities, potentially negating or redirecting magical effects."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "antiMagicDefense": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "occult_slayer.vicious_strike",
+        "name": "Vicious Strike",
+        "type": "feature",
+        "description": {
+          "summary": "Deal extra damage against spellcasters or magical foes.",
+          "fullText": "The occult slayer gains improved offensive capability against spellcasters or creatures using magic."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "bonusVsSpellcasters": true
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "occult_slayer.blank_thoughts",
+        "name": "Blank Thoughts",
+        "type": "feature",
+        "description": {
+          "summary": "Resist mind-affecting detection or control.",
+          "fullText": "The occult slayer gains protection against mind-affecting magic and supernatural mental influence."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "protectsAgainst": [
+                "mind-affecting magic"
+              ]
+            }
+          }
+        },
+        "confidence": "medium"
+      },
+      {
+        "id": "occult_slayer.auravision",
+        "name": "Auravision",
+        "type": "ability",
+        "description": {
+          "summary": "Perceive magical auras.",
+          "fullText": "The occult slayer can perceive magical auras or magical power around creatures and objects."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "detectMagicalAuras": true
+            }
+          }
+        },
+        "confidence": "medium"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "occult_slayer.magical_defense"
+          },
+          {
+            "ref": "occult_slayer.weapon_bond"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "occult_slayer.mind_over_magic"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "occult_slayer.magical_defense"
+          },
+          {
+            "ref": "occult_slayer.vicious_strike"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "occult_slayer.blank_thoughts"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "occult_slayer.magical_defense"
+          },
+          {
+            "ref": "occult_slayer.auravision"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "partial",
+      "needsReview": true,
+      "reviewNotes": [
+        "Occult Slayer feature names/precise mechanics should be verified against Complete Warrior; current model is structurally valid for in-app review."
+      ]
+    }
+  }
+]

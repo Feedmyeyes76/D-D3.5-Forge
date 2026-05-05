@@ -1,0 +1,96 @@
+{
+  "version": "2.2",
+  "strictMode": false,
+  "validation": [
+    {
+      "name": "max_level_required",
+      "description": "Each class must define maxLevel",
+      "action": "error"
+    },
+    {
+      "name": "feature_ref_integrity",
+      "description": "Every level feature ref must match a feature id",
+      "action": "error"
+    },
+    {
+      "name": "feature_used_in_levels",
+      "description": "Every feature must be referenced in at least one level",
+      "action": "error"
+    },
+    {
+      "name": "description_required",
+      "description": "Every feature must include description.summary and description.fullText",
+      "action": "error"
+    },
+    {
+      "name": "progression_required",
+      "description": "Every feature must include a progression object",
+      "action": "error"
+    },
+    {
+      "name": "progression_level_alignment",
+      "description": "Feature progression levels must exist within class level range (1\u2013maxLevel)",
+      "action": "error"
+    },
+    {
+      "name": "level_has_valid_structure",
+      "description": "Each level must include level number, features array, and casting array",
+      "action": "error"
+    },
+    {
+      "name": "casting_array_required",
+      "description": "Each level must include casting array (even if empty)",
+      "action": "error"
+    },
+    {
+      "name": "migration_status_required",
+      "description": "Each class must include migrationStatus",
+      "action": "error"
+    },
+    {
+      "name": "feature_minimum",
+      "description": "Each class should have at least one feature",
+      "action": "warning"
+    },
+    {
+      "name": "level_coverage",
+      "description": "Class should define levels 1 through maxLevel",
+      "action": "warning"
+    },
+    {
+      "name": "level_feature_presence",
+      "description": "Each class should have at least one level with features",
+      "action": "warning"
+    },
+    {
+      "name": "progression_usage_check",
+      "description": "Features with progression should appear in corresponding levels within maxLevel",
+      "action": "warning"
+    },
+    {
+      "name": "casting_progression_sanity",
+      "description": "Casting classes should have casting progression across multiple levels",
+      "action": "warning"
+    },
+    {
+      "name": "confidence_required",
+      "description": "Each feature should include confidence rating",
+      "action": "warning"
+    }
+  ],
+  "dynamicRules": {
+    "classMaxLevel": [
+      "use explicit maxLevel (REQUIRED)",
+      "do not infer from levels[] or progression",
+      "validator must treat maxLevel as authoritative"
+    ],
+    "missing_level_detection": [
+      "warn if any level between 1 and maxLevel is missing",
+      "do not warn for levels above maxLevel"
+    ],
+    "progression_bounds": [
+      "all feature progression keys must be <= maxLevel",
+      "error if progression exceeds maxLevel"
+    ]
+  }
+}

@@ -1,0 +1,195 @@
+[
+{
+  "name": "Blackguard",
+  "description": {
+    "summary": "An anti-paladin who gains dark divine powers and a fiendish servant.",
+    "flavor": "Blackguards are champions of evil, wielding divine power through corruption and cruelty.",
+    "role": "Melee striker with divine abilities and debuff aura.",
+    "sourceText": "Dungeon Master's Guide, p. 182"
+  },
+  "hitDie": 10,
+  "babProg": "full",
+  "skillPoints": 2,
+  "saves": { "fort": "good", "ref": "poor", "will": "good" },
+  "features": [
+    {
+      "id": "blackguard.aura_of_evil",
+      "name": "Aura of Evil",
+      "type": "feature",
+      "description": {
+        "summary": "Radiates evil aura.",
+        "fullText": "A blackguard radiates an aura of evil as a cleric of equal level."
+      },
+      "progression": { "1": {} },
+      "confidence": "high"
+    },
+    {
+      "id": "blackguard.smite_good",
+      "name": "Smite Good",
+      "type": "ability",
+      "description": {
+        "summary": "Smite good opponents.",
+        "fullText": "Adds Charisma bonus to attack and level to damage against good targets."
+      },
+      "progression": {
+        "1": { "value": "1/day" },
+        "5": { "value": "2/day" },
+        "10": { "value": "3/day" }
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "blackguard.dark_blessing",
+      "name": "Dark Blessing",
+      "type": "feature",
+      "description": {
+        "summary": "Adds Charisma bonus to saving throws.",
+        "fullText": "A blackguard applies Charisma bonus to all saving throws."
+      },
+      "progression": {
+        "2": {
+          "mechanics": {
+            "addAbilityToSaves": "cha"
+          }
+        }
+      },
+      "confidence": "high"
+    }
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "features": [
+        { "ref": "blackguard.aura_of_evil" },
+        { "ref": "blackguard.smite_good" }
+      ],
+      "casting": []
+    },
+    {
+      "level": 2,
+      "features": [
+        { "ref": "blackguard.dark_blessing" }
+      ],
+      "casting": []
+    }
+  ],
+  "migrationStatus": {
+    "progression": "partial",
+    "metadata": "complete",
+    "mechanics": "partial",
+    "needsReview": true,
+    "reviewNotes": ["Spellcasting and fiendish servant not yet implemented"]
+  }
+},
+
+{
+  "name": "Arcane Archer",
+  "description": {
+    "summary": "A ranged specialist who enhances arrows with magic.",
+    "flavor": "Arcane archers infuse arrows with magical power for devastating ranged attacks.",
+    "role": "Ranged striker with magical enhancements.",
+    "sourceText": "Dungeon Master's Guide, p. 176"
+  },
+  "hitDie": 8,
+  "babProg": "full",
+  "skillPoints": 4,
+  "saves": { "fort": "good", "ref": "good", "will": "poor" },
+  "features": [
+    {
+      "id": "arcane_archer.enhance_arrow",
+      "name": "Enhance Arrow",
+      "type": "scaling",
+      "description": {
+        "summary": "Enhances arrows with magical bonuses.",
+        "fullText": "Arrows gain enhancement bonuses at higher levels."
+      },
+      "progression": {
+        "1": { "value": "+1" },
+        "3": { "value": "+2" },
+        "5": { "value": "+3" },
+        "7": { "value": "+4" },
+        "9": { "value": "+5" }
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "arcane_archer.seeker_arrow",
+      "name": "Seeker Arrow",
+      "type": "ability",
+      "description": {
+        "summary": "Arrow automatically hits target.",
+        "fullText": "Ignores concealment and cover."
+      },
+      "progression": {
+        "4": { "value": "1/day" }
+      },
+      "confidence": "medium"
+    }
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "features": [{ "ref": "arcane_archer.enhance_arrow" }],
+      "casting": []
+    },
+    {
+      "level": 4,
+      "features": [{ "ref": "arcane_archer.seeker_arrow" }],
+      "casting": []
+    }
+  ],
+  "migrationStatus": {
+    "progression": "partial",
+    "metadata": "complete",
+    "mechanics": "partial",
+    "needsReview": true,
+    "reviewNotes": ["Missing several arrow abilities"]
+  }
+},
+
+{
+  "name": "Shadowdancer",
+  "description": {
+    "summary": "A stealth-based class that manipulates shadows.",
+    "flavor": "Shadowdancers blend into darkness and strike unseen.",
+    "role": "Stealth mobility class with supernatural shadow abilities.",
+    "sourceText": "Dungeon Master's Guide, p. 81"
+  },
+  "hitDie": 8,
+  "babProg": "medium",
+  "skillPoints": 6,
+  "saves": { "fort": "poor", "ref": "good", "will": "poor" },
+  "features": [
+    {
+      "id": "shadowdancer.shadow_jump",
+      "name": "Shadow Jump",
+      "type": "ability",
+      "description": {
+        "summary": "Teleport between shadows.",
+        "fullText": "Allows teleportation between shadows with increasing range."
+      },
+      "progression": {
+        "4": { "value": "20 ft" },
+        "6": { "value": "40 ft" },
+        "8": { "value": "80 ft" },
+        "10": { "value": "160 ft" }
+      },
+      "confidence": "high"
+    }
+  ],
+  "levels": [
+    {
+      "level": 4,
+      "features": [{ "ref": "shadowdancer.shadow_jump" }],
+      "casting": []
+    }
+  ],
+  "migrationStatus": {
+    "progression": "partial",
+    "metadata": "complete",
+    "mechanics": "partial",
+    "needsReview": false,
+    "reviewNotes": []
+  }
+}
+]

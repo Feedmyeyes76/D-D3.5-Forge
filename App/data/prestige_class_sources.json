@@ -1,0 +1,38 @@
+{
+  "dervish": {
+    "name": "Dervish",
+    "book": "Complete Warrior",
+    "page": 25,
+    "priority": ["player", "docx", "pdf"]
+  },
+  "shadowdancer": {
+    "name": "Shadowdancer",
+    "book": "Dungeon Master's Guide",
+    "page": 81,
+    "priority": ["player", "docx", "pdf"]
+  },
+  "eldritch_knight": {
+    "name": "Eldritch Knight",
+    "book": "Dungeon Master's Guide",
+    "page": 182,
+    "priority": ["player", "docx", "pdf"]
+  },
+  "mystic_theurge": {
+    "name": "Mystic Theurge",
+    "book": "Dungeon Master's Guide",
+    "page": 192,
+    "priority": ["player", "docx", "pdf"]
+  },
+  "arcane_trickster": {
+    "name": "Arcane Trickster",
+    "book": "Dungeon Master's Guide",
+    "page": 177,
+    "priority": ["player", "docx", "pdf"]
+  },
+  "assassin": {
+    "name": "Assassin",
+    "book": "Dungeon Master's Guide",
+    "page": 180,
+    "priority": ["player", "docx", "pdf"]
+  }
+}

@@ -1,0 +1,1958 @@
+[
+  {
+    "name": "Elemental Savant",
+    "description": {
+      "summary": "A spellcaster who transforms into an elemental being through mastery of one energy type.",
+      "flavor": "Elemental savants devote themselves to one of the classic elements, reshaping their magic and bodies until they transcend mortal form.",
+      "role": "Energy-specialized caster with strong elemental defenses and near-full spellcasting advancement.",
+      "sourceText": "Complete Arcane, p. 32"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 8
+        },
+        {
+          "name": "Knowledge (the planes)",
+          "ranks": 4
+        }
+      ],
+      "feats": [
+        "Energy Substitution (acid, cold, electricity, or fire)"
+      ],
+      "spells": "Able to cast at least three spells sharing the acid, cold, electricity, or fire descriptor, one of which must be at least 3rd level.",
+      "special": "Must have made peaceful contact with an elemental or an outsider with an elemental subtype."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Knowledge (arcana)",
+      "Knowledge (the planes)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "elemental_savant.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing spellcasting class at all levels except 5th and 10th.",
+          "fullText": "At each elemental savant level except 5th and 10th, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing spellcasting class"
+          },
+          "6": {
+            "value": "+1 existing spellcasting class"
+          },
+          "7": {
+            "value": "+1 existing spellcasting class"
+          },
+          "8": {
+            "value": "+1 existing spellcasting class"
+          },
+          "9": {
+            "value": "+1 existing spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.elemental_specialty",
+        "name": "Elemental Specialty",
+        "type": "feature",
+        "description": {
+          "summary": "Choose an elemental specialty tied to an energy type.",
+          "fullText": "At 1st level, the elemental savant chooses air/electricity, earth/acid, fire/fire, or water/cold. This choice must match the Energy Substitution feat used to qualify. Spells that deal energy damage change to the chosen energy type and descriptor."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "choices": [
+                {
+                  "element": "air",
+                  "energy": "electricity"
+                },
+                {
+                  "element": "earth",
+                  "energy": "acid"
+                },
+                {
+                  "element": "fire",
+                  "energy": "fire"
+                },
+                {
+                  "element": "water",
+                  "energy": "cold"
+                }
+              ],
+              "convertsEnergyDamageToChosenType": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.resistance_to_energy",
+        "name": "Resistance to Energy",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain resistance to the energy type tied to the chosen element.",
+          "fullText": "The elemental savant gains resistance against the energy type associated with the chosen elemental specialty. The resistance improves at higher levels."
+        },
+        "progression": {
+          "1": {
+            "value": "5"
+          },
+          "4": {
+            "value": "10"
+          },
+          "7": {
+            "value": "20"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.immunity_to_sleep",
+        "name": "Immunity to Sleep",
+        "type": "feature",
+        "description": {
+          "summary": "Become immune to sleep effects.",
+          "fullText": "At 2nd level, the elemental savant gains immunity to sleep effects."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "immuneTo": [
+                "sleep"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.energy_penetration",
+        "name": "Energy Penetration",
+        "type": "scaling",
+        "description": {
+          "summary": "Improve caster level checks to overcome spell resistance with chosen energy spells.",
+          "fullText": "When casting spells using the energy type associated with the chosen element, the elemental savant gains a competence bonus on caster level checks to overcome spell resistance."
+        },
+        "progression": {
+          "3": {
+            "value": "+2",
+            "mechanics": {
+              "bonusType": "competence",
+              "appliesTo": "caster level checks to overcome spell resistance with chosen energy spells"
+            }
+          },
+          "8": {
+            "value": "+4",
+            "mechanics": {
+              "bonusType": "competence",
+              "appliesTo": "caster level checks to overcome spell resistance with chosen energy spells"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.energy_focus",
+        "name": "Energy Focus",
+        "type": "scaling",
+        "description": {
+          "summary": "Increase save DCs for spells with the chosen energy descriptor.",
+          "fullText": "The save DC for spells with the energy descriptor associated with the elemental savant's chosen element increases at 5th level and again at 10th level."
+        },
+        "progression": {
+          "5": {
+            "value": "+1",
+            "mechanics": {
+              "appliesTo": "spell save DCs with chosen energy descriptor"
+            }
+          },
+          "10": {
+            "value": "+2",
+            "mechanics": {
+              "appliesTo": "spell save DCs with chosen energy descriptor",
+              "totalBonus": 2
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.darkvision",
+        "name": "Darkvision",
+        "type": "feature",
+        "description": {
+          "summary": "Gain darkvision.",
+          "fullText": "At 6th level, the elemental savant gains darkvision out to 60 feet."
+        },
+        "progression": {
+          "6": {
+            "mechanics": {
+              "darkvisionFeet": 60
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.immunity_to_paralysis_and_poison",
+        "name": "Immunity to Paralysis and Poison",
+        "type": "feature",
+        "description": {
+          "summary": "Become immune to paralysis and poison.",
+          "fullText": "At 9th level, the elemental savant gains immunity to paralysis and poison."
+        },
+        "progression": {
+          "9": {
+            "mechanics": {
+              "immuneTo": [
+                "paralysis",
+                "poison"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.elemental_perfection",
+        "name": "Elemental Perfection",
+        "type": "feature",
+        "description": {
+          "summary": "Become an elemental creature.",
+          "fullText": "At 10th level, the elemental savant's type changes to elemental. The savant no longer needs to eat, sleep, or breathe, gains immunity to stunning, and is no longer subject to extra damage from critical hits or flanking. The savant gains appropriate movement modes, natural attacks, special attacks, and special qualities of a Medium elemental of the chosen specialty, with the listed save DC adjustment for elemental attack forms."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "typeChange": "elemental",
+              "noNeedToEat": true,
+              "noNeedToSleep": true,
+              "noNeedToBreathe": true,
+              "immuneTo": [
+                "stunning"
+              ],
+              "notSubjectTo": [
+                "extra damage from critical hits",
+                "extra damage from flanking"
+              ],
+              "elementalAttackSaveDcFormula": "20 + Constitution modifier"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "elemental_savant.energy_immunity",
+        "name": "Energy Immunity",
+        "type": "feature",
+        "description": {
+          "summary": "Become immune to the chosen energy type.",
+          "fullText": "At 10th level, the elemental savant gains immunity to the energy type associated with the chosen elemental specialty."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "immuneToChosenEnergyType": true
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.elemental_specialty"
+          },
+          {
+            "ref": "elemental_savant.resistance_to_energy"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.immunity_to_sleep"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.energy_penetration"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.resistance_to_energy"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "elemental_savant.energy_focus"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.darkvision"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.resistance_to_energy"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.energy_penetration"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "elemental_savant.spellcasting_advancement"
+          },
+          {
+            "ref": "elemental_savant.immunity_to_paralysis_and_poison"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "elemental_savant.energy_focus"
+          },
+          {
+            "ref": "elemental_savant.elemental_perfection"
+          },
+          {
+            "ref": "elemental_savant.energy_immunity"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Fatespinner",
+    "description": {
+      "summary": "An arcane caster who manipulates luck, probability, and fate.",
+      "flavor": "Fatespinners glimpse the hidden structure of chance and bend fortune for themselves or against their enemies.",
+      "role": "Arcane caster advancement class with save DC boosts, rerolls, stabilization, and saving throw manipulation.",
+      "sourceText": "Complete Arcane, p. 37"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 10
+        },
+        {
+          "name": "Profession (gambler)",
+          "ranks": 5
+        }
+      ],
+      "spells": "Able to cast 4th-level arcane spells, including at least one divination spell of 1st level or higher.",
+      "special": "Must have avoided death or severe calamity through the machinations of fate."
+    },
+    "classSkills": [
+      "Appraise",
+      "Concentration",
+      "Craft",
+      "Knowledge (arcana)",
+      "Profession",
+      "Sleight of Hand",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "fatespinner.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing spellcasting class at levels 1 through 4.",
+          "fullText": "At each fatespinner level except 5th, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing spellcasting class"
+          },
+          "2": {
+            "value": "+1 existing spellcasting class"
+          },
+          "3": {
+            "value": "+1 existing spellcasting class"
+          },
+          "4": {
+            "value": "+1 existing spellcasting class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.spin_fate",
+        "name": "Spin Fate",
+        "type": "scaling",
+        "description": {
+          "summary": "Spend daily spin points to increase spell save DCs.",
+          "fullText": "Each day, the fatespinner has a number of spin points equal to class level. As a free action, the fatespinner can spend spin to increase the save DC of a spell being cast on a point-for-point basis. Spin is replenished when the character regains spells."
+        },
+        "progression": {
+          "1": {
+            "value": "1 spin point/day",
+            "mechanics": {
+              "dailyPoolFormula": "fatespinner class level",
+              "useAction": "free action",
+              "appliesTo": "spell save DC",
+              "cost": "1 spin point per +1 DC"
+            }
+          },
+          "2": {
+            "value": "2 spin points/day",
+            "mechanics": {
+              "dailyPoolFormula": "fatespinner class level",
+              "useAction": "free action",
+              "appliesTo": "spell save DC",
+              "cost": "1 spin point per +1 DC"
+            }
+          },
+          "3": {
+            "value": "3 spin points/day",
+            "mechanics": {
+              "dailyPoolFormula": "fatespinner class level",
+              "useAction": "free action",
+              "appliesTo": "spell save DC",
+              "cost": "1 spin point per +1 DC"
+            }
+          },
+          "4": {
+            "value": "4 spin points/day",
+            "mechanics": {
+              "dailyPoolFormula": "fatespinner class level",
+              "useAction": "free action",
+              "appliesTo": "spell save DC",
+              "cost": "1 spin point per +1 DC"
+            }
+          },
+          "5": {
+            "value": "5 spin points/day",
+            "mechanics": {
+              "dailyPoolFormula": "fatespinner class level",
+              "useAction": "free action",
+              "appliesTo": "spell save DC",
+              "cost": "1 spin point per +1 DC"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.fickle_finger_of_fate",
+        "name": "Fickle Finger of Fate",
+        "type": "ability",
+        "description": {
+          "summary": "Force another creature to reroll a just-made roll.",
+          "fullText": "At 2nd level, once per day as an immediate action, the fatespinner can force another creature in line of sight to reroll a roll it has just made. The creature must keep the reroll result."
+        },
+        "progression": {
+          "2": {
+            "value": "1/day",
+            "mechanics": {
+              "action": "immediate",
+              "target": "another creature",
+              "requiresLineOfSight": true,
+              "forcesReroll": true,
+              "targetKeepsReroll": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.spin_destiny",
+        "name": "Spin Destiny",
+        "type": "ability",
+        "description": {
+          "summary": "Spend spin points on the fatespinner's own checks, attacks, or saves.",
+          "fullText": "At 3rd level, the fatespinner can spend spin to add a point-for-point bonus to a skill check, attack roll, or saving throw he attempts. The spin must be applied before the roll and comes from the same daily spin pool."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "appliesTo": [
+                "skill checks",
+                "attack rolls",
+                "saving throws"
+              ],
+              "mustApplyBeforeRoll": true,
+              "usesSpinPool": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.deny_fate",
+        "name": "Deny Fate",
+        "type": "feature",
+        "description": {
+          "summary": "Automatically stabilize once per day when dying.",
+          "fullText": "At 4th level, once per day, the first time the fatespinner must make a check to become stable when dying, the check automatically succeeds."
+        },
+        "progression": {
+          "4": {
+            "value": "1/day",
+            "mechanics": {
+              "automaticStabilizationCheck": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.resist_fate",
+        "name": "Resist Fate",
+        "type": "ability",
+        "description": {
+          "summary": "Reroll one of the fatespinner's own rolls once per day.",
+          "fullText": "At 4th level, once per day, the fatespinner can reroll one roll he has just made. He must keep the reroll result even if it is worse."
+        },
+        "progression": {
+          "4": {
+            "value": "1/day",
+            "mechanics": {
+              "selfReroll": true,
+              "mustKeepReroll": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "fatespinner.seal_fate",
+        "name": "Seal Fate",
+        "type": "ability",
+        "description": {
+          "summary": "Apply a major bonus or penalty to a target's next saving throw.",
+          "fullText": "At 5th level, once per day as a free action, the fatespinner selects a visible target within 30 feet with Hit Dice no greater than his own. The target receives either a +10 bonus or a -10 penalty on its next saving throw, as chosen by the fatespinner. The effect lasts 1 round."
+        },
+        "progression": {
+          "5": {
+            "value": "1/day",
+            "mechanics": {
+              "action": "free",
+              "rangeFeet": 30,
+              "targetMustBeVisible": true,
+              "targetHdMaximum": "fatespinner Hit Dice",
+              "nextSavingThrowModifierChoice": [
+                "+10",
+                "-10"
+              ],
+              "duration": "1 round"
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "fatespinner.spellcasting_advancement"
+          },
+          {
+            "ref": "fatespinner.spin_fate"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "fatespinner.spellcasting_advancement"
+          },
+          {
+            "ref": "fatespinner.spin_fate"
+          },
+          {
+            "ref": "fatespinner.fickle_finger_of_fate"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "fatespinner.spellcasting_advancement"
+          },
+          {
+            "ref": "fatespinner.spin_fate"
+          },
+          {
+            "ref": "fatespinner.spin_destiny"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "fatespinner.spellcasting_advancement"
+          },
+          {
+            "ref": "fatespinner.spin_fate"
+          },
+          {
+            "ref": "fatespinner.deny_fate"
+          },
+          {
+            "ref": "fatespinner.resist_fate"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "fatespinner.spin_fate"
+          },
+          {
+            "ref": "fatespinner.seal_fate"
+          }
+        ],
+        "casting": []
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Geometer",
+    "description": {
+      "summary": "An arcane caster who encodes spells into diagrams, glyphs, and perfect magical geometry.",
+      "flavor": "Geometers study the hidden diagrams behind magic, reducing spells to sigils and precise arcane forms.",
+      "role": "Full arcane casting progression class focused on spellglyphs, glyph spells, and magical writing traps.",
+      "sourceText": "Complete Arcane, p. 39"
+    },
+    "hitDie": 4,
+    "babProg": "poor",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "skills": [
+        {
+          "name": "Decipher Script",
+          "ranks": 9
+        },
+        {
+          "name": "Disable Device",
+          "ranks": 4
+        },
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 9
+        },
+        {
+          "name": "Search",
+          "ranks": 4
+        }
+      ],
+      "feats": [
+        "Scribe Scroll"
+      ],
+      "spells": "Able to prepare and cast 3rd-level arcane spells."
+    },
+    "classSkills": [
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Disable Device",
+      "Knowledge (all)",
+      "Profession",
+      "Search",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "geometer.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class at every level.",
+          "fullText": "At each geometer level, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 existing arcane class"
+          },
+          "2": {
+            "value": "+1 existing arcane class"
+          },
+          "3": {
+            "value": "+1 existing arcane class"
+          },
+          "4": {
+            "value": "+1 existing arcane class"
+          },
+          "5": {
+            "value": "+1 existing arcane class"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.glyph_of_warding",
+        "name": "Glyph of Warding",
+        "type": "feature",
+        "description": {
+          "summary": "Add glyph of warding to the geometer's spellbook as an arcane spell.",
+          "fullText": "At 1st level, the geometer adds glyph of warding to his spellbook as a 3rd-level arcane spell and can prepare and cast it like any other spell he knows."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "addSpellToSpellbook": "glyph of warding",
+              "spellLevel": 3,
+              "tradition": "arcane"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.spellglyph",
+        "name": "Spellglyph",
+        "type": "ability",
+        "description": {
+          "summary": "Use a prepared diagram in place of verbal and material spell components.",
+          "fullText": "A spellglyph is an arcane diagram that can substitute for a specific prepared spell's verbal and material components, if any. When used, the spell is treated as if affected by Silent Spell, and the spellglyph replaces normal material components other than foci. Preparing a spellglyph takes 1 hour and rare inks costing 25 gp per spell level, plus the cost of expensive material components if applicable."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "preparationTime": "1 hour",
+              "inkCost": "25 gp per spell level",
+              "substitutesFor": [
+                "verbal components",
+                "material components except focus"
+              ],
+              "silentSpellEffect": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.book_of_geometry",
+        "name": "Book of Geometry",
+        "type": "feature",
+        "description": {
+          "summary": "Reduce new spellbook page requirements and make the spellbook harder for others to use.",
+          "fullText": "At 2nd level and higher, every spell the geometer learns from that point forward requires only a single page in his spellbook. It still takes 24 hours and 100 gp per page to scribe a spell. Non-geometers have the Spellcraft DC to decipher or prepare spells from the geometer's spellbook increased by 5."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "spellbookPagesPerNewSpell": 1,
+              "scribeTime": "24 hours",
+              "scribeCostPerPageGp": 100,
+              "nonGeometerSpellcraftDcIncrease": 5
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.sigilsight",
+        "name": "Sigilsight",
+        "type": "feature",
+        "description": {
+          "summary": "Find magical writing traps as a rogue and gain a caster-level bonus on such Search checks.",
+          "fullText": "At 3rd level, the geometer can use Search to find magical traps based on runes, glyphs, sigils, symbols, or other writings as a rogue can. He gains a bonus equal to caster level on Search checks to find such traps, and coming within 10 feet allows a Search check as if actively searching."
+        },
+        "progression": {
+          "3": {
+            "mechanics": {
+              "findMagicWritingTrapsAsRogue": true,
+              "searchBonusFormula": "caster level",
+              "proximityTriggerFeet": 10
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.pass_sigil",
+        "name": "Pass Sigil",
+        "type": "ability",
+        "description": {
+          "summary": "Temporarily suppress magical wards based on written symbols.",
+          "fullText": "At 4th level, as a standard action, the geometer can attempt to pass a magical sigil, rune, glyph, or written ward he can see. He makes a level check against DC 6 + the sigil creator's caster level. On success, the device is suppressed while he maintains concentration."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "action": "standard",
+              "levelCheckDcFormula": "6 + sigil creator's caster level",
+              "requiresSight": true,
+              "suppressionDuration": "while maintaining concentration"
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.powerful_spellglyph",
+        "name": "Powerful Spellglyph",
+        "type": "feature",
+        "description": {
+          "summary": "Increase caster level when casting through a spellglyph.",
+          "fullText": "At 5th level, when the geometer casts a spell using a spellglyph, his caster level is treated as 1 higher for that spell."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "casterLevelBonusWhenUsingSpellglyph": 1
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "geometer.greater_glyph_of_warding",
+        "name": "Greater Glyph of Warding",
+        "type": "feature",
+        "description": {
+          "summary": "Add greater glyph of warding to the geometer's spellbook as an arcane spell.",
+          "fullText": "At 5th level, the geometer adds greater glyph of warding to his spellbook as a 6th-level arcane spell and can prepare and cast it like any other spell he knows."
+        },
+        "progression": {
+          "5": {
+            "mechanics": {
+              "addSpellToSpellbook": "greater glyph of warding",
+              "spellLevel": 6,
+              "tradition": "arcane"
+            }
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "geometer.spellcasting_advancement"
+          },
+          {
+            "ref": "geometer.glyph_of_warding"
+          },
+          {
+            "ref": "geometer.spellglyph"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "geometer.spellcasting_advancement"
+          },
+          {
+            "ref": "geometer.book_of_geometry"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "geometer.spellcasting_advancement"
+          },
+          {
+            "ref": "geometer.sigilsight"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "geometer.spellcasting_advancement"
+          },
+          {
+            "ref": "geometer.pass_sigil"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "geometer.spellcasting_advancement"
+          },
+          {
+            "ref": "geometer.powerful_spellglyph"
+          },
+          {
+            "ref": "geometer.greater_glyph_of_warding"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  },
+  {
+    "name": "Green Star Adept",
+    "description": {
+      "summary": "An arcane warrior who consumes starmetal and slowly transforms into a living green starmetal construct.",
+      "flavor": "Green Star adepts seek fallen starmetal from the comet Alhazarde, trading flesh for durability, power, and unnatural immortality.",
+      "role": "Durable arcane gish with partial casting, scaling damage reduction, physical transformation, and construct-like end state.",
+      "sourceText": "Complete Arcane, p. 41"
+    },
+    "hitDie": 8,
+    "babProg": "medium",
+    "skillPoints": 2,
+    "saves": {
+      "fort": "poor",
+      "ref": "poor",
+      "will": "good"
+    },
+    "requirements": {
+      "bab": 4,
+      "skills": [
+        {
+          "name": "Decipher Script",
+          "ranks": 2
+        },
+        {
+          "name": "Knowledge (arcana)",
+          "ranks": 8
+        },
+        {
+          "name": "Knowledge (architecture and engineering)",
+          "ranks": 2
+        },
+        {
+          "name": "Knowledge (geography)",
+          "ranks": 2
+        },
+        {
+          "name": "Knowledge (history)",
+          "ranks": 2
+        }
+      ],
+      "feats": [
+        "Combat Casting"
+      ],
+      "spells": "Arcane caster level 1st.",
+      "special": "Must acquire at least 2 ounces of starmetal, powder it, and consume it in a specially prepared infusion requiring arcane reagents costing 1,000 gp and one week to prepare."
+    },
+    "classSkills": [
+      "Appraise",
+      "Concentration",
+      "Craft",
+      "Decipher Script",
+      "Knowledge (arcana)",
+      "Knowledge (architecture and engineering)",
+      "Knowledge (geography)",
+      "Knowledge (history)",
+      "Profession",
+      "Spellcraft"
+    ],
+    "features": [
+      {
+        "id": "green_star_adept.damage_reduction",
+        "name": "Damage Reduction",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain scaling damage reduction overcome by adamantine.",
+          "fullText": "The Green Star adept's starmetal-infused flesh grants damage reduction 1/adamantine at 1st level. The damage reduction improves by 1 each class level, reaching damage reduction 10/adamantine at 10th level."
+        },
+        "progression": {
+          "1": {
+            "value": "1/adamantine"
+          },
+          "2": {
+            "value": "2/adamantine"
+          },
+          "3": {
+            "value": "3/adamantine"
+          },
+          "4": {
+            "value": "4/adamantine"
+          },
+          "5": {
+            "value": "5/adamantine"
+          },
+          "6": {
+            "value": "6/adamantine"
+          },
+          "7": {
+            "value": "7/adamantine"
+          },
+          "8": {
+            "value": "8/adamantine"
+          },
+          "9": {
+            "value": "9/adamantine"
+          },
+          "10": {
+            "value": "10/adamantine"
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.improved_caster_level",
+        "name": "Improved Caster Level",
+        "type": "casting",
+        "description": {
+          "summary": "Add Green Star adept level to an arcane caster level for effective caster level.",
+          "fullText": "A Green Star adept adds class level to the caster level of one arcane spellcasting class to determine effective caster level, even though spells per day advance only at even-numbered levels."
+        },
+        "progression": {
+          "1": {
+            "value": "+1 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "2": {
+            "value": "+2 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "3": {
+            "value": "+3 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "4": {
+            "value": "+4 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "5": {
+            "value": "+5 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "6": {
+            "value": "+6 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "7": {
+            "value": "+7 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "8": {
+            "value": "+8 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "9": {
+            "value": "+9 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          },
+          "10": {
+            "value": "+10 caster level",
+            "mechanics": {
+              "effectiveCasterLevelBonusFormula": "Green Star adept class level",
+              "doesNotGrantSpellSlots": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.starmetal_dependency",
+        "name": "Starmetal Dependency",
+        "type": "feature",
+        "description": {
+          "summary": "Require additional starmetal rituals to gain later class features.",
+          "fullText": "After 1st level, the Green Star adept does not gain special class features for a new class level until completing a 24-hour ritual requiring 1 pound of starmetal and 1,000 gp in arcane reagents and materials. Base attack bonus, saving throws, skills, feats, and ability score increases are not delayed by this ritual."
+        },
+        "progression": {
+          "1": {
+            "mechanics": {
+              "appliesAfterLevel": 1,
+              "ritualTime": "24 hours",
+              "starmetalRequired": "1 pound",
+              "reagentCostGp": 1000,
+              "delaysSpecialClassFeaturesOnly": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.starmetal_rigor",
+        "name": "Starmetal Rigor",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain Strength and natural armor while losing Dexterity as the body becomes starmetal.",
+          "fullText": "The Green Star adept's body becomes denser and stronger. Strength and natural armor increase at 1st, 4th, 7th, and 10th levels, while Dexterity is reduced at 1st, 7th, and 10th level to a minimum of 3."
+        },
+        "progression": {
+          "1": {
+            "value": "Str +1, Dex -1, natural armor +1",
+            "mechanics": {
+              "strengthBonusTotal": 1,
+              "dexterityPenaltyTotal": -1,
+              "naturalArmorBonusTotal": 1,
+              "minimumDexterity": 3
+            }
+          },
+          "4": {
+            "value": "Str +2, Dex -1, natural armor +2",
+            "mechanics": {
+              "strengthBonusTotal": 2,
+              "dexterityPenaltyTotal": -1,
+              "naturalArmorBonusTotal": 2,
+              "minimumDexterity": 3
+            }
+          },
+          "7": {
+            "value": "Str +4, Dex -2, natural armor +4",
+            "mechanics": {
+              "strengthBonusTotal": 4,
+              "dexterityPenaltyTotal": -2,
+              "naturalArmorBonusTotal": 4,
+              "minimumDexterity": 3
+            }
+          },
+          "10": {
+            "value": "Str +6, Dex -3, natural armor +6",
+            "mechanics": {
+              "strengthBonusTotal": 6,
+              "dexterityPenaltyTotal": -3,
+              "naturalArmorBonusTotal": 6,
+              "minimumDexterity": 3
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.natural_attack",
+        "name": "Natural Attack",
+        "type": "feature",
+        "description": {
+          "summary": "Gain a slam attack.",
+          "fullText": "At 2nd level, the Green Star adept gains a slam attack dealing bludgeoning damage equal to a club sized for the character, plus 1-1/2 times Strength modifier."
+        },
+        "progression": {
+          "2": {
+            "mechanics": {
+              "naturalAttack": "slam",
+              "damageBySize": {
+                "Small": "1d4",
+                "Medium": "1d6",
+                "Large": "1d8"
+              },
+              "strengthMultiplier": 1.5
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.unnatural_metabolism",
+        "name": "Unnatural Metabolism",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a scaling bonus on saves against several biological and necromantic effects.",
+          "fullText": "At 2nd level, the Green Star adept gains a +2 bonus on saves against poison, sleep effects, paralysis, stunning, disease, death effects, and necromancy effects. This bonus improves at 5th and 8th level."
+        },
+        "progression": {
+          "2": {
+            "value": "+2",
+            "mechanics": {
+              "saveBonus": 2,
+              "appliesAgainst": [
+                "poison",
+                "sleep effects",
+                "paralysis",
+                "stunning",
+                "disease",
+                "death effects",
+                "necromancy effects"
+              ]
+            }
+          },
+          "5": {
+            "value": "+4",
+            "mechanics": {
+              "saveBonus": 4,
+              "appliesAgainst": [
+                "poison",
+                "sleep effects",
+                "paralysis",
+                "stunning",
+                "disease",
+                "death effects",
+                "necromancy effects"
+              ]
+            }
+          },
+          "8": {
+            "value": "+6",
+            "mechanics": {
+              "saveBonus": 6,
+              "appliesAgainst": [
+                "poison",
+                "sleep effects",
+                "paralysis",
+                "stunning",
+                "disease",
+                "death effects",
+                "necromancy effects"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.fortification",
+        "name": "Fortification",
+        "type": "scaling",
+        "description": {
+          "summary": "Gain a chance to negate critical hits and sneak attacks.",
+          "fullText": "At 3rd level and higher, the Green Star adept gains fortification. When a critical hit or sneak attack is scored, there is a chance that the extra effect is negated and damage is rolled normally. The chance improves at 6th and 9th level."
+        },
+        "progression": {
+          "3": {
+            "value": "25%",
+            "mechanics": {
+              "negateCriticalOrSneakAttackChance": 25
+            }
+          },
+          "6": {
+            "value": "50%",
+            "mechanics": {
+              "negateCriticalOrSneakAttackChance": 50
+            }
+          },
+          "9": {
+            "value": "75%",
+            "mechanics": {
+              "negateCriticalOrSneakAttackChance": 75
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.otherworldly_vision",
+        "name": "Otherworldly Vision",
+        "type": "feature",
+        "description": {
+          "summary": "Gain darkvision and low-light vision.",
+          "fullText": "At 4th level, the Green Star adept gains darkvision out to 60 feet and low-light vision."
+        },
+        "progression": {
+          "4": {
+            "mechanics": {
+              "darkvisionFeet": 60,
+              "lowLightVision": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.null_metabolism",
+        "name": "Null Metabolism",
+        "type": "feature",
+        "description": {
+          "summary": "No longer need to breathe, eat, or sleep and ignore fatigue and exhaustion.",
+          "fullText": "At 7th level, the Green Star adept no longer needs to breathe, eat, or sleep, gains immunity to inhaled poisons, drowning, suffocation, and sleep effects, and is no longer subject to fatigue or exhaustion."
+        },
+        "progression": {
+          "7": {
+            "mechanics": {
+              "noNeedToBreathe": true,
+              "noNeedToEat": true,
+              "noNeedToSleep": true,
+              "immuneTo": [
+                "inhaled poisons",
+                "drowning",
+                "suffocation",
+                "sleep effects"
+              ],
+              "notSubjectTo": [
+                "fatigue",
+                "exhaustion"
+              ]
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.emerald_perfection",
+        "name": "Emerald Perfection",
+        "type": "feature",
+        "description": {
+          "summary": "Complete the transformation into a construct-like starmetal being.",
+          "fullText": "At 10th level, the Green Star adept's type changes to construct. The adept loses Constitution, gains size-based bonus hit points, keeps a mind and does not gain normal construct immunity to mind-affecting effects, and gains multiple immunities and construct-like traits described by the class."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "typeChange": "construct",
+              "losesConstitutionScore": true,
+              "bonusHitPointsBySize": {
+                "Small": 10,
+                "Medium": 20,
+                "Large": 30
+              },
+              "notImmuneToMindAffectingFromConstructType": true,
+              "immuneTo": [
+                "poison",
+                "paralysis",
+                "stunning",
+                "disease",
+                "extra damage from sneak attacks",
+                "death effects",
+                "necromancy effects",
+                "critical hits",
+                "nonlethal damage",
+                "ability damage",
+                "ability drain",
+                "energy drain"
+              ],
+              "fortitudeSaveImmunityExceptObjectsOrHarmless": true,
+              "destroyedAtZeroHitPoints": true,
+              "cannotDieOfOldAge": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.rapid_repair",
+        "name": "Rapid Repair",
+        "type": "feature",
+        "description": {
+          "summary": "Repair damage during rest.",
+          "fullText": "At 10th level, the Green Star adept repairs 1 point of damage per hour of rest as long as he has at least 1 hit point. This does not regrow or reattach lost body parts."
+        },
+        "progression": {
+          "10": {
+            "mechanics": {
+              "repairRate": "1 hit point per hour of rest",
+              "requiresAtLeastOneHitPoint": true,
+              "doesNotRegrowOrReattachBodyParts": true
+            }
+          }
+        },
+        "confidence": "high"
+      },
+      {
+        "id": "green_star_adept.spellcasting_advancement",
+        "name": "Spellcasting Advancement",
+        "type": "casting",
+        "description": {
+          "summary": "Advance an existing arcane spellcasting class at even-numbered levels.",
+          "fullText": "At every even-numbered Green Star adept level, the character gains new spells per day and spells known, if applicable, as if gaining a level in an existing arcane spellcasting class."
+        },
+        "progression": {
+          "2": {
+            "value": "+1 existing arcane class"
+          },
+          "4": {
+            "value": "+1 existing arcane class"
+          },
+          "6": {
+            "value": "+1 existing arcane class"
+          },
+          "8": {
+            "value": "+1 existing arcane class"
+          },
+          "10": {
+            "value": "+1 existing arcane class"
+          }
+        },
+        "confidence": "high"
+      }
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.starmetal_dependency"
+          },
+          {
+            "ref": "green_star_adept.starmetal_rigor"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 2,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.natural_attack"
+          },
+          {
+            "ref": "green_star_adept.unnatural_metabolism"
+          },
+          {
+            "ref": "green_star_adept.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.fortification"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 4,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.starmetal_rigor"
+          },
+          {
+            "ref": "green_star_adept.otherworldly_vision"
+          },
+          {
+            "ref": "green_star_adept.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.unnatural_metabolism"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 6,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.fortification"
+          },
+          {
+            "ref": "green_star_adept.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.starmetal_rigor"
+          },
+          {
+            "ref": "green_star_adept.null_metabolism"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 8,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.unnatural_metabolism"
+          },
+          {
+            "ref": "green_star_adept.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.fortification"
+          }
+        ],
+        "casting": []
+      },
+      {
+        "level": 10,
+        "features": [
+          {
+            "ref": "green_star_adept.damage_reduction"
+          },
+          {
+            "ref": "green_star_adept.improved_caster_level"
+          },
+          {
+            "ref": "green_star_adept.starmetal_rigor"
+          },
+          {
+            "ref": "green_star_adept.emerald_perfection"
+          },
+          {
+            "ref": "green_star_adept.rapid_repair"
+          },
+          {
+            "ref": "green_star_adept.spellcasting_advancement"
+          }
+        ],
+        "casting": [
+          {
+            "type": "existing",
+            "progression": 1,
+            "choice": {
+              "type": "category",
+              "options": [
+                "arcane"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "migrationStatus": {
+      "progression": "complete",
+      "metadata": "complete",
+      "mechanics": "complete",
+      "needsReview": false,
+      "reviewNotes": []
+    }
+  }
+]
